@@ -1,0 +1,27 @@
+/**
+ *
+ *
+ *
+ * Error Use Case: An unexpected exception has been thrown by an OpenActive SDK library or component.
+ *
+ *
+ *
+ * This type is derived from https://schema.org/Thing, which means that any of this type's properties within schema.org may also be used.
+ */
+export const InternalLibraryError: import("@imin/speck/lib/types").ObjectSpeck<{
+    '@type': "InternalLibraryError";
+} & {
+    name?: string | undefined;
+    description?: string | undefined;
+    instance?: string | undefined;
+    requestId?: string | undefined;
+    statusCode?: number | undefined;
+}, {
+    '@type': "InternalLibraryError";
+} & {
+    name?: string | undefined;
+    description?: string | undefined;
+    instance?: string | undefined;
+    requestId?: string | undefined;
+    statusCode?: number | undefined;
+}>;

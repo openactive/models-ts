@@ -1,0 +1,77 @@
+/**
+ */
+export const Flight: import("@imin/speck/lib/types").ObjectSpeck<{
+    '@type': "Flight";
+} & {
+    identifier?: any;
+    name?: string | undefined;
+    description?: string | undefined;
+    webCheckinTime?: string | undefined;
+    departureGate?: string | undefined;
+    seller?: any;
+    mealService?: string | undefined;
+    aircraft?: any;
+    arrivalTerminal?: string | undefined;
+    departureAirport?: any;
+    arrivalGate?: string | undefined;
+    departureTerminal?: string | undefined;
+    arrivalAirport?: any;
+    boardingPolicy?: any;
+    carrier?: any;
+    flightNumber?: string | undefined;
+    flightDistance?: any;
+    estimatedFlightDuration?: string | undefined;
+    itinerary?: any;
+    subTrip?: any;
+    partOfTrip?: any;
+    arrivalTime?: string | undefined;
+    offers?: any;
+    provider?: any;
+    departureTime?: string | undefined;
+    sameAs?: string | undefined;
+    subjectOf?: any;
+    potentialAction?: any;
+    mainEntityOfPage?: any;
+    additionalType?: string | undefined;
+    alternateName?: string | undefined;
+    url?: string | undefined;
+    image?: any;
+    disambiguatingDescription?: string | undefined;
+}, {
+    '@type': "Flight";
+} & {
+    identifier?: any;
+    name?: string | undefined;
+    description?: string | undefined;
+    webCheckinTime?: string | undefined;
+    departureGate?: string | undefined;
+    seller?: any;
+    mealService?: string | undefined;
+    aircraft?: any;
+    arrivalTerminal?: string | undefined;
+    departureAirport?: any;
+    arrivalGate?: string | undefined;
+    departureTerminal?: string | undefined;
+    arrivalAirport?: any;
+    boardingPolicy?: any;
+    carrier?: any;
+    flightNumber?: string | undefined;
+    flightDistance?: any;
+    estimatedFlightDuration?: string | undefined;
+    itinerary?: any;
+    subTrip?: any;
+    partOfTrip?: any;
+    arrivalTime?: string | undefined;
+    offers?: any;
+    provider?: any;
+    departureTime?: string | undefined;
+    sameAs?: string | undefined;
+    subjectOf?: any;
+    potentialAction?: any;
+    mainEntityOfPage?: any;
+    additionalType?: string | undefined;
+    alternateName?: string | undefined;
+    url?: string | undefined;
+    image?: any;
+    disambiguatingDescription?: string | undefined;
+}>;

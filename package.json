@@ -2,37 +2,25 @@
   "name": "models-ts",
   "version": "1.0.0",
   "description": "TypeScript implementation of OpenActive's data model",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "test": "npm run generate-d-ts",
-    "build": "npm run generate-d-ts",
-    "clean-d-ts": "cd src && find . -name \"*.d.ts\" -type f -delete",
-    "generate-d-ts": "npm run clean-d-ts && tsc",
-    "preversion": "npm test",
-    "postversion": "git push && git push --tags"
+    "build": "tsc",
+    "test": "tsc && mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.18",
+    "@types/joi": "^14.3.4",
+    "@types/mocha": "^8.2.2",
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@imin/speck": "github:imin-ltd/speck#2255500",
-    "faker": "~4.1.0",
-    "moment": "~2.24.0"
-  },
-  "devDependencies": {
-    "@types/faker": "~4.1.0",
-    "@types/lodash": "^4.14.149",
-    "husky": "^4.2.1",
-    "typescript": "~3.7.4"
-  },
-  "engines": {
-    "node": "10.16.0",
-    "npm": "6.9.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/openactive/models-ts.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/openactive/models-ts/issues"
-  },
-  "homepage": "https://github.com/openactive/models-ts#readme"
+    "@types/node": "^15.3.0",
+    "joi": "^14.3.1"
+  }
 }

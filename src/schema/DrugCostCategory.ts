@@ -1,0 +1,77 @@
+// This file was generated
+import * as Joi from 'joi';
+import { OaValidationError } from '../oaValidationError';
+import * as oa from '../oa';
+import * as schema from '../schema';
+
+/**
+ * schema:DrugCostCategory
+ */
+export type DrugCostCategory = {
+  '@type': 'DrugCostCategory';
+  '@context'?: string | string[];
+  /**
+   * A unique url based identifier for the record
+   */
+  '@id'?: string;
+};
+
+/**
+ * schema:DrugCostCategory
+ *
+ * This differs from DrugCostCategory because it also allows for objects that have the type of a model that
+ * sub-classes this model. e.g. `Event_OrSubClass` allows `Event`s as well as `ScheduledSession`s, `SessionSeries`,
+ * etc.
+ */
+export type DrugCostCategoryOrSubClass =
+  | DrugCostCategory
+  ;
+
+/**
+ * schema:DrugCostCategory - Validation schema (w/ JOI)
+ */
+export const DrugCostCategoryJoiSchema = Joi.object({
+  '@type': Joi.string().valid('DrugCostCategory').required(),
+  '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
+  '@id': Joi.string().uri(),
+});
+
+/**
+ * schema:DrugCostCategory - Validation schema (w/ JOI)
+ *
+ * This differs from DrugCostCategoryJoiSchema because it also allows for objects that have the type of a model that
+ * sub-classes this model. e.g. `Event.OrSubClassJoiSchema` allows `Event`s as well as `ScheduledSession`s,
+ * `SessionSeries`, etc.
+ */
+export const DrugCostCategoryOrSubClassJoiSchema = Joi.alternatives().try([
+  DrugCostCategoryJoiSchema,
+]);
+
+/**
+ * Runtime validator for schema:DrugCostCategory.
+ *
+ * If some data has a structure which matches a schema:DrugCostCategory, it will be returned with the correct type.
+ * Otherwise, this function returns an OAValidationError with details about why the data does not match.
+ *
+ * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
+ *
+ * ```ts
+ * const maybeDrugCostCategory = DrugCostCategory.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * if (maybeDrugCostCategory instanceof OaValidationError) {
+ *   // From this point on, `maybeDrugCostCategory` will have type `OaValidationError`
+ *   const error = maybeDrugCostCategory;
+ *   // Do something with the error. Maybe ignore it? Or log it? Or throw? Up to you.
+ * }
+ * // From this point on, `maybeDrugCostCategory` will have type `DrugCostCategory`
+ * const drugCostCategory = maybeDrugCostCategory;
+ * ```
+ */
+export function validateDrugCostCategory(maybeDrugCostCategory: unknown): DrugCostCategory | OaValidationError {
+  const { value, error } = DrugCostCategoryJoiSchema.validate(maybeDrugCostCategory);
+  if (error) {
+    return new OaValidationError('DrugCostCategory', maybeDrugCostCategory, error);
+  }
+  /* Joi does not implement TS Type Guards, so TS does not implicitly know that this has now been validated
+  to have the right type. Therefore, we just cast it to the right type. */
+  return value as DrugCostCategory;
+}

@@ -13,7 +13,6 @@ jobs:
       - name: Checkout models-ts
         uses: actions/checkout@v2
         with:
-          ref: master
           path: models-ts
 
       - name: Checkout models-lib

@@ -43,6 +43,29 @@ export declare type Course = {
      */
     '@id'?: string;
     /**
+     * Provide additional, specific documentation for participants about how disabilities are, or can be supported at the Event.
+     *
+     * ```json
+     * "accessibilityInformation": "This route has been British Cycling assessed as an accessible route, meaning it is suitable for the majority of adaptive bikes. The route will have no or low levels of traffic, there will be plenty of space and will have a good surface throughout. If you have any questions about using this route on an adaptive bike on this ride, please use visit https://www.letsride.co.uk/accessibility or call 0123 456 7000 and ask for the Recreation team."
+     * ```
+     */
+    accessibilityInformation?: string;
+    /**
+     * Used to specify the types of disabilities or impairments that are supported at an event.
+     *
+     * ```json
+     * "accessibilitySupport": [
+     *   {
+     *     "@type": "Concept",
+     *     "@id": "https://openactive.io/accessibility-support#1393f2dc-3fcc-4be9-a99f-f1e51f5ad277",
+     *     "prefLabel": "Visual impairment",
+     *     "inScheme": "https://openactive.io/accessibility-support"
+     *   }
+     * ]
+     * ```
+     */
+    accessibilitySupport?: oa.ConceptOrSubClass[];
+    /**
      * Specifies the physical activity or activities that will take place during a Course.
      *
      * ```json
@@ -58,28 +81,78 @@ export declare type Course = {
      */
     activity?: oa.ConceptOrSubClass[];
     /**
-     * The person or organization who have created the Course. An author might be an schema:Organization or a schema:Person.
+     * Indicates that an event is recommended as being suitable for or is targetted at a specific age range.
+     *
+     * ```json
+     * "ageRange": {
+     *   "@type": "QuantitativeValue",
+     *   "minValue": 50,
+     *   "maxValue": 60
+     * }
+     * ```
+     */
+    ageRange?: oa.QuantitativeValueOrSubClass;
+    /**
+     * The person or organization who designed the Course. An author might be an schema:Organization or a schema:Person.
+     * This property may reference the `@id` of the `organizer` of the `CourseInstance` within which this `Course` is embedded, to reduce data duplication.
      *
      * ```json
      * "author": {
      *   "@type": "Organization",
+     *   "@id": "https://id.bookingsystem.example.com/organizers/1",
      *   "name": "Central Speedball Association",
      *   "url": "http://www.speedball-world.com"
      * }
      * ```
      */
-    author?: oa.PersonOrSubClass | oa.OrganizationOrSubClass;
+    author?: oa.PersonOrSubClass | oa.OrganizationOrSubClass | string;
     /**
-     * A logo for the Course.
+     * Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.
      *
      * ```json
-     * "logo": {
-     *   "@type": "ImageObject",
-     *   "url": "http://example.com/static/image/speedball_large.jpg"
-     * }
+     * "category": [
+     *   "High Intensity"
+     * ]
      * ```
      */
-    logo?: oa.ImageObjectOrSubClass;
+    category?: string[] | oa.ConceptOrSubClass[];
+    /**
+     * Indicates that an event is restricted to male, female or a mixed audience. This information must be displayed prominently to the user before booking. If a gender restriction isn't specified then applications should assume that an event is suitable for a mixed audience.
+     *
+     * ```json
+     * "genderRestriction": "https://openactive.io/FemaleOnly"
+     * ```
+     */
+    genderRestriction?: oa.GenderRestrictionType;
+    /**
+     * An image or photo that depicts the event, e.g. a photo taken at a previous event.
+     *
+     * ```json
+     * "image": [
+     *   {
+     *     "@type": "ImageObject",
+     *     "url": "http://example.com/static/image/speedball_large.jpg",
+     *     "thumbnail": [
+     *       {
+     *         "@type": "ImageObject",
+     *         "url": "http://example.com/static/image/speedball_thumbnail.jpg"
+     *       }
+     *     ]
+     *   }
+     * ]
+     * ```
+     */
+    image?: oa.ImageObjectOrSubClass[];
+    /**
+     * A general purpose property for specifying the suitability of an event for different participant “levels”. E.g. `Beginner`, `Intermediate`, `Advanced`. Or in the case of martial arts, specific belt requirements.
+     *
+     * ```json
+     * "level": [
+     *   "Beginner"
+     * ]
+     * ```
+     */
+    level?: string[] | oa.ConceptOrSubClass[];
     /**
      * A definitive canonical URL for the Course.
      *
@@ -597,10 +670,6 @@ export declare type Course = {
      * An alias for the item.
      */
     alternateName?: string;
-    /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
-     */
-    image?: schema.ImageObjectOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */

@@ -1,6 +1,6 @@
 {
   "name": "@openactive/models-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript/TypeScript implementation of OpenActive's data model",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

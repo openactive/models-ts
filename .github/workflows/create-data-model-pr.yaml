@@ -39,6 +39,14 @@ jobs:
         run: npm start -- generate TypeScript --destination ../models-ts/src/
         working-directory: ./models-lib/
         
+      - name: Install models-ts
+        run: npm install
+        working-directory: ./models-ts/
+        
+      - name: Build models-ts types
+        run: npm run build
+        working-directory: ./models-ts/
+        
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3

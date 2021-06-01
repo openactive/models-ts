@@ -1,14 +1,26 @@
 {
-  "name": "models-ts",
+  "name": "@openactive/models-ts",
   "version": "1.0.0",
-  "description": "TypeScript implementation of OpenActive's data model",
+  "description": "JavaScript/TypeScript implementation of OpenActive's data model",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "tsc && mocha"
   },
-  "author": "",
+  "author": "OpenActive Community <hello@openactive.io>",
+  "keywords": [
+    "openactive",
+    "models",
+    "validator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openactive/models-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openactive/models-ts/issues"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.2.18",

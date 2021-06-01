@@ -314,6 +314,7 @@ export declare type EventSeries = {
      * ```json
      * "organizer": {
      *   "@type": "Organization",
+     *   "@id": "https://id.bookingsystem.example.com/organizers/1",
      *   "name": "Central Speedball Association",
      *   "url": "http://www.speedball-world.com"
      * }

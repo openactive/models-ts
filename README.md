@@ -1,4 +1,4 @@
-# models-ts
+# models-ts [![npm version](https://img.shields.io/npm/v/@openactive/models-ts)](https://www.npmjs.com/package/@openactive/models-ts) [![Tests](https://github.com/openactive/models-ts/actions/workflows/tests.yaml/badge.svg?branch=main)](https://github.com/openactive/models-ts/actions/workflows/tests.yaml)
 
 Model validation and TypeScript types for OpenActive's data model
 

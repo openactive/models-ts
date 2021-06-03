@@ -629,7 +629,7 @@ export declare const AudioObjectOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAudioObject = AudioObject.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAudioObject = validateAudioObject(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAudioObject instanceof OaValidationError) {
  *   // From this point on, `maybeAudioObject` will have type `OaValidationError`
  *   const error = maybeAudioObject;

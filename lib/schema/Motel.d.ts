@@ -525,7 +525,7 @@ export declare const MotelOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMotel = Motel.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMotel = validateMotel(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMotel instanceof OaValidationError) {
  *   // From this point on, `maybeMotel` will have type `OaValidationError`
  *   const error = maybeMotel;

@@ -150,7 +150,7 @@ export declare const CheckOutActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCheckOutAction = CheckOutAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCheckOutAction = validateCheckOutAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCheckOutAction instanceof OaValidationError) {
  *   // From this point on, `maybeCheckOutAction` will have type `OaValidationError`
  *   const error = maybeCheckOutAction;

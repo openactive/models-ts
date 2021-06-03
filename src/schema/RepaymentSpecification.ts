@@ -142,7 +142,7 @@ export const RepaymentSpecificationOrSubClassJoiSchema = Joi.alternatives().try(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRepaymentSpecification = RepaymentSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRepaymentSpecification = validateRepaymentSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRepaymentSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeRepaymentSpecification` will have type `OaValidationError`
  *   const error = maybeRepaymentSpecification;

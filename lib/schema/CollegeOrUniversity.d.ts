@@ -480,7 +480,7 @@ export declare const CollegeOrUniversityOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCollegeOrUniversity = CollegeOrUniversity.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCollegeOrUniversity = validateCollegeOrUniversity(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCollegeOrUniversity instanceof OaValidationError) {
  *   // From this point on, `maybeCollegeOrUniversity` will have type `OaValidationError`
  *   const error = maybeCollegeOrUniversity;

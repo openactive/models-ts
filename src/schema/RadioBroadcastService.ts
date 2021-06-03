@@ -293,7 +293,7 @@ export const RadioBroadcastServiceOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRadioBroadcastService = RadioBroadcastService.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRadioBroadcastService = validateRadioBroadcastService(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRadioBroadcastService instanceof OaValidationError) {
  *   // From this point on, `maybeRadioBroadcastService` will have type `OaValidationError`
  *   const error = maybeRadioBroadcastService;

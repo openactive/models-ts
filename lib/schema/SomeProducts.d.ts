@@ -273,7 +273,7 @@ export declare const SomeProductsOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSomeProducts = SomeProducts.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSomeProducts = validateSomeProducts(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSomeProducts instanceof OaValidationError) {
  *   // From this point on, `maybeSomeProducts` will have type `OaValidationError`
  *   const error = maybeSomeProducts;

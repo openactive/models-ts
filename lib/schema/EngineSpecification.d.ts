@@ -111,7 +111,7 @@ export declare const EngineSpecificationOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEngineSpecification = EngineSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEngineSpecification = validateEngineSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEngineSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeEngineSpecification` will have type `OaValidationError`
  *   const error = maybeEngineSpecification;

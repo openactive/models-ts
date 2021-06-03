@@ -28,7 +28,7 @@ export const PaymentMethodJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePaymentMethod = PaymentMethod.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePaymentMethod = validatePaymentMethod(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePaymentMethod instanceof OaValidationError) {
  *   // From this point on, `maybePaymentMethod` will have type `OaValidationError`
  *   const error = maybePaymentMethod;

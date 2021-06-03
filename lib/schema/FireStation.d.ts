@@ -496,7 +496,7 @@ export declare const FireStationOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeFireStation = FireStation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeFireStation = validateFireStation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeFireStation instanceof OaValidationError) {
  *   // From this point on, `maybeFireStation` will have type `OaValidationError`
  *   const error = maybeFireStation;

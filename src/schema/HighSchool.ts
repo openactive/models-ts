@@ -603,7 +603,7 @@ export const HighSchoolOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHighSchool = HighSchool.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHighSchool = validateHighSchool(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHighSchool instanceof OaValidationError) {
  *   // From this point on, `maybeHighSchool` will have type `OaValidationError`
  *   const error = maybeHighSchool;

@@ -265,7 +265,7 @@ export declare const ScreeningEventOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeScreeningEvent = ScreeningEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeScreeningEvent = validateScreeningEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeScreeningEvent instanceof OaValidationError) {
  *   // From this point on, `maybeScreeningEvent` will have type `OaValidationError`
  *   const error = maybeScreeningEvent;

@@ -273,7 +273,7 @@ export declare const CatholicChurchOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCatholicChurch = CatholicChurch.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCatholicChurch = validateCatholicChurch(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCatholicChurch instanceof OaValidationError) {
  *   // From this point on, `maybeCatholicChurch` will have type `OaValidationError`
  *   const error = maybeCatholicChurch;

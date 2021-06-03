@@ -253,7 +253,7 @@ export declare const LiteraryEventOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLiteraryEvent = LiteraryEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLiteraryEvent = validateLiteraryEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLiteraryEvent instanceof OaValidationError) {
  *   // From this point on, `maybeLiteraryEvent` will have type `OaValidationError`
  *   const error = maybeLiteraryEvent;

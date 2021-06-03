@@ -269,7 +269,7 @@ export declare const ReservoirOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeReservoir = Reservoir.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeReservoir = validateReservoir(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeReservoir instanceof OaValidationError) {
  *   // From this point on, `maybeReservoir` will have type `OaValidationError`
  *   const error = maybeReservoir;

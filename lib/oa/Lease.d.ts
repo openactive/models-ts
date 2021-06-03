@@ -106,7 +106,7 @@ export declare const LeaseOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLease = Lease.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLease = validateLease(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLease instanceof OaValidationError) {
  *   // From this point on, `maybeLease` will have type `OaValidationError`
  *   const error = maybeLease;

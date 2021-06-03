@@ -158,7 +158,7 @@ export declare const CustomerNoticeSimulateActionOrSubClassJoiSchema: Joi.Altern
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCustomerNoticeSimulateAction = CustomerNoticeSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCustomerNoticeSimulateAction = validateCustomerNoticeSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCustomerNoticeSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeCustomerNoticeSimulateAction` will have type `OaValidationError`
  *   const error = maybeCustomerNoticeSimulateAction;

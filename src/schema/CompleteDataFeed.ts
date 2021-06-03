@@ -740,7 +740,7 @@ export const CompleteDataFeedOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCompleteDataFeed = CompleteDataFeed.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCompleteDataFeed = validateCompleteDataFeed(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCompleteDataFeed instanceof OaValidationError) {
  *   // From this point on, `maybeCompleteDataFeed` will have type `OaValidationError`
  *   const error = maybeCompleteDataFeed;

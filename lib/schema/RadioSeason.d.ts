@@ -596,7 +596,7 @@ export declare const RadioSeasonOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRadioSeason = RadioSeason.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRadioSeason = validateRadioSeason(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRadioSeason instanceof OaValidationError) {
  *   // From this point on, `maybeRadioSeason` will have type `OaValidationError`
  *   const error = maybeRadioSeason;

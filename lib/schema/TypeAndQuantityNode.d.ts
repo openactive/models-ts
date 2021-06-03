@@ -111,7 +111,7 @@ export declare const TypeAndQuantityNodeOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTypeAndQuantityNode = TypeAndQuantityNode.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTypeAndQuantityNode = validateTypeAndQuantityNode(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTypeAndQuantityNode instanceof OaValidationError) {
  *   // From this point on, `maybeTypeAndQuantityNode` will have type `OaValidationError`
  *   const error = maybeTypeAndQuantityNode;

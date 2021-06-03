@@ -106,7 +106,7 @@ export declare const ShippingDeliveryTimeOrSubClassJoiSchema: Joi.AlternativesSc
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeShippingDeliveryTime = ShippingDeliveryTime.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeShippingDeliveryTime = validateShippingDeliveryTime(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeShippingDeliveryTime instanceof OaValidationError) {
  *   // From this point on, `maybeShippingDeliveryTime` will have type `OaValidationError`
  *   const error = maybeShippingDeliveryTime;

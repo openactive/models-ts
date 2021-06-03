@@ -692,7 +692,7 @@ export const SpreadsheetDigitalDocumentOrSubClassJoiSchema = Joi.alternatives().
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSpreadsheetDigitalDocument = SpreadsheetDigitalDocument.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSpreadsheetDigitalDocument = validateSpreadsheetDigitalDocument(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSpreadsheetDigitalDocument instanceof OaValidationError) {
  *   // From this point on, `maybeSpreadsheetDigitalDocument` will have type `OaValidationError`
  *   const error = maybeSpreadsheetDigitalDocument;

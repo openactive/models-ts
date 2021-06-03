@@ -117,7 +117,7 @@ export const ComputerLanguageOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeComputerLanguage = ComputerLanguage.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeComputerLanguage = validateComputerLanguage(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeComputerLanguage instanceof OaValidationError) {
  *   // From this point on, `maybeComputerLanguage` will have type `OaValidationError`
  *   const error = maybeComputerLanguage;

@@ -195,7 +195,7 @@ export const ReplacementSimulateActionOrSubClassJoiSchema = Joi.alternatives().t
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeReplacementSimulateAction = ReplacementSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeReplacementSimulateAction = validateReplacementSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeReplacementSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeReplacementSimulateAction` will have type `OaValidationError`
  *   const error = maybeReplacementSimulateAction;

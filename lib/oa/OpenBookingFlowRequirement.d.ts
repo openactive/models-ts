@@ -17,7 +17,7 @@ export declare const OpenBookingFlowRequirementJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOpenBookingFlowRequirement = OpenBookingFlowRequirement.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOpenBookingFlowRequirement = validateOpenBookingFlowRequirement(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOpenBookingFlowRequirement instanceof OaValidationError) {
  *   // From this point on, `maybeOpenBookingFlowRequirement` will have type `OaValidationError`
  *   const error = maybeOpenBookingFlowRequirement;

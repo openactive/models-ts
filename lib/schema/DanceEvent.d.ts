@@ -253,7 +253,7 @@ export declare const DanceEventOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDanceEvent = DanceEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDanceEvent = validateDanceEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDanceEvent instanceof OaValidationError) {
  *   // From this point on, `maybeDanceEvent` will have type `OaValidationError`
  *   const error = maybeDanceEvent;

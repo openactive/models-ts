@@ -463,7 +463,7 @@ export declare const AuthenticatedPersonOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAuthenticatedPerson = AuthenticatedPerson.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAuthenticatedPerson = validateAuthenticatedPerson(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAuthenticatedPerson instanceof OaValidationError) {
  *   // From this point on, `maybeAuthenticatedPerson` will have type `OaValidationError`
  *   const error = maybeAuthenticatedPerson;

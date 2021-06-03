@@ -697,7 +697,7 @@ export const WPAdBlockOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWPAdBlock = WPAdBlock.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWPAdBlock = validateWPAdBlock(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWPAdBlock instanceof OaValidationError) {
  *   // From this point on, `maybeWPAdBlock` will have type `OaValidationError`
  *   const error = maybeWPAdBlock;

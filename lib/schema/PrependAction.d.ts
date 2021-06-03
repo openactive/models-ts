@@ -146,7 +146,7 @@ export declare const PrependActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePrependAction = PrependAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePrependAction = validatePrependAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePrependAction instanceof OaValidationError) {
  *   // From this point on, `maybePrependAction` will have type `OaValidationError`
  *   const error = maybePrependAction;

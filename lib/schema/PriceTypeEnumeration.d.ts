@@ -21,7 +21,7 @@ export declare const PriceTypeEnumerationJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePriceTypeEnumeration = PriceTypeEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePriceTypeEnumeration = validatePriceTypeEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePriceTypeEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybePriceTypeEnumeration` will have type `OaValidationError`
  *   const error = maybePriceTypeEnumeration;

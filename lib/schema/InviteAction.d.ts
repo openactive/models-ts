@@ -154,7 +154,7 @@ export declare const InviteActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInviteAction = InviteAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInviteAction = validateInviteAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInviteAction instanceof OaValidationError) {
  *   // From this point on, `maybeInviteAction` will have type `OaValidationError`
  *   const error = maybeInviteAction;

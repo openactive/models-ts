@@ -498,7 +498,7 @@ export const SlotOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSlot = Slot.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSlot = validateSlot(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSlot instanceof OaValidationError) {
  *   // From this point on, `maybeSlot` will have type `OaValidationError`
  *   const error = maybeSlot;

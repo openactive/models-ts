@@ -174,7 +174,7 @@ export const UnknownOfferErrorOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUnknownOfferError = UnknownOfferError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUnknownOfferError = validateUnknownOfferError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUnknownOfferError instanceof OaValidationError) {
  *   // From this point on, `maybeUnknownOfferError` will have type `OaValidationError`
  *   const error = maybeUnknownOfferError;

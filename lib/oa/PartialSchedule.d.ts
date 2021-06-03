@@ -166,7 +166,7 @@ export declare const PartialScheduleOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePartialSchedule = PartialSchedule.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePartialSchedule = validatePartialSchedule(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePartialSchedule instanceof OaValidationError) {
  *   // From this point on, `maybePartialSchedule` will have type `OaValidationError`
  *   const error = maybePartialSchedule;

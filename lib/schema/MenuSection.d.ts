@@ -560,7 +560,7 @@ export declare const MenuSectionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMenuSection = MenuSection.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMenuSection = validateMenuSection(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMenuSection instanceof OaValidationError) {
  *   // From this point on, `maybeMenuSection` will have type `OaValidationError`
  *   const error = maybeMenuSection;

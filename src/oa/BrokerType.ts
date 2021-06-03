@@ -30,7 +30,7 @@ export const BrokerTypeJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBrokerType = BrokerType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBrokerType = validateBrokerType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBrokerType instanceof OaValidationError) {
  *   // From this point on, `maybeBrokerType` will have type `OaValidationError`
  *   const error = maybeBrokerType;

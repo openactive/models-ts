@@ -556,7 +556,7 @@ export declare const GuideOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGuide = Guide.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGuide = validateGuide(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGuide instanceof OaValidationError) {
  *   // From this point on, `maybeGuide` will have type `OaValidationError`
  *   const error = maybeGuide;

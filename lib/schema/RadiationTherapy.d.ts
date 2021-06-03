@@ -166,7 +166,7 @@ export declare const RadiationTherapyOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRadiationTherapy = RadiationTherapy.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRadiationTherapy = validateRadiationTherapy(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRadiationTherapy instanceof OaValidationError) {
  *   // From this point on, `maybeRadiationTherapy` will have type `OaValidationError`
  *   const error = maybeRadiationTherapy;

@@ -144,7 +144,7 @@ export declare const PatchNotAllowedOnPropertyErrorOrSubClassJoiSchema: Joi.Alte
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePatchNotAllowedOnPropertyError = PatchNotAllowedOnPropertyError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePatchNotAllowedOnPropertyError = validatePatchNotAllowedOnPropertyError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePatchNotAllowedOnPropertyError instanceof OaValidationError) {
  *   // From this point on, `maybePatchNotAllowedOnPropertyError` will have type `OaValidationError`
  *   const error = maybePatchNotAllowedOnPropertyError;

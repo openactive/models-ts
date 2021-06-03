@@ -188,7 +188,7 @@ export const QuoteActionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeQuoteAction = QuoteAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeQuoteAction = validateQuoteAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeQuoteAction instanceof OaValidationError) {
  *   // From this point on, `maybeQuoteAction` will have type `OaValidationError`
  *   const error = maybeQuoteAction;

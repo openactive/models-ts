@@ -144,7 +144,7 @@ export declare const InternalLibraryConfigurationErrorOrSubClassJoiSchema: Joi.A
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInternalLibraryConfigurationError = InternalLibraryConfigurationError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInternalLibraryConfigurationError = validateInternalLibraryConfigurationError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInternalLibraryConfigurationError instanceof OaValidationError) {
  *   // From this point on, `maybeInternalLibraryConfigurationError` will have type `OaValidationError`
  *   const error = maybeInternalLibraryConfigurationError;

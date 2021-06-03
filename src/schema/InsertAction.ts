@@ -191,7 +191,7 @@ export const InsertActionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInsertAction = InsertAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInsertAction = validateInsertAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInsertAction instanceof OaValidationError) {
  *   // From this point on, `maybeInsertAction` will have type `OaValidationError`
  *   const error = maybeInsertAction;

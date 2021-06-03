@@ -134,7 +134,7 @@ export declare const MarryActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMarryAction = MarryAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMarryAction = validateMarryAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMarryAction instanceof OaValidationError) {
  *   // From this point on, `maybeMarryAction` will have type `OaValidationError`
  *   const error = maybeMarryAction;

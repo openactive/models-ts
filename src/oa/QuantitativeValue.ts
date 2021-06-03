@@ -170,7 +170,7 @@ export const QuantitativeValueOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeQuantitativeValue = QuantitativeValue.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeQuantitativeValue = validateQuantitativeValue(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeQuantitativeValue instanceof OaValidationError) {
  *   // From this point on, `maybeQuantitativeValue` will have type `OaValidationError`
  *   const error = maybeQuantitativeValue;

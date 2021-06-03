@@ -606,7 +606,7 @@ export const FacilityUseOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeFacilityUse = FacilityUse.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeFacilityUse = validateFacilityUse(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeFacilityUse instanceof OaValidationError) {
  *   // From this point on, `maybeFacilityUse` will have type `OaValidationError`
  *   const error = maybeFacilityUse;

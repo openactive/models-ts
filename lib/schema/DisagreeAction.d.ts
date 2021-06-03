@@ -134,7 +134,7 @@ export declare const DisagreeActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDisagreeAction = DisagreeAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDisagreeAction = validateDisagreeAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDisagreeAction instanceof OaValidationError) {
  *   // From this point on, `maybeDisagreeAction` will have type `OaValidationError`
  *   const error = maybeDisagreeAction;

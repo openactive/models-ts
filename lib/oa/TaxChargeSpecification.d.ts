@@ -142,7 +142,7 @@ export declare const TaxChargeSpecificationOrSubClassJoiSchema: Joi.Alternatives
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTaxChargeSpecification = TaxChargeSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTaxChargeSpecification = validateTaxChargeSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTaxChargeSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeTaxChargeSpecification` will have type `OaValidationError`
  *   const error = maybeTaxChargeSpecification;

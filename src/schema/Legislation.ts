@@ -754,7 +754,7 @@ export const LegislationOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLegislation = Legislation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLegislation = validateLegislation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLegislation instanceof OaValidationError) {
  *   // From this point on, `maybeLegislation` will have type `OaValidationError`
  *   const error = maybeLegislation;

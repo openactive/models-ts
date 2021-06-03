@@ -172,7 +172,7 @@ export const RegisterActionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRegisterAction = RegisterAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRegisterAction = validateRegisterAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRegisterAction instanceof OaValidationError) {
  *   // From this point on, `maybeRegisterAction` will have type `OaValidationError`
  *   const error = maybeRegisterAction;

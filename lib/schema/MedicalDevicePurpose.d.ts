@@ -40,7 +40,7 @@ export declare const MedicalDevicePurposeOrSubClassJoiSchema: Joi.AlternativesSc
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMedicalDevicePurpose = MedicalDevicePurpose.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMedicalDevicePurpose = validateMedicalDevicePurpose(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMedicalDevicePurpose instanceof OaValidationError) {
  *   // From this point on, `maybeMedicalDevicePurpose` will have type `OaValidationError`
  *   const error = maybeMedicalDevicePurpose;

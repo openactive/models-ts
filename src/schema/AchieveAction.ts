@@ -178,7 +178,7 @@ export const AchieveActionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAchieveAction = AchieveAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAchieveAction = validateAchieveAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAchieveAction instanceof OaValidationError) {
  *   // From this point on, `maybeAchieveAction` will have type `OaValidationError`
  *   const error = maybeAchieveAction;

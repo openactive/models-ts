@@ -144,7 +144,7 @@ export const OrganizationRoleOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOrganizationRole = OrganizationRole.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOrganizationRole = validateOrganizationRole(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOrganizationRole instanceof OaValidationError) {
  *   // From this point on, `maybeOrganizationRole` will have type `OaValidationError`
  *   const error = maybeOrganizationRole;

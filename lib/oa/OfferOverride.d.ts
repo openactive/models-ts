@@ -330,7 +330,7 @@ export declare const OfferOverrideOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOfferOverride = OfferOverride.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOfferOverride = validateOfferOverride(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOfferOverride instanceof OaValidationError) {
  *   // From this point on, `maybeOfferOverride` will have type `OaValidationError`
  *   const error = maybeOfferOverride;

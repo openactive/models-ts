@@ -269,7 +269,7 @@ export declare const SchoolDistrictOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSchoolDistrict = SchoolDistrict.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSchoolDistrict = validateSchoolDistrict(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSchoolDistrict instanceof OaValidationError) {
  *   // From this point on, `maybeSchoolDistrict` will have type `OaValidationError`
  *   const error = maybeSchoolDistrict;

@@ -132,7 +132,7 @@ export const InteractionCounterOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInteractionCounter = InteractionCounter.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInteractionCounter = validateInteractionCounter(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInteractionCounter instanceof OaValidationError) {
  *   // From this point on, `maybeInteractionCounter` will have type `OaValidationError`
  *   const error = maybeInteractionCounter;

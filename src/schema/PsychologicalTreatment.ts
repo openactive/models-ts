@@ -197,7 +197,7 @@ export const PsychologicalTreatmentOrSubClassJoiSchema = Joi.alternatives().try(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePsychologicalTreatment = PsychologicalTreatment.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePsychologicalTreatment = validatePsychologicalTreatment(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePsychologicalTreatment instanceof OaValidationError) {
  *   // From this point on, `maybePsychologicalTreatment` will have type `OaValidationError`
  *   const error = maybePsychologicalTreatment;

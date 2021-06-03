@@ -158,7 +158,7 @@ export declare const DietarySupplementOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDietarySupplement = DietarySupplement.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDietarySupplement = validateDietarySupplement(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDietarySupplement instanceof OaValidationError) {
  *   // From this point on, `maybeDietarySupplement` will have type `OaValidationError`
  *   const error = maybeDietarySupplement;

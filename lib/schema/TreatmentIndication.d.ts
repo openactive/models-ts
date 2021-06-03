@@ -118,7 +118,7 @@ export declare const TreatmentIndicationOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTreatmentIndication = TreatmentIndication.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTreatmentIndication = validateTreatmentIndication(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTreatmentIndication instanceof OaValidationError) {
  *   // From this point on, `maybeTreatmentIndication` will have type `OaValidationError`
  *   const error = maybeTreatmentIndication;

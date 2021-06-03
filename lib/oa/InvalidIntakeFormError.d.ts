@@ -144,7 +144,7 @@ export declare const InvalidIntakeFormErrorOrSubClassJoiSchema: Joi.Alternatives
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInvalidIntakeFormError = InvalidIntakeFormError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInvalidIntakeFormError = validateInvalidIntakeFormError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInvalidIntakeFormError instanceof OaValidationError) {
  *   // From this point on, `maybeInvalidIntakeFormError` will have type `OaValidationError`
  *   const error = maybeInvalidIntakeFormError;

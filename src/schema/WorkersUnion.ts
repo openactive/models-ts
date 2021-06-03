@@ -435,7 +435,7 @@ export const WorkersUnionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWorkersUnion = WorkersUnion.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWorkersUnion = validateWorkersUnion(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWorkersUnion instanceof OaValidationError) {
  *   // From this point on, `maybeWorkersUnion` will have type `OaValidationError`
  *   const error = maybeWorkersUnion;

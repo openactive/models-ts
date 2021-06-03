@@ -34,7 +34,7 @@ export const GamePlayModeJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGamePlayMode = GamePlayMode.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGamePlayMode = validateGamePlayMode(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGamePlayMode instanceof OaValidationError) {
  *   // From this point on, `maybeGamePlayMode` will have type `OaValidationError`
  *   const error = maybeGamePlayMode;

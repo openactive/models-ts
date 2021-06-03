@@ -162,7 +162,7 @@ export const MedicalRiskCalculatorOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMedicalRiskCalculator = MedicalRiskCalculator.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMedicalRiskCalculator = validateMedicalRiskCalculator(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMedicalRiskCalculator instanceof OaValidationError) {
  *   // From this point on, `maybeMedicalRiskCalculator` will have type `OaValidationError`
  *   const error = maybeMedicalRiskCalculator;

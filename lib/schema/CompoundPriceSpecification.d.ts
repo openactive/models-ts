@@ -135,7 +135,7 @@ export declare const CompoundPriceSpecificationOrSubClassJoiSchema: Joi.Alternat
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCompoundPriceSpecification = CompoundPriceSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCompoundPriceSpecification = validateCompoundPriceSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCompoundPriceSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeCompoundPriceSpecification` will have type `OaValidationError`
  *   const error = maybeCompoundPriceSpecification;

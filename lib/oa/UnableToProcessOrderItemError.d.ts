@@ -144,7 +144,7 @@ export declare const UnableToProcessOrderItemErrorOrSubClassJoiSchema: Joi.Alter
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUnableToProcessOrderItemError = UnableToProcessOrderItemError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUnableToProcessOrderItemError = validateUnableToProcessOrderItemError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUnableToProcessOrderItemError instanceof OaValidationError) {
  *   // From this point on, `maybeUnableToProcessOrderItemError` will have type `OaValidationError`
  *   const error = maybeUnableToProcessOrderItemError;

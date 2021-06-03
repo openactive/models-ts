@@ -21,7 +21,7 @@ export declare const LegalValueLevelJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLegalValueLevel = LegalValueLevel.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLegalValueLevel = validateLegalValueLevel(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLegalValueLevel instanceof OaValidationError) {
  *   // From this point on, `maybeLegalValueLevel` will have type `OaValidationError`
  *   const error = maybeLegalValueLevel;

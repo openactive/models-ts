@@ -2922,7 +2922,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePropertyEnumeration = PropertyEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePropertyEnumeration = validatePropertyEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePropertyEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybePropertyEnumeration` will have type `OaValidationError`
  *   const error = maybePropertyEnumeration;

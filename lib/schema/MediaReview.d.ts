@@ -572,7 +572,7 @@ export declare const MediaReviewOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMediaReview = MediaReview.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMediaReview = validateMediaReview(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMediaReview instanceof OaValidationError) {
  *   // From this point on, `maybeMediaReview` will have type `OaValidationError`
  *   const error = maybeMediaReview;

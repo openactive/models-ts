@@ -659,7 +659,7 @@ export const BedAndBreakfastOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBedAndBreakfast = BedAndBreakfast.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBedAndBreakfast = validateBedAndBreakfast(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBedAndBreakfast instanceof OaValidationError) {
  *   // From this point on, `maybeBedAndBreakfast` will have type `OaValidationError`
  *   const error = maybeBedAndBreakfast;

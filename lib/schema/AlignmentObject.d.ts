@@ -110,7 +110,7 @@ export declare const AlignmentObjectOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAlignmentObject = AlignmentObject.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAlignmentObject = validateAlignmentObject(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAlignmentObject instanceof OaValidationError) {
  *   // From this point on, `maybeAlignmentObject` will have type `OaValidationError`
  *   const error = maybeAlignmentObject;

@@ -440,7 +440,7 @@ export const CorporationOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCorporation = Corporation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCorporation = validateCorporation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCorporation instanceof OaValidationError) {
  *   // From this point on, `maybeCorporation` will have type `OaValidationError`
  *   const error = maybeCorporation;

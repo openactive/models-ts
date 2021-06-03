@@ -574,7 +574,7 @@ export declare const ComicStoryOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeComicStory = ComicStory.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeComicStory = validateComicStory(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeComicStory instanceof OaValidationError) {
  *   // From this point on, `maybeComicStory` will have type `OaValidationError`
  *   const error = maybeComicStory;

@@ -269,7 +269,7 @@ export declare const RiverBodyOfWaterOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRiverBodyOfWater = RiverBodyOfWater.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRiverBodyOfWater = validateRiverBodyOfWater(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRiverBodyOfWater instanceof OaValidationError) {
  *   // From this point on, `maybeRiverBodyOfWater` will have type `OaValidationError`
  *   const error = maybeRiverBodyOfWater;

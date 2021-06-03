@@ -338,7 +338,7 @@ export const PublicationEventOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePublicationEvent = PublicationEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePublicationEvent = validatePublicationEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePublicationEvent instanceof OaValidationError) {
  *   // From this point on, `maybePublicationEvent` will have type `OaValidationError`
  *   const error = maybePublicationEvent;

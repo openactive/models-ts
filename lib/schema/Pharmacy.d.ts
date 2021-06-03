@@ -508,7 +508,7 @@ export declare const PharmacyOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePharmacy = Pharmacy.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePharmacy = validatePharmacy(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePharmacy instanceof OaValidationError) {
  *   // From this point on, `maybePharmacy` will have type `OaValidationError`
  *   const error = maybePharmacy;

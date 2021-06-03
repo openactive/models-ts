@@ -142,7 +142,7 @@ export const HealthPlanCostSharingSpecificationOrSubClassJoiSchema = Joi.alterna
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHealthPlanCostSharingSpecification = HealthPlanCostSharingSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHealthPlanCostSharingSpecification = validateHealthPlanCostSharingSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHealthPlanCostSharingSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeHealthPlanCostSharingSpecification` will have type `OaValidationError`
  *   const error = maybeHealthPlanCostSharingSpecification;

@@ -118,7 +118,7 @@ export declare const MonetaryAmountDistributionOrSubClassJoiSchema: Joi.Alternat
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMonetaryAmountDistribution = MonetaryAmountDistribution.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMonetaryAmountDistribution = validateMonetaryAmountDistribution(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMonetaryAmountDistribution instanceof OaValidationError) {
  *   // From this point on, `maybeMonetaryAmountDistribution` will have type `OaValidationError`
  *   const error = maybeMonetaryAmountDistribution;

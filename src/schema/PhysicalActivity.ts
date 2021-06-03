@@ -174,7 +174,7 @@ export const PhysicalActivityOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePhysicalActivity = PhysicalActivity.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePhysicalActivity = validatePhysicalActivity(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePhysicalActivity instanceof OaValidationError) {
  *   // From this point on, `maybePhysicalActivity` will have type `OaValidationError`
  *   const error = maybePhysicalActivity;

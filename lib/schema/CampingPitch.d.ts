@@ -324,7 +324,7 @@ export declare const CampingPitchOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCampingPitch = CampingPitch.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCampingPitch = validateCampingPitch(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCampingPitch instanceof OaValidationError) {
  *   // From this point on, `maybeCampingPitch` will have type `OaValidationError`
  *   const error = maybeCampingPitch;

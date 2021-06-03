@@ -127,7 +127,7 @@ export const DigitalDocumentPermissionOrSubClassJoiSchema = Joi.alternatives().t
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDigitalDocumentPermission = DigitalDocumentPermission.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDigitalDocumentPermission = validateDigitalDocumentPermission(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDigitalDocumentPermission instanceof OaValidationError) {
  *   // From this point on, `maybeDigitalDocumentPermission` will have type `OaValidationError`
  *   const error = maybeDigitalDocumentPermission;

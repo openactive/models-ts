@@ -134,7 +134,7 @@ export declare const TieActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTieAction = TieAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTieAction = validateTieAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTieAction instanceof OaValidationError) {
  *   // From this point on, `maybeTieAction` will have type `OaValidationError`
  *   const error = maybeTieAction;

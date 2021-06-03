@@ -134,7 +134,7 @@ export declare const PhotographActionOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePhotographAction = PhotographAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePhotographAction = validatePhotographAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePhotographAction instanceof OaValidationError) {
  *   // From this point on, `maybePhotographAction` will have type `OaValidationError`
  *   const error = maybePhotographAction;

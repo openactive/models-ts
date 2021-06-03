@@ -25,7 +25,7 @@ export declare const FacilitySettingTypeJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeFacilitySettingType = FacilitySettingType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeFacilitySettingType = validateFacilitySettingType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeFacilitySettingType instanceof OaValidationError) {
  *   // From this point on, `maybeFacilitySettingType` will have type `OaValidationError`
  *   const error = maybeFacilitySettingType;

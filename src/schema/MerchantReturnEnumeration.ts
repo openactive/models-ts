@@ -36,7 +36,7 @@ export const MerchantReturnEnumerationJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMerchantReturnEnumeration = MerchantReturnEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMerchantReturnEnumeration = validateMerchantReturnEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMerchantReturnEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeMerchantReturnEnumeration` will have type `OaValidationError`
  *   const error = maybeMerchantReturnEnumeration;

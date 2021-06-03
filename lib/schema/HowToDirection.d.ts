@@ -596,7 +596,7 @@ export declare const HowToDirectionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHowToDirection = HowToDirection.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHowToDirection = validateHowToDirection(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHowToDirection instanceof OaValidationError) {
  *   // From this point on, `maybeHowToDirection` will have type `OaValidationError`
  *   const error = maybeHowToDirection;

@@ -179,7 +179,7 @@ export const BooleanFormFieldSpecificationOrSubClassJoiSchema = Joi.alternatives
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBooleanFormFieldSpecification = BooleanFormFieldSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBooleanFormFieldSpecification = validateBooleanFormFieldSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBooleanFormFieldSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeBooleanFormFieldSpecification` will have type `OaValidationError`
  *   const error = maybeBooleanFormFieldSpecification;

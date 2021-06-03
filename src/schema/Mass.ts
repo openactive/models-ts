@@ -117,7 +117,7 @@ export const MassOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMass = Mass.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMass = validateMass(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMass instanceof OaValidationError) {
  *   // From this point on, `maybeMass` will have type `OaValidationError`
  *   const error = maybeMass;

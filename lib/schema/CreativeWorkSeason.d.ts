@@ -596,7 +596,7 @@ export declare const CreativeWorkSeasonOrSubClassJoiSchema: Joi.AlternativesSche
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCreativeWorkSeason = CreativeWorkSeason.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCreativeWorkSeason = validateCreativeWorkSeason(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCreativeWorkSeason instanceof OaValidationError) {
  *   // From this point on, `maybeCreativeWorkSeason` will have type `OaValidationError`
  *   const error = maybeCreativeWorkSeason;

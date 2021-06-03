@@ -192,7 +192,7 @@ export const LigamentOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLigament = Ligament.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLigament = validateLigament(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLigament instanceof OaValidationError) {
  *   // From this point on, `maybeLigament` will have type `OaValidationError`
  *   const error = maybeLigament;

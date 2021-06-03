@@ -274,7 +274,7 @@ export declare const OfferForPurchaseOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOfferForPurchase = OfferForPurchase.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOfferForPurchase = validateOfferForPurchase(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOfferForPurchase instanceof OaValidationError) {
  *   // From this point on, `maybeOfferForPurchase` will have type `OaValidationError`
  *   const error = maybeOfferForPurchase;

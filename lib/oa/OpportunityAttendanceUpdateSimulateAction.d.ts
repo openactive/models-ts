@@ -158,7 +158,7 @@ export declare const OpportunityAttendanceUpdateSimulateActionOrSubClassJoiSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOpportunityAttendanceUpdateSimulateAction = OpportunityAttendanceUpdateSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOpportunityAttendanceUpdateSimulateAction = validateOpportunityAttendanceUpdateSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOpportunityAttendanceUpdateSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeOpportunityAttendanceUpdateSimulateAction` will have type `OaValidationError`
  *   const error = maybeOpportunityAttendanceUpdateSimulateAction;

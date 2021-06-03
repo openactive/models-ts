@@ -21,7 +21,7 @@ export declare const RsvpResponseTypeJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRsvpResponseType = RsvpResponseType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRsvpResponseType = validateRsvpResponseType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRsvpResponseType instanceof OaValidationError) {
  *   // From this point on, `maybeRsvpResponseType` will have type `OaValidationError`
  *   const error = maybeRsvpResponseType;

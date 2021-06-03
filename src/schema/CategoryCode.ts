@@ -139,7 +139,7 @@ export const CategoryCodeOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCategoryCode = CategoryCode.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCategoryCode = validateCategoryCode(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCategoryCode instanceof OaValidationError) {
  *   // From this point on, `maybeCategoryCode` will have type `OaValidationError`
  *   const error = maybeCategoryCode;

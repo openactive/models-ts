@@ -184,7 +184,7 @@ export const ParagraphFormFieldSpecificationOrSubClassJoiSchema = Joi.alternativ
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeParagraphFormFieldSpecification = ParagraphFormFieldSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeParagraphFormFieldSpecification = validateParagraphFormFieldSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeParagraphFormFieldSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeParagraphFormFieldSpecification` will have type `OaValidationError`
  *   const error = maybeParagraphFormFieldSpecification;

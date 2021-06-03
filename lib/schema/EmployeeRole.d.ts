@@ -118,7 +118,7 @@ export declare const EmployeeRoleOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEmployeeRole = EmployeeRole.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEmployeeRole = validateEmployeeRole(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEmployeeRole instanceof OaValidationError) {
  *   // From this point on, `maybeEmployeeRole` will have type `OaValidationError`
  *   const error = maybeEmployeeRole;

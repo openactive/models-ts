@@ -134,7 +134,7 @@ export declare const DeactivateActionOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDeactivateAction = DeactivateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDeactivateAction = validateDeactivateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDeactivateAction instanceof OaValidationError) {
  *   // From this point on, `maybeDeactivateAction` will have type `OaValidationError`
  *   const error = maybeDeactivateAction;

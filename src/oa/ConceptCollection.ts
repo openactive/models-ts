@@ -703,7 +703,7 @@ export const ConceptCollectionOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeConceptCollection = ConceptCollection.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeConceptCollection = validateConceptCollection(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeConceptCollection instanceof OaValidationError) {
  *   // From this point on, `maybeConceptCollection` will have type `OaValidationError`
  *   const error = maybeConceptCollection;

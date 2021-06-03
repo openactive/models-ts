@@ -596,7 +596,7 @@ export declare const RadioClipOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRadioClip = RadioClip.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRadioClip = validateRadioClip(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRadioClip instanceof OaValidationError) {
  *   // From this point on, `maybeRadioClip` will have type `OaValidationError`
  *   const error = maybeRadioClip;

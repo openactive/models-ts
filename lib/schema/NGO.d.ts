@@ -345,7 +345,7 @@ export declare const NGOOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeNGO = NGO.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeNGO = validateNGO(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeNGO instanceof OaValidationError) {
  *   // From this point on, `maybeNGO` will have type `OaValidationError`
  *   const error = maybeNGO;

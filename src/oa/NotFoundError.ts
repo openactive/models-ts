@@ -174,7 +174,7 @@ export const NotFoundErrorOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeNotFoundError = NotFoundError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeNotFoundError = validateNotFoundError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeNotFoundError instanceof OaValidationError) {
  *   // From this point on, `maybeNotFoundError` will have type `OaValidationError`
  *   const error = maybeNotFoundError;

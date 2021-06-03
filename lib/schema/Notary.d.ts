@@ -496,7 +496,7 @@ export declare const NotaryOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeNotary = Notary.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeNotary = validateNotary(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeNotary instanceof OaValidationError) {
  *   // From this point on, `maybeNotary` will have type `OaValidationError`
  *   const error = maybeNotary;

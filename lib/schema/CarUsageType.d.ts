@@ -21,7 +21,7 @@ export declare const CarUsageTypeJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCarUsageType = CarUsageType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCarUsageType = validateCarUsageType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCarUsageType instanceof OaValidationError) {
  *   // From this point on, `maybeCarUsageType` will have type `OaValidationError`
  *   const error = maybeCarUsageType;

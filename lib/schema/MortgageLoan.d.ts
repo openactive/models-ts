@@ -243,7 +243,7 @@ export declare const MortgageLoanOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMortgageLoan = MortgageLoan.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMortgageLoan = validateMortgageLoan(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMortgageLoan instanceof OaValidationError) {
  *   // From this point on, `maybeMortgageLoan` will have type `OaValidationError`
  *   const error = maybeMortgageLoan;

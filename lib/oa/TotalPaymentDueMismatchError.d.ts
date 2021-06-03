@@ -144,7 +144,7 @@ export declare const TotalPaymentDueMismatchErrorOrSubClassJoiSchema: Joi.Altern
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTotalPaymentDueMismatchError = TotalPaymentDueMismatchError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTotalPaymentDueMismatchError = validateTotalPaymentDueMismatchError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTotalPaymentDueMismatchError instanceof OaValidationError) {
  *   // From this point on, `maybeTotalPaymentDueMismatchError` will have type `OaValidationError`
  *   const error = maybeTotalPaymentDueMismatchError;

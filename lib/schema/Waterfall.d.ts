@@ -269,7 +269,7 @@ export declare const WaterfallOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWaterfall = Waterfall.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWaterfall = validateWaterfall(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWaterfall instanceof OaValidationError) {
  *   // From this point on, `maybeWaterfall` will have type `OaValidationError`
  *   const error = maybeWaterfall;

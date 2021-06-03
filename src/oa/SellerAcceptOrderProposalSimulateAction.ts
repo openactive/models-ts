@@ -195,7 +195,7 @@ export const SellerAcceptOrderProposalSimulateActionOrSubClassJoiSchema = Joi.al
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSellerAcceptOrderProposalSimulateAction = SellerAcceptOrderProposalSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSellerAcceptOrderProposalSimulateAction = validateSellerAcceptOrderProposalSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSellerAcceptOrderProposalSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeSellerAcceptOrderProposalSimulateAction` will have type `OaValidationError`
  *   const error = maybeSellerAcceptOrderProposalSimulateAction;

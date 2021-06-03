@@ -189,7 +189,7 @@ export const DropdownFormFieldSpecificationOrSubClassJoiSchema = Joi.alternative
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDropdownFormFieldSpecification = DropdownFormFieldSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDropdownFormFieldSpecification = validateDropdownFormFieldSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDropdownFormFieldSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeDropdownFormFieldSpecification` will have type `OaValidationError`
  *   const error = maybeDropdownFormFieldSpecification;

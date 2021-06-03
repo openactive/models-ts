@@ -111,7 +111,7 @@ export declare const ObservationOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeObservation = Observation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeObservation = validateObservation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeObservation instanceof OaValidationError) {
  *   // From this point on, `maybeObservation` will have type `OaValidationError`
  *   const error = maybeObservation;

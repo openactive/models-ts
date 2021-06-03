@@ -605,7 +605,7 @@ export declare const SearchResultsPageOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSearchResultsPage = SearchResultsPage.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSearchResultsPage = validateSearchResultsPage(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSearchResultsPage instanceof OaValidationError) {
  *   // From this point on, `maybeSearchResultsPage` will have type `OaValidationError`
  *   const error = maybeSearchResultsPage;

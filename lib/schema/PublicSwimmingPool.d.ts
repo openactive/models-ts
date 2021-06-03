@@ -496,7 +496,7 @@ export declare const PublicSwimmingPoolOrSubClassJoiSchema: Joi.AlternativesSche
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePublicSwimmingPool = PublicSwimmingPool.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePublicSwimmingPool = validatePublicSwimmingPool(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePublicSwimmingPool instanceof OaValidationError) {
  *   // From this point on, `maybePublicSwimmingPool` will have type `OaValidationError`
  *   const error = maybePublicSwimmingPool;

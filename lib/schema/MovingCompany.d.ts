@@ -496,7 +496,7 @@ export declare const MovingCompanyOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMovingCompany = MovingCompany.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMovingCompany = validateMovingCompany(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMovingCompany instanceof OaValidationError) {
  *   // From this point on, `maybeMovingCompany` will have type `OaValidationError`
  *   const error = maybeMovingCompany;

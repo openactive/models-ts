@@ -158,7 +158,7 @@ export declare const FlightReservationOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeFlightReservation = FlightReservation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeFlightReservation = validateFlightReservation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeFlightReservation instanceof OaValidationError) {
  *   // From this point on, `maybeFlightReservation` will have type `OaValidationError`
  *   const error = maybeFlightReservation;

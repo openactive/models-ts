@@ -597,7 +597,7 @@ export declare const ScholarlyArticleOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeScholarlyArticle = ScholarlyArticle.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeScholarlyArticle = validateScholarlyArticle(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeScholarlyArticle instanceof OaValidationError) {
  *   // From this point on, `maybeScholarlyArticle` will have type `OaValidationError`
  *   const error = maybeScholarlyArticle;

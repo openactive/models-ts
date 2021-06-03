@@ -556,7 +556,7 @@ export declare const LearningResourceOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLearningResource = LearningResource.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLearningResource = validateLearningResource(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLearningResource instanceof OaValidationError) {
  *   // From this point on, `maybeLearningResource` will have type `OaValidationError`
  *   const error = maybeLearningResource;

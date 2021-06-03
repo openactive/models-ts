@@ -56,7 +56,7 @@ export const WearableMeasurementTypeEnumerationOrSubClassJoiSchema = Joi.alterna
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWearableMeasurementTypeEnumeration = WearableMeasurementTypeEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWearableMeasurementTypeEnumeration = validateWearableMeasurementTypeEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWearableMeasurementTypeEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeWearableMeasurementTypeEnumeration` will have type `OaValidationError`
  *   const error = maybeWearableMeasurementTypeEnumeration;

@@ -114,7 +114,7 @@ export declare const EndorsementRatingOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEndorsementRating = EndorsementRating.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEndorsementRating = validateEndorsementRating(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEndorsementRating instanceof OaValidationError) {
  *   // From this point on, `maybeEndorsementRating` will have type `OaValidationError`
  *   const error = maybeEndorsementRating;

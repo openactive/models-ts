@@ -144,7 +144,7 @@ export declare const TemporarilyUnableToCreateOrderErrorOrSubClassJoiSchema: Joi
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTemporarilyUnableToCreateOrderError = TemporarilyUnableToCreateOrderError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTemporarilyUnableToCreateOrderError = validateTemporarilyUnableToCreateOrderError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTemporarilyUnableToCreateOrderError instanceof OaValidationError) {
  *   // From this point on, `maybeTemporarilyUnableToCreateOrderError` will have type `OaValidationError`
  *   const error = maybeTemporarilyUnableToCreateOrderError;

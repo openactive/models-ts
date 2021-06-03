@@ -556,7 +556,7 @@ export declare const QuizOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeQuiz = Quiz.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeQuiz = validateQuiz(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeQuiz instanceof OaValidationError) {
  *   // From this point on, `maybeQuiz` will have type `OaValidationError`
  *   const error = maybeQuiz;

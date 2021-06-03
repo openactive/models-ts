@@ -40,7 +40,7 @@ export declare const LegalForceStatusOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLegalForceStatus = LegalForceStatus.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLegalForceStatus = validateLegalForceStatus(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLegalForceStatus instanceof OaValidationError) {
  *   // From this point on, `maybeLegalForceStatus` will have type `OaValidationError`
  *   const error = maybeLegalForceStatus;

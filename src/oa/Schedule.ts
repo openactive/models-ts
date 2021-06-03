@@ -223,7 +223,7 @@ export const ScheduleOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSchedule = Schedule.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSchedule = validateSchedule(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSchedule instanceof OaValidationError) {
  *   // From this point on, `maybeSchedule` will have type `OaValidationError`
  *   const error = maybeSchedule;

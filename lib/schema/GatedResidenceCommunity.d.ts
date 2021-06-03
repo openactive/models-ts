@@ -273,7 +273,7 @@ export declare const GatedResidenceCommunityOrSubClassJoiSchema: Joi.Alternative
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGatedResidenceCommunity = GatedResidenceCommunity.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGatedResidenceCommunity = validateGatedResidenceCommunity(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGatedResidenceCommunity instanceof OaValidationError) {
  *   // From this point on, `maybeGatedResidenceCommunity` will have type `OaValidationError`
  *   const error = maybeGatedResidenceCommunity;

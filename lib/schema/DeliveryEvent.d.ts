@@ -269,7 +269,7 @@ export declare const DeliveryEventOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDeliveryEvent = DeliveryEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDeliveryEvent = validateDeliveryEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDeliveryEvent instanceof OaValidationError) {
  *   // From this point on, `maybeDeliveryEvent` will have type `OaValidationError`
  *   const error = maybeDeliveryEvent;

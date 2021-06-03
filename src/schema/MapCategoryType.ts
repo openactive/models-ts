@@ -36,7 +36,7 @@ export const MapCategoryTypeJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMapCategoryType = MapCategoryType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMapCategoryType = validateMapCategoryType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMapCategoryType instanceof OaValidationError) {
  *   // From this point on, `maybeMapCategoryType` will have type `OaValidationError`
  *   const error = maybeMapCategoryType;

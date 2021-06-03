@@ -605,7 +605,7 @@ export declare const AboutPageOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAboutPage = AboutPage.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAboutPage = validateAboutPage(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAboutPage instanceof OaValidationError) {
  *   // From this point on, `maybeAboutPage` will have type `OaValidationError`
  *   const error = maybeAboutPage;

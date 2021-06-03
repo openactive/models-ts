@@ -795,7 +795,7 @@ export const ImageObjectOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeImageObject = ImageObject.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeImageObject = validateImageObject(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeImageObject instanceof OaValidationError) {
  *   // From this point on, `maybeImageObject` will have type `OaValidationError`
  *   const error = maybeImageObject;

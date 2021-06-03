@@ -496,7 +496,7 @@ export declare const AutoWashOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAutoWash = AutoWash.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAutoWash = validateAutoWash(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAutoWash instanceof OaValidationError) {
  *   // From this point on, `maybeAutoWash` will have type `OaValidationError`
  *   const error = maybeAutoWash;

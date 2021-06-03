@@ -687,7 +687,7 @@ export const AmpStoryOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAmpStory = AmpStory.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAmpStory = validateAmpStory(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAmpStory instanceof OaValidationError) {
  *   // From this point on, `maybeAmpStory` will have type `OaValidationError`
  *   const error = maybeAmpStory;

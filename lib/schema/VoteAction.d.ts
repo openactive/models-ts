@@ -146,7 +146,7 @@ export declare const VoteActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeVoteAction = VoteAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeVoteAction = validateVoteAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeVoteAction instanceof OaValidationError) {
  *   // From this point on, `maybeVoteAction` will have type `OaValidationError`
  *   const error = maybeVoteAction;

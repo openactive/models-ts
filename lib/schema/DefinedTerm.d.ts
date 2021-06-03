@@ -98,7 +98,7 @@ export declare const DefinedTermOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDefinedTerm = DefinedTerm.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDefinedTerm = validateDefinedTerm(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDefinedTerm instanceof OaValidationError) {
  *   // From this point on, `maybeDefinedTerm` will have type `OaValidationError`
  *   const error = maybeDefinedTerm;

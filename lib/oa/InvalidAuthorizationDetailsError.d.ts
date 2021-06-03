@@ -144,7 +144,7 @@ export declare const InvalidAuthorizationDetailsErrorOrSubClassJoiSchema: Joi.Al
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInvalidAuthorizationDetailsError = InvalidAuthorizationDetailsError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInvalidAuthorizationDetailsError = validateInvalidAuthorizationDetailsError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInvalidAuthorizationDetailsError instanceof OaValidationError) {
  *   // From this point on, `maybeInvalidAuthorizationDetailsError` will have type `OaValidationError`
  *   const error = maybeInvalidAuthorizationDetailsError;

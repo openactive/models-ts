@@ -199,7 +199,7 @@ export declare const CurrencyConversionServiceOrSubClassJoiSchema: Joi.Alternati
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCurrencyConversionService = CurrencyConversionService.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCurrencyConversionService = validateCurrencyConversionService(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCurrencyConversionService instanceof OaValidationError) {
  *   // From this point on, `maybeCurrencyConversionService` will have type `OaValidationError`
  *   const error = maybeCurrencyConversionService;

@@ -623,7 +623,7 @@ export const AutoPartsStoreOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAutoPartsStore = AutoPartsStore.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAutoPartsStore = validateAutoPartsStore(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAutoPartsStore instanceof OaValidationError) {
  *   // From this point on, `maybeAutoPartsStore` will have type `OaValidationError`
  *   const error = maybeAutoPartsStore;

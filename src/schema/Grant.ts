@@ -129,7 +129,7 @@ export const GrantOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGrant = Grant.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGrant = validateGrant(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGrant instanceof OaValidationError) {
  *   // From this point on, `maybeGrant` will have type `OaValidationError`
  *   const error = maybeGrant;

@@ -149,7 +149,7 @@ export const CertificationSchemeOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCertificationScheme = CertificationScheme.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCertificationScheme = validateCertificationScheme(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCertificationScheme instanceof OaValidationError) {
  *   // From this point on, `maybeCertificationScheme` will have type `OaValidationError`
  *   const error = maybeCertificationScheme;

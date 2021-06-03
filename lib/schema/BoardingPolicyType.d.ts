@@ -21,7 +21,7 @@ export declare const BoardingPolicyTypeJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBoardingPolicyType = BoardingPolicyType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBoardingPolicyType = validateBoardingPolicyType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBoardingPolicyType instanceof OaValidationError) {
  *   // From this point on, `maybeBoardingPolicyType` will have type `OaValidationError`
  *   const error = maybeBoardingPolicyType;

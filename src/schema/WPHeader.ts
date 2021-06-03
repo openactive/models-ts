@@ -697,7 +697,7 @@ export const WPHeaderOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWPHeader = WPHeader.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWPHeader = validateWPHeader(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWPHeader instanceof OaValidationError) {
  *   // From this point on, `maybeWPHeader` will have type `OaValidationError`
  *   const error = maybeWPHeader;

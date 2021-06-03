@@ -174,7 +174,7 @@ export const OpportunityCapacityIsReservedByLeaseErrorOrSubClassJoiSchema = Joi.
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOpportunityCapacityIsReservedByLeaseError = OpportunityCapacityIsReservedByLeaseError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOpportunityCapacityIsReservedByLeaseError = validateOpportunityCapacityIsReservedByLeaseError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOpportunityCapacityIsReservedByLeaseError instanceof OaValidationError) {
  *   // From this point on, `maybeOpportunityCapacityIsReservedByLeaseError` will have type `OaValidationError`
  *   const error = maybeOpportunityCapacityIsReservedByLeaseError;

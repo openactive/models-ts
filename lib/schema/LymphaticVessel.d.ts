@@ -162,7 +162,7 @@ export declare const LymphaticVesselOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLymphaticVessel = LymphaticVessel.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLymphaticVessel = validateLymphaticVessel(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLymphaticVessel instanceof OaValidationError) {
  *   // From this point on, `maybeLymphaticVessel` will have type `OaValidationError`
  *   const error = maybeLymphaticVessel;

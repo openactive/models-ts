@@ -623,7 +623,7 @@ export const BookStoreOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBookStore = BookStore.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBookStore = validateBookStore(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBookStore instanceof OaValidationError) {
  *   // From this point on, `maybeBookStore` will have type `OaValidationError`
  *   const error = maybeBookStore;

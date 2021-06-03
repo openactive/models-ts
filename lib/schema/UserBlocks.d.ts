@@ -253,7 +253,7 @@ export declare const UserBlocksOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUserBlocks = UserBlocks.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUserBlocks = validateUserBlocks(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUserBlocks instanceof OaValidationError) {
  *   // From this point on, `maybeUserBlocks` will have type `OaValidationError`
  *   const error = maybeUserBlocks;

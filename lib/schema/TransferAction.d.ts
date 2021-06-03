@@ -142,7 +142,7 @@ export declare const TransferActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTransferAction = TransferAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTransferAction = validateTransferAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTransferAction instanceof OaValidationError) {
  *   // From this point on, `maybeTransferAction` will have type `OaValidationError`
  *   const error = maybeTransferAction;

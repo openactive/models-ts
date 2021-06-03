@@ -134,7 +134,7 @@ export declare const PaintActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePaintAction = PaintAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePaintAction = validatePaintAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePaintAction instanceof OaValidationError) {
  *   // From this point on, `maybePaintAction` will have type `OaValidationError`
  *   const error = maybePaintAction;

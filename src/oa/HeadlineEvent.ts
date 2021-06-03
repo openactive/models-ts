@@ -791,7 +791,7 @@ export const HeadlineEventOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHeadlineEvent = HeadlineEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHeadlineEvent = validateHeadlineEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHeadlineEvent instanceof OaValidationError) {
  *   // From this point on, `maybeHeadlineEvent` will have type `OaValidationError`
  *   const error = maybeHeadlineEvent;

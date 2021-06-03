@@ -95,7 +95,7 @@ export declare const EnumerationOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEnumeration = Enumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEnumeration = validateEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeEnumeration` will have type `OaValidationError`
  *   const error = maybeEnumeration;

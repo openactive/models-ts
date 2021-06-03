@@ -145,7 +145,7 @@ export declare const DeliveryChargeSpecificationOrSubClassJoiSchema: Joi.Alterna
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDeliveryChargeSpecification = DeliveryChargeSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDeliveryChargeSpecification = validateDeliveryChargeSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDeliveryChargeSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeDeliveryChargeSpecification` will have type `OaValidationError`
  *   const error = maybeDeliveryChargeSpecification;

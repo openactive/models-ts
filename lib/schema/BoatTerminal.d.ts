@@ -273,7 +273,7 @@ export declare const BoatTerminalOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBoatTerminal = BoatTerminal.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBoatTerminal = validateBoatTerminal(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBoatTerminal instanceof OaValidationError) {
  *   // From this point on, `maybeBoatTerminal` will have type `OaValidationError`
  *   const error = maybeBoatTerminal;

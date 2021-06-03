@@ -56,7 +56,7 @@ export const EnergyStarEnergyEfficiencyEnumerationOrSubClassJoiSchema = Joi.alte
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEnergyStarEnergyEfficiencyEnumeration = EnergyStarEnergyEfficiencyEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEnergyStarEnergyEfficiencyEnumeration = validateEnergyStarEnergyEfficiencyEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEnergyStarEnergyEfficiencyEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeEnergyStarEnergyEfficiencyEnumeration` will have type `OaValidationError`
  *   const error = maybeEnergyStarEnergyEfficiencyEnumeration;

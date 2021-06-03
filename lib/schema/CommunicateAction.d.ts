@@ -150,7 +150,7 @@ export declare const CommunicateActionOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCommunicateAction = CommunicateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCommunicateAction = validateCommunicateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCommunicateAction instanceof OaValidationError) {
  *   // From this point on, `maybeCommunicateAction` will have type `OaValidationError`
  *   const error = maybeCommunicateAction;

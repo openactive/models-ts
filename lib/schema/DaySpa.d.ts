@@ -496,7 +496,7 @@ export declare const DaySpaOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDaySpa = DaySpa.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDaySpa = validateDaySpa(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDaySpa instanceof OaValidationError) {
  *   // From this point on, `maybeDaySpa` will have type `OaValidationError`
  *   const error = maybeDaySpa;

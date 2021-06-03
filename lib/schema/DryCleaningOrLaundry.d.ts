@@ -496,7 +496,7 @@ export declare const DryCleaningOrLaundryOrSubClassJoiSchema: Joi.AlternativesSc
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDryCleaningOrLaundry = DryCleaningOrLaundry.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDryCleaningOrLaundry = validateDryCleaningOrLaundry(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDryCleaningOrLaundry instanceof OaValidationError) {
  *   // From this point on, `maybeDryCleaningOrLaundry` will have type `OaValidationError`
  *   const error = maybeDryCleaningOrLaundry;

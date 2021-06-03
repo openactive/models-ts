@@ -117,7 +117,7 @@ export const DistanceOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDistance = Distance.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDistance = validateDistance(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDistance instanceof OaValidationError) {
  *   // From this point on, `maybeDistance` will have type `OaValidationError`
  *   const error = maybeDistance;

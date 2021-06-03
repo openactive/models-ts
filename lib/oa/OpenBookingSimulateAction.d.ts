@@ -158,7 +158,7 @@ export declare const OpenBookingSimulateActionOrSubClassJoiSchema: Joi.Alternati
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOpenBookingSimulateAction = OpenBookingSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOpenBookingSimulateAction = validateOpenBookingSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOpenBookingSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeOpenBookingSimulateAction` will have type `OaValidationError`
  *   const error = maybeOpenBookingSimulateAction;

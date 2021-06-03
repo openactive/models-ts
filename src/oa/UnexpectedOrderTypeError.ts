@@ -174,7 +174,7 @@ export const UnexpectedOrderTypeErrorOrSubClassJoiSchema = Joi.alternatives().tr
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUnexpectedOrderTypeError = UnexpectedOrderTypeError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUnexpectedOrderTypeError = validateUnexpectedOrderTypeError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUnexpectedOrderTypeError instanceof OaValidationError) {
  *   // From this point on, `maybeUnexpectedOrderTypeError` will have type `OaValidationError`
  *   const error = maybeUnexpectedOrderTypeError;

@@ -496,7 +496,7 @@ export declare const PetStoreOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePetStore = PetStore.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePetStore = validatePetStore(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePetStore instanceof OaValidationError) {
  *   // From this point on, `maybePetStore` will have type `OaValidationError`
  *   const error = maybePetStore;

@@ -564,7 +564,7 @@ export declare const PeriodicalOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePeriodical = Periodical.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePeriodical = validatePeriodical(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePeriodical instanceof OaValidationError) {
  *   // From this point on, `maybePeriodical` will have type `OaValidationError`
  *   const error = maybePeriodical;

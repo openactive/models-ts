@@ -56,7 +56,7 @@ export const USNonprofitTypeOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUSNonprofitType = USNonprofitType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUSNonprofitType = validateUSNonprofitType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUSNonprofitType instanceof OaValidationError) {
  *   // From this point on, `maybeUSNonprofitType` will have type `OaValidationError`
  *   const error = maybeUSNonprofitType;

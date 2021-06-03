@@ -171,7 +171,7 @@ export const PropertyValueOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePropertyValue = PropertyValue.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePropertyValue = validatePropertyValue(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePropertyValue instanceof OaValidationError) {
  *   // From this point on, `maybePropertyValue` will have type `OaValidationError`
  *   const error = maybePropertyValue;

@@ -199,7 +199,7 @@ export declare const FinancialProductOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeFinancialProduct = FinancialProduct.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeFinancialProduct = validateFinancialProduct(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeFinancialProduct instanceof OaValidationError) {
  *   // From this point on, `maybeFinancialProduct` will have type `OaValidationError`
  *   const error = maybeFinancialProduct;

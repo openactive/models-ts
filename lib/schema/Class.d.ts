@@ -95,7 +95,7 @@ export declare const ClassOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeClass = Class.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeClass = validateClass(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeClass instanceof OaValidationError) {
  *   // From this point on, `maybeClass` will have type `OaValidationError`
  *   const error = maybeClass;

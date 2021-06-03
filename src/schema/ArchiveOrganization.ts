@@ -628,7 +628,7 @@ export const ArchiveOrganizationOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeArchiveOrganization = ArchiveOrganization.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeArchiveOrganization = validateArchiveOrganization(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeArchiveOrganization instanceof OaValidationError) {
  *   // From this point on, `maybeArchiveOrganization` will have type `OaValidationError`
  *   const error = maybeArchiveOrganization;

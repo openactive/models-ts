@@ -40,7 +40,7 @@ export declare const SteeringPositionValueOrSubClassJoiSchema: Joi.AlternativesS
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSteeringPositionValue = SteeringPositionValue.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSteeringPositionValue = validateSteeringPositionValue(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSteeringPositionValue instanceof OaValidationError) {
  *   // From this point on, `maybeSteeringPositionValue` will have type `OaValidationError`
  *   const error = maybeSteeringPositionValue;

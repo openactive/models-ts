@@ -21,7 +21,7 @@ export declare const ReturnFeesEnumerationJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeReturnFeesEnumeration = ReturnFeesEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeReturnFeesEnumeration = validateReturnFeesEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeReturnFeesEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeReturnFeesEnumeration` will have type `OaValidationError`
  *   const error = maybeReturnFeesEnumeration;

@@ -32,7 +32,7 @@ export const BusinessFunctionJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBusinessFunction = BusinessFunction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBusinessFunction = validateBusinessFunction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBusinessFunction instanceof OaValidationError) {
  *   // From this point on, `maybeBusinessFunction` will have type `OaValidationError`
  *   const error = maybeBusinessFunction;

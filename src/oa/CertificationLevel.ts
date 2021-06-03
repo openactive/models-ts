@@ -133,7 +133,7 @@ export const CertificationLevelOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCertificationLevel = CertificationLevel.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCertificationLevel = validateCertificationLevel(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCertificationLevel instanceof OaValidationError) {
  *   // From this point on, `maybeCertificationLevel` will have type `OaValidationError`
  *   const error = maybeCertificationLevel;

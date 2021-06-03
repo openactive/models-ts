@@ -752,7 +752,7 @@ export const TVSeasonOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTVSeason = TVSeason.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTVSeason = validateTVSeason(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTVSeason instanceof OaValidationError) {
  *   // From this point on, `maybeTVSeason` will have type `OaValidationError`
  *   const error = maybeTVSeason;

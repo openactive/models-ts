@@ -215,7 +215,7 @@ export declare const DepositAccountOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDepositAccount = DepositAccount.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDepositAccount = validateDepositAccount(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDepositAccount instanceof OaValidationError) {
  *   // From this point on, `maybeDepositAccount` will have type `OaValidationError`
  *   const error = maybeDepositAccount;

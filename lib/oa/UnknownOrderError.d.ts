@@ -144,7 +144,7 @@ export declare const UnknownOrderErrorOrSubClassJoiSchema: Joi.AlternativesSchem
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUnknownOrderError = UnknownOrderError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUnknownOrderError = validateUnknownOrderError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUnknownOrderError instanceof OaValidationError) {
  *   // From this point on, `maybeUnknownOrderError` will have type `OaValidationError`
  *   const error = maybeUnknownOrderError;

@@ -329,7 +329,7 @@ export declare const SingleFamilyResidenceOrSubClassJoiSchema: Joi.AlternativesS
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSingleFamilyResidence = SingleFamilyResidence.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSingleFamilyResidence = validateSingleFamilyResidence(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSingleFamilyResidence instanceof OaValidationError) {
  *   // From this point on, `maybeSingleFamilyResidence` will have type `OaValidationError`
  *   const error = maybeSingleFamilyResidence;

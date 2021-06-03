@@ -144,7 +144,7 @@ export declare const PatchContainsExcessivePropertiesErrorOrSubClassJoiSchema: J
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePatchContainsExcessivePropertiesError = PatchContainsExcessivePropertiesError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePatchContainsExcessivePropertiesError = validatePatchContainsExcessivePropertiesError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePatchContainsExcessivePropertiesError instanceof OaValidationError) {
  *   // From this point on, `maybePatchContainsExcessivePropertiesError` will have type `OaValidationError`
  *   const error = maybePatchContainsExcessivePropertiesError;

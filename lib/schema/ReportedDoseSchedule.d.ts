@@ -134,7 +134,7 @@ export declare const ReportedDoseScheduleOrSubClassJoiSchema: Joi.AlternativesSc
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeReportedDoseSchedule = ReportedDoseSchedule.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeReportedDoseSchedule = validateReportedDoseSchedule(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeReportedDoseSchedule instanceof OaValidationError) {
  *   // From this point on, `maybeReportedDoseSchedule` will have type `OaValidationError`
  *   const error = maybeReportedDoseSchedule;

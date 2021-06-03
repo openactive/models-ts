@@ -622,7 +622,7 @@ export declare const AnalysisNewsArticleOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAnalysisNewsArticle = AnalysisNewsArticle.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAnalysisNewsArticle = validateAnalysisNewsArticle(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAnalysisNewsArticle instanceof OaValidationError) {
  *   // From this point on, `maybeAnalysisNewsArticle` will have type `OaValidationError`
  *   const error = maybeAnalysisNewsArticle;

@@ -273,7 +273,7 @@ export declare const CemeteryOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCemetery = Cemetery.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCemetery = validateCemetery(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCemetery instanceof OaValidationError) {
  *   // From this point on, `maybeCemetery` will have type `OaValidationError`
  *   const error = maybeCemetery;

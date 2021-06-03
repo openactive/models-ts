@@ -742,7 +742,7 @@ export const MovieClipOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMovieClip = MovieClip.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMovieClip = validateMovieClip(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMovieClip instanceof OaValidationError) {
  *   // From this point on, `maybeMovieClip` will have type `OaValidationError`
  *   const error = maybeMovieClip;

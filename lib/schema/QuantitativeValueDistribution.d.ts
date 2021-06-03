@@ -114,7 +114,7 @@ export declare const QuantitativeValueDistributionOrSubClassJoiSchema: Joi.Alter
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeQuantitativeValueDistribution = QuantitativeValueDistribution.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeQuantitativeValueDistribution = validateQuantitativeValueDistribution(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeQuantitativeValueDistribution instanceof OaValidationError) {
  *   // From this point on, `maybeQuantitativeValueDistribution` will have type `OaValidationError`
  *   const error = maybeQuantitativeValueDistribution;

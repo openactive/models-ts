@@ -21,7 +21,7 @@ export declare const EnergyEfficiencyEnumerationJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEnergyEfficiencyEnumeration = EnergyEfficiencyEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEnergyEfficiencyEnumeration = validateEnergyEfficiencyEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEnergyEfficiencyEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeEnergyEfficiencyEnumeration` will have type `OaValidationError`
  *   const error = maybeEnergyEfficiencyEnumeration;

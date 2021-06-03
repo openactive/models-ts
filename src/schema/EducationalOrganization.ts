@@ -615,7 +615,7 @@ export const EducationalOrganizationOrSubClassJoiSchema = Joi.alternatives().try
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEducationalOrganization = EducationalOrganization.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEducationalOrganization = validateEducationalOrganization(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEducationalOrganization instanceof OaValidationError) {
  *   // From this point on, `maybeEducationalOrganization` will have type `OaValidationError`
  *   const error = maybeEducationalOrganization;

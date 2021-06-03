@@ -122,7 +122,7 @@ export declare const GeoShapeOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGeoShape = GeoShape.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGeoShape = validateGeoShape(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGeoShape instanceof OaValidationError) {
  *   // From this point on, `maybeGeoShape` will have type `OaValidationError`
  *   const error = maybeGeoShape;

@@ -623,7 +623,7 @@ export const SelfStorageOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSelfStorage = SelfStorage.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSelfStorage = validateSelfStorage(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSelfStorage instanceof OaValidationError) {
  *   // From this point on, `maybeSelfStorage` will have type `OaValidationError`
  *   const error = maybeSelfStorage;

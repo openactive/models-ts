@@ -174,7 +174,7 @@ export const IncompleteAttendeeDetailsErrorOrSubClassJoiSchema = Joi.alternative
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeIncompleteAttendeeDetailsError = IncompleteAttendeeDetailsError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeIncompleteAttendeeDetailsError = validateIncompleteAttendeeDetailsError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeIncompleteAttendeeDetailsError instanceof OaValidationError) {
  *   // From this point on, `maybeIncompleteAttendeeDetailsError` will have type `OaValidationError`
  *   const error = maybeIncompleteAttendeeDetailsError;

@@ -134,7 +134,7 @@ export declare const BookmarkActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBookmarkAction = BookmarkAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBookmarkAction = validateBookmarkAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBookmarkAction instanceof OaValidationError) {
  *   // From this point on, `maybeBookmarkAction` will have type `OaValidationError`
  *   const error = maybeBookmarkAction;

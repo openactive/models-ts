@@ -86,7 +86,7 @@ export const HealthAspectEnumerationJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHealthAspectEnumeration = HealthAspectEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHealthAspectEnumeration = validateHealthAspectEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHealthAspectEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeHealthAspectEnumeration` will have type `OaValidationError`
  *   const error = maybeHealthAspectEnumeration;

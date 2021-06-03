@@ -40,7 +40,7 @@ export declare const GameServerStatusOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGameServerStatus = GameServerStatus.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGameServerStatus = validateGameServerStatus(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGameServerStatus instanceof OaValidationError) {
  *   // From this point on, `maybeGameServerStatus` will have type `OaValidationError`
  *   const error = maybeGameServerStatus;

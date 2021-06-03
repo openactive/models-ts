@@ -623,7 +623,7 @@ export const ExerciseGymOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeExerciseGym = ExerciseGym.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeExerciseGym = validateExerciseGym(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeExerciseGym instanceof OaValidationError) {
  *   // From this point on, `maybeExerciseGym` will have type `OaValidationError`
  *   const error = maybeExerciseGym;

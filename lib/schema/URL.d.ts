@@ -40,7 +40,7 @@ export declare const URLOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeURL = URL.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeURL = validateURL(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeURL instanceof OaValidationError) {
  *   // From this point on, `maybeURL` will have type `OaValidationError`
  *   const error = maybeURL;

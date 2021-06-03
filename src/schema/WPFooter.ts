@@ -697,7 +697,7 @@ export const WPFooterOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWPFooter = WPFooter.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWPFooter = validateWPFooter(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWPFooter instanceof OaValidationError) {
  *   // From this point on, `maybeWPFooter` will have type `OaValidationError`
  *   const error = maybeWPFooter;

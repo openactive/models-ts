@@ -496,7 +496,7 @@ export declare const TennisComplexOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTennisComplex = TennisComplex.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTennisComplex = validateTennisComplex(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTennisComplex instanceof OaValidationError) {
  *   // From this point on, `maybeTennisComplex` will have type `OaValidationError`
  *   const error = maybeTennisComplex;

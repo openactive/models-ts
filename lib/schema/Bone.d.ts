@@ -150,7 +150,7 @@ export declare const BoneOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBone = Bone.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBone = validateBone(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBone instanceof OaValidationError) {
  *   // From this point on, `maybeBone` will have type `OaValidationError`
  *   const error = maybeBone;

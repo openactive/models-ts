@@ -496,7 +496,7 @@ export declare const InternetCafeOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInternetCafe = InternetCafe.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInternetCafe = validateInternetCafe(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInternetCafe instanceof OaValidationError) {
  *   // From this point on, `maybeInternetCafe` will have type `OaValidationError`
  *   const error = maybeInternetCafe;

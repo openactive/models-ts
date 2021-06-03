@@ -50,7 +50,7 @@ export const RestrictedDietJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRestrictedDiet = RestrictedDiet.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRestrictedDiet = validateRestrictedDiet(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRestrictedDiet instanceof OaValidationError) {
  *   // From this point on, `maybeRestrictedDiet` will have type `OaValidationError`
  *   const error = maybeRestrictedDiet;

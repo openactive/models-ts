@@ -269,7 +269,7 @@ export declare const CityOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCity = City.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCity = validateCity(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCity instanceof OaValidationError) {
  *   // From this point on, `maybeCity` will have type `OaValidationError`
  *   const error = maybeCity;

@@ -33,7 +33,7 @@ export declare const DayOfWeekJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDayOfWeek = DayOfWeek.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDayOfWeek = validateDayOfWeek(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDayOfWeek instanceof OaValidationError) {
  *   // From this point on, `maybeDayOfWeek` will have type `OaValidationError`
  *   const error = maybeDayOfWeek;

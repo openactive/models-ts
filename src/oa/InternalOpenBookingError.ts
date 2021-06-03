@@ -180,7 +180,7 @@ export const InternalOpenBookingErrorOrSubClassJoiSchema = Joi.alternatives().tr
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInternalOpenBookingError = InternalOpenBookingError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInternalOpenBookingError = validateInternalOpenBookingError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInternalOpenBookingError instanceof OaValidationError) {
  *   // From this point on, `maybeInternalOpenBookingError` will have type `OaValidationError`
  *   const error = maybeInternalOpenBookingError;

@@ -580,7 +580,7 @@ export declare const HowToSectionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHowToSection = HowToSection.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHowToSection = validateHowToSection(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHowToSection instanceof OaValidationError) {
  *   // From this point on, `maybeHowToSection` will have type `OaValidationError`
  *   const error = maybeHowToSection;

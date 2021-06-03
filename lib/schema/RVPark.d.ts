@@ -273,7 +273,7 @@ export declare const RVParkOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeRVPark = RVPark.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeRVPark = validateRVPark(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeRVPark instanceof OaValidationError) {
  *   // From this point on, `maybeRVPark` will have type `OaValidationError`
  *   const error = maybeRVPark;

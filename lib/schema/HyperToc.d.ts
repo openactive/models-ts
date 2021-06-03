@@ -556,7 +556,7 @@ export declare const HyperTocOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHyperToc = HyperToc.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHyperToc = validateHyperToc(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHyperToc instanceof OaValidationError) {
  *   // From this point on, `maybeHyperToc` will have type `OaValidationError`
  *   const error = maybeHyperToc;

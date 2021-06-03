@@ -340,7 +340,7 @@ export const LandmarksOrHistoricalBuildingsOrSubClassJoiSchema = Joi.alternative
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLandmarksOrHistoricalBuildings = LandmarksOrHistoricalBuildings.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLandmarksOrHistoricalBuildings = validateLandmarksOrHistoricalBuildings(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLandmarksOrHistoricalBuildings instanceof OaValidationError) {
  *   // From this point on, `maybeLandmarksOrHistoricalBuildings` will have type `OaValidationError`
  *   const error = maybeLandmarksOrHistoricalBuildings;

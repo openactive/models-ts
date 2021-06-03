@@ -42,7 +42,7 @@ export const MusicReleaseFormatTypeJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMusicReleaseFormatType = MusicReleaseFormatType.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMusicReleaseFormatType = validateMusicReleaseFormatType(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMusicReleaseFormatType instanceof OaValidationError) {
  *   // From this point on, `maybeMusicReleaseFormatType` will have type `OaValidationError`
  *   const error = maybeMusicReleaseFormatType;

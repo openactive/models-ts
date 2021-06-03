@@ -556,7 +556,7 @@ export declare const MathSolverOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMathSolver = MathSolver.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMathSolver = validateMathSolver(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMathSolver instanceof OaValidationError) {
  *   // From this point on, `maybeMathSolver` will have type `OaValidationError`
  *   const error = maybeMathSolver;

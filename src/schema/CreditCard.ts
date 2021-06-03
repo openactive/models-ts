@@ -318,7 +318,7 @@ export const CreditCardOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCreditCard = CreditCard.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCreditCard = validateCreditCard(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCreditCard instanceof OaValidationError) {
  *   // From this point on, `maybeCreditCard` will have type `OaValidationError`
  *   const error = maybeCreditCard;

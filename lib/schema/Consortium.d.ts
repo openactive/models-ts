@@ -345,7 +345,7 @@ export declare const ConsortiumOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeConsortium = Consortium.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeConsortium = validateConsortium(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeConsortium instanceof OaValidationError) {
  *   // From this point on, `maybeConsortium` will have type `OaValidationError`
  *   const error = maybeConsortium;

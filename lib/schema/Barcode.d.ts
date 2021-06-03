@@ -637,7 +637,7 @@ export declare const BarcodeOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBarcode = Barcode.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBarcode = validateBarcode(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBarcode instanceof OaValidationError) {
  *   // From this point on, `maybeBarcode` will have type `OaValidationError`
  *   const error = maybeBarcode;

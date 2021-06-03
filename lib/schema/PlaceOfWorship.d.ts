@@ -273,7 +273,7 @@ export declare const PlaceOfWorshipOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePlaceOfWorship = PlaceOfWorship.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePlaceOfWorship = validatePlaceOfWorship(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePlaceOfWorship instanceof OaValidationError) {
  *   // From this point on, `maybePlaceOfWorship` will have type `OaValidationError`
  *   const error = maybePlaceOfWorship;

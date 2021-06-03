@@ -408,7 +408,7 @@ export const MeetingRoomOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMeetingRoom = MeetingRoom.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMeetingRoom = validateMeetingRoom(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMeetingRoom instanceof OaValidationError) {
  *   // From this point on, `maybeMeetingRoom` will have type `OaValidationError`
  *   const error = maybeMeetingRoom;

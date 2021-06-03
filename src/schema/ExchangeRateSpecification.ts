@@ -132,7 +132,7 @@ export const ExchangeRateSpecificationOrSubClassJoiSchema = Joi.alternatives().t
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeExchangeRateSpecification = ExchangeRateSpecification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeExchangeRateSpecification = validateExchangeRateSpecification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeExchangeRateSpecification instanceof OaValidationError) {
  *   // From this point on, `maybeExchangeRateSpecification` will have type `OaValidationError`
  *   const error = maybeExchangeRateSpecification;

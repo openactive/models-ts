@@ -319,7 +319,7 @@ export const ExhibitionEventOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeExhibitionEvent = ExhibitionEvent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeExhibitionEvent = validateExhibitionEvent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeExhibitionEvent instanceof OaValidationError) {
  *   // From this point on, `maybeExhibitionEvent` will have type `OaValidationError`
  *   const error = maybeExhibitionEvent;

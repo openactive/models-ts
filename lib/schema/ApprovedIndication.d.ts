@@ -118,7 +118,7 @@ export declare const ApprovedIndicationOrSubClassJoiSchema: Joi.AlternativesSche
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeApprovedIndication = ApprovedIndication.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeApprovedIndication = validateApprovedIndication(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeApprovedIndication instanceof OaValidationError) {
  *   // From this point on, `maybeApprovedIndication` will have type `OaValidationError`
  *   const error = maybeApprovedIndication;

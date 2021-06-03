@@ -500,7 +500,7 @@ export declare const AutomatedTellerOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAutomatedTeller = AutomatedTeller.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAutomatedTeller = validateAutomatedTeller(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAutomatedTeller instanceof OaValidationError) {
  *   // From this point on, `maybeAutomatedTeller` will have type `OaValidationError`
  *   const error = maybeAutomatedTeller;

@@ -162,7 +162,7 @@ export const EmployerAggregateRatingOrSubClassJoiSchema = Joi.alternatives().try
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEmployerAggregateRating = EmployerAggregateRating.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEmployerAggregateRating = validateEmployerAggregateRating(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEmployerAggregateRating instanceof OaValidationError) {
  *   // From this point on, `maybeEmployerAggregateRating` will have type `OaValidationError`
  *   const error = maybeEmployerAggregateRating;

@@ -496,7 +496,7 @@ export declare const AutoRentalOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAutoRental = AutoRental.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAutoRental = validateAutoRental(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAutoRental instanceof OaValidationError) {
  *   // From this point on, `maybeAutoRental` will have type `OaValidationError`
  *   const error = maybeAutoRental;

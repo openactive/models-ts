@@ -707,7 +707,7 @@ export const PublicationVolumeOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePublicationVolume = PublicationVolume.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePublicationVolume = validatePublicationVolume(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePublicationVolume instanceof OaValidationError) {
  *   // From this point on, `maybePublicationVolume` will have type `OaValidationError`
  *   const error = maybePublicationVolume;

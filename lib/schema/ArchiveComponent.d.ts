@@ -560,7 +560,7 @@ export declare const ArchiveComponentOrSubClassJoiSchema: Joi.AlternativesSchema
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeArchiveComponent = ArchiveComponent.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeArchiveComponent = validateArchiveComponent(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeArchiveComponent instanceof OaValidationError) {
  *   // From this point on, `maybeArchiveComponent` will have type `OaValidationError`
  *   const error = maybeArchiveComponent;

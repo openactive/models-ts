@@ -144,7 +144,7 @@ export declare const OpportunityIsInConflictErrorOrSubClassJoiSchema: Joi.Altern
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOpportunityIsInConflictError = OpportunityIsInConflictError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOpportunityIsInConflictError = validateOpportunityIsInConflictError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOpportunityIsInConflictError instanceof OaValidationError) {
  *   // From this point on, `maybeOpportunityIsInConflictError` will have type `OaValidationError`
  *   const error = maybeOpportunityIsInConflictError;

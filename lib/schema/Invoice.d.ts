@@ -154,7 +154,7 @@ export declare const InvoiceOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInvoice = Invoice.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInvoice = validateInvoice(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInvoice instanceof OaValidationError) {
  *   // From this point on, `maybeInvoice` will have type `OaValidationError`
  *   const error = maybeInvoice;

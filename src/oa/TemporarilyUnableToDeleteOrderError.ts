@@ -174,7 +174,7 @@ export const TemporarilyUnableToDeleteOrderErrorOrSubClassJoiSchema = Joi.altern
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTemporarilyUnableToDeleteOrderError = TemporarilyUnableToDeleteOrderError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTemporarilyUnableToDeleteOrderError = validateTemporarilyUnableToDeleteOrderError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTemporarilyUnableToDeleteOrderError instanceof OaValidationError) {
  *   // From this point on, `maybeTemporarilyUnableToDeleteOrderError` will have type `OaValidationError`
  *   const error = maybeTemporarilyUnableToDeleteOrderError;

@@ -190,7 +190,7 @@ export declare const VitalSignOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeVitalSign = VitalSign.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeVitalSign = validateVitalSign(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeVitalSign instanceof OaValidationError) {
  *   // From this point on, `maybeVitalSign` will have type `OaValidationError`
  *   const error = maybeVitalSign;

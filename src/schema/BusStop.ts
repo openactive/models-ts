@@ -345,7 +345,7 @@ export const BusStopOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeBusStop = BusStop.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeBusStop = validateBusStop(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeBusStop instanceof OaValidationError) {
  *   // From this point on, `maybeBusStop` will have type `OaValidationError`
  *   const error = maybeBusStop;

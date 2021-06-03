@@ -230,7 +230,7 @@ export declare const OrderProposalOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOrderProposal = OrderProposal.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOrderProposal = validateOrderProposal(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOrderProposal instanceof OaValidationError) {
  *   // From this point on, `maybeOrderProposal` will have type `OaValidationError`
  *   const error = maybeOrderProposal;

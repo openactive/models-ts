@@ -158,7 +158,7 @@ export declare const SellerRejectOrderProposalSimulateActionOrSubClassJoiSchema:
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSellerRejectOrderProposalSimulateAction = SellerRejectOrderProposalSimulateAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSellerRejectOrderProposalSimulateAction = validateSellerRejectOrderProposalSimulateAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSellerRejectOrderProposalSimulateAction instanceof OaValidationError) {
  *   // From this point on, `maybeSellerRejectOrderProposalSimulateAction` will have type `OaValidationError`
  *   const error = maybeSellerRejectOrderProposalSimulateAction;

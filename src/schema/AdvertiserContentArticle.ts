@@ -740,7 +740,7 @@ export const AdvertiserContentArticleOrSubClassJoiSchema = Joi.alternatives().tr
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAdvertiserContentArticle = AdvertiserContentArticle.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAdvertiserContentArticle = validateAdvertiserContentArticle(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAdvertiserContentArticle instanceof OaValidationError) {
  *   // From this point on, `maybeAdvertiserContentArticle` will have type `OaValidationError`
  *   const error = maybeAdvertiserContentArticle;

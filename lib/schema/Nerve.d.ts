@@ -166,7 +166,7 @@ export declare const NerveOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeNerve = Nerve.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeNerve = validateNerve(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeNerve instanceof OaValidationError) {
  *   // From this point on, `maybeNerve` will have type `OaValidationError`
  *   const error = maybeNerve;

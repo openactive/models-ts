@@ -21,7 +21,7 @@ export declare const ContactPointOptionJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeContactPointOption = ContactPointOption.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeContactPointOption = validateContactPointOption(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeContactPointOption instanceof OaValidationError) {
  *   // From this point on, `maybeContactPointOption` will have type `OaValidationError`
  *   const error = maybeContactPointOption;

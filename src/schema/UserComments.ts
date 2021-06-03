@@ -344,7 +344,7 @@ export const UserCommentsOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUserComments = UserComments.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUserComments = validateUserComments(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUserComments instanceof OaValidationError) {
  *   // From this point on, `maybeUserComments` will have type `OaValidationError`
  *   const error = maybeUserComments;

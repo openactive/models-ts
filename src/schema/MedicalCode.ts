@@ -177,7 +177,7 @@ export const MedicalCodeOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMedicalCode = MedicalCode.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMedicalCode = validateMedicalCode(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMedicalCode instanceof OaValidationError) {
  *   // From this point on, `maybeMedicalCode` will have type `OaValidationError`
  *   const error = maybeMedicalCode;

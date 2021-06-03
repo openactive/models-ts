@@ -756,7 +756,7 @@ export const CoverArtOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeCoverArt = CoverArt.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeCoverArt = validateCoverArt(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeCoverArt instanceof OaValidationError) {
  *   // From this point on, `maybeCoverArt` will have type `OaValidationError`
  *   const error = maybeCoverArt;

@@ -40,7 +40,7 @@ export declare const EUEnergyEfficiencyEnumerationOrSubClassJoiSchema: Joi.Alter
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEUEnergyEfficiencyEnumeration = EUEnergyEfficiencyEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEUEnergyEfficiencyEnumeration = validateEUEnergyEfficiencyEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEUEnergyEfficiencyEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeEUEnergyEfficiencyEnumeration` will have type `OaValidationError`
  *   const error = maybeEUEnergyEfficiencyEnumeration;

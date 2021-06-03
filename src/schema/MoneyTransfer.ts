@@ -192,7 +192,7 @@ export const MoneyTransferOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMoneyTransfer = MoneyTransfer.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMoneyTransfer = validateMoneyTransfer(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMoneyTransfer instanceof OaValidationError) {
  *   // From this point on, `maybeMoneyTransfer` will have type `OaValidationError`
  *   const error = maybeMoneyTransfer;

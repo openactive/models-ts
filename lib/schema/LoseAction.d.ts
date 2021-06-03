@@ -138,7 +138,7 @@ export declare const LoseActionOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeLoseAction = LoseAction.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeLoseAction = validateLoseAction(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeLoseAction instanceof OaValidationError) {
  *   // From this point on, `maybeLoseAction` will have type `OaValidationError`
  *   const error = maybeLoseAction;

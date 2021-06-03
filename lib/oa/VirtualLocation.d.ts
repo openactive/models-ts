@@ -88,7 +88,7 @@ export declare const VirtualLocationOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeVirtualLocation = VirtualLocation.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeVirtualLocation = validateVirtualLocation(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeVirtualLocation instanceof OaValidationError) {
  *   // From this point on, `maybeVirtualLocation` will have type `OaValidationError`
  *   const error = maybeVirtualLocation;

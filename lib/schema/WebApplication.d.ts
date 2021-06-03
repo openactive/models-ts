@@ -652,7 +652,7 @@ export declare const WebApplicationOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeWebApplication = WebApplication.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeWebApplication = validateWebApplication(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeWebApplication instanceof OaValidationError) {
  *   // From this point on, `maybeWebApplication` will have type `OaValidationError`
  *   const error = maybeWebApplication;

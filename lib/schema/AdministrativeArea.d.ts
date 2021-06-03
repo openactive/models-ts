@@ -269,7 +269,7 @@ export declare const AdministrativeAreaOrSubClassJoiSchema: Joi.AlternativesSche
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeAdministrativeArea = AdministrativeArea.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeAdministrativeArea = validateAdministrativeArea(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeAdministrativeArea instanceof OaValidationError) {
  *   // From this point on, `maybeAdministrativeArea` will have type `OaValidationError`
  *   const error = maybeAdministrativeArea;

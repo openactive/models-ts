@@ -450,7 +450,7 @@ export const VeterinaryCareOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeVeterinaryCare = VeterinaryCare.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeVeterinaryCare = validateVeterinaryCare(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeVeterinaryCare instanceof OaValidationError) {
  *   // From this point on, `maybeVeterinaryCare` will have type `OaValidationError`
  *   const error = maybeVeterinaryCare;

@@ -21,7 +21,7 @@ export declare const SizeSystemEnumerationJoiSchema: Joi.StringSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSizeSystemEnumeration = SizeSystemEnumeration.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSizeSystemEnumeration = validateSizeSystemEnumeration(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSizeSystemEnumeration instanceof OaValidationError) {
  *   // From this point on, `maybeSizeSystemEnumeration` will have type `OaValidationError`
  *   const error = maybeSizeSystemEnumeration;

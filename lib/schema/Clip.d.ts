@@ -596,7 +596,7 @@ export declare const ClipOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeClip = Clip.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeClip = validateClip(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeClip instanceof OaValidationError) {
  *   // From this point on, `maybeClip` will have type `OaValidationError`
  *   const error = maybeClip;

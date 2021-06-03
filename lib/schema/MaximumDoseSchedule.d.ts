@@ -134,7 +134,7 @@ export declare const MaximumDoseScheduleOrSubClassJoiSchema: Joi.AlternativesSch
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMaximumDoseSchedule = MaximumDoseSchedule.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMaximumDoseSchedule = validateMaximumDoseSchedule(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMaximumDoseSchedule instanceof OaValidationError) {
  *   // From this point on, `maybeMaximumDoseSchedule` will have type `OaValidationError`
  *   const error = maybeMaximumDoseSchedule;

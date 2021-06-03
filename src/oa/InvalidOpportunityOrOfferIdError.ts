@@ -174,7 +174,7 @@ export const InvalidOpportunityOrOfferIdErrorOrSubClassJoiSchema = Joi.alternati
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInvalidOpportunityOrOfferIdError = InvalidOpportunityOrOfferIdError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInvalidOpportunityOrOfferIdError = validateInvalidOpportunityOrOfferIdError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInvalidOpportunityOrOfferIdError instanceof OaValidationError) {
  *   // From this point on, `maybeInvalidOpportunityOrOfferIdError` will have type `OaValidationError`
  *   const error = maybeInvalidOpportunityOrOfferIdError;

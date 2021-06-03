@@ -146,7 +146,7 @@ export const HowToItemOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeHowToItem = HowToItem.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeHowToItem = validateHowToItem(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeHowToItem instanceof OaValidationError) {
  *   // From this point on, `maybeHowToItem` will have type `OaValidationError`
  *   const error = maybeHowToItem;

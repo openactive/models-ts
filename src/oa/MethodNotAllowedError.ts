@@ -174,7 +174,7 @@ export const MethodNotAllowedErrorOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeMethodNotAllowedError = MethodNotAllowedError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeMethodNotAllowedError = validateMethodNotAllowedError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeMethodNotAllowedError instanceof OaValidationError) {
  *   // From this point on, `maybeMethodNotAllowedError` will have type `OaValidationError`
  *   const error = maybeMethodNotAllowedError;

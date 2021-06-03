@@ -32,7 +32,7 @@ export const OrderProposalStatusJoiSchema = Joi.string().valid(
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOrderProposalStatus = OrderProposalStatus.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOrderProposalStatus = validateOrderProposalStatus(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOrderProposalStatus instanceof OaValidationError) {
  *   // From this point on, `maybeOrderProposalStatus` will have type `OaValidationError`
  *   const error = maybeOrderProposalStatus;

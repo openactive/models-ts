@@ -141,7 +141,7 @@ export const TrustCertificationOrSubClassJoiSchema = Joi.alternatives().try([
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeTrustCertification = TrustCertification.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeTrustCertification = validateTrustCertification(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeTrustCertification instanceof OaValidationError) {
  *   // From this point on, `maybeTrustCertification` will have type `OaValidationError`
  *   const error = maybeTrustCertification;

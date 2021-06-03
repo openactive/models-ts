@@ -102,7 +102,7 @@ export declare const EnergyConsumptionDetailsOrSubClassJoiSchema: Joi.Alternativ
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeEnergyConsumptionDetails = EnergyConsumptionDetails.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeEnergyConsumptionDetails = validateEnergyConsumptionDetails(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeEnergyConsumptionDetails instanceof OaValidationError) {
  *   // From this point on, `maybeEnergyConsumptionDetails` will have type `OaValidationError`
  *   const error = maybeEnergyConsumptionDetails;

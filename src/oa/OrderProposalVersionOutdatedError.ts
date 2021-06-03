@@ -174,7 +174,7 @@ export const OrderProposalVersionOutdatedErrorOrSubClassJoiSchema = Joi.alternat
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeOrderProposalVersionOutdatedError = OrderProposalVersionOutdatedError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeOrderProposalVersionOutdatedError = validateOrderProposalVersionOutdatedError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeOrderProposalVersionOutdatedError instanceof OaValidationError) {
  *   // From this point on, `maybeOrderProposalVersionOutdatedError` will have type `OaValidationError`
  *   const error = maybeOrderProposalVersionOutdatedError;

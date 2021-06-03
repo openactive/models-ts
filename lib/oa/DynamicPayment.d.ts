@@ -118,7 +118,7 @@ export declare const DynamicPaymentOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeDynamicPayment = DynamicPayment.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeDynamicPayment = validateDynamicPayment(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeDynamicPayment instanceof OaValidationError) {
  *   // From this point on, `maybeDynamicPayment` will have type `OaValidationError`
  *   const error = maybeDynamicPayment;

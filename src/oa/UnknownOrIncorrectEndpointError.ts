@@ -174,7 +174,7 @@ export const UnknownOrIncorrectEndpointErrorOrSubClassJoiSchema = Joi.alternativ
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeUnknownOrIncorrectEndpointError = UnknownOrIncorrectEndpointError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeUnknownOrIncorrectEndpointError = validateUnknownOrIncorrectEndpointError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeUnknownOrIncorrectEndpointError instanceof OaValidationError) {
  *   // From this point on, `maybeUnknownOrIncorrectEndpointError` will have type `OaValidationError`
  *   const error = maybeUnknownOrIncorrectEndpointError;

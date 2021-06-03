@@ -560,7 +560,7 @@ export declare const SiteNavigationElementOrSubClassJoiSchema: Joi.AlternativesS
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeSiteNavigationElement = SiteNavigationElement.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeSiteNavigationElement = validateSiteNavigationElement(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeSiteNavigationElement instanceof OaValidationError) {
  *   // From this point on, `maybeSiteNavigationElement` will have type `OaValidationError`
  *   const error = maybeSiteNavigationElement;

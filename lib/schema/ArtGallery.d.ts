@@ -496,7 +496,7 @@ export declare const ArtGalleryOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeArtGallery = ArtGallery.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeArtGallery = validateArtGallery(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeArtGallery instanceof OaValidationError) {
  *   // From this point on, `maybeArtGallery` will have type `OaValidationError`
  *   const error = maybeArtGallery;

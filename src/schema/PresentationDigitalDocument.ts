@@ -692,7 +692,7 @@ export const PresentationDigitalDocumentOrSubClassJoiSchema = Joi.alternatives()
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybePresentationDigitalDocument = PresentationDigitalDocument.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybePresentationDigitalDocument = validatePresentationDigitalDocument(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybePresentationDigitalDocument instanceof OaValidationError) {
  *   // From this point on, `maybePresentationDigitalDocument` will have type `OaValidationError`
  *   const error = maybePresentationDigitalDocument;

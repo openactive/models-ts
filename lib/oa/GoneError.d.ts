@@ -144,7 +144,7 @@ export declare const GoneErrorOrSubClassJoiSchema: Joi.AlternativesSchema;
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeGoneError = GoneError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeGoneError = validateGoneError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeGoneError instanceof OaValidationError) {
  *   // From this point on, `maybeGoneError` will have type `OaValidationError`
  *   const error = maybeGoneError;

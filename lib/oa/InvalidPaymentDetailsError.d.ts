@@ -144,7 +144,7 @@ export declare const InvalidPaymentDetailsErrorOrSubClassJoiSchema: Joi.Alternat
  * Use this to e.g. check a JSON object received in an HTTP request. Example usage (for an express request handler):
  *
  * ```ts
- * const maybeInvalidPaymentDetailsError = InvalidPaymentDetailsError.validate(req.body); // `req.body` will have type `any` or `unknown`
+ * const maybeInvalidPaymentDetailsError = validateInvalidPaymentDetailsError(req.body); // `req.body` will have type `any` or `unknown`
  * if (maybeInvalidPaymentDetailsError instanceof OaValidationError) {
  *   // From this point on, `maybeInvalidPaymentDetailsError` will have type `OaValidationError`
  *   const error = maybeInvalidPaymentDetailsError;

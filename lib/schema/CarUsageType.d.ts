@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * A value indicating a special usage of a car, e.g. commercial rental, driving school, or as a taxi.
  */
-export declare type CarUsageType = 'https://schema.org/RentalVehicleUsage' | 'https://schema.org/DrivingSchoolVehicleUsage' | 'https://schema.org/TaxiVehicleUsage';
+export declare type CarUsageType = 'https://schema.org/DrivingSchoolVehicleUsage' | 'https://schema.org/TaxiVehicleUsage' | 'https://schema.org/RentalVehicleUsage';
 /**
  * schema:CarUsageType - Validation schema (w/ JOI)
  *

@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * An enumeration of genders.
  */
-export declare type GenderType = 'https://schema.org/Female' | 'https://schema.org/Male';
+export declare type GenderType = 'https://schema.org/Male' | 'https://schema.org/Female';
 /**
  * schema:GenderType - Validation schema (w/ JOI)
  *

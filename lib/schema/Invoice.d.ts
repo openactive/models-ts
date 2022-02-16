@@ -21,37 +21,15 @@ export declare type Invoice = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
-    /**
-     * Party placing the order or paying the invoice.
-     */
-    customer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The time interval used to compute the invoice.
-     */
-    billingPeriod?: string;
-    /**
-     * The total amount due.
-     */
-    totalPaymentDue?: schema.PriceSpecificationOrSubClass | schema.MonetaryAmountOrSubClass | string;
     /**
      * The date that payment is due.
      */
     paymentDue?: string;
-    /**
-     * The minimum payment required at this time.
-     */
-    minimumPaymentDue?: schema.PriceSpecificationOrSubClass | schema.MonetaryAmountOrSubClass | string;
-    /**
-     * A number that confirms the given order or payment has been received.
-     */
-    confirmationNumber?: string;
-    /**
-     * The status of payment; whether the invoice has been paid or not.
-     */
-    paymentStatus?: string | schema.PaymentStatusTypeOrSubClass;
     /**
      * An identifier for the method of payment used (e.g. the last 4 digits of the credit card).
      */
@@ -61,69 +39,93 @@ export declare type Invoice = {
      */
     accountId?: string;
     /**
-     * An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.
+     * The time interval used to compute the invoice.
      */
-    broker?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    billingPeriod?: string;
     /**
-     * The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.
+     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
      */
-    referencesOrder?: schema.OrderOrSubClass | string;
+    category?: string | schema.PhysicalActivityCategory | schema.ThingOrSubClass;
     /**
-     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+     * The status of payment; whether the invoice has been paid or not.
      */
-    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    paymentStatus?: string | schema.PaymentStatusTypeOrSubClass;
     /**
-     * The date the invoice is scheduled to be paid.
+     * Party placing the order or paying the invoice.
      */
-    scheduledPaymentDate?: string;
+    customer?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * The total amount due.
+     */
+    totalPaymentDue?: schema.MonetaryAmountOrSubClass | schema.PriceSpecificationOrSubClass | string;
     /**
      * The date that payment is due.
      */
     paymentDueDate?: string;
     /**
-     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+     * The date the invoice is scheduled to be paid.
      */
-    category?: schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
+    scheduledPaymentDate?: string;
+    /**
+     * The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.
+     */
+    referencesOrder?: schema.OrderOrSubClass | string;
+    /**
+     * A number that confirms the given order or payment has been received.
+     */
+    confirmationNumber?: string;
+    /**
+     * The minimum payment required at this time.
+     */
+    minimumPaymentDue?: schema.MonetaryAmountOrSubClass | schema.PriceSpecificationOrSubClass | string;
+    /**
+     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+     */
+    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
      * The name of the credit card or other method of payment for the order.
      */
     paymentMethod?: schema.PaymentMethod;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.
      */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
+    broker?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:Invoice

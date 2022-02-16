@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * GovernmentBenefitsType enumerates several kinds of government benefits to support the COVID-19 situation. Note that this structure may not capture all benefits offered.
  */
-export declare type GovernmentBenefitsType = 'https://schema.org/ParentalSupport' | 'https://schema.org/UnemploymentSupport' | 'https://schema.org/OneTimePayments' | 'https://schema.org/DisabilitySupport' | 'https://schema.org/BasicIncome' | 'https://schema.org/PaidLeave' | 'https://schema.org/HealthCare' | 'https://schema.org/BusinessSupport';
+export declare type GovernmentBenefitsType = 'https://schema.org/BusinessSupport' | 'https://schema.org/PaidLeave' | 'https://schema.org/ParentalSupport' | 'https://schema.org/DisabilitySupport' | 'https://schema.org/UnemploymentSupport' | 'https://schema.org/HealthCare' | 'https://schema.org/OneTimePayments' | 'https://schema.org/BasicIncome';
 /**
  * schema:GovernmentBenefitsType - Validation schema (w/ JOI)
  *

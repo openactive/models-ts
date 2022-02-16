@@ -10,11 +10,11 @@ import { OaValidationError } from '../oaValidationError';
 export type PriceTypeEnumeration = 
   
   | 'https://schema.org/SalePrice'
-  | 'https://schema.org/InvoicePrice'
-  | 'https://schema.org/MinimumAdvertisedPrice'
-  | 'https://schema.org/ListPrice'
-  | 'https://schema.org/SRP'
   | 'https://schema.org/MSRP'
+  | 'https://schema.org/ListPrice'
+  | 'https://schema.org/InvoicePrice'
+  | 'https://schema.org/SRP'
+  | 'https://schema.org/MinimumAdvertisedPrice'
   ;
 
 /**
@@ -24,11 +24,11 @@ export type PriceTypeEnumeration =
  */
 export const PriceTypeEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/SalePrice',
-  'https://schema.org/InvoicePrice',
-  'https://schema.org/MinimumAdvertisedPrice',
-  'https://schema.org/ListPrice',
-  'https://schema.org/SRP',
   'https://schema.org/MSRP',
+  'https://schema.org/ListPrice',
+  'https://schema.org/InvoicePrice',
+  'https://schema.org/SRP',
+  'https://schema.org/MinimumAdvertisedPrice',
 );
 
 /**

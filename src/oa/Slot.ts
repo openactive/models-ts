@@ -21,11 +21,9 @@ export type Slot = {
    */
   identifier?: number | string | oa.PropertyValueOrSubClass | oa.PropertyValueOrSubClass[];
   /**
-   * A unique url based identifier for the record
-   *
-   * ```json
-   * "@id": "https://example.com/slot/12345"
-   * ```
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
@@ -39,6 +37,18 @@ export type Slot = {
    * ```
    */
   additionalAdmissionRestriction?: string[];
+  /**
+   * Free text restrictions to display to the Customer at the browse stage, that may apply when using a Customer Account to make the booking.
+   * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
+   *
+   * ```json
+   * "customerAccountBookingRestriction": [
+   *   "Gold members only",
+   *   "Gym induction required"
+   * ]
+   * ```
+   */
+  customerAccountBookingRestriction?: string[];
   /**
    * The duration of the slot given in [ISO8601] format.
    *
@@ -55,6 +65,15 @@ export type Slot = {
    * ```
    */
   facilityUse?: oa.FacilityUseOrSubClass | string;
+  /**
+   * Indicates that a Customer Account may be used to book that opportunity.
+   * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
+   *
+   * ```json
+   * "isOpenBookingWithCustomerAccountAllowed": "true"
+   * ```
+   */
+  isOpenBookingWithCustomerAccountAllowed?: boolean;
   /**
    * The maximum available courts or pitches at this time. Must be 0 or 1 for an IndividualFacilityUse.
    *
@@ -237,6 +256,13 @@ export type Slot = {
   'beta:isFirstSessionAccessibleForFree'?: boolean;
   /**
    * [NOTICE: This is a beta property, and is highly likely to change in future versions of this library.]
+   * A property that indicates whether the event contains a high frequency of occurrences. Intended as a UI hint for interfaces that represent these occurrences.
+   * 
+   * If you are using this property, please join the discussion at proposal [#301](https://github.com/openactive/modelling-opportunity-data/issues/301).
+   */
+  'beta:isScheduledAsSlots'?: boolean;
+  /**
+   * [NOTICE: This is a beta property, and is highly likely to change in future versions of this library.]
    * Contact details for an Event, where they are not specifically related to the `organizer` or `leader`.
    * 
    * If you are using this property, please join the discussion at proposal [#113](https://github.com/openactive/modelling-opportunity-data/issues/113).
@@ -259,18 +285,98 @@ export type Slot = {
    */
   'test:testOpportunityCriteria'?: oa.TestOpportunityCriteriaEnumeration;
   /**
-   * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
-   *        Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).
+   * The subject matter of the content.
    */
-  workFeatured?: schema.CreativeWorkOrSubClass | string;
+  about?: schema.ThingOrSubClass | string;
+  /**
+   * The time admission will commence.
+   */
+  doorTime?: string;
+  /**
+   * The typical expected age range, e.g. '7-9', '11-'.
+   */
+  typicalAgeRange?: string;
+  /**
+   * A person or organization that supports (sponsors) something through some kind of financial contribution.
+   */
+  funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
    * The overall rating, based on a collection of reviews or ratings, of the item.
    */
   aggregateRating?: schema.AggregateRatingOrSubClass | string;
   /**
+   * A person attending the event.
+   */
+  attendees?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * The person or organization who wrote a composition, or who is the composer of a work performed at some event.
+   */
+  composer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
+   */
+  translator?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.
+   */
+  previousStartDate?: string;
+  /**
+   * A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.
+   */
+  director?: schema.PersonOrSubClass | string;
+  /**
+   * The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). 
+   */
+  maximumPhysicalAttendeeCapacity?: number;
+  /**
+   * A person or organization attending the event.
+   */
+  attendee?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * An intended audience, i.e. a group for whom something was created.
+   */
+  audience?: schema.AudienceOrSubClass | string;
+  /**
+   * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+   */
+  sponsor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.
+   */
+  actor?: schema.PersonOrSubClass | string;
+  /**
+   * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
+   *        Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).
+   */
+  workFeatured?: schema.CreativeWorkOrSubClass | string;
+  /**
    * A work performed in some event, for example a play performed in a TheaterEvent.
    */
   workPerformed?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * The CreativeWork that captured all or part of this Event.
+   */
+  recordedIn?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * The main performer or performers of the event&#x2014;for example, a presenter, musician, or actor.
+   */
+  performers?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
+   */
+  inLanguage?: string | schema.LanguageOrSubClass;
+  /**
+   * A performer at the event&#x2014;for example, a presenter, musician, musical group or actor.
+   */
+  performer?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+  /**
+   * A review of the item.
+   */
+  review?: schema.ReviewOrSubClass | string;
+  /**
+   * Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference.
+   */
+  subEvents?: schema.Event_OrSubClass | string;
   /**
    * Associates an [[Event]] with a [[Schedule]]. There are circumstances where it is preferable to share a schedule for a series of
    *       repeating events rather than data on the individual events themselves. For example, a website or application might prefer to publish a schedule for a weekly
@@ -281,101 +387,9 @@ export type Slot = {
    */
   eventSchedule?: schema.ScheduleOrSubClass | string;
   /**
-   * A person attending the event.
-   */
-  attendees?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.
-   */
-  actor?: schema.PersonOrSubClass | string;
-  /**
-   * A performer at the event&#x2014;for example, a presenter, musician, musical group or actor.
-   */
-  performer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-  /**
-   * A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.
-   */
-  director?: schema.PersonOrSubClass | string;
-  /**
-   * Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.
-   */
-  previousStartDate?: string;
-  /**
-   * A review of the item.
-   */
-  review?: schema.ReviewOrSubClass | string;
-  /**
-   * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
-   */
-  translator?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference.
-   */
-  subEvents?: schema.Event_OrSubClass | string;
-  /**
-   * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-   */
-  sponsor?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). 
-   */
-  maximumPhysicalAttendeeCapacity?: number;
-  /**
-   * A person or organization attending the event.
-   */
-  attendee?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * The CreativeWork that captured all or part of this Event.
-   */
-  recordedIn?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * The subject matter of the content.
-   */
-  about?: schema.ThingOrSubClass | string;
-  /**
-   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
-   */
-  inLanguage?: string | schema.LanguageOrSubClass;
-  /**
-   * The person or organization who wrote a composition, or who is the composer of a work performed at some event.
-   */
-  composer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-  /**
-   * The main performer or performers of the event&#x2014;for example, a presenter, musician, or actor.
-   */
-  performers?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-  /**
-   * The time admission will commence.
-   */
-  doorTime?: string;
-  /**
-   * A person or organization that supports (sponsors) something through some kind of financial contribution.
-   */
-  funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-  /**
-   * An intended audience, i.e. a group for whom something was created.
-   */
-  audience?: schema.AudienceOrSubClass | string;
-  /**
-   * The typical expected age range, e.g. '7-9', '11-'.
-   */
-  typicalAgeRange?: string;
-  /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-   */
-  sameAs?: string;
-  /**
-   * A CreativeWork or Event about this Thing.
-   */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-  /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
    * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
   /**
    * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
    */
@@ -384,6 +398,18 @@ export type Slot = {
    * An alias for the item.
    */
   alternateName?: string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
   /**
    * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
@@ -414,8 +440,10 @@ export const SlotJoiSchema = Joi.object({
   identifier: Joi.alternatives().try(Joi.number().integer(), Joi.string(), Joi.lazy(() => oa.PropertyValueOrSubClassJoiSchema), Joi.array().items(Joi.lazy(() => oa.PropertyValueOrSubClassJoiSchema))),
   '@id': Joi.string().uri(),
   additionalAdmissionRestriction: Joi.array().items(Joi.string()),
+  customerAccountBookingRestriction: Joi.array().items(Joi.string()),
   duration: Joi.string(),
   facilityUse: Joi.alternatives().try(Joi.lazy(() => oa.FacilityUseOrSubClassJoiSchema), Joi.string().uri()),
+  isOpenBookingWithCustomerAccountAllowed: Joi.boolean(),
   maximumUses: Joi.number().integer(),
   offers: Joi.array().items(Joi.lazy(() => oa.OfferOrSubClassJoiSchema)),
   organizer: Joi.alternatives().try(Joi.lazy(() => oa.PersonOrSubClassJoiSchema), Joi.lazy(() => oa.OrganizationOrSubClassJoiSchema)),
@@ -439,40 +467,41 @@ export const SlotJoiSchema = Joi.object({
   'beta:participantSuppliedEquipment': Joi.lazy(() => oa.RequiredStatusTypeJoiSchema),
   'beta:donationPaymentUrl': Joi.string().uri(),
   'beta:isFirstSessionAccessibleForFree': Joi.boolean(),
+  'beta:isScheduledAsSlots': Joi.boolean(),
   'beta:contactPoint': Joi.lazy(() => schema.ContactPointOrSubClassJoiSchema),
   'beta:bookingChannel': Joi.array().items(Joi.lazy(() => oa.BookingChannelTypeJoiSchema)),
   'test:testOpenBookingFlow': Joi.lazy(() => oa.TestOpenBookingFlowEnumerationJoiSchema),
   'test:testOpportunityCriteria': Joi.lazy(() => oa.TestOpportunityCriteriaEnumerationJoiSchema),
-  workFeatured: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  aggregateRating: Joi.alternatives().try(Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema), Joi.string().uri()),
-  workPerformed: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  eventSchedule: Joi.alternatives().try(Joi.lazy(() => schema.ScheduleOrSubClassJoiSchema), Joi.string().uri()),
-  attendees: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  actor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  performer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  director: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  previousStartDate: Joi.string().isoDate(),
-  review: Joi.alternatives().try(Joi.lazy(() => schema.ReviewOrSubClassJoiSchema), Joi.string().uri()),
-  translator: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  subEvents: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
-  sponsor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  maximumPhysicalAttendeeCapacity: Joi.number().integer(),
-  attendee: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  recordedIn: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   about: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
-  inLanguage: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string().uri()),
-  composer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  performers: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  doorTime: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
-  funder: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
+  doorTime: Joi.alternatives().try(Joi.string(), Joi.string().isoDate()),
   typicalAgeRange: Joi.string(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  funder: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  aggregateRating: Joi.alternatives().try(Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema), Joi.string().uri()),
+  attendees: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  composer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  translator: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  previousStartDate: Joi.string().isoDate(),
+  director: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  maximumPhysicalAttendeeCapacity: Joi.number().integer(),
+  attendee: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
+  sponsor: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  actor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  workFeatured: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  workPerformed: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  recordedIn: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  performers: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  inLanguage: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string().uri()),
+  performer: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  review: Joi.alternatives().try(Joi.lazy(() => schema.ReviewOrSubClassJoiSchema), Joi.string().uri()),
+  subEvents: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  eventSchedule: Joi.alternatives().try(Joi.lazy(() => schema.ScheduleOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.string().uri(), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema)),
   additionalType: Joi.string().uri(),
   alternateName: Joi.string(),
+  sameAs: Joi.string().uri(),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
 });
 

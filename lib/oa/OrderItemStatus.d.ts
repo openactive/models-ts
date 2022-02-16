@@ -3,7 +3,7 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * OrderItemStatus
  */
-export declare type OrderItemStatus = 'https://openactive.io/SellerCancelled' | 'https://openactive.io/CustomerCancelled' | 'https://openactive.io/OrderItemConfirmed' | 'https://openactive.io/CustomerAttended';
+export declare type OrderItemStatus = 'https://openactive.io/SellerCancelled' | 'https://openactive.io/CustomerCancelled' | 'https://openactive.io/OrderItemConfirmed' | 'https://openactive.io/AttendeeAttended' | 'https://openactive.io/AttendeeAbsent';
 /**
  * OrderItemStatus - Validation schema (w/ JOI)
  */

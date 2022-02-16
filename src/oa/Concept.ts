@@ -13,11 +13,7 @@ export type Concept = {
   '@type': 'Concept';
   '@context'?: string | string[];
   /**
-   * A unique url based identifier for the record
-   *
-   * ```json
-   * "@id": "https://openactive.io/activity-list#a454c7e6-52da-426d-9bd1-743e9d7d266d12345"
-   * ```
+   * The `@id` of a Concept from the [OpenActive Activity List](https://github.com/openactive/activity-list). This value [must always exactly match](https://developer.openactive.io/publishing-data/activity-list-references) an `id` from the [OpenActive Activity List](https://github.com/openactive/activity-list).
    */
   '@id'?: string;
   /**
@@ -59,7 +55,7 @@ export type Concept = {
    */
   hiddenLabel?: string[];
   /**
-   * A stable URL reference for the taxonomy, which must be `https://openactive.io/activity-list` to reference the OpenActive Activity List.
+   * A stable URL reference for the taxonomy, which must be `https://openactive.io/activity-list` to [reference the OpenActive Activity List](https://developer.openactive.io/publishing-data/activity-list-references).
    *
    * ```json
    * "inScheme": "https://openactive.io/activity-list"

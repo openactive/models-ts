@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Format of this release (the type of recording media used, ie. compact disc, digital media, LP, etc.).
  */
-export declare type MusicReleaseFormatType = 'https://schema.org/DVDFormat' | 'https://schema.org/DigitalAudioTapeFormat' | 'https://schema.org/VinylFormat' | 'https://schema.org/CDFormat' | 'https://schema.org/CassetteFormat' | 'https://schema.org/LaserDiscFormat' | 'https://schema.org/DigitalFormat';
+export declare type MusicReleaseFormatType = 'https://schema.org/VinylFormat' | 'https://schema.org/DigitalAudioTapeFormat' | 'https://schema.org/DVDFormat' | 'https://schema.org/LaserDiscFormat' | 'https://schema.org/DigitalFormat' | 'https://schema.org/CDFormat' | 'https://schema.org/CassetteFormat';
 /**
  * schema:MusicReleaseFormatType - Validation schema (w/ JOI)
  *

@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * RsvpResponseType is an enumeration type whose instances represent responding to an RSVP request.
  */
-export declare type RsvpResponseType = 'https://schema.org/RsvpResponseMaybe' | 'https://schema.org/RsvpResponseNo' | 'https://schema.org/RsvpResponseYes';
+export declare type RsvpResponseType = 'https://schema.org/RsvpResponseNo' | 'https://schema.org/RsvpResponseYes' | 'https://schema.org/RsvpResponseMaybe';
 /**
  * schema:RsvpResponseType - Validation schema (w/ JOI)
  *

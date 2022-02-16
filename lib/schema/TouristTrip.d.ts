@@ -21,78 +21,80 @@ export declare type TouristTrip = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
      * Attraction suitable for type(s) of tourist. eg. Children, visitors from a particular country, etc.
      */
-    touristType?: schema.AudienceOrSubClass | string;
-    /**
-     * Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).
-     */
-    itinerary?: schema.PlaceOrSubClass | schema.ItemListOrSubClass | string;
-    /**
-     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
-     */
-    subTrip?: schema.TripOrSubClass | string;
-    /**
-     * Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
-     */
-    partOfTrip?: schema.TripOrSubClass | string;
-    /**
-     * The expected arrival time.
-     */
-    arrivalTime?: string;
+    touristType?: string | schema.AudienceOrSubClass;
     /**
      * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
      *
      */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
-    /**
-     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
-     */
-    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
     /**
      * The expected departure time.
      */
     departureTime?: string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).
      */
-    sameAs?: string;
+    itinerary?: schema.ItemListOrSubClass | schema.PlaceOrSubClass | string;
     /**
-     * A CreativeWork or Event about this Thing.
+     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    subTrip?: schema.TripOrSubClass | string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * The expected arrival time.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    arrivalTime?: string;
+    /**
+     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+     */
+    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
+     */
+    partOfTrip?: schema.TripOrSubClass | string;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:TouristTrip

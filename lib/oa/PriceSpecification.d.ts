@@ -24,7 +24,9 @@ export declare type PriceSpecification = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -44,69 +46,69 @@ export declare type PriceSpecification = {
      */
     priceCurrency?: string;
     /**
-     * The date when the item becomes valid.
+     * Specifies whether the applicable value-added tax (VAT) is included in the price specification or not.
      */
-    validFrom?: string;
-    /**
-     * The lowest price if the price is a range.
-     */
-    minPrice?: number;
-    /**
-     * The highest price if the price is a range.
-     */
-    maxPrice?: number;
+    valueAddedTaxIncluded?: boolean;
     /**
      * The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.
      */
     eligibleTransactionVolume?: schema.PriceSpecificationOrSubClass | string;
     /**
-     * The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
+     * The highest price if the price is a range.
      */
-    eligibleQuantity?: schema.QuantitativeValueOrSubClass | string;
+    maxPrice?: number;
     /**
-     * Specifies whether the applicable value-added tax (VAT) is included in the price specification or not.
+     * The lowest price if the price is a range.
      */
-    valueAddedTaxIncluded?: boolean;
+    minPrice?: number;
+    /**
+     * The date when the item becomes valid.
+     */
+    validFrom?: string;
     /**
      * The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
      */
     validThrough?: string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
      */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
+    eligibleQuantity?: schema.QuantitativeValueOrSubClass | string;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * PriceSpecification

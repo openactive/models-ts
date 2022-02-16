@@ -3,13 +3,13 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:MerchantReturnEnumeration
  *
- * MerchantReturnEnumeration enumerates several kinds of product return policy. Note that this structure may not capture all aspects of the policy.
+ * Enumerates several kinds of product return policies.
  */
-export declare type MerchantReturnEnumeration = 'https://schema.org/MerchantReturnUnspecified' | 'https://schema.org/MerchantReturnNotPermitted' | 'https://schema.org/MerchantReturnFiniteReturnWindow' | 'https://schema.org/MerchantReturnUnlimitedWindow';
+export declare type MerchantReturnEnumeration = 'https://schema.org/MerchantReturnNotPermitted' | 'https://schema.org/MerchantReturnFiniteReturnWindow' | 'https://schema.org/MerchantReturnUnspecified' | 'https://schema.org/MerchantReturnUnlimitedWindow';
 /**
  * schema:MerchantReturnEnumeration - Validation schema (w/ JOI)
  *
- * MerchantReturnEnumeration enumerates several kinds of product return policy. Note that this structure may not capture all aspects of the policy.
+ * Enumerates several kinds of product return policies.
  */
 export declare const MerchantReturnEnumerationJoiSchema: Joi.StringSchema;
 /**

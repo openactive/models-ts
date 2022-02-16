@@ -21,45 +21,47 @@ export declare type Intangible = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:Intangible
@@ -68,7 +70,7 @@ export declare type Intangible = {
  * sub-classes this model. e.g. `Event_OrSubClass` allows `Event`s as well as `ScheduledSession`s, `SessionSeries`,
  * etc.
  */
-export declare type IntangibleOrSubClass = Intangible | schema.StructuredValueOrSubClass | schema.PermitOrSubClass | schema.MenuItemOrSubClass | schema.GrantOrSubClass | schema.SeatOrSubClass | schema.MediaSubscriptionOrSubClass | schema.ObservationOrSubClass | schema.OrderItemOrSubClass | schema.OccupationOrSubClass | schema.ActionAccessSpecificationOrSubClass | schema.PropertyOrSubClass | schema.RatingOrSubClass | schema.HealthPlanFormularyOrSubClass | schema.ListItemOrSubClass | schema.HealthInsurancePlanOrSubClass | schema.ProgramMembershipOrSubClass | schema.ServiceChannelOrSubClass | schema.BroadcastChannelOrSubClass | schema.SeriesOrSubClass | schema.HealthPlanCostSharingSpecificationOrSubClass | schema.MerchantReturnPolicyOrSubClass | schema.TripOrSubClass | schema.EnergyConsumptionDetailsOrSubClass | schema.BedDetailsOrSubClass | schema.OfferOrSubClass | schema.ServiceOrSubClass | schema.GeospatialGeometryOrSubClass | schema.AlignmentObjectOrSubClass | schema.ComputerLanguageOrSubClass | schema.RoleOrSubClass | schema.HealthPlanNetworkOrSubClass | schema.ScheduleOrSubClass | schema.BroadcastFrequencySpecificationOrSubClass | schema.EducationalOccupationalProgramOrSubClass | schema.TicketOrSubClass | schema.EnumerationOrSubClass | schema.DataFeedItemOrSubClass | schema.ItemListOrSubClass | schema.ParcelDeliveryOrSubClass | schema.OccupationalExperienceRequirementsOrSubClass | schema.DefinedTermOrSubClass | schema.LanguageOrSubClass | schema.OrderOrSubClass | schema.AudienceOrSubClass | schema.InvoiceOrSubClass | schema.QuantityOrSubClass | schema.SpeakableSpecificationOrSubClass | schema.ClassOrSubClass | schema.FloorPlanOrSubClass | schema.PropertyValueSpecificationOrSubClass | schema.ReservationOrSubClass | schema.EntryPointOrSubClass | schema.GameServerOrSubClass | schema.DigitalDocumentPermissionOrSubClass | schema.JobPostingOrSubClass | schema.VirtualLocationOrSubClass | schema.StatisticalPopulationOrSubClass | schema.BrandOrSubClass | schema.DemandOrSubClass;
+export declare type IntangibleOrSubClass = Intangible | schema.ReservationOrSubClass | schema.AlignmentObjectOrSubClass | schema.EnumerationOrSubClass | schema.OrderOrSubClass | schema.DemandOrSubClass | schema.OccupationalExperienceRequirementsOrSubClass | schema.PermitOrSubClass | schema.MerchantReturnPolicyOrSubClass | schema.HealthPlanNetworkOrSubClass | schema.EducationalOccupationalProgramOrSubClass | schema.DataFeedItemOrSubClass | schema.ActionAccessSpecificationOrSubClass | schema.ItemListOrSubClass | schema.RatingOrSubClass | schema.BrandOrSubClass | schema.StructuredValueOrSubClass | schema.QuantityOrSubClass | schema.EnergyConsumptionDetailsOrSubClass | schema.JobPostingOrSubClass | schema.TicketOrSubClass | schema.BroadcastFrequencySpecificationOrSubClass | schema.SeriesOrSubClass | schema.OccupationOrSubClass | schema.GrantOrSubClass | schema.MenuItemOrSubClass | schema.DefinedTermOrSubClass | schema.GeospatialGeometryOrSubClass | schema.BedDetailsOrSubClass | schema.MediaSubscriptionOrSubClass | schema.ObservationOrSubClass | schema.SpeakableSpecificationOrSubClass | schema.ServiceChannelOrSubClass | schema.ProgramMembershipOrSubClass | schema.OrderItemOrSubClass | schema.VirtualLocationOrSubClass | schema.AudienceOrSubClass | schema.HealthInsurancePlanOrSubClass | schema.StatisticalPopulationOrSubClass | schema.PropertyOrSubClass | schema.BroadcastChannelOrSubClass | schema.PropertyValueSpecificationOrSubClass | schema.LanguageOrSubClass | schema.ComputerLanguageOrSubClass | schema.FloorPlanOrSubClass | schema.HealthPlanCostSharingSpecificationOrSubClass | schema.MerchantReturnPolicySeasonalOverrideOrSubClass | schema.InvoiceOrSubClass | schema.OfferOrSubClass | schema.RoleOrSubClass | schema.ServiceOrSubClass | schema.DigitalDocumentPermissionOrSubClass | schema.ClassOrSubClass | schema.TripOrSubClass | schema.HealthPlanFormularyOrSubClass | schema.EntryPointOrSubClass | schema.ScheduleOrSubClass | schema.ParcelDeliveryOrSubClass | schema.GameServerOrSubClass | schema.SeatOrSubClass | schema.ListItemOrSubClass;
 /**
  * schema:Intangible - Validation schema (w/ JOI)
  */

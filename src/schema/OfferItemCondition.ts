@@ -9,9 +9,9 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type OfferItemCondition = 
   
-  | 'https://schema.org/DamagedCondition'
-  | 'https://schema.org/UsedCondition'
   | 'https://schema.org/NewCondition'
+  | 'https://schema.org/UsedCondition'
+  | 'https://schema.org/DamagedCondition'
   | 'https://schema.org/RefurbishedCondition'
   ;
 
@@ -21,9 +21,9 @@ export type OfferItemCondition =
  * A list of possible conditions for the item.
  */
 export const OfferItemConditionJoiSchema = Joi.string().valid(
-  'https://schema.org/DamagedCondition',
-  'https://schema.org/UsedCondition',
   'https://schema.org/NewCondition',
+  'https://schema.org/UsedCondition',
+  'https://schema.org/DamagedCondition',
   'https://schema.org/RefurbishedCondition',
 );
 

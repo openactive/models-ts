@@ -21,54 +21,24 @@ export declare type TradeAction = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
+    /**
+     * The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".
+     */
+    priceCurrency?: string;
     /**
      * The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.\n\nUsage guidelines:\n\n* Use the [[priceCurrency]] property (with standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR") instead of including [ambiguous symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign) such as '$' in the value.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.\n* Note that both [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute) and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting.\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.
      *
      */
     price?: number | string;
     /**
-     * The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".
-     */
-    priceCurrency?: string;
-    /**
      * One or more detailed price specifications, indicating the unit price and delivery or payment charges.
      */
     priceSpecification?: schema.PriceSpecificationOrSubClass | string;
-    /**
-     * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-     */
-    startTime?: string;
-    /**
-     * The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.
-     */
-    instrument?: schema.ThingOrSubClass | string;
-    /**
-     * Indicates the current disposition of the Action.
-     */
-    actionStatus?: schema.ActionStatusTypeOrSubClass | string;
-    /**
-     * The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.
-     */
-    agent?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.
-     */
-    participant?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * Indicates a target EntryPoint for an Action.
-     */
-    target?: schema.EntryPointOrSubClass | string;
-    /**
-     * The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-     */
-    endTime?: string;
-    /**
-     * For failed actions, more information on the cause of the failure.
-     */
-    error?: schema.ThingOrSubClass | string;
     /**
      * The result produced in the action. e.g. John wrote *a book*.
      */
@@ -78,45 +48,77 @@ export declare type TradeAction = {
      */
     object?: schema.ThingOrSubClass | string;
     /**
+     * Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.
+     */
+    participant?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * For failed actions, more information on the cause of the failure.
+     */
+    error?: schema.ThingOrSubClass | string;
+    /**
      * The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
      */
-    location?: schema.PlaceOrSubClass | string | schema.VirtualLocationOrSubClass | schema.PostalAddressOrSubClass;
+    location?: schema.PostalAddressOrSubClass | string | schema.PlaceOrSubClass | schema.VirtualLocationOrSubClass;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
      */
-    sameAs?: string;
+    endTime?: string;
     /**
-     * A CreativeWork or Event about this Thing.
+     * The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    agent?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * Indicates a target EntryPoint for an Action.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    target?: schema.EntryPointOrSubClass | string;
+    /**
+     * Indicates the current disposition of the Action.
+     */
+    actionStatus?: schema.ActionStatusTypeOrSubClass | string;
+    /**
+     * The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.
+     */
+    instrument?: schema.ThingOrSubClass | string;
+    /**
+     * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
+     */
+    startTime?: string;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:TradeAction
@@ -125,7 +127,7 @@ export declare type TradeAction = {
  * sub-classes this model. e.g. `Event_OrSubClass` allows `Event`s as well as `ScheduledSession`s, `SessionSeries`,
  * etc.
  */
-export declare type TradeActionOrSubClass = TradeAction | schema.PreOrderActionOrSubClass | schema.RentActionOrSubClass | schema.OrderActionOrSubClass | schema.DonateActionOrSubClass | schema.BuyActionOrSubClass | schema.PayActionOrSubClass | schema.TipActionOrSubClass | schema.SellActionOrSubClass | schema.QuoteActionOrSubClass;
+export declare type TradeActionOrSubClass = TradeAction | schema.PayActionOrSubClass | schema.TipActionOrSubClass | schema.SellActionOrSubClass | schema.RentActionOrSubClass | schema.QuoteActionOrSubClass | schema.PreOrderActionOrSubClass | schema.DonateActionOrSubClass | schema.BuyActionOrSubClass | schema.OrderActionOrSubClass;
 /**
  * schema:TradeAction - Validation schema (w/ JOI)
  */

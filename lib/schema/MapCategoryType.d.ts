@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * An enumeration of several kinds of Map.
  */
-export declare type MapCategoryType = 'https://schema.org/ParkingMap' | 'https://schema.org/TransitMap' | 'https://schema.org/VenueMap' | 'https://schema.org/SeatingMap';
+export declare type MapCategoryType = 'https://schema.org/SeatingMap' | 'https://schema.org/VenueMap' | 'https://schema.org/TransitMap' | 'https://schema.org/ParkingMap';
 /**
  * schema:MapCategoryType - Validation schema (w/ JOI)
  *

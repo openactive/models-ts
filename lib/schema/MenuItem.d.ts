@@ -21,62 +21,64 @@ export declare type MenuItem = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
+    /**
+     * Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.
+     */
+    menuAddOn?: schema.MenuSectionOrSubClass | schema.MenuItemOrSubClass | string;
     /**
      * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
      *
      */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
-    /**
-     * Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.
-     */
-    suitableForDiet?: schema.RestrictedDiet;
-    /**
-     * Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.
-     */
-    menuAddOn?: schema.MenuItemOrSubClass | schema.MenuSectionOrSubClass | string;
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
     /**
      * Nutrition information about the recipe or menu item.
      */
     nutrition?: schema.NutritionInformationOrSubClass | string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.
      */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
+    suitableForDiet?: schema.RestrictedDiet;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:MenuItem

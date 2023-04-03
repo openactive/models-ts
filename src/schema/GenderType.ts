@@ -9,8 +9,8 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type GenderType = 
   
-  | 'https://schema.org/Female'
   | 'https://schema.org/Male'
+  | 'https://schema.org/Female'
   ;
 
 /**
@@ -19,8 +19,8 @@ export type GenderType =
  * An enumeration of genders.
  */
 export const GenderTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/Female',
   'https://schema.org/Male',
+  'https://schema.org/Female',
 );
 
 /**

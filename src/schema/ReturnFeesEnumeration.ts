@@ -5,24 +5,28 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:ReturnFeesEnumeration
  *
- * ReturnFeesEnumeration expresses policies for return fees.
+ * Enumerates several kinds of policies for product return fees.
  */
 export type ReturnFeesEnumeration = 
   
   | 'https://schema.org/ReturnShippingFees'
-  | 'https://schema.org/OriginalShippingFees'
+  | 'https://schema.org/ReturnFeesCustomerResponsibility'
   | 'https://schema.org/RestockingFees'
+  | 'https://schema.org/OriginalShippingFees'
+  | 'https://schema.org/FreeReturn'
   ;
 
 /**
  * schema:ReturnFeesEnumeration - Validation schema (w/ JOI)
  *
- * ReturnFeesEnumeration expresses policies for return fees.
+ * Enumerates several kinds of policies for product return fees.
  */
 export const ReturnFeesEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/ReturnShippingFees',
-  'https://schema.org/OriginalShippingFees',
+  'https://schema.org/ReturnFeesCustomerResponsibility',
   'https://schema.org/RestockingFees',
+  'https://schema.org/OriginalShippingFees',
+  'https://schema.org/FreeReturn',
 );
 
 /**

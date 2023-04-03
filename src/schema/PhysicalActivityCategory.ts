@@ -9,13 +9,13 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type PhysicalActivityCategory = 
   
-  | 'https://schema.org/Balance'
-  | 'https://schema.org/AnaerobicActivity'
-  | 'https://schema.org/Flexibility'
-  | 'https://schema.org/StrengthTraining'
-  | 'https://schema.org/AerobicActivity'
-  | 'https://schema.org/OccupationalActivity'
   | 'https://schema.org/LeisureTimeActivity'
+  | 'https://schema.org/OccupationalActivity'
+  | 'https://schema.org/StrengthTraining'
+  | 'https://schema.org/Flexibility'
+  | 'https://schema.org/AerobicActivity'
+  | 'https://schema.org/AnaerobicActivity'
+  | 'https://schema.org/Balance'
   ;
 
 /**
@@ -24,13 +24,13 @@ export type PhysicalActivityCategory =
  * Categories of physical activity, organized by physiologic classification.
  */
 export const PhysicalActivityCategoryJoiSchema = Joi.string().valid(
-  'https://schema.org/Balance',
-  'https://schema.org/AnaerobicActivity',
-  'https://schema.org/Flexibility',
-  'https://schema.org/StrengthTraining',
-  'https://schema.org/AerobicActivity',
-  'https://schema.org/OccupationalActivity',
   'https://schema.org/LeisureTimeActivity',
+  'https://schema.org/OccupationalActivity',
+  'https://schema.org/StrengthTraining',
+  'https://schema.org/Flexibility',
+  'https://schema.org/AerobicActivity',
+  'https://schema.org/AnaerobicActivity',
+  'https://schema.org/Balance',
 );
 
 /**

@@ -9,9 +9,9 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type RsvpResponseType = 
   
-  | 'https://schema.org/RsvpResponseMaybe'
   | 'https://schema.org/RsvpResponseNo'
   | 'https://schema.org/RsvpResponseYes'
+  | 'https://schema.org/RsvpResponseMaybe'
   ;
 
 /**
@@ -20,9 +20,9 @@ export type RsvpResponseType =
  * RsvpResponseType is an enumeration type whose instances represent responding to an RSVP request.
  */
 export const RsvpResponseTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/RsvpResponseMaybe',
   'https://schema.org/RsvpResponseNo',
   'https://schema.org/RsvpResponseYes',
+  'https://schema.org/RsvpResponseMaybe',
 );
 
 /**

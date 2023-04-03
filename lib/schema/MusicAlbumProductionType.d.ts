@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Classification of the album by it's type of content: soundtrack, live album, studio album, etc.
  */
-export declare type MusicAlbumProductionType = 'https://schema.org/SpokenWordAlbum' | 'https://schema.org/SoundtrackAlbum' | 'https://schema.org/StudioAlbum' | 'https://schema.org/RemixAlbum' | 'https://schema.org/DemoAlbum' | 'https://schema.org/MixtapeAlbum' | 'https://schema.org/LiveAlbum' | 'https://schema.org/DJMixAlbum' | 'https://schema.org/CompilationAlbum';
+export declare type MusicAlbumProductionType = 'https://schema.org/StudioAlbum' | 'https://schema.org/MixtapeAlbum' | 'https://schema.org/DemoAlbum' | 'https://schema.org/SpokenWordAlbum' | 'https://schema.org/DJMixAlbum' | 'https://schema.org/SoundtrackAlbum' | 'https://schema.org/CompilationAlbum' | 'https://schema.org/LiveAlbum' | 'https://schema.org/RemixAlbum';
 /**
  * schema:MusicAlbumProductionType - Validation schema (w/ JOI)
  *

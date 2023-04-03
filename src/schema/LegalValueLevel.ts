@@ -9,10 +9,10 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type LegalValueLevel = 
   
-  | 'https://schema.org/AuthoritativeLegalValue'
   | 'https://schema.org/UnofficialLegalValue'
-  | 'https://schema.org/DefinitiveLegalValue'
+  | 'https://schema.org/AuthoritativeLegalValue'
   | 'https://schema.org/OfficialLegalValue'
+  | 'https://schema.org/DefinitiveLegalValue'
   ;
 
 /**
@@ -21,10 +21,10 @@ export type LegalValueLevel =
  * A list of possible levels for the legal validity of a legislation.
  */
 export const LegalValueLevelJoiSchema = Joi.string().valid(
-  'https://schema.org/AuthoritativeLegalValue',
   'https://schema.org/UnofficialLegalValue',
-  'https://schema.org/DefinitiveLegalValue',
+  'https://schema.org/AuthoritativeLegalValue',
   'https://schema.org/OfficialLegalValue',
+  'https://schema.org/DefinitiveLegalValue',
 );
 
 /**

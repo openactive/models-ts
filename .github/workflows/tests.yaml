@@ -10,18 +10,18 @@ jobs:
 
     strategy:
       matrix:
-        version: ['10.x', '12.x', '14.x']
+        version: ['16.x', '18.x']
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    
+
     - name: Use Node.js ${{ matrix.version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.version }}
-  
+
     - run: npm install
-    
+
     - run: npm test
 

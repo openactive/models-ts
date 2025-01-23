@@ -22,15 +22,15 @@ jobs:
           repository: openactive/models-lib
           path: models-lib
 
-      - name: Setup Node.js 14.x
+      - name: Setup Node.js 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
-        
+          node-version: 18.x
+
       - name: Install models-lib
         run: npm install
         working-directory: ./models-lib/
-        
+
       - name: Update models-lib with latest data-models
         run: npm update @openactive/data-models
         working-directory: ./models-lib/
@@ -38,15 +38,15 @@ jobs:
       - name: Run TypeScript models generator
         run: npm start -- generate TypeScript --destination ../models-ts/src/
         working-directory: ./models-lib/
-        
+
       - name: Install models-ts
         run: npm install
         working-directory: ./models-ts/
-        
+
       - name: Build models-ts types
         run: npm run build
         working-directory: ./models-ts/
-        
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4

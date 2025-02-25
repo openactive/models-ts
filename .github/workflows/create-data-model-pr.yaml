@@ -74,7 +74,7 @@ jobs:
           path: models-ts
 
       - name: Test current state of branch
-        uses: openactive/models-ts/.github/workflows/test.yml@${{ inputs.models-ts_ref || github.ref }}
+        uses: openactive/models-ts/.github/workflows/tests.yaml@${{ inputs.models-ts_ref || github.ref }}
         if: ${{ inputs.data-models_ref || inputs.models-lib_ref || inputs.models-ts_ref }}
         with:
           repo_artifact: models-ts

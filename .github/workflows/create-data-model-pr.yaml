@@ -4,6 +4,18 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [data-models-update]
+  workflow_call:
+    inputs:
+      data-models_ref:
+        required: false
+        type: string
+      models-lib_ref:
+        required: false
+        type: string
+      models-ts_ref:
+        required: false
+        type: string
+        default: 'refs/heads/main'
 
 jobs:
   generate:
@@ -13,14 +25,16 @@ jobs:
       - name: Checkout models-ts
         uses: actions/checkout@v2
         with:
-          ref: main
           path: models-ts
+          # If this is being called from another workflow, then the models-ts_ref will be provided or defaulted; otherwise we can assume a different trigger
+          ref: ${{ inputs.models-ts_ref || github.ref }}
 
       - name: Checkout models-lib
         uses: actions/checkout@v2
         with:
           repository: openactive/models-lib
           path: models-lib
+          ref: ${{ inputs.models-lib_ref || 'refs/heads/main' }}
 
       - name: Setup Node.js 14.x
         uses: actions/setup-node@v1
@@ -32,8 +46,13 @@ jobs:
         working-directory: ./models-lib/
         
       - name: Update models-lib with latest data-models
+        if: ${{ !inputs.data-models_ref }}
         run: npm update @openactive/data-models
         working-directory: ./models-lib/
+
+      - name: Install specific version of data-models ${{ inputs.data-models_ref }}
+        if: ${{ inputs.data-models_ref }}
+        run: npm install github:openactive/data-models#${{ inputs.data-models_ref }}
 
       - name: Run TypeScript models generator
         run: npm start -- generate TypeScript --destination ../models-ts/src/
@@ -46,10 +65,18 @@ jobs:
       - name: Build models-ts types
         run: npm run build
         working-directory: ./models-ts/
-        
+
+      - name: Upload current state of branch
+        uses: actions/upload-artifact@v4
+        if: ${{ inputs.data-models_ref || inputs.models-lib_ref || inputs.models-ts_ref }}
+        with:
+          name: models-ts
+          path: models-ts
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
+        if: ${{ !inputs.data-models_ref && !inputs.models-lib_ref && !inputs.models-ts_ref }}
         with:
           path: ./models-ts/
           token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
@@ -67,6 +94,14 @@ jobs:
           draft: false
 
       - name: Check outputs
+        if: ${{ !inputs.data-models_ref && !inputs.models-lib_ref && !inputs.models-ts_ref }}
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+
+  test:
+      uses: openactive/models-ts/.github/workflows/tests.yaml@${{ inputs.models-ts_ref || github.ref }}
+      if: ${{ inputs.data-models_ref || inputs.models-lib_ref || inputs.models-ts_ref }}
+      with:
+        repo_artifact: models-ts
+        

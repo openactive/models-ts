@@ -73,12 +73,6 @@ jobs:
           name: models-ts
           path: models-ts
 
-      - name: Test current state of branch
-        uses: openactive/models-ts/.github/workflows/tests.yaml@${{ inputs.models-ts_ref || github.ref }}
-        if: ${{ inputs.data-models_ref || inputs.models-lib_ref || inputs.models-ts_ref }}
-        with:
-          repo_artifact: models-ts
-        
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
@@ -104,3 +98,10 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+
+  test:
+      uses: openactive/models-ts/.github/workflows/tests.yaml@${{ inputs.models-ts_ref || github.ref }}
+      if: ${{ inputs.data-models_ref || inputs.models-lib_ref || inputs.models-ts_ref }}
+      with:
+        repo_artifact: models-ts
+        

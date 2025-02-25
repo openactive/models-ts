@@ -3,6 +3,11 @@ name: Tests
 on:
   pull_request:
     branches: [ main ]
+  workflow_call:
+    inputs:
+      repo_artifact:
+        required: false
+        type: string
 
 jobs:
   test:
@@ -14,7 +19,15 @@ jobs:
 
     steps:
     - name: Checkout
+      if: ${{ !inputs.repo_artifact }}
       uses: actions/checkout@v2
+
+    # If specified, download an artifact instead of checking out the repo
+    - name: Download Artifact
+      if: ${{ inputs.repo_artifact }}
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.repo_artifact }}
     
     - name: Use Node.js ${{ matrix.version }}
       uses: actions/setup-node@v1

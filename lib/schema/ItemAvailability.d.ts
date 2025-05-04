@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * A list of possible product availability options.
  */
-export declare type ItemAvailability = 'https://schema.org/PreOrder' | 'https://schema.org/SoldOut' | 'https://schema.org/BackOrder' | 'https://schema.org/PreSale' | 'https://schema.org/InStoreOnly' | 'https://schema.org/OutOfStock' | 'https://schema.org/OnlineOnly' | 'https://schema.org/Discontinued' | 'https://schema.org/LimitedAvailability' | 'https://schema.org/InStock';
+export declare type ItemAvailability = 'https://schema.org/InStoreOnly' | 'https://schema.org/OnlineOnly' | 'https://schema.org/BackOrder' | 'https://schema.org/OutOfStock' | 'https://schema.org/LimitedAvailability' | 'https://schema.org/PreSale' | 'https://schema.org/PreOrder' | 'https://schema.org/InStock' | 'https://schema.org/Discontinued' | 'https://schema.org/SoldOut';
 /**
  * schema:ItemAvailability - Validation schema (w/ JOI)
  *

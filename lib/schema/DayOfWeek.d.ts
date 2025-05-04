@@ -11,7 +11,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  *
  */
-export declare type DayOfWeek = 'https://schema.org/PublicHolidays' | 'https://schema.org/Sunday' | 'https://schema.org/Monday' | 'https://schema.org/Thursday' | 'https://schema.org/Wednesday' | 'https://schema.org/Tuesday' | 'https://schema.org/Saturday' | 'https://schema.org/Friday';
+export declare type DayOfWeek = 'https://schema.org/Saturday' | 'https://schema.org/Monday' | 'https://schema.org/Thursday' | 'https://schema.org/Sunday' | 'https://schema.org/Wednesday' | 'https://schema.org/PublicHolidays' | 'https://schema.org/Tuesday' | 'https://schema.org/Friday';
 /**
  * schema:DayOfWeek - Validation schema (w/ JOI)
  *

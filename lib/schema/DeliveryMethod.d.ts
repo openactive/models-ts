@@ -7,7 +7,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  *
  */
-export declare type DeliveryMethod = 'https://schema.org/OnSitePickup' | 'https://schema.org/LockerDelivery' | 'https://schema.org/ParcelService';
+export declare type DeliveryMethod = 'https://schema.org/LockerDelivery' | 'https://schema.org/OnSitePickup' | 'https://schema.org/ParcelService';
 /**
  * schema:DeliveryMethod - Validation schema (w/ JOI)
  *

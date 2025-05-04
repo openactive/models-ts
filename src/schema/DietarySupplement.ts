@@ -24,57 +24,71 @@ export type DietarySupplement = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
-  /**
-   * The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.
-   */
-  mechanismOfAction?: string;
-  /**
-   * True if this item's name is a proprietary/brand name (vs. generic name).
-   */
-  isProprietary?: boolean;
-  /**
-   * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
-   */
-  maximumIntake?: schema.MaximumDoseScheduleOrSubClass | string;
   /**
    * Any potential safety concern associated with the supplement. May include interactions with other drugs and foods, pregnancy, breastfeeding, known adverse reactions, and documented efficacy of the supplement.
    */
   safetyConsideration?: string;
   /**
-   * The drug or supplement's legal status, including any controlled substance schedules that apply.
-   */
-  legalStatus?: schema.MedicalEnumeration | string | schema.DrugLegalStatusOrSubClass;
-  /**
-   * The generic name of this drug or supplement.
-   */
-  nonProprietaryName?: string;
-  /**
-   * Proprietary name given to the diet plan, typically by its originator or creator.
-   */
-  proprietaryName?: string;
-  /**
    * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
    */
   recommendedIntake?: schema.RecommendedDoseScheduleOrSubClass | string;
-  /**
-   * An active ingredient, typically chemical compounds and/or biologic substances.
-   */
-  activeIngredient?: string;
-  /**
-   * The manufacturer of the product.
-   */
-  manufacturer?: schema.OrganizationOrSubClass | string;
   /**
    * Characteristics of the population for which this is intended, or which typically uses it, e.g. 'adults'.
    */
   targetPopulation?: string;
   /**
+   * An active ingredient, typically chemical compounds and/or biologic substances.
+   */
+  activeIngredient?: string;
+  /**
+   * Proprietary name given to the diet plan, typically by its originator or creator.
+   */
+  proprietaryName?: string;
+  /**
+   * The manufacturer of the product.
+   */
+  manufacturer?: schema.OrganizationOrSubClass | string;
+  /**
+   * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
+   */
+  maximumIntake?: schema.MaximumDoseScheduleOrSubClass | string;
+  /**
+   * The generic name of this drug or supplement.
+   */
+  nonProprietaryName?: string;
+  /**
+   * The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.
+   */
+  mechanismOfAction?: string;
+  /**
+   * The drug or supplement's legal status, including any controlled substance schedules that apply.
+   */
+  legalStatus?: schema.MedicalEnumeration | schema.DrugLegalStatusOrSubClass | string;
+  /**
+   * True if this item's name is a proprietary/brand name (vs. generic name).
+   */
+  isProprietary?: boolean;
+  /**
+   * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
+   */
+  medicineSystem?: schema.MedicineSystemOrSubClass | string;
+  /**
    * A medical guideline related to this entity.
    */
   guideline?: schema.MedicalGuidelineOrSubClass | string;
+  /**
+   * A medical study or trial related to this entity.
+   */
+  study?: schema.MedicalStudyOrSubClass | string;
+  /**
+   * If applicable, a medical specialty in which this entity is relevant.
+   */
+  relevantSpecialty?: schema.MedicalSpecialtyOrSubClass | string;
   /**
    * If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.
    */
@@ -84,53 +98,41 @@ export type DietarySupplement = {
    */
   code?: schema.MedicalCodeOrSubClass | string;
   /**
-   * If applicable, a medical specialty in which this entity is relevant.
-   */
-  relevantSpecialty?: schema.MedicalSpecialtyOrSubClass | string;
-  /**
-   * A medical study or trial related to this entity.
-   */
-  study?: schema.MedicalStudyOrSubClass | string;
-  /**
-   * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
-   */
-  medicineSystem?: schema.MedicineSystemOrSubClass | string;
-  /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-   */
-  sameAs?: string;
-  /**
-   * A CreativeWork or Event about this Thing.
-   */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-  /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
    * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
   /**
    * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
    */
   additionalType?: string;
   /**
-   * An alias for the item.
-   */
-  alternateName?: string;
-  /**
    * URL of the item.
    */
   url?: string;
   /**
-   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   * An alias for the item.
    */
-  image?: schema.ImageObjectOrSubClass | string;
+  alternateName?: string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
   /**
    * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
   disambiguatingDescription?: string;
+  /**
+   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   */
+  image?: schema.ImageObjectOrSubClass | string;
 };
 
 /**
@@ -150,36 +152,36 @@ export type DietarySupplementOrSubClass =
 export const DietarySupplementJoiSchema = Joi.object({
   '@type': Joi.string().valid('DietarySupplement').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
   description: Joi.string(),
   '@id': Joi.string().uri(),
-  mechanismOfAction: Joi.string(),
-  isProprietary: Joi.boolean(),
-  maximumIntake: Joi.alternatives().try(Joi.lazy(() => schema.MaximumDoseScheduleOrSubClassJoiSchema), Joi.string().uri()),
   safetyConsideration: Joi.string(),
-  legalStatus: Joi.alternatives().try(Joi.lazy(() => schema.MedicalEnumerationJoiSchema), Joi.string(), Joi.lazy(() => schema.DrugLegalStatusOrSubClassJoiSchema), Joi.string().uri()),
-  nonProprietaryName: Joi.string(),
-  proprietaryName: Joi.string(),
   recommendedIntake: Joi.alternatives().try(Joi.lazy(() => schema.RecommendedDoseScheduleOrSubClassJoiSchema), Joi.string().uri()),
-  activeIngredient: Joi.string(),
-  manufacturer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
   targetPopulation: Joi.string(),
+  activeIngredient: Joi.string(),
+  proprietaryName: Joi.string(),
+  manufacturer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  maximumIntake: Joi.alternatives().try(Joi.lazy(() => schema.MaximumDoseScheduleOrSubClassJoiSchema), Joi.string().uri()),
+  nonProprietaryName: Joi.string(),
+  mechanismOfAction: Joi.string(),
+  legalStatus: Joi.alternatives().try(Joi.lazy(() => schema.MedicalEnumerationJoiSchema), Joi.lazy(() => schema.DrugLegalStatusOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  isProprietary: Joi.boolean(),
+  medicineSystem: Joi.alternatives().try(Joi.lazy(() => schema.MedicineSystemOrSubClassJoiSchema), Joi.string().uri()),
   guideline: Joi.alternatives().try(Joi.lazy(() => schema.MedicalGuidelineOrSubClassJoiSchema), Joi.string().uri()),
+  study: Joi.alternatives().try(Joi.lazy(() => schema.MedicalStudyOrSubClassJoiSchema), Joi.string().uri()),
+  relevantSpecialty: Joi.alternatives().try(Joi.lazy(() => schema.MedicalSpecialtyOrSubClassJoiSchema), Joi.string().uri()),
   recognizingAuthority: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
   code: Joi.alternatives().try(Joi.lazy(() => schema.MedicalCodeOrSubClassJoiSchema), Joi.string().uri()),
-  relevantSpecialty: Joi.alternatives().try(Joi.lazy(() => schema.MedicalSpecialtyOrSubClassJoiSchema), Joi.string().uri()),
-  study: Joi.alternatives().try(Joi.lazy(() => schema.MedicalStudyOrSubClassJoiSchema), Joi.string().uri()),
-  medicineSystem: Joi.alternatives().try(Joi.lazy(() => schema.MedicineSystemOrSubClassJoiSchema), Joi.string().uri()),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.string().uri(), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema)),
   additionalType: Joi.string().uri(),
-  alternateName: Joi.string(),
   url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  alternateName: Joi.string(),
+  sameAs: Joi.string().uri(),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
 });
 
 /**

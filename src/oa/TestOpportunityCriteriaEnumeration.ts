@@ -12,8 +12,9 @@ import { OaValidationError } from '../oaValidationError';
 export type TestOpportunityCriteriaEnumeration = 
   
   | 'https://openactive.io/test-interface#TestOpportunityBookable'
-  | 'https://openactive.io/test-interface#TestOpportunityOpenBookingNotAllowed'
+  | 'https://openactive.io/test-interface#TestOpportunityBookableInPast'
   | 'https://openactive.io/test-interface#TestOpportunityBookableNoSpaces'
+  | 'https://openactive.io/test-interface#TestOpportunityBookableOneSpace'
   | 'https://openactive.io/test-interface#TestOpportunityBookableFiveSpaces'
   | 'https://openactive.io/test-interface#TestOpportunityBookableFree'
   | 'https://openactive.io/test-interface#TestOpportunityBookableNonFree'
@@ -50,8 +51,9 @@ export type TestOpportunityCriteriaEnumeration =
  */
 export const TestOpportunityCriteriaEnumerationJoiSchema = Joi.string().valid(
   'https://openactive.io/test-interface#TestOpportunityBookable',
-  'https://openactive.io/test-interface#TestOpportunityOpenBookingNotAllowed',
+  'https://openactive.io/test-interface#TestOpportunityBookableInPast',
   'https://openactive.io/test-interface#TestOpportunityBookableNoSpaces',
+  'https://openactive.io/test-interface#TestOpportunityBookableOneSpace',
   'https://openactive.io/test-interface#TestOpportunityBookableFiveSpaces',
   'https://openactive.io/test-interface#TestOpportunityBookableFree',
   'https://openactive.io/test-interface#TestOpportunityBookableNonFree',

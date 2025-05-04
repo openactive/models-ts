@@ -9,15 +9,15 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type MusicAlbumProductionType = 
   
-  | 'https://schema.org/SpokenWordAlbum'
-  | 'https://schema.org/SoundtrackAlbum'
   | 'https://schema.org/StudioAlbum'
-  | 'https://schema.org/RemixAlbum'
-  | 'https://schema.org/DemoAlbum'
   | 'https://schema.org/MixtapeAlbum'
-  | 'https://schema.org/LiveAlbum'
+  | 'https://schema.org/DemoAlbum'
+  | 'https://schema.org/SpokenWordAlbum'
   | 'https://schema.org/DJMixAlbum'
+  | 'https://schema.org/SoundtrackAlbum'
   | 'https://schema.org/CompilationAlbum'
+  | 'https://schema.org/LiveAlbum'
+  | 'https://schema.org/RemixAlbum'
   ;
 
 /**
@@ -26,15 +26,15 @@ export type MusicAlbumProductionType =
  * Classification of the album by it's type of content: soundtrack, live album, studio album, etc.
  */
 export const MusicAlbumProductionTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/SpokenWordAlbum',
-  'https://schema.org/SoundtrackAlbum',
   'https://schema.org/StudioAlbum',
-  'https://schema.org/RemixAlbum',
-  'https://schema.org/DemoAlbum',
   'https://schema.org/MixtapeAlbum',
-  'https://schema.org/LiveAlbum',
+  'https://schema.org/DemoAlbum',
+  'https://schema.org/SpokenWordAlbum',
   'https://schema.org/DJMixAlbum',
+  'https://schema.org/SoundtrackAlbum',
   'https://schema.org/CompilationAlbum',
+  'https://schema.org/LiveAlbum',
+  'https://schema.org/RemixAlbum',
 );
 
 /**

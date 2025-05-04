@@ -10,7 +10,8 @@ export type OrderItemStatus =
   | 'https://openactive.io/SellerCancelled'
   | 'https://openactive.io/CustomerCancelled'
   | 'https://openactive.io/OrderItemConfirmed'
-  | 'https://openactive.io/CustomerAttended'
+  | 'https://openactive.io/AttendeeAttended'
+  | 'https://openactive.io/AttendeeAbsent'
   ;
 
 /**
@@ -20,7 +21,8 @@ export const OrderItemStatusJoiSchema = Joi.string().valid(
   'https://openactive.io/SellerCancelled',
   'https://openactive.io/CustomerCancelled',
   'https://openactive.io/OrderItemConfirmed',
-  'https://openactive.io/CustomerAttended',
+  'https://openactive.io/AttendeeAttended',
+  'https://openactive.io/AttendeeAbsent',
 );
 
 /**

@@ -27,11 +27,9 @@ export declare type OrderProposal = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
-     *
-     * ```json
-     * "@id": "https://example.com/OrderProposal/d45b31031ab6d80b12345"
-     * ```
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -91,41 +89,45 @@ export declare type OrderProposal = {
      */
     totalPaymentTax?: oa.TaxChargeSpecificationOrSubClass[];
     /**
-     * Was the offer accepted as a gift for someone other than the buyer.
+     * Date order was placed.
      */
-    isGift?: boolean;
-    /**
-     * The delivery of the parcel related to this order or order item.
-     */
-    orderDelivery?: schema.ParcelDeliveryOrSubClass | string;
-    /**
-     * The offer(s) -- e.g., product, quantity and price combinations -- included in the order.
-     */
-    acceptedOffer?: schema.OfferOrSubClass | string;
-    /**
-     * The currency of the discount.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".
-     */
-    discountCurrency?: string;
+    orderDate?: string;
     /**
      * The date that payment is due.
      */
     paymentDue?: string;
     /**
-     * A number that confirms the given order or payment has been received.
+     * Any discount applied (to an Order).
      */
-    confirmationNumber?: string;
+    discount?: number | string;
+    /**
+     * Code used to redeem a discount.
+     */
+    discountCode?: string;
     /**
      * An identifier for the method of payment used (e.g. the last 4 digits of the credit card).
      */
     paymentMethodId?: string;
     /**
+     * The delivery of the parcel related to this order or order item.
+     */
+    orderDelivery?: schema.ParcelDeliveryOrSubClass | string;
+    /**
+     * The currency of the discount.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".
+     */
+    discountCurrency?: string;
+    /**
+     * Was the offer accepted as a gift for someone other than the buyer.
+     */
+    isGift?: boolean;
+    /**
      * The billing address for the order.
      */
     billingAddress?: schema.PostalAddressOrSubClass | string;
     /**
-     * The URL for sending a payment.
+     * The current status of the order.
      */
-    paymentUrl?: string;
+    orderStatus?: schema.OrderStatusOrSubClass | string;
     /**
      * The order is being paid as part of the referenced Invoice.
      */
@@ -135,65 +137,61 @@ export declare type OrderProposal = {
      */
     paymentDueDate?: string;
     /**
+     * A number that confirms the given order or payment has been received.
+     */
+    confirmationNumber?: string;
+    /**
+     * The offer(s) -- e.g., product, quantity and price combinations -- included in the order.
+     */
+    acceptedOffer?: schema.OfferOrSubClass | string;
+    /**
      * 'merchant' is an out-dated term for 'seller'.
      */
     merchant?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
     /**
-     * Date order was placed.
+     * The URL for sending a payment.
      */
-    orderDate?: string;
+    paymentUrl?: string;
     /**
      * The name of the credit card or other method of payment for the order.
      */
     paymentMethod?: schema.PaymentMethod;
     /**
-     * Code used to redeem a discount.
-     */
-    discountCode?: string;
-    /**
-     * The current status of the order.
-     */
-    orderStatus?: schema.OrderStatusOrSubClass | string;
-    /**
-     * Any discount applied (to an Order).
-     */
-    discount?: number | string;
-    /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * OrderProposal

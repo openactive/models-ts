@@ -21,7 +21,9 @@ export declare type ProductCollection = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -29,105 +31,305 @@ export declare type ProductCollection = {
      */
     includesObject?: schema.TypeAndQuantityNodeOrSubClass | string;
     /**
-     * [object Object]
+     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.
      */
-    collectionSize?: number;
+    pattern?: string | schema.DefinedTermOrSubClass;
     /**
-     * The textual content of this CreativeWork.
+     * A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
      */
-    text?: string;
+    hasMeasurement?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+     *
+     */
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
+    /**
+     * The color of the product.
+     */
+    color?: string;
+    /**
+     * A pointer to another product (or multiple products) for which this product is an accessory or spare part.
+     */
+    isAccessoryOrSparePartFor?: schema.ProductOrSubClass | string;
+    /**
+     * The product identifier, such as ISBN. For example: ``` meta itemprop="productID" content="isbn:123-456-789" ```.
+     */
+    productID?: string;
+    /**
+     * The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
+     */
+    model?: string | schema.ProductModelOrSubClass;
+    /**
+     * The depth of the item.
+     */
+    depth?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The weight of the product or person.
+     */
+    weight?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin13?: string;
+    /**
+     * The date of production of the item, e.g. vehicle.
+     */
+    productionDate?: string;
     /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
      */
     aggregateRating?: schema.AggregateRatingOrSubClass | string;
     /**
-     * A link to the page containing the comments of the CreativeWork.
+     * An award won by or for this item.
      */
-    discussionUrl?: string;
+    award?: string;
     /**
-     * The "temporal" property can be used in cases where more specific properties
-     * (e.g. [[temporalCoverage]], [[dateCreated]], [[dateModified]], [[datePublished]]) are not known to be appropriate.
+     * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
      */
-    temporal?: string;
+    gtin8?: string;
     /**
-     * Conditions that affect the availability of, or method(s) of access to, an item. Typically used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]. This property is not suitable for use as a general Web access control mechanism. It is expressed only in natural language.\n\nFor example "Available by appointment from the Reading Room" or "Accessible only from logged-in accounts ".
+     * Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number) (nsn) of a [[Product]].
      */
-    conditionsOfAccess?: string;
+    nsn?: string;
     /**
-     * Date the content expires and is no longer useful or available. For example a [[VideoObject]] or [[NewsArticle]] whose availability or relevance is time-limited, or a [[ClaimReview]] fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.
+     * The country of origin of something, including products as well as creative  works such as movie and TV content.
+     *
+     * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.
+     *
+     * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
      */
-    expires?: string;
+    countryOfOrigin?: schema.CountryOrSubClass | string;
+    /**
+     * The manufacturer of the product.
+     */
+    manufacturer?: schema.OrganizationOrSubClass | string;
+    /**
+     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+     */
+    brand?: schema.OrganizationOrSubClass | schema.BrandOrSubClass | string;
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+     */
+    category?: string | schema.PhysicalActivityCategory | schema.ThingOrSubClass;
+    /**
+     * Specifies a MerchantReturnPolicy that may be applicable.
+     */
+    hasMerchantReturnPolicy?: schema.MerchantReturnPolicyOrSubClass | string;
+    /**
+     * Defines the energy efficiency Category (also known as "class" or "rating") for a product according to an international energy efficiency standard.
+     */
+    hasEnergyConsumptionDetails?: schema.EnergyConsumptionDetailsOrSubClass | string;
+    /**
+     * A slogan or motto associated with the item.
+     */
+    slogan?: string;
+    /**
+     * A pointer to another, functionally similar product (or multiple products).
+     */
+    isSimilarTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+    /**
+     * The height of the item.
+     */
+    height?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
     /**
      * A standardized size of a product or creative work, specified either through a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue with a unitCode, or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]], [[height]], [[depth]] and [[weight]] properties may be more applicable.
      */
-    size?: schema.DefinedTermOrSubClass | schema.SizeSpecificationOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    size?: schema.SizeSpecificationOrSubClass | schema.DefinedTermOrSubClass | string | schema.QuantitativeValueOrSubClass;
     /**
-     * Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.
+     * The release date of a product or product model. This can be used to distinguish the exact variant of a product.
      */
-    timeRequired?: string;
+    releaseDate?: string;
     /**
-     * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+     * An associated logo.
      */
-    dateModified?: string;
+    logo?: string | schema.ImageObjectOrSubClass;
     /**
-     * The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of
-     *       contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates
-     *       areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York.
+     * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
      */
-    spatialCoverage?: schema.PlaceOrSubClass | string;
+    mpn?: string;
     /**
-     * The level in terms of progression through an educational or training context. Examples of educational levels include 'beginner', 'intermediate' or 'advanced', and formal sets of level indicators.
+     * The place where the item (typically [[Product]]) was last processed and tested before importation.
      */
-    educationalLevel?: string | schema.DefinedTermOrSubClass;
+    countryOfLastProcessing?: string;
     /**
-     * A creative work that this work is an example/instance/realization/derivation of.
+     * Awards won by or for this item.
      */
-    exampleOfWork?: schema.CreativeWorkOrSubClass | string;
+    awards?: string;
     /**
-     * The year during which the claimed copyright for the CreativeWork was first asserted.
+     * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
      */
-    copyrightYear?: number;
+    gtin12?: string;
     /**
-     * The Organization on whose behalf the creator was working.
+     * The width of the item.
      */
-    sourceOrganization?: schema.OrganizationOrSubClass | string;
+    width?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     */
+    audience?: schema.AudienceOrSubClass | string;
+    /**
+     * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin14?: string;
+    /**
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     */
+    material?: schema.ProductOrSubClass | string;
+    /**
+     * A pointer to another, somehow related product (or multiple products).
+     */
+    isRelatedTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+    /**
+     * Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].
+     */
+    inProductGroupWithID?: string;
+    /**
+     * Review of the item.
+     */
+    reviews?: schema.ReviewOrSubClass | string;
+    /**
+     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
+     */
+    sku?: string;
+    /**
+     * A pointer to another product (or multiple products) for which this product is a consumable.
+     */
+    isConsumableFor?: schema.ProductOrSubClass | string;
+    /**
+     * A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.
+     *
+     */
+    gtin?: string;
+    /**
+     * A review of the item.
+     */
+    review?: schema.ReviewOrSubClass | string;
+    /**
+     * A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.
+     */
+    itemCondition?: schema.OfferItemCondition;
+    /**
+     * A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+     *
+     */
+    additionalProperty?: schema.PropertyValueOrSubClass | string;
+    /**
+     * Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.
+     */
+    isVariantOf?: schema.ProductModelOrSubClass | schema.ProductGroupOrSubClass | string;
+    /**
+     * The place where the product was assembled.
+     */
+    countryOfAssembly?: string;
+    /**
+     * The date the item e.g. vehicle was purchased by the current owner.
+     */
+    purchaseDate?: string;
+    /**
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     */
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
+    /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     */
+    additionalType?: string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
+    /**
+     * An alias for the item.
+     */
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    /**
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     */
+    disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
+    /**
+     * [object Object]
+     */
+    collectionSize?: number;
+    /**
+     * Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
+     */
+    creditText?: string;
+    /**
+     * The subject matter of the content.
+     */
+    about?: schema.ThingOrSubClass | string;
+    /**
+     * The textual content of this CreativeWork.
+     */
+    text?: string;
+    /**
+     * Fictional person connected with a creative work.
+     */
+    character?: schema.PersonOrSubClass | string;
+    /**
+     * The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.
+     */
+    locationCreated?: schema.PlaceOrSubClass | string;
+    /**
+     * A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html.
+     */
+    isBasedOnUrl?: schema.CreativeWorkOrSubClass | string | schema.ProductOrSubClass;
     /**
      * Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.
      */
-    isPartOf?: schema.CreativeWorkOrSubClass | string;
+    isPartOf?: string | schema.CreativeWorkOrSubClass;
     /**
-     * An embedded video object.
+     * [object Object]
      */
-    video?: schema.ClipOrSubClass | schema.VideoObjectOrSubClass | string;
-    /**
-     * A work that is a translation of the content of this work. e.g. 西遊記 has an English workTranslation “Journey to the West”,a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese  translation Tây du ký bình khảo.
-     */
-    workTranslation?: schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates the party responsible for generating and publishing the current structured data markup, typically in cases where the structured data is derived automatically from existing published content but published on a different site. For example, student projects and open data initiatives often re-publish existing content with more explicitly structured metadata. The
-     * [[sdPublisher]] property helps make such practices more explicit.
-     */
-    sdPublisher?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
-     */
-    creator?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * A thumbnail image relevant to the Thing.
-     */
-    thumbnailUrl?: string;
-    /**
-     * The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species”
-     */
-    translationOfWork?: schema.CreativeWorkOrSubClass | string;
+    materialExtent?: string | schema.QuantitativeValueOrSubClass;
     /**
      * The specific time described by a creative work, for works (e.g. articles, video objects etc.) that emphasise a particular moment within an Event.
      */
     contentReferenceTime?: string;
     /**
-     * Date of first broadcast/publication.
+     * A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]), or other [[Project]]. A maintainer is a [[Person]] or [[Organization]] that manages contributions to, and/or publication of, some (typically complex) artifact. It is common for distributions of software and data to be based on "upstream" sources. When [[maintainer]] is applied to a specific version of something e.g. a particular version or packaging of a [[Dataset]], it is always  possible that the upstream source has a different maintainer. The [[isBasedOn]] property can be used to indicate such relationships between datasets to make the different maintenance roles clear. Similarly in the case of software, a package may have dedicated maintainers working on integration into software distributions such as Ubuntu, as well as upstream maintainers of the underlying work.
+     *
      */
-    datePublished?: string;
+    maintainer?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * The typical expected age range, e.g. '7-9', '11-'.
+     */
+    typicalAgeRange?: string;
+    /**
+     * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
+     */
+    author?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * A person or organization that supports (sponsors) something through some kind of financial contribution.
+     */
+    funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Date the content expires and is no longer useful or available. For example a [[VideoObject]] or [[NewsArticle]] whose availability or relevance is time-limited, or a [[ClaimReview]] fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.
+     */
+    expires?: string;
+    /**
+     * Genre of the creative work, broadcast channel or group.
+     */
+    genre?: string;
+    /**
+     * A work that is a translation of the content of this work. e.g. 西遊記 has an English workTranslation “Journey to the West”,a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese  translation Tây du ký bình khảo.
+     */
+    workTranslation?: schema.CreativeWorkOrSubClass | string;
     /**
      * The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals). In
      *       the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written "2011/2012"). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL.
@@ -137,137 +339,72 @@ export declare type ProductCollection = {
      */
     temporalCoverage?: string;
     /**
-     * Media type, typically MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml)) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, 'encoding' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.
+     * Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense).
      */
-    fileFormat?: string;
-    /**
-     * The location depicted or described in the content. For example, the location in a photograph or painting.
-     */
-    contentLocation?: schema.PlaceOrSubClass | string;
-    /**
-     * A secondary title of the CreativeWork.
-     */
-    alternativeHeadline?: string;
-    /**
-     * A secondary contributor to the CreativeWork or Event.
-     */
-    contributor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The version of the CreativeWork embodied by a specified resource.
-     */
-    version?: number | string;
-    /**
-     * The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.
-     *
-     */
-    accessMode?: string;
-    /**
-     * The "spatial" property can be used in cases when more specific properties
-     * (e.g. [[locationCreated]], [[spatialCoverage]], [[contentLocation]]) are not known to be appropriate.
-     */
-    spatial?: schema.PlaceOrSubClass | string;
-    /**
-     * A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.
-     */
-    encoding?: schema.MediaObjectOrSubClass | string;
-    /**
-     * The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.).
-     */
-    producer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * An abstract is a short description that summarizes a [[CreativeWork]].
-     */
-    abstract?: string;
-    /**
-     * A publication event associated with the item.
-     */
-    publication?: schema.PublicationEventOrSubClass | string;
-    /**
-     * The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.
-     */
-    locationCreated?: schema.PlaceOrSubClass | string;
-    /**
-     * A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]), or other [[Project]]. A maintainer is a [[Person]] or [[Organization]] that manages contributions to, and/or publication of, some (typically complex) artifact. It is common for distributions of software and data to be based on "upstream" sources. When [[maintainer]] is applied to a specific version of something e.g. a particular version or packaging of a [[Dataset]], it is always  possible that the upstream source has a different maintainer. The [[isBasedOn]] property can be used to indicate such relationships between datasets to make the different maintenance roles clear. Similarly in the case of software, a package may have dedicated maintainers working on integration into software distributions such as Ubuntu, as well as upstream maintainers of the underlying work.
-     *
-     */
-    maintainer?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * The party holding the legal copyright to the CreativeWork.
-     */
-    copyrightHolder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
-     *
-     */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
-    /**
-     * Genre of the creative work, broadcast channel or group.
-     */
-    genre?: string;
-    /**
-     * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
-     */
-    author?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    hasPart?: schema.CreativeWorkOrSubClass | string;
     /**
      * A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."
      */
     accessibilitySummary?: string;
     /**
-     * The date on which the CreativeWork was created or the item was added to a DataFeed.
+     * A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include:  auditory, tactile, textual, visual.
+     *
      */
-    dateCreated?: string;
+    accessModeSufficient?: schema.ItemListOrSubClass | string;
     /**
-     * Review of the item.
+     * Headline of the article.
      */
-    reviews?: schema.ReviewOrSubClass | string;
+    headline?: string;
     /**
-     * Official rating of a piece of content&#x2014;for example,'MPAA PG-13'.
+     * An alignment to an established educational framework.
+     *
+     * This property should not be used where the nature of the alignment can be described using a simple property, for example to express that a resource [[teaches]] or [[assesses]] a competency.
      */
-    contentRating?: string | schema.RatingOrSubClass;
+    educationalAlignment?: schema.AlignmentObjectOrSubClass | string;
     /**
-     * Indicates that the resource is compatible with the referenced accessibility API ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
+     * The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
+     *
+     * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
+     *
      */
-    accessibilityAPI?: string;
+    publishingPrinciples?: string | schema.CreativeWorkOrSubClass;
     /**
-     * The publisher of the creative work.
+     * Comments, typically from users.
      */
-    publisher?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    comment?: schema.CommentOrSubClass | string;
     /**
-     * A license document that applies to this content, typically indicated by URL.
+     * An embedded audio object.
      */
-    license?: schema.CreativeWorkOrSubClass | string;
+    audio?: schema.ClipOrSubClass | schema.AudioObjectOrSubClass | schema.MusicRecordingOrSubClass | string;
     /**
-     * Indicates whether this content is family friendly.
+     * An embedded video object.
      */
-    isFamilyFriendly?: boolean;
+    video?: schema.VideoObjectOrSubClass | schema.ClipOrSubClass | string;
     /**
-     * A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3 ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
+     * The Organization on whose behalf the creator was working.
      */
-    accessibilityHazard?: string;
+    sourceOrganization?: schema.OrganizationOrSubClass | string;
     /**
-     * Indicates the primary entity described in some page or other CreativeWork.
+     * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
      */
-    mainEntity?: schema.ThingOrSubClass | string;
+    translator?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * An award won by or for this item.
+     * The position of an item in a series or sequence of items.
      */
-    award?: string;
+    position?: string | number;
     /**
-     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+     * The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species”
      */
-    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    translationOfWork?: schema.CreativeWorkOrSubClass | string;
     /**
-     * A review of the item.
+     * A resource from which this work is derived or from which it is a modification or adaption.
      */
-    review?: schema.ReviewOrSubClass | string;
+    isBasedOn?: string | schema.ProductOrSubClass | schema.CreativeWorkOrSubClass;
     /**
-     * Specifies the Person that is legally accountable for the CreativeWork.
+     * Indicates (by URL or string) a particular version of a schema used in some CreativeWork. This property was created primarily to
+     *     indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community.
      */
-    accountablePerson?: schema.PersonOrSubClass | string;
-    /**
-     * The predominant mode of learning supported by the learning resource. Acceptable values are 'active', 'expositive', or 'mixed'.
-     */
-    interactivityType?: string;
+    schemaVersion?: string;
     /**
      * An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]] representing a specific edit / edition for a work of film or television.
      *
@@ -278,53 +415,31 @@ export declare type ProductCollection = {
      */
     editEIDR?: string;
     /**
-     * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
+     * Indicates the party responsible for generating and publishing the current structured data markup, typically in cases where the structured data is derived automatically from existing published content but published on a different site. For example, student projects and open data initiatives often re-publish existing content with more explicitly structured metadata. The
+     * [[sdPublisher]] property helps make such practices more explicit.
      */
-    translator?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    sdPublisher?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * The number of comments this CreativeWork (e.g. Article, Question or Answer) has received. This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.
+     * A license document that applies to this content, typically indicated by URL.
      */
-    commentCount?: number;
+    license?: string | schema.CreativeWorkOrSubClass;
     /**
-     * Indicates (by URL or string) a particular version of a schema used in some CreativeWork. This property was created primarily to
-     *     indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community.
+     * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
      */
-    schemaVersion?: string;
+    interactionStatistic?: schema.InteractionCounterOrSubClass | string;
     /**
-     * Indicates the date on which the current structured data was generated / published. Typically used alongside [[sdPublisher]]
+     * Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
      */
-    sdDatePublished?: string;
+    accessibilityFeature?: string;
     /**
-     * The purpose of a work in the context of education; for example, 'assignment', 'group work'.
+     * Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
      */
-    educationalUse?: string | schema.DefinedTermOrSubClass;
+    mentions?: schema.ThingOrSubClass | string;
     /**
-     * Identifies input methods that are sufficient to fully control the described resource ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
+     * The "temporal" property can be used in cases where more specific properties
+     * (e.g. [[temporalCoverage]], [[dateCreated]], [[dateModified]], [[datePublished]]) are not known to be appropriate.
      */
-    accessibilityControl?: string;
-    /**
-     * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-     */
-    sponsor?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * An alignment to an established educational framework.
-     *
-     * This property should not be used where the nature of the alignment can be described using a simple property, for example to express that a resource [[teaches]] or [[assesses]] a competency.
-     */
-    educationalAlignment?: schema.AlignmentObjectOrSubClass | string;
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     */
-    isAccessibleForFree?: boolean;
-    /**
-     * A media object that encodes this CreativeWork.
-     */
-    encodings?: schema.MediaObjectOrSubClass | string;
-    /**
-     * A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include:  auditory, tactile, textual, visual.
-     *
-     */
-    accessModeSufficient?: schema.ItemListOrSubClass | string;
+    temporal?: string;
     /**
      * The schema.org [[usageInfo]] property indicates further information about a [[CreativeWork]]. This property is applicable both to works that are freely available and to those that require payment or other transactions. It can reference additional information e.g. community expectations on preferred linking and citation conventions, as well as purchasing details. For something that can be commercially licensed, usageInfo can provide detailed, resource-specific information about licensing options.
      *
@@ -332,41 +447,148 @@ export declare type ProductCollection = {
      */
     usageInfo?: schema.CreativeWorkOrSubClass | string;
     /**
-     * The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event.
+     * The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.
      */
-    recordedAt?: schema.Event_OrSubClass | string;
+    creativeWorkStatus?: string | schema.DefinedTermOrSubClass;
     /**
-     * Fictional person connected with a creative work.
+     * The publisher of the creative work.
      */
-    character?: schema.PersonOrSubClass | string;
+    publisher?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
     /**
-     * A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.
+     * The place and time the release was issued, expressed as a PublicationEvent.
      */
-    citation?: string | schema.CreativeWorkOrSubClass;
+    releasedEvent?: schema.PublicationEventOrSubClass | string;
     /**
-     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.
+     * A secondary title of the CreativeWork.
      */
-    pattern?: string | schema.DefinedTermOrSubClass;
+    alternativeHeadline?: string;
+    /**
+     * A license document that applies to this structured data, typically indicated by URL.
+     */
+    sdLicense?: string | schema.CreativeWorkOrSubClass;
+    /**
+     * Specifies the Person that is legally accountable for the CreativeWork.
+     */
+    accountablePerson?: schema.PersonOrSubClass | string;
     /**
      * Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.
      */
     copyrightNotice?: string;
     /**
-     * Headline of the article.
+     * The item being described is intended to help a person learn the competency or learning outcome defined by the referenced term.
      */
-    headline?: string;
+    teaches?: string | schema.DefinedTermOrSubClass;
     /**
-     * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
+     * A creative work that this work is an example/instance/realization/derivation of.
      */
-    interactionStatistic?: schema.InteractionCounterOrSubClass | string;
+    exampleOfWork?: schema.CreativeWorkOrSubClass | string;
     /**
-     * Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
+     * The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event.
      */
-    mentions?: schema.ThingOrSubClass | string;
+    recordedAt?: schema.Event_OrSubClass | string;
     /**
-     * A license document that applies to this structured data, typically indicated by URL.
+     * Conditions that affect the availability of, or method(s) of access to, an item. Typically used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]. This property is not suitable for use as a general Web access control mechanism. It is expressed only in natural language.\n\nFor example "Available by appointment from the Reading Room" or "Accessible only from logged-in accounts ".
      */
-    sdLicense?: string | schema.CreativeWorkOrSubClass;
+    conditionsOfAccess?: string;
+    /**
+     * Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook.
+     */
+    workExample?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3 ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
+     */
+    accessibilityHazard?: string;
+    /**
+     * The year during which the claimed copyright for the CreativeWork was first asserted.
+     */
+    copyrightYear?: number;
+    /**
+     * A media object that encodes this CreativeWork.
+     */
+    encodings?: schema.MediaObjectOrSubClass | string;
+    /**
+     * The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
+     */
+    creator?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.
+     *
+     */
+    accessMode?: string;
+    /**
+     * An abstract is a short description that summarizes a [[CreativeWork]].
+     */
+    abstract?: string;
+    /**
+     * A thumbnail image relevant to the Thing.
+     */
+    thumbnailUrl?: string;
+    /**
+     * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+     */
+    acquireLicensePage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * Official rating of a piece of content&#x2014;for example,'MPAA PG-13'.
+     */
+    contentRating?: schema.RatingOrSubClass | string;
+    /**
+     * Indicates whether this content is family friendly.
+     */
+    isFamilyFriendly?: boolean;
+    /**
+     * Specifies the Person who edited the CreativeWork.
+     */
+    editor?: schema.PersonOrSubClass | string;
+    /**
+     * Date of first broadcast/publication.
+     */
+    datePublished?: string;
+    /**
+     * The level in terms of progression through an educational or training context. Examples of educational levels include 'beginner', 'intermediate' or 'advanced', and formal sets of level indicators.
+     */
+    educationalLevel?: string | schema.DefinedTermOrSubClass;
+    /**
+     * The item being described is intended to assess the competency or learning outcome defined by the referenced term.
+     */
+    assesses?: schema.DefinedTermOrSubClass | string;
+    /**
+     * Indicates the primary entity described in some page or other CreativeWork.
+     */
+    mainEntity?: schema.ThingOrSubClass | string;
+    /**
+     * Indicates a correction to a [[CreativeWork]], either via a [[CorrectionComment]], textually or in another document.
+     */
+    correction?: schema.CorrectionCommentOrSubClass | string;
+    /**
+     * Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.
+     */
+    timeRequired?: string;
+    /**
+     * Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
+     */
+    keywords?: schema.DefinedTermOrSubClass | string;
+    /**
+     * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+     */
+    sponsor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * The purpose of a work in the context of education; for example, 'assignment', 'group work'.
+     */
+    educationalUse?: schema.DefinedTermOrSubClass | string;
+    /**
+     * Indicates the date on which the current structured data was generated / published. Typically used alongside [[sdPublisher]]
+     */
+    sdDatePublished?: string;
+    /**
+     * The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of
+     *       contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates
+     *       areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York.
+     */
+    spatialCoverage?: schema.PlaceOrSubClass | string;
+    /**
+     * A publication event associated with the item.
+     */
+    publication?: schema.PublicationEventOrSubClass | string;
     /**
      * Media type typically expressed using a MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml) and [MDN reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).
      *
@@ -376,298 +598,102 @@ export declare type ProductCollection = {
      */
     encodingFormat?: string;
     /**
-     * [object Object]
-     */
-    materialExtent?: string | schema.QuantitativeValueOrSubClass;
-    /**
-     * Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
-     */
-    creditText?: string;
-    /**
-     * The predominant type or kind characterizing the learning resource. For example, 'presentation', 'handout'.
-     */
-    learningResourceType?: string | schema.DefinedTermOrSubClass;
-    /**
-     * The item being described is intended to help a person learn the competency or learning outcome defined by the referenced term.
-     */
-    teaches?: string | schema.DefinedTermOrSubClass;
-    /**
-     * The subject matter of the content.
-     */
-    about?: schema.ThingOrSubClass | string;
-    /**
      * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
      */
     inLanguage?: string | schema.LanguageOrSubClass;
     /**
-     * The item being described is intended to assess the competency or learning outcome defined by the referenced term.
+     * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
      */
-    assesses?: schema.DefinedTermOrSubClass | string;
+    dateModified?: string;
     /**
-     * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+     * The date on which the CreativeWork was created or the item was added to a DataFeed.
      */
-    acquireLicensePage?: string | schema.CreativeWorkOrSubClass;
-    /**
-     * The place and time the release was issued, expressed as a PublicationEvent.
-     */
-    releasedEvent?: schema.PublicationEventOrSubClass | string;
-    /**
-     * An embedded audio object.
-     */
-    audio?: schema.ClipOrSubClass | schema.AudioObjectOrSubClass | schema.MusicRecordingOrSubClass | string;
-    /**
-     * Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
-     */
-    accessibilityFeature?: string;
-    /**
-     * Comments, typically from users.
-     */
-    comment?: schema.CommentOrSubClass | string;
-    /**
-     * Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense).
-     */
-    hasPart?: schema.CreativeWorkOrSubClass | string;
+    dateCreated?: string;
     /**
      * A media object that encodes this CreativeWork. This property is a synonym for encoding.
      */
     associatedMedia?: schema.MediaObjectOrSubClass | string;
     /**
-     * The position of an item in a series or sequence of items.
+     * Used to indicate a specific claim contained, implied, translated or refined from the content of a [[MediaObject]] or other [[CreativeWork]]. The interpreting party can be indicated using [[claimInterpreter]].
      */
-    position?: string | number;
-    /**
-     * The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.
-     */
-    creativeWorkStatus?: string | schema.DefinedTermOrSubClass;
-    /**
-     * A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html.
-     */
-    isBasedOnUrl?: schema.ProductOrSubClass | string | schema.CreativeWorkOrSubClass;
-    /**
-     * A material that something is made from, e.g. leather, wool, cotton, paper.
-     */
-    material?: schema.ProductOrSubClass | string;
-    /**
-     * A person or organization that supports (sponsors) something through some kind of financial contribution.
-     */
-    funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
-     *
-     * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
-     *
-     */
-    publishingPrinciples?: string | schema.CreativeWorkOrSubClass;
-    /**
-     * Awards won by or for this item.
-     */
-    awards?: string;
-    /**
-     * Specifies the Person who edited the CreativeWork.
-     */
-    editor?: schema.PersonOrSubClass | string;
-    /**
-     * Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook.
-     */
-    workExample?: schema.CreativeWorkOrSubClass | string;
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     */
-    audience?: schema.AudienceOrSubClass | string;
-    /**
-     * Indicates a correction to a [[CreativeWork]], either via a [[CorrectionComment]], textually or in another document.
-     */
-    correction?: schema.CorrectionCommentOrSubClass | string;
-    /**
-     * Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
-     */
-    keywords?: string | schema.DefinedTermOrSubClass;
+    interpretedAsClaim?: schema.ClaimOrSubClass | string;
     /**
      * The publishing division which published the comic.
      */
     publisherImprint?: schema.OrganizationOrSubClass | string;
     /**
-     * A resource from which this work is derived or from which it is a modification or adaption.
+     * Indicates that the resource is compatible with the referenced accessibility API ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
      */
-    isBasedOn?: schema.CreativeWorkOrSubClass | string | schema.ProductOrSubClass;
+    accessibilityAPI?: string;
     /**
-     * The typical expected age range, e.g. '7-9', '11-'.
+     * The version of the CreativeWork embodied by a specified resource.
      */
-    typicalAgeRange?: string;
+    version?: string | number;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The predominant type or kind characterizing the learning resource. For example, 'presentation', 'handout'.
      */
-    sameAs?: string;
+    learningResourceType?: string | schema.DefinedTermOrSubClass;
     /**
-     * A CreativeWork or Event about this Thing.
+     * A link to the page containing the comments of the CreativeWork.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    discussionUrl?: string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * Media type, typically MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml)) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, 'encoding' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    fileFormat?: string;
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.).
      */
-    additionalType?: string;
+    producer?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
     /**
-     * An alias for the item.
+     * A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.
      */
-    alternateName?: string;
+    citation?: string | schema.CreativeWorkOrSubClass;
     /**
-     * URL of the item.
+     * Indicates a page or other link involved in archival of a [[CreativeWork]]. In the case of [[MediaReview]], the items in a [[MediaReviewItem]] may often become inaccessible, but be archived by archival, journalistic, activist, or law enforcement organizations. In such cases, the referenced page may not directly publish the content.
      */
-    url?: string;
+    archivedAt?: schema.WebPageOrSubClass | string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    encoding?: schema.MediaObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * The predominant mode of learning supported by the learning resource. Acceptable values are 'active', 'expositive', or 'mixed'.
      */
-    disambiguatingDescription?: string;
+    interactivityType?: string;
     /**
-     * A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
+     * The "spatial" property can be used in cases when more specific properties
+     * (e.g. [[locationCreated]], [[spatialCoverage]], [[contentLocation]]) are not known to be appropriate.
      */
-    hasMeasurement?: schema.QuantitativeValueOrSubClass | string;
+    spatial?: schema.PlaceOrSubClass | string;
     /**
-     * A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.
+     * The location depicted or described in the content. For example, the location in a photograph or painting.
      */
-    itemCondition?: schema.OfferItemCondition;
+    contentLocation?: schema.PlaceOrSubClass | string;
     /**
-     * The depth of the item.
+     * The party holding the legal copyright to the CreativeWork.
      */
-    depth?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    copyrightHolder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * The height of the item.
+     * A secondary contributor to the CreativeWork or Event.
      */
-    height?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
+    contributor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     * A flag to signal that the item, event, or place is accessible for free.
      */
-    gtin12?: string;
+    isAccessibleForFree?: boolean;
     /**
-     * A pointer to another, functionally similar product (or multiple products).
+     * Identifies input methods that are sufficient to fully control the described resource ([WebSchemas wiki lists possible values](http://www.w3.org/wiki/WebSchemas/Accessibility)).
      */
-    isSimilarTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+    accessibilityControl?: string;
     /**
-     * The weight of the product or person.
+     * The number of comments this CreativeWork (e.g. Article, Question or Answer) has received. This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.
      */
-    weight?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * Indicates a MerchantReturnPolicy that may be applicable.
-     */
-    hasMerchantReturnPolicy?: schema.MerchantReturnPolicyOrSubClass | string;
-    /**
-     * The width of the item.
-     */
-    width?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
-    /**
-     * A pointer to another product (or multiple products) for which this product is a consumable.
-     */
-    isConsumableFor?: schema.ProductOrSubClass | string;
-    /**
-     * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin13?: string;
-    /**
-     * A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.
-     *
-     */
-    gtin?: string;
-    /**
-     * Defines the energy efficiency Category (also known as "class" or "rating") for a product according to an international energy efficiency standard.
-     */
-    hasEnergyConsumptionDetails?: schema.EnergyConsumptionDetailsOrSubClass | string;
-    /**
-     * The color of the product.
-     */
-    color?: string;
-    /**
-     * A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-     *
-     */
-    additionalProperty?: schema.PropertyValueOrSubClass | string;
-    /**
-     * An associated logo.
-     */
-    logo?: schema.ImageObjectOrSubClass | string;
-    /**
-     * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
-     */
-    mpn?: string;
-    /**
-     * Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].
-     */
-    inProductGroupWithID?: string;
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-     */
-    category?: schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
-    /**
-     * Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.
-     */
-    isVariantOf?: schema.ProductGroupOrSubClass | schema.ProductModelOrSubClass | string;
-    /**
-     * A slogan or motto associated with the item.
-     */
-    slogan?: string;
-    /**
-     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
-     */
-    sku?: string;
-    /**
-     * Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number) (nsn) of a [[Product]].
-     */
-    nsn?: string;
-    /**
-     * The date the item e.g. vehicle was purchased by the current owner.
-     */
-    purchaseDate?: string;
-    /**
-     * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin14?: string;
-    /**
-     * A pointer to another product (or multiple products) for which this product is an accessory or spare part.
-     */
-    isAccessoryOrSparePartFor?: schema.ProductOrSubClass | string;
-    /**
-     * The manufacturer of the product.
-     */
-    manufacturer?: schema.OrganizationOrSubClass | string;
-    /**
-     * The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
-     */
-    model?: schema.ProductModelOrSubClass | string;
-    /**
-     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-     */
-    brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * The release date of a product or product model. This can be used to distinguish the exact variant of a product.
-     */
-    releaseDate?: string;
-    /**
-     * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin8?: string;
-    /**
-     * The date of production of the item, e.g. vehicle.
-     */
-    productionDate?: string;
-    /**
-     * A pointer to another, somehow related product (or multiple products).
-     */
-    isRelatedTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
-    /**
-     * The product identifier, such as ISBN. For example: ``` meta itemprop="productID" content="isbn:123-456-789" ```.
-     */
-    productID?: string;
+    commentCount?: number;
 };
 /**
  * schema:ProductCollection

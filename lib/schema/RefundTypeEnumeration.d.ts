@@ -3,13 +3,13 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:RefundTypeEnumeration
  *
- * RefundTypeEnumeration enumerates several kinds of product return refund types.
+ * Enumerates several kinds of product return refund types.
  */
-export declare type RefundTypeEnumeration = 'https://schema.org/FullRefund' | 'https://schema.org/StoreCreditRefund' | 'https://schema.org/ExchangeRefund';
+export declare type RefundTypeEnumeration = 'https://schema.org/ExchangeRefund' | 'https://schema.org/StoreCreditRefund' | 'https://schema.org/FullRefund';
 /**
  * schema:RefundTypeEnumeration - Validation schema (w/ JOI)
  *
- * RefundTypeEnumeration enumerates several kinds of product return refund types.
+ * Enumerates several kinds of product return refund types.
  */
 export declare const RefundTypeEnumerationJoiSchema: Joi.StringSchema;
 /**

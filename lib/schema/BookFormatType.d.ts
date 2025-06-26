@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * The publication format of the book.
  */
-export declare type BookFormatType = 'https://schema.org/EBook' | 'https://schema.org/AudiobookFormat' | 'https://schema.org/Hardcover' | 'https://schema.org/Paperback' | 'https://schema.org/GraphicNovel';
+export declare type BookFormatType = 'https://schema.org/GraphicNovel' | 'https://schema.org/AudiobookFormat' | 'https://schema.org/Hardcover' | 'https://schema.org/EBook' | 'https://schema.org/Paperback';
 /**
  * schema:BookFormatType - Validation schema (w/ JOI)
  *

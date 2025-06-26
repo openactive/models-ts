@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Enumerates common size systems for different categories of products, for example "EN-13402" or "UK" for wearables or "Imperial" for screws.
  */
-export declare type SizeSystemEnumeration = 'https://schema.org/SizeSystemImperial' | 'https://schema.org/SizeSystemMetric';
+export declare type SizeSystemEnumeration = 'https://schema.org/SizeSystemMetric' | 'https://schema.org/SizeSystemImperial';
 /**
  * schema:SizeSystemEnumeration - Validation schema (w/ JOI)
  *

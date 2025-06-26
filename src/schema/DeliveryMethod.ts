@@ -11,8 +11,8 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type DeliveryMethod = 
   
-  | 'https://schema.org/OnSitePickup'
   | 'https://schema.org/LockerDelivery'
+  | 'https://schema.org/OnSitePickup'
   | 'https://schema.org/ParcelService'
   ;
 
@@ -24,8 +24,8 @@ export type DeliveryMethod =
  *         
  */
 export const DeliveryMethodJoiSchema = Joi.string().valid(
-  'https://schema.org/OnSitePickup',
   'https://schema.org/LockerDelivery',
+  'https://schema.org/OnSitePickup',
   'https://schema.org/ParcelService',
 );
 

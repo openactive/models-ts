@@ -11,6 +11,7 @@ describe('data-models example - event_eventseries_example_1.json', () => {
     "https://openactive.io/ns-beta"
   ],
   "@type": "Event",
+  "@id": "https://id.bookingsystem.example.com/events/158313",
   "superEvent": {
     "@type": "EventSeries",
     "@id": "https://opensessions.io/api/event-series/123456",

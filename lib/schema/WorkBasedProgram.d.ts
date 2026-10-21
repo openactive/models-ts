@@ -21,7 +21,9 @@ export declare type WorkBasedProgram = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -34,58 +36,46 @@ export declare type WorkBasedProgram = {
      */
     occupationalCategory?: schema.CategoryCodeOrSubClass | string;
     /**
-     * A course or class that is one of the learning opportunities that constitute an educational / occupational program. No information is implied about whether the course is mandatory or optional; no guarantee is implied about whether the course will be available to everyone on the program.
+     * The expected length of time to complete the program if attending full-time.
      */
-    hasCourse?: schema.CourseOrSubClass | string;
+    timeToComplete?: string;
     /**
-     * The type of educational or occupational program. For example, classroom, internship, alternance, etc..
+     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+     *
      */
-    programType?: schema.DefinedTermOrSubClass | string;
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
+    /**
+     * The number of credits or units a full-time student would be expected to take in 1 term however 'term' is defined by the institution.
+     */
+    typicalCreditsPerTerm?: schema.StructuredValueOrSubClass | number | string;
     /**
      * The date at which the program begins collecting applications for the next enrollment cycle.
      */
     applicationStartDate?: string;
     /**
-     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
-     *
+     * Prerequisites for enrolling in the program.
      */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
+    programPrerequisites?: schema.EducationalOccupationalCredentialOrSubClass | schema.CourseOrSubClass | string | schema.AlignmentObjectOrSubClass;
     /**
-     * The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
+     * The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.
      */
-    startDate?: string;
-    /**
-     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
-     */
-    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The number of times terms of study are offered per year. Semesters and quarters are common units for term. For example, if the student can only take 2 semesters for the program in one year, then termsPerYear should be 2.
-     */
-    termsPerYear?: number;
-    /**
-     * The expected salary upon completing the training.
-     */
-    salaryUponCompletion?: schema.MonetaryAmountDistributionOrSubClass | string;
-    /**
-     * A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.
-     */
-    occupationalCredentialAwarded?: string | schema.EducationalOccupationalCredentialOrSubClass;
-    /**
-     * A financial aid type or program which students may use to pay for tuition or fees associated with the program.
-     */
-    financialAidEligible?: schema.DefinedTermOrSubClass | string;
-    /**
-     * The day of the week for which these opening hours are valid.
-     */
-    dayOfWeek?: schema.DayOfWeek;
-    /**
-     * The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
-     */
-    endDate?: string;
+    numberOfCredits?: number | schema.StructuredValueOrSubClass | string;
     /**
      * Similar to courseMode, The medium or means of delivery of the program as a whole. The value may either be a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous ).
      */
     educationalProgramMode?: string;
+    /**
+     * The type of educational or occupational program. For example, classroom, internship, alternance, etc..
+     */
+    programType?: schema.DefinedTermOrSubClass | string;
+    /**
+     * The date at which the program stops collecting applications for the next enrollment cycle.
+     */
+    applicationDeadline?: string;
+    /**
+     * A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course or program.
+     */
+    educationalCredentialAwarded?: schema.EducationalOccupationalCredentialOrSubClass | string;
     /**
      * The maximum number of students who may be enrolled in the program.
      */
@@ -95,69 +85,81 @@ export declare type WorkBasedProgram = {
      */
     termDuration?: string;
     /**
-     * The date at which the program stops collecting applications for the next enrollment cycle.
+     * The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
      */
-    applicationDeadline?: string;
+    endDate?: string;
     /**
-     * The number of credits or units a full-time student would be expected to take in 1 term however 'term' is defined by the institution.
+     * The expected salary upon completing the training.
      */
-    typicalCreditsPerTerm?: number | schema.StructuredValueOrSubClass | string;
-    /**
-     * The expected length of time to complete the program if attending full-time.
-     */
-    timeToComplete?: string;
-    /**
-     * The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.
-     */
-    numberOfCredits?: schema.StructuredValueOrSubClass | number | string;
+    salaryUponCompletion?: schema.MonetaryAmountDistributionOrSubClass | string;
     /**
      * The time of day the program normally runs. For example, "evenings".
      */
     timeOfDay?: string;
     /**
-     * A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course or program.
+     * The number of times terms of study are offered per year. Semesters and quarters are common units for term. For example, if the student can only take 2 semesters for the program in one year, then termsPerYear should be 2.
      */
-    educationalCredentialAwarded?: string | schema.EducationalOccupationalCredentialOrSubClass;
+    termsPerYear?: number;
     /**
-     * Prerequisites for enrolling in the program.
+     * A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.
      */
-    programPrerequisites?: schema.CourseOrSubClass | schema.AlignmentObjectOrSubClass | schema.EducationalOccupationalCredentialOrSubClass | string;
+    occupationalCredentialAwarded?: string | schema.EducationalOccupationalCredentialOrSubClass;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).
      */
-    sameAs?: string;
+    startDate?: string;
     /**
-     * A CreativeWork or Event about this Thing.
+     * The day of the week for which these opening hours are valid.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    dayOfWeek?: schema.DayOfWeek;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * A financial aid type or program which students may use to pay for tuition or fees associated with the program.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    financialAidEligible?: schema.DefinedTermOrSubClass | string;
+    /**
+     * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+     */
+    provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * A course or class that is one of the learning opportunities that constitute an educational / occupational program. No information is implied about whether the course is mandatory or optional; no guarantee is implied about whether the course will be available to everyone on the program.
+     */
+    hasCourse?: schema.CourseOrSubClass | string;
     /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:WorkBasedProgram

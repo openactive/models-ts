@@ -14,6 +14,7 @@ export type PropertyEnumeration =
   | 'https://openactive.io/accessPass'
   | 'https://openactive.io/accessibilityInformation'
   | 'https://openactive.io/accessibilitySupport'
+  | 'https://openactive.io/accountNumber'
   | 'https://openactive.io/activity'
   | 'https://openactive.io/additionalAdmissionRestriction'
   | 'https://openactive.io/ageRange'
@@ -28,15 +29,25 @@ export type PropertyEnumeration =
   | 'https://openactive.io/brokerRole'
   | 'https://openactive.io/cancellationMessage'
   | 'https://openactive.io/concept'
+  | 'https://openactive.io/customerAccountBookingRestriction'
   | 'https://openactive.io/customerNotice'
+  | 'https://openactive.io/eligibleEntitlementType'
+  | 'https://openactive.io/emergencyContact'
+  | 'https://openactive.io/entitlement'
+  | 'https://openactive.io/entitlementType'
+  | 'https://openactive.io/evidenceRequestAction'
+  | 'https://openactive.io/facilityType'
   | 'https://openactive.io/facilityUse'
   | 'https://openactive.io/genderRestriction'
+  | 'https://openactive.io/hasAccount'
+  | 'https://openactive.io/hasHiddenEntitlements'
   | 'https://openactive.io/idTemplate'
   | 'https://openactive.io/individualFacilityUse'
   | 'https://openactive.io/instance'
   | 'https://openactive.io/instanceOfCourse'
   | 'https://openactive.io/isCoached'
   | 'https://openactive.io/isOpenBookingAllowed'
+  | 'https://openactive.io/isOpenBookingWithCustomerAccountAllowed'
   | 'https://openactive.io/latestCancellationBeforeStartDate'
   | 'https://openactive.io/leader'
   | 'https://openactive.io/lease'
@@ -55,6 +66,7 @@ export type PropertyEnumeration =
   | 'https://openactive.io/orderProposalVersion'
   | 'https://openactive.io/orderRequiresApproval'
   | 'https://openactive.io/orderSellerNote'
+  | 'https://openactive.io/outstandingAction'
   | 'https://openactive.io/payment'
   | 'https://openactive.io/paymentProviderId'
   | 'https://openactive.io/programme'
@@ -70,6 +82,7 @@ export type PropertyEnumeration =
   | 'https://openactive.io/totalPaymentTax'
   | 'https://openactive.io/unitTaxSpecification'
   | 'https://openactive.io/validFromBeforeStartDate'
+  | 'https://openactive.io/validThroughBeforeStartDate'
   | 'https://openactive.io/valueOption'
   | 'https://schema.org/about'
   | 'https://schema.org/abridged'
@@ -136,6 +149,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/alignmentType'
   | 'https://schema.org/alternateName'
   | 'https://schema.org/alternativeHeadline'
+  | 'https://schema.org/alternativeOf'
   | 'https://schema.org/alumni'
   | 'https://schema.org/alumniOf'
   | 'https://schema.org/amenityFeature'
@@ -159,6 +173,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/appliesToDeliveryMethod'
   | 'https://schema.org/appliesToPaymentMethod'
   | 'https://schema.org/archiveHeld'
+  | 'https://schema.org/archivedAt'
   | 'https://schema.org/area'
   | 'https://schema.org/areaServed'
   | 'https://schema.org/arrivalAirport'
@@ -183,8 +198,12 @@ export type PropertyEnumeration =
   | 'https://schema.org/assesses'
   | 'https://schema.org/associatedAnatomy'
   | 'https://schema.org/associatedArticle'
+  | 'https://schema.org/associatedClaimReview'
+  | 'https://schema.org/associatedDisease'
   | 'https://schema.org/associatedMedia'
+  | 'https://schema.org/associatedMediaReview'
   | 'https://schema.org/associatedPathophysiology'
+  | 'https://schema.org/associatedReview'
   | 'https://schema.org/athlete'
   | 'https://schema.org/attendee'
   | 'https://schema.org/attendees'
@@ -225,6 +244,9 @@ export type PropertyEnumeration =
   | 'https://schema.org/billingIncrement'
   | 'https://schema.org/billingPeriod'
   | 'https://schema.org/billingStart'
+  | 'https://schema.org/bioChemInteraction'
+  | 'https://schema.org/bioChemSimilarity'
+  | 'https://schema.org/biologicalRole'
   | 'https://schema.org/biomechnicalClass'
   | 'https://schema.org/birthDate'
   | 'https://schema.org/birthPlace'
@@ -291,12 +313,16 @@ export type PropertyEnumeration =
   | 'https://schema.org/cheatCode'
   | 'https://schema.org/checkinTime'
   | 'https://schema.org/checkoutTime'
+  | 'https://schema.org/chemicalComposition'
+  | 'https://schema.org/chemicalRole'
   | 'https://schema.org/childMaxAge'
   | 'https://schema.org/childMinAge'
+  | 'https://schema.org/childTaxon'
   | 'https://schema.org/children'
   | 'https://schema.org/cholesterolContent'
   | 'https://schema.org/circle'
   | 'https://schema.org/citation'
+  | 'https://schema.org/claimInterpreter'
   | 'https://schema.org/claimReviewed'
   | 'https://schema.org/clincalPharmacology'
   | 'https://schema.org/clinicalPharmacology'
@@ -356,6 +382,8 @@ export type PropertyEnumeration =
   | 'https://schema.org/costPerUnit'
   | 'https://schema.org/countriesNotSupported'
   | 'https://schema.org/countriesSupported'
+  | 'https://schema.org/countryOfAssembly'
+  | 'https://schema.org/countryOfLastProcessing'
   | 'https://schema.org/countryOfOrigin'
   | 'https://schema.org/course'
   | 'https://schema.org/courseCode'
@@ -374,6 +402,9 @@ export type PropertyEnumeration =
   | 'https://schema.org/currency'
   | 'https://schema.org/currentExchangeRate'
   | 'https://schema.org/customer'
+  | 'https://schema.org/customerRemorseReturnFees'
+  | 'https://schema.org/customerRemorseReturnLabelSource'
+  | 'https://schema.org/customerRemorseReturnShippingFeesAmount'
   | 'https://schema.org/cutoffTime'
   | 'https://schema.org/cvdCollectionDate'
   | 'https://schema.org/cvdFacilityCounty'
@@ -432,6 +463,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/diet'
   | 'https://schema.org/dietFeatures'
   | 'https://schema.org/differentialDiagnosis'
+  | 'https://schema.org/directApply'
   | 'https://schema.org/director'
   | 'https://schema.org/directors'
   | 'https://schema.org/disambiguatingDescription'
@@ -493,12 +525,14 @@ export type PropertyEnumeration =
   | 'https://schema.org/eligibleTransactionVolume'
   | 'https://schema.org/email'
   | 'https://schema.org/embedUrl'
+  | 'https://schema.org/embeddedTextCaption'
   | 'https://schema.org/emissionsCO2'
   | 'https://schema.org/employee'
   | 'https://schema.org/employees'
   | 'https://schema.org/employerOverview'
   | 'https://schema.org/employmentType'
   | 'https://schema.org/employmentUnit'
+  | 'https://schema.org/encodesBioChemEntity'
   | 'https://schema.org/encodesCreativeWork'
   | 'https://schema.org/encoding'
   | 'https://schema.org/encodingFormat'
@@ -550,6 +584,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/experienceRequirements'
   | 'https://schema.org/expertConsiderations'
   | 'https://schema.org/expires'
+  | 'https://schema.org/expressedIn'
   | 'https://schema.org/familyName'
   | 'https://schema.org/fatContent'
   | 'https://schema.org/faxNumber'
@@ -626,6 +661,8 @@ export type PropertyEnumeration =
   | 'https://schema.org/guidelineDate'
   | 'https://schema.org/guidelineSubject'
   | 'https://schema.org/handlingTime'
+  | 'https://schema.org/hasBioChemEntityPart'
+  | 'https://schema.org/hasBioPolymerSequence'
   | 'https://schema.org/hasBroadcastChannel'
   | 'https://schema.org/hasCategoryCode'
   | 'https://schema.org/hasCourse'
@@ -644,10 +681,12 @@ export type PropertyEnumeration =
   | 'https://schema.org/hasMenuItem'
   | 'https://schema.org/hasMenuSection'
   | 'https://schema.org/hasMerchantReturnPolicy'
+  | 'https://schema.org/hasMolecularFunction'
   | 'https://schema.org/hasOccupation'
   | 'https://schema.org/hasOfferCatalog'
   | 'https://schema.org/hasPOS'
   | 'https://schema.org/hasPart'
+  | 'https://schema.org/hasRepresentation'
   | 'https://schema.org/hasVariant'
   | 'https://schema.org/headline'
   | 'https://schema.org/healthCondition'
@@ -687,6 +726,8 @@ export type PropertyEnumeration =
   | 'https://schema.org/imagingTechnique'
   | 'https://schema.org/inAlbum'
   | 'https://schema.org/inBroadcastLineup'
+  | 'https://schema.org/inChI'
+  | 'https://schema.org/inChIKey'
   | 'https://schema.org/inCodeSet'
   | 'https://schema.org/inDefinedTermSet'
   | 'https://schema.org/inLanguage'
@@ -724,6 +765,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/interactionType'
   | 'https://schema.org/interactivityType'
   | 'https://schema.org/interestRate'
+  | 'https://schema.org/interpretedAsClaim'
   | 'https://schema.org/inventoryLevel'
   | 'https://schema.org/inverseOf'
   | 'https://schema.org/isAcceptingNewPatients'
@@ -733,10 +775,14 @@ export type PropertyEnumeration =
   | 'https://schema.org/isBasedOn'
   | 'https://schema.org/isBasedOnUrl'
   | 'https://schema.org/isConsumableFor'
+  | 'https://schema.org/isEncodedByBioChemEntity'
   | 'https://schema.org/isFamilyFriendly'
   | 'https://schema.org/isGift'
+  | 'https://schema.org/isInvolvedInBiologicalProcess'
   | 'https://schema.org/isLiveBroadcast'
+  | 'https://schema.org/isLocatedInSubcellularLocation'
   | 'https://schema.org/isPartOf'
+  | 'https://schema.org/isPartOfBioChemEntity'
   | 'https://schema.org/isPlanForApartment'
   | 'https://schema.org/isProprietary'
   | 'https://schema.org/isRelatedTo'
@@ -754,6 +800,9 @@ export type PropertyEnumeration =
   | 'https://schema.org/iswcCode'
   | 'https://schema.org/item'
   | 'https://schema.org/itemCondition'
+  | 'https://schema.org/itemDefectReturnFees'
+  | 'https://schema.org/itemDefectReturnLabelSource'
+  | 'https://schema.org/itemDefectReturnShippingFeesAmount'
   | 'https://schema.org/itemListElement'
   | 'https://schema.org/itemListOrder'
   | 'https://schema.org/itemLocation'
@@ -761,6 +810,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/itemReviewed'
   | 'https://schema.org/itemShipped'
   | 'https://schema.org/itinerary'
+  | 'https://schema.org/iupacName'
   | 'https://schema.org/jobBenefits'
   | 'https://schema.org/jobImmediateStart'
   | 'https://schema.org/jobLocation'
@@ -848,6 +898,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/measurementTechnique'
   | 'https://schema.org/mechanismOfAction'
   | 'https://schema.org/mediaAuthenticityCategory'
+  | 'https://schema.org/mediaItemAppearance'
   | 'https://schema.org/median'
   | 'https://schema.org/medicalAudience'
   | 'https://schema.org/medicalSpecialty'
@@ -874,6 +925,9 @@ export type PropertyEnumeration =
   | 'https://schema.org/model'
   | 'https://schema.org/modelDate'
   | 'https://schema.org/modifiedTime'
+  | 'https://schema.org/molecularFormula'
+  | 'https://schema.org/molecularWeight'
+  | 'https://schema.org/monoisotopicMolecularWeight'
   | 'https://schema.org/monthlyMinimumRepaymentAmount'
   | 'https://schema.org/monthsOfExperience'
   | 'https://schema.org/mpn'
@@ -890,6 +944,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/namedPosition'
   | 'https://schema.org/nationality'
   | 'https://schema.org/naturalProgression'
+  | 'https://schema.org/negativeNotes'
   | 'https://schema.org/nerve'
   | 'https://schema.org/nerveMotor'
   | 'https://schema.org/netWorth'
@@ -955,6 +1010,8 @@ export type PropertyEnumeration =
   | 'https://schema.org/orderedItem'
   | 'https://schema.org/organizer'
   | 'https://schema.org/originAddress'
+  | 'https://schema.org/originalMediaContextDescription'
+  | 'https://schema.org/originalMediaLink'
   | 'https://schema.org/originatesFrom'
   | 'https://schema.org/overdosage'
   | 'https://schema.org/ownedFrom'
@@ -968,6 +1025,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/parentItem'
   | 'https://schema.org/parentOrganization'
   | 'https://schema.org/parentService'
+  | 'https://schema.org/parentTaxon'
   | 'https://schema.org/parents'
   | 'https://schema.org/partOfEpisode'
   | 'https://schema.org/partOfInvoice'
@@ -1018,6 +1076,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/polygon'
   | 'https://schema.org/populationType'
   | 'https://schema.org/position'
+  | 'https://schema.org/positiveNotes'
   | 'https://schema.org/possibleComplication'
   | 'https://schema.org/possibleTreatment'
   | 'https://schema.org/postOfficeBoxNumber'
@@ -1028,6 +1087,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/postalCodePrefix'
   | 'https://schema.org/postalCodeRange'
   | 'https://schema.org/potentialAction'
+  | 'https://schema.org/potentialUse'
   | 'https://schema.org/preOp'
   | 'https://schema.org/predecessorOf'
   | 'https://schema.org/pregnancyCategory'
@@ -1157,11 +1217,17 @@ export type PropertyEnumeration =
   | 'https://schema.org/reservedTicket'
   | 'https://schema.org/responsibilities'
   | 'https://schema.org/restPeriods'
+  | 'https://schema.org/restockingFee'
   | 'https://schema.org/result'
   | 'https://schema.org/resultComment'
   | 'https://schema.org/resultReview'
   | 'https://schema.org/returnFees'
+  | 'https://schema.org/returnLabelSource'
+  | 'https://schema.org/returnMethod'
   | 'https://schema.org/returnPolicyCategory'
+  | 'https://schema.org/returnPolicyCountry'
+  | 'https://schema.org/returnPolicySeasonalOverride'
+  | 'https://schema.org/returnShippingFeesAmount'
   | 'https://schema.org/review'
   | 'https://schema.org/reviewAspect'
   | 'https://schema.org/reviewBody'
@@ -1225,6 +1291,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/serviceType'
   | 'https://schema.org/serviceUrl'
   | 'https://schema.org/servingSize'
+  | 'https://schema.org/sha256'
   | 'https://schema.org/sharedContent'
   | 'https://schema.org/shippingDestination'
   | 'https://schema.org/shippingDetails'
@@ -1244,6 +1311,7 @@ export type PropertyEnumeration =
   | 'https://schema.org/skills'
   | 'https://schema.org/sku'
   | 'https://schema.org/slogan'
+  | 'https://schema.org/smiles'
   | 'https://schema.org/smokingAllowed'
   | 'https://schema.org/sodiumContent'
   | 'https://schema.org/softwareAddOn'
@@ -1321,6 +1389,8 @@ export type PropertyEnumeration =
   | 'https://schema.org/targetProduct'
   | 'https://schema.org/targetUrl'
   | 'https://schema.org/taxID'
+  | 'https://schema.org/taxonRank'
+  | 'https://schema.org/taxonomicRange'
   | 'https://schema.org/teaches'
   | 'https://schema.org/telephone'
   | 'https://schema.org/temporal'
@@ -1469,6 +1539,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://openactive.io/accessPass',
   'https://openactive.io/accessibilityInformation',
   'https://openactive.io/accessibilitySupport',
+  'https://openactive.io/accountNumber',
   'https://openactive.io/activity',
   'https://openactive.io/additionalAdmissionRestriction',
   'https://openactive.io/ageRange',
@@ -1483,15 +1554,25 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://openactive.io/brokerRole',
   'https://openactive.io/cancellationMessage',
   'https://openactive.io/concept',
+  'https://openactive.io/customerAccountBookingRestriction',
   'https://openactive.io/customerNotice',
+  'https://openactive.io/eligibleEntitlementType',
+  'https://openactive.io/emergencyContact',
+  'https://openactive.io/entitlement',
+  'https://openactive.io/entitlementType',
+  'https://openactive.io/evidenceRequestAction',
+  'https://openactive.io/facilityType',
   'https://openactive.io/facilityUse',
   'https://openactive.io/genderRestriction',
+  'https://openactive.io/hasAccount',
+  'https://openactive.io/hasHiddenEntitlements',
   'https://openactive.io/idTemplate',
   'https://openactive.io/individualFacilityUse',
   'https://openactive.io/instance',
   'https://openactive.io/instanceOfCourse',
   'https://openactive.io/isCoached',
   'https://openactive.io/isOpenBookingAllowed',
+  'https://openactive.io/isOpenBookingWithCustomerAccountAllowed',
   'https://openactive.io/latestCancellationBeforeStartDate',
   'https://openactive.io/leader',
   'https://openactive.io/lease',
@@ -1510,6 +1591,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://openactive.io/orderProposalVersion',
   'https://openactive.io/orderRequiresApproval',
   'https://openactive.io/orderSellerNote',
+  'https://openactive.io/outstandingAction',
   'https://openactive.io/payment',
   'https://openactive.io/paymentProviderId',
   'https://openactive.io/programme',
@@ -1525,6 +1607,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://openactive.io/totalPaymentTax',
   'https://openactive.io/unitTaxSpecification',
   'https://openactive.io/validFromBeforeStartDate',
+  'https://openactive.io/validThroughBeforeStartDate',
   'https://openactive.io/valueOption',
   'https://schema.org/about',
   'https://schema.org/abridged',
@@ -1591,6 +1674,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/alignmentType',
   'https://schema.org/alternateName',
   'https://schema.org/alternativeHeadline',
+  'https://schema.org/alternativeOf',
   'https://schema.org/alumni',
   'https://schema.org/alumniOf',
   'https://schema.org/amenityFeature',
@@ -1614,6 +1698,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/appliesToDeliveryMethod',
   'https://schema.org/appliesToPaymentMethod',
   'https://schema.org/archiveHeld',
+  'https://schema.org/archivedAt',
   'https://schema.org/area',
   'https://schema.org/areaServed',
   'https://schema.org/arrivalAirport',
@@ -1638,8 +1723,12 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/assesses',
   'https://schema.org/associatedAnatomy',
   'https://schema.org/associatedArticle',
+  'https://schema.org/associatedClaimReview',
+  'https://schema.org/associatedDisease',
   'https://schema.org/associatedMedia',
+  'https://schema.org/associatedMediaReview',
   'https://schema.org/associatedPathophysiology',
+  'https://schema.org/associatedReview',
   'https://schema.org/athlete',
   'https://schema.org/attendee',
   'https://schema.org/attendees',
@@ -1680,6 +1769,9 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/billingIncrement',
   'https://schema.org/billingPeriod',
   'https://schema.org/billingStart',
+  'https://schema.org/bioChemInteraction',
+  'https://schema.org/bioChemSimilarity',
+  'https://schema.org/biologicalRole',
   'https://schema.org/biomechnicalClass',
   'https://schema.org/birthDate',
   'https://schema.org/birthPlace',
@@ -1746,12 +1838,16 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/cheatCode',
   'https://schema.org/checkinTime',
   'https://schema.org/checkoutTime',
+  'https://schema.org/chemicalComposition',
+  'https://schema.org/chemicalRole',
   'https://schema.org/childMaxAge',
   'https://schema.org/childMinAge',
+  'https://schema.org/childTaxon',
   'https://schema.org/children',
   'https://schema.org/cholesterolContent',
   'https://schema.org/circle',
   'https://schema.org/citation',
+  'https://schema.org/claimInterpreter',
   'https://schema.org/claimReviewed',
   'https://schema.org/clincalPharmacology',
   'https://schema.org/clinicalPharmacology',
@@ -1811,6 +1907,8 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/costPerUnit',
   'https://schema.org/countriesNotSupported',
   'https://schema.org/countriesSupported',
+  'https://schema.org/countryOfAssembly',
+  'https://schema.org/countryOfLastProcessing',
   'https://schema.org/countryOfOrigin',
   'https://schema.org/course',
   'https://schema.org/courseCode',
@@ -1829,6 +1927,9 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/currency',
   'https://schema.org/currentExchangeRate',
   'https://schema.org/customer',
+  'https://schema.org/customerRemorseReturnFees',
+  'https://schema.org/customerRemorseReturnLabelSource',
+  'https://schema.org/customerRemorseReturnShippingFeesAmount',
   'https://schema.org/cutoffTime',
   'https://schema.org/cvdCollectionDate',
   'https://schema.org/cvdFacilityCounty',
@@ -1887,6 +1988,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/diet',
   'https://schema.org/dietFeatures',
   'https://schema.org/differentialDiagnosis',
+  'https://schema.org/directApply',
   'https://schema.org/director',
   'https://schema.org/directors',
   'https://schema.org/disambiguatingDescription',
@@ -1948,12 +2050,14 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/eligibleTransactionVolume',
   'https://schema.org/email',
   'https://schema.org/embedUrl',
+  'https://schema.org/embeddedTextCaption',
   'https://schema.org/emissionsCO2',
   'https://schema.org/employee',
   'https://schema.org/employees',
   'https://schema.org/employerOverview',
   'https://schema.org/employmentType',
   'https://schema.org/employmentUnit',
+  'https://schema.org/encodesBioChemEntity',
   'https://schema.org/encodesCreativeWork',
   'https://schema.org/encoding',
   'https://schema.org/encodingFormat',
@@ -2005,6 +2109,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/experienceRequirements',
   'https://schema.org/expertConsiderations',
   'https://schema.org/expires',
+  'https://schema.org/expressedIn',
   'https://schema.org/familyName',
   'https://schema.org/fatContent',
   'https://schema.org/faxNumber',
@@ -2081,6 +2186,8 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/guidelineDate',
   'https://schema.org/guidelineSubject',
   'https://schema.org/handlingTime',
+  'https://schema.org/hasBioChemEntityPart',
+  'https://schema.org/hasBioPolymerSequence',
   'https://schema.org/hasBroadcastChannel',
   'https://schema.org/hasCategoryCode',
   'https://schema.org/hasCourse',
@@ -2099,10 +2206,12 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/hasMenuItem',
   'https://schema.org/hasMenuSection',
   'https://schema.org/hasMerchantReturnPolicy',
+  'https://schema.org/hasMolecularFunction',
   'https://schema.org/hasOccupation',
   'https://schema.org/hasOfferCatalog',
   'https://schema.org/hasPOS',
   'https://schema.org/hasPart',
+  'https://schema.org/hasRepresentation',
   'https://schema.org/hasVariant',
   'https://schema.org/headline',
   'https://schema.org/healthCondition',
@@ -2142,6 +2251,8 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/imagingTechnique',
   'https://schema.org/inAlbum',
   'https://schema.org/inBroadcastLineup',
+  'https://schema.org/inChI',
+  'https://schema.org/inChIKey',
   'https://schema.org/inCodeSet',
   'https://schema.org/inDefinedTermSet',
   'https://schema.org/inLanguage',
@@ -2179,6 +2290,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/interactionType',
   'https://schema.org/interactivityType',
   'https://schema.org/interestRate',
+  'https://schema.org/interpretedAsClaim',
   'https://schema.org/inventoryLevel',
   'https://schema.org/inverseOf',
   'https://schema.org/isAcceptingNewPatients',
@@ -2188,10 +2300,14 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/isBasedOn',
   'https://schema.org/isBasedOnUrl',
   'https://schema.org/isConsumableFor',
+  'https://schema.org/isEncodedByBioChemEntity',
   'https://schema.org/isFamilyFriendly',
   'https://schema.org/isGift',
+  'https://schema.org/isInvolvedInBiologicalProcess',
   'https://schema.org/isLiveBroadcast',
+  'https://schema.org/isLocatedInSubcellularLocation',
   'https://schema.org/isPartOf',
+  'https://schema.org/isPartOfBioChemEntity',
   'https://schema.org/isPlanForApartment',
   'https://schema.org/isProprietary',
   'https://schema.org/isRelatedTo',
@@ -2209,6 +2325,9 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/iswcCode',
   'https://schema.org/item',
   'https://schema.org/itemCondition',
+  'https://schema.org/itemDefectReturnFees',
+  'https://schema.org/itemDefectReturnLabelSource',
+  'https://schema.org/itemDefectReturnShippingFeesAmount',
   'https://schema.org/itemListElement',
   'https://schema.org/itemListOrder',
   'https://schema.org/itemLocation',
@@ -2216,6 +2335,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/itemReviewed',
   'https://schema.org/itemShipped',
   'https://schema.org/itinerary',
+  'https://schema.org/iupacName',
   'https://schema.org/jobBenefits',
   'https://schema.org/jobImmediateStart',
   'https://schema.org/jobLocation',
@@ -2303,6 +2423,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/measurementTechnique',
   'https://schema.org/mechanismOfAction',
   'https://schema.org/mediaAuthenticityCategory',
+  'https://schema.org/mediaItemAppearance',
   'https://schema.org/median',
   'https://schema.org/medicalAudience',
   'https://schema.org/medicalSpecialty',
@@ -2329,6 +2450,9 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/model',
   'https://schema.org/modelDate',
   'https://schema.org/modifiedTime',
+  'https://schema.org/molecularFormula',
+  'https://schema.org/molecularWeight',
+  'https://schema.org/monoisotopicMolecularWeight',
   'https://schema.org/monthlyMinimumRepaymentAmount',
   'https://schema.org/monthsOfExperience',
   'https://schema.org/mpn',
@@ -2345,6 +2469,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/namedPosition',
   'https://schema.org/nationality',
   'https://schema.org/naturalProgression',
+  'https://schema.org/negativeNotes',
   'https://schema.org/nerve',
   'https://schema.org/nerveMotor',
   'https://schema.org/netWorth',
@@ -2410,6 +2535,8 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/orderedItem',
   'https://schema.org/organizer',
   'https://schema.org/originAddress',
+  'https://schema.org/originalMediaContextDescription',
+  'https://schema.org/originalMediaLink',
   'https://schema.org/originatesFrom',
   'https://schema.org/overdosage',
   'https://schema.org/ownedFrom',
@@ -2423,6 +2550,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/parentItem',
   'https://schema.org/parentOrganization',
   'https://schema.org/parentService',
+  'https://schema.org/parentTaxon',
   'https://schema.org/parents',
   'https://schema.org/partOfEpisode',
   'https://schema.org/partOfInvoice',
@@ -2473,6 +2601,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/polygon',
   'https://schema.org/populationType',
   'https://schema.org/position',
+  'https://schema.org/positiveNotes',
   'https://schema.org/possibleComplication',
   'https://schema.org/possibleTreatment',
   'https://schema.org/postOfficeBoxNumber',
@@ -2483,6 +2612,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/postalCodePrefix',
   'https://schema.org/postalCodeRange',
   'https://schema.org/potentialAction',
+  'https://schema.org/potentialUse',
   'https://schema.org/preOp',
   'https://schema.org/predecessorOf',
   'https://schema.org/pregnancyCategory',
@@ -2612,11 +2742,17 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/reservedTicket',
   'https://schema.org/responsibilities',
   'https://schema.org/restPeriods',
+  'https://schema.org/restockingFee',
   'https://schema.org/result',
   'https://schema.org/resultComment',
   'https://schema.org/resultReview',
   'https://schema.org/returnFees',
+  'https://schema.org/returnLabelSource',
+  'https://schema.org/returnMethod',
   'https://schema.org/returnPolicyCategory',
+  'https://schema.org/returnPolicyCountry',
+  'https://schema.org/returnPolicySeasonalOverride',
+  'https://schema.org/returnShippingFeesAmount',
   'https://schema.org/review',
   'https://schema.org/reviewAspect',
   'https://schema.org/reviewBody',
@@ -2680,6 +2816,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/serviceType',
   'https://schema.org/serviceUrl',
   'https://schema.org/servingSize',
+  'https://schema.org/sha256',
   'https://schema.org/sharedContent',
   'https://schema.org/shippingDestination',
   'https://schema.org/shippingDetails',
@@ -2699,6 +2836,7 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/skills',
   'https://schema.org/sku',
   'https://schema.org/slogan',
+  'https://schema.org/smiles',
   'https://schema.org/smokingAllowed',
   'https://schema.org/sodiumContent',
   'https://schema.org/softwareAddOn',
@@ -2776,6 +2914,8 @@ export const PropertyEnumerationJoiSchema = Joi.string().valid(
   'https://schema.org/targetProduct',
   'https://schema.org/targetUrl',
   'https://schema.org/taxID',
+  'https://schema.org/taxonRank',
+  'https://schema.org/taxonomicRange',
   'https://schema.org/teaches',
   'https://schema.org/telephone',
   'https://schema.org/temporal',

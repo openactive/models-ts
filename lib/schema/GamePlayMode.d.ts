@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Indicates whether this game is multi-player, co-op or single-player.
  */
-export declare type GamePlayMode = 'https://schema.org/SinglePlayer' | 'https://schema.org/CoOp' | 'https://schema.org/MultiPlayer';
+export declare type GamePlayMode = 'https://schema.org/MultiPlayer' | 'https://schema.org/CoOp' | 'https://schema.org/SinglePlayer';
 /**
  * schema:GamePlayMode - Validation schema (w/ JOI)
  *

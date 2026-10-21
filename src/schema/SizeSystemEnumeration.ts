@@ -9,8 +9,8 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type SizeSystemEnumeration = 
   
-  | 'https://schema.org/SizeSystemImperial'
   | 'https://schema.org/SizeSystemMetric'
+  | 'https://schema.org/SizeSystemImperial'
   ;
 
 /**
@@ -19,8 +19,8 @@ export type SizeSystemEnumeration =
  * Enumerates common size systems for different categories of products, for example "EN-13402" or "UK" for wearables or "Imperial" for screws.
  */
 export const SizeSystemEnumerationJoiSchema = Joi.string().valid(
-  'https://schema.org/SizeSystemImperial',
   'https://schema.org/SizeSystemMetric',
+  'https://schema.org/SizeSystemImperial',
 );
 
 /**

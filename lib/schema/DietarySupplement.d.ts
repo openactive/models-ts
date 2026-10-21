@@ -21,57 +21,71 @@ export declare type DietarySupplement = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
-    /**
-     * The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.
-     */
-    mechanismOfAction?: string;
-    /**
-     * True if this item's name is a proprietary/brand name (vs. generic name).
-     */
-    isProprietary?: boolean;
-    /**
-     * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
-     */
-    maximumIntake?: schema.MaximumDoseScheduleOrSubClass | string;
     /**
      * Any potential safety concern associated with the supplement. May include interactions with other drugs and foods, pregnancy, breastfeeding, known adverse reactions, and documented efficacy of the supplement.
      */
     safetyConsideration?: string;
     /**
-     * The drug or supplement's legal status, including any controlled substance schedules that apply.
-     */
-    legalStatus?: schema.MedicalEnumeration | string | schema.DrugLegalStatusOrSubClass;
-    /**
-     * The generic name of this drug or supplement.
-     */
-    nonProprietaryName?: string;
-    /**
-     * Proprietary name given to the diet plan, typically by its originator or creator.
-     */
-    proprietaryName?: string;
-    /**
      * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
      */
     recommendedIntake?: schema.RecommendedDoseScheduleOrSubClass | string;
-    /**
-     * An active ingredient, typically chemical compounds and/or biologic substances.
-     */
-    activeIngredient?: string;
-    /**
-     * The manufacturer of the product.
-     */
-    manufacturer?: schema.OrganizationOrSubClass | string;
     /**
      * Characteristics of the population for which this is intended, or which typically uses it, e.g. 'adults'.
      */
     targetPopulation?: string;
     /**
+     * An active ingredient, typically chemical compounds and/or biologic substances.
+     */
+    activeIngredient?: string;
+    /**
+     * Proprietary name given to the diet plan, typically by its originator or creator.
+     */
+    proprietaryName?: string;
+    /**
+     * The manufacturer of the product.
+     */
+    manufacturer?: schema.OrganizationOrSubClass | string;
+    /**
+     * Recommended intake of this supplement for a given population as defined by a specific recommending authority.
+     */
+    maximumIntake?: schema.MaximumDoseScheduleOrSubClass | string;
+    /**
+     * The generic name of this drug or supplement.
+     */
+    nonProprietaryName?: string;
+    /**
+     * The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.
+     */
+    mechanismOfAction?: string;
+    /**
+     * The drug or supplement's legal status, including any controlled substance schedules that apply.
+     */
+    legalStatus?: schema.MedicalEnumeration | schema.DrugLegalStatusOrSubClass | string;
+    /**
+     * True if this item's name is a proprietary/brand name (vs. generic name).
+     */
+    isProprietary?: boolean;
+    /**
+     * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
+     */
+    medicineSystem?: schema.MedicineSystemOrSubClass | string;
+    /**
      * A medical guideline related to this entity.
      */
     guideline?: schema.MedicalGuidelineOrSubClass | string;
+    /**
+     * A medical study or trial related to this entity.
+     */
+    study?: schema.MedicalStudyOrSubClass | string;
+    /**
+     * If applicable, a medical specialty in which this entity is relevant.
+     */
+    relevantSpecialty?: schema.MedicalSpecialtyOrSubClass | string;
     /**
      * If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.
      */
@@ -81,53 +95,41 @@ export declare type DietarySupplement = {
      */
     code?: schema.MedicalCodeOrSubClass | string;
     /**
-     * If applicable, a medical specialty in which this entity is relevant.
-     */
-    relevantSpecialty?: schema.MedicalSpecialtyOrSubClass | string;
-    /**
-     * A medical study or trial related to this entity.
-     */
-    study?: schema.MedicalStudyOrSubClass | string;
-    /**
-     * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
-     */
-    medicineSystem?: schema.MedicineSystemOrSubClass | string;
-    /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:DietarySupplement

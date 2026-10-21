@@ -24,45 +24,15 @@ export type ExerciseAction = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * A sub property of location. The course where this action was taken.
+   * A sub property of instrument. The exercise plan used on this action.
    */
-  exerciseCourse?: schema.PlaceOrSubClass | string;
-  /**
-   * A sub property of location. The original location of the object or the agent before the action.
-   */
-  fromLocation?: schema.PlaceOrSubClass | string;
-  /**
-   * Type(s) of exercise or activity, such as strength training, flexibility training, aerobics, cardiac rehabilitation, etc.
-   */
-  exerciseType?: string;
-  /**
-   * A sub property of location. The sports event where this action occurred.
-   */
-  sportsEvent?: schema.SportsEventOrSubClass | string;
-  /**
-   * A sub property of participant. The sports team that participated on this action.
-   */
-  sportsTeam?: schema.SportsTeamOrSubClass | string;
-  /**
-   * A sub property of location. The course where this action was taken.
-   */
-  course?: schema.PlaceOrSubClass | string;
-  /**
-   * A sub property of instrument. The diet used in this action.
-   */
-  diet?: schema.DietOrSubClass | string;
-  /**
-   * A sub property of location. The sports activity location where this action occurred.
-   */
-  sportsActivityLocation?: schema.SportsActivityLocationOrSubClass | string;
-  /**
-   * A sub property of participant. The opponent on this action.
-   */
-  opponent?: schema.PersonOrSubClass | string;
+  exercisePlan?: schema.ExercisePlanOrSubClass | string;
   /**
    * The distance travelled, e.g. exercising or travelling.
    */
@@ -70,55 +40,55 @@ export type ExerciseAction = {
   /**
    * A sub property of instrument. The diet used in this action.
    */
+  diet?: schema.DietOrSubClass | string;
+  /**
+   * A sub property of participant. The opponent on this action.
+   */
+  opponent?: schema.PersonOrSubClass | string;
+  /**
+   * A sub property of location. The original location of the object or the agent before the action.
+   */
+  fromLocation?: schema.PlaceOrSubClass | string;
+  /**
+   * A sub property of location. The sports activity location where this action occurred.
+   */
+  sportsActivityLocation?: schema.SportsActivityLocationOrSubClass | string;
+  /**
+   * A sub property of instrument. The diet used in this action.
+   */
   exerciseRelatedDiet?: schema.DietOrSubClass | string;
   /**
-   * A sub property of instrument. The exercise plan used on this action.
+   * Type(s) of exercise or activity, such as strength training, flexibility training, aerobics, cardiac rehabilitation, etc.
    */
-  exercisePlan?: schema.ExercisePlanOrSubClass | string;
+  exerciseType?: string;
   /**
    * A sub property of location. The final location of the object or the agent after the action.
    */
   toLocation?: schema.PlaceOrSubClass | string;
   /**
-   * Upcoming or past event associated with this place, organization, or action.
+   * A sub property of location. The sports event where this action occurred.
    */
-  event?: schema.Event_OrSubClass | string;
+  sportsEvent?: schema.SportsEventOrSubClass | string;
+  /**
+   * A sub property of location. The course where this action was taken.
+   */
+  course?: schema.PlaceOrSubClass | string;
+  /**
+   * A sub property of location. The course where this action was taken.
+   */
+  exerciseCourse?: schema.PlaceOrSubClass | string;
+  /**
+   * A sub property of participant. The sports team that participated on this action.
+   */
+  sportsTeam?: schema.SportsTeamOrSubClass | string;
   /**
    * An intended audience, i.e. a group for whom something was created.
    */
   audience?: schema.AudienceOrSubClass | string;
   /**
-   * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
+   * Upcoming or past event associated with this place, organization, or action.
    */
-  startTime?: string;
-  /**
-   * The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.
-   */
-  instrument?: schema.ThingOrSubClass | string;
-  /**
-   * Indicates the current disposition of the Action.
-   */
-  actionStatus?: schema.ActionStatusTypeOrSubClass | string;
-  /**
-   * The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.
-   */
-  agent?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.
-   */
-  participant?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * Indicates a target EntryPoint for an Action.
-   */
-  target?: schema.EntryPointOrSubClass | string;
-  /**
-   * The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-   */
-  endTime?: string;
-  /**
-   * For failed actions, more information on the cause of the failure.
-   */
-  error?: schema.ThingOrSubClass | string;
+  event?: schema.Event_OrSubClass | string;
   /**
    * The result produced in the action. e.g. John wrote *a book*.
    */
@@ -128,45 +98,77 @@ export type ExerciseAction = {
    */
   object?: schema.ThingOrSubClass | string;
   /**
+   * Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.
+   */
+  participant?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+  /**
+   * For failed actions, more information on the cause of the failure.
+   */
+  error?: schema.ThingOrSubClass | string;
+  /**
    * The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
    */
-  location?: schema.PlaceOrSubClass | string | schema.VirtualLocationOrSubClass | schema.PostalAddressOrSubClass;
+  location?: schema.PostalAddressOrSubClass | string | schema.PlaceOrSubClass | schema.VirtualLocationOrSubClass;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it's the time offset of the end of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
    */
-  sameAs?: string;
+  endTime?: string;
   /**
-   * A CreativeWork or Event about this Thing.
+   * The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.
    */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+  agent?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   * Indicates a target EntryPoint for an Action.
    */
-  potentialAction?: schema.ActionOrSubClass | string;
+  target?: schema.EntryPointOrSubClass | string;
+  /**
+   * Indicates the current disposition of the Action.
+   */
+  actionStatus?: schema.ActionStatusTypeOrSubClass | string;
+  /**
+   * The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.
+   */
+  instrument?: schema.ThingOrSubClass | string;
+  /**
+   * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.\n\nNote that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
+   */
+  startTime?: string;
   /**
    * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
   /**
    * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
    */
   additionalType?: string;
   /**
-   * An alias for the item.
-   */
-  alternateName?: string;
-  /**
    * URL of the item.
    */
   url?: string;
   /**
-   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   * An alias for the item.
    */
-  image?: schema.ImageObjectOrSubClass | string;
+  alternateName?: string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
   /**
    * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
   disambiguatingDescription?: string;
+  /**
+   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   */
+  image?: schema.ImageObjectOrSubClass | string;
 };
 
 /**
@@ -186,45 +188,45 @@ export type ExerciseActionOrSubClass =
 export const ExerciseActionJoiSchema = Joi.object({
   '@type': Joi.string().valid('ExerciseAction').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
   description: Joi.string(),
   '@id': Joi.string().uri(),
-  exerciseCourse: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  fromLocation: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  exerciseType: Joi.string(),
-  sportsEvent: Joi.alternatives().try(Joi.lazy(() => schema.SportsEventOrSubClassJoiSchema), Joi.string().uri()),
-  sportsTeam: Joi.alternatives().try(Joi.lazy(() => schema.SportsTeamOrSubClassJoiSchema), Joi.string().uri()),
-  course: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  diet: Joi.alternatives().try(Joi.lazy(() => schema.DietOrSubClassJoiSchema), Joi.string().uri()),
-  sportsActivityLocation: Joi.alternatives().try(Joi.lazy(() => schema.SportsActivityLocationOrSubClassJoiSchema), Joi.string().uri()),
-  opponent: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  distance: Joi.alternatives().try(Joi.lazy(() => schema.DistanceOrSubClassJoiSchema), Joi.string().uri()),
-  exerciseRelatedDiet: Joi.alternatives().try(Joi.lazy(() => schema.DietOrSubClassJoiSchema), Joi.string().uri()),
   exercisePlan: Joi.alternatives().try(Joi.lazy(() => schema.ExercisePlanOrSubClassJoiSchema), Joi.string().uri()),
+  distance: Joi.alternatives().try(Joi.lazy(() => schema.DistanceOrSubClassJoiSchema), Joi.string().uri()),
+  diet: Joi.alternatives().try(Joi.lazy(() => schema.DietOrSubClassJoiSchema), Joi.string().uri()),
+  opponent: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  fromLocation: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
+  sportsActivityLocation: Joi.alternatives().try(Joi.lazy(() => schema.SportsActivityLocationOrSubClassJoiSchema), Joi.string().uri()),
+  exerciseRelatedDiet: Joi.alternatives().try(Joi.lazy(() => schema.DietOrSubClassJoiSchema), Joi.string().uri()),
+  exerciseType: Joi.string(),
   toLocation: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  event: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  sportsEvent: Joi.alternatives().try(Joi.lazy(() => schema.SportsEventOrSubClassJoiSchema), Joi.string().uri()),
+  course: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
+  exerciseCourse: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
+  sportsTeam: Joi.alternatives().try(Joi.lazy(() => schema.SportsTeamOrSubClassJoiSchema), Joi.string().uri()),
   audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
-  startTime: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
-  instrument: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
-  actionStatus: Joi.alternatives().try(Joi.lazy(() => schema.ActionStatusTypeOrSubClassJoiSchema), Joi.string().uri()),
-  agent: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  participant: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  target: Joi.alternatives().try(Joi.lazy(() => schema.EntryPointOrSubClassJoiSchema), Joi.string().uri()),
-  endTime: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
-  error: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  event: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
   result: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
   object: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
-  location: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string(), Joi.lazy(() => schema.VirtualLocationOrSubClassJoiSchema), Joi.lazy(() => schema.PostalAddressOrSubClassJoiSchema), Joi.string().uri()),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  participant: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  error: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  location: Joi.alternatives().try(Joi.lazy(() => schema.PostalAddressOrSubClassJoiSchema), Joi.string(), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.lazy(() => schema.VirtualLocationOrSubClassJoiSchema), Joi.string().uri()),
+  endTime: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
+  agent: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  target: Joi.alternatives().try(Joi.lazy(() => schema.EntryPointOrSubClassJoiSchema), Joi.string().uri()),
+  actionStatus: Joi.alternatives().try(Joi.lazy(() => schema.ActionStatusTypeOrSubClassJoiSchema), Joi.string().uri()),
+  instrument: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  startTime: Joi.alternatives().try(Joi.string(), Joi.string().isoDate()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.string().uri(), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema)),
   additionalType: Joi.string().uri(),
-  alternateName: Joi.string(),
   url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  alternateName: Joi.string(),
+  sameAs: Joi.string().uri(),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
 });
 
 /**

@@ -21,45 +21,47 @@ export declare type StructuredValue = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
      * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
     /**
      * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      */
     additionalType?: string;
     /**
-     * An alias for the item.
-     */
-    alternateName?: string;
-    /**
      * URL of the item.
      */
     url?: string;
     /**
-     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     * An alias for the item.
      */
-    image?: schema.ImageObjectOrSubClass | string;
+    alternateName?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
     disambiguatingDescription?: string;
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+     */
+    image?: schema.ImageObjectOrSubClass | string;
 };
 /**
  * schema:StructuredValue
@@ -68,7 +70,7 @@ export declare type StructuredValue = {
  * sub-classes this model. e.g. `Event_OrSubClass` allows `Event`s as well as `ScheduledSession`s, `SessionSeries`,
  * etc.
  */
-export declare type StructuredValueOrSubClass = StructuredValue | schema.NutritionInformationOrSubClass | schema.EngineSpecificationOrSubClass | schema.WarrantyPromiseOrSubClass | schema.OfferShippingDetailsOrSubClass | schema.OwnershipInfoOrSubClass | schema.MonetaryAmountOrSubClass | schema.QuantitativeValueOrSubClass | schema.GeoShapeOrSubClass | schema.RepaymentSpecificationOrSubClass | schema.DeliveryTimeSettingsOrSubClass | schema.InteractionCounterOrSubClass | schema.PriceSpecificationOrSubClass | schema.OpeningHoursSpecificationOrSubClass | schema.PostalCodeRangeSpecificationOrSubClass | schema.GeoCoordinatesOrSubClass | schema.QuantitativeValueDistributionOrSubClass | schema.ContactPointOrSubClass | schema.ShippingDeliveryTimeOrSubClass | schema.DefinedRegionOrSubClass | schema.CDCPMDRecordOrSubClass | schema.PropertyValueOrSubClass | schema.ExchangeRateSpecificationOrSubClass | schema.DatedMoneySpecificationOrSubClass | schema.ShippingRateSettingsOrSubClass | schema.TypeAndQuantityNodeOrSubClass;
+export declare type StructuredValueOrSubClass = StructuredValue | schema.PropertyValueOrSubClass | schema.PriceSpecificationOrSubClass | schema.DefinedRegionOrSubClass | schema.NutritionInformationOrSubClass | schema.QuantitativeValueDistributionOrSubClass | schema.OwnershipInfoOrSubClass | schema.QuantitativeValueOrSubClass | schema.EngineSpecificationOrSubClass | schema.DeliveryTimeSettingsOrSubClass | schema.PostalCodeRangeSpecificationOrSubClass | schema.InteractionCounterOrSubClass | schema.OfferShippingDetailsOrSubClass | schema.TypeAndQuantityNodeOrSubClass | schema.GeoCoordinatesOrSubClass | schema.RepaymentSpecificationOrSubClass | schema.ShippingDeliveryTimeOrSubClass | schema.ContactPointOrSubClass | schema.DatedMoneySpecificationOrSubClass | schema.CDCPMDRecordOrSubClass | schema.ExchangeRateSpecificationOrSubClass | schema.ShippingRateSettingsOrSubClass | schema.WarrantyPromiseOrSubClass | schema.GeoShapeOrSubClass | schema.OpeningHoursSpecificationOrSubClass | schema.MonetaryAmountOrSubClass;
 /**
  * schema:StructuredValue - Validation schema (w/ JOI)
  */

@@ -24,113 +24,115 @@ export type CDCPMDRecord = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
-  /**
-   * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed.
-   */
-  cvdNumC19OverflowPats?: number;
-  /**
-   * numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and outpatient beds, including all staffed,ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.
-   */
-  cvdNumTotBeds?: number;
-  /**
-   * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed, and overflow (surge) beds used for inpatients.
-   */
-  cvdNumBeds?: number;
-  /**
-   * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed and on a mechanical ventilator.
-   */
-  cvdNumC19OFMechVentPats?: number;
-  /**
-   * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care location who have suspected or confirmed COVID-19.
-   */
-  cvdNumC19HospPats?: number;
-  /**
-   * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
-   */
-  cvdNumVent?: number;
-  /**
-   * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed inpatient beds that are occupied.
-   */
-  cvdNumBedsOcc?: number;
-  /**
-   * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.
-   */
-  cvdNumC19HOPats?: number;
-  /**
-   * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died in the hospital, ED, or any overflow location.
-   */
-  cvdNumC19Died?: number;
-  /**
-   * collectiondate - Date for which patient counts are reported.
-   */
-  cvdCollectionDate?: string;
   /**
    * numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.
    */
   cvdNumVentUse?: number;
   /**
+   * numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and outpatient beds, including all staffed,ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.
+   */
+  cvdNumTotBeds?: number;
+  /**
+   * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died in the hospital, ED, or any overflow location.
+   */
+  cvdNumC19Died?: number;
+  /**
+   * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.
+   */
+  cvdNumC19HOPats?: number;
+  /**
    * Name of the County of the NHSN facility that this data record applies to. Use [[cvdFacilityId]] to identify the facility. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.
    */
   cvdFacilityCounty?: string;
   /**
-   * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are occupied.
+   * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed.
    */
-  cvdNumICUBedsOcc?: number;
+  cvdNumC19OverflowPats?: number;
+  /**
+   * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed, and overflow (surge) beds used for inpatients.
+   */
+  cvdNumBeds?: number;
   /**
    * Publication date of an online listing.
    */
   datePosted?: string;
   /**
+   * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are occupied.
+   */
+  cvdNumICUBedsOcc?: number;
+  /**
+   * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
+   */
+  cvdNumVent?: number;
+  /**
+   * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care location who have suspected or confirmed COVID-19.
+   */
+  cvdNumC19HospPats?: number;
+  /**
    * numicubeds - ICU BEDS: Total number of staffed inpatient intensive care unit (ICU) beds.
    */
   cvdNumICUBeds?: number;
   /**
-   * Identifier of the NHSN facility that this data record applies to. Use [[cvdFacilityCounty]] to indicate the county. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.
+   * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed and on a mechanical ventilator.
    */
-  cvdFacilityId?: string;
+  cvdNumC19OFMechVentPats?: number;
   /**
    * numc19mechventpats - HOSPITALIZED and VENTILATED: Patients hospitalized in an NHSN inpatient care location who have suspected or confirmed COVID-19 and are on a mechanical ventilator.
    */
   cvdNumC19MechVentPats?: number;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * Identifier of the NHSN facility that this data record applies to. Use [[cvdFacilityCounty]] to indicate the county. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.
    */
-  sameAs?: string;
+  cvdFacilityId?: string;
   /**
-   * A CreativeWork or Event about this Thing.
+   * collectiondate - Date for which patient counts are reported.
    */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+  cvdCollectionDate?: string;
   /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed inpatient beds that are occupied.
    */
-  potentialAction?: schema.ActionOrSubClass | string;
+  cvdNumBedsOcc?: number;
   /**
    * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
   /**
    * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
    */
   additionalType?: string;
   /**
-   * An alias for the item.
-   */
-  alternateName?: string;
-  /**
    * URL of the item.
    */
   url?: string;
   /**
-   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   * An alias for the item.
    */
-  image?: schema.ImageObjectOrSubClass | string;
+  alternateName?: string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
   /**
    * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
   disambiguatingDescription?: string;
+  /**
+   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   */
+  image?: schema.ImageObjectOrSubClass | string;
 };
 
 /**
@@ -150,36 +152,36 @@ export type CDCPMDRecordOrSubClass =
 export const CDCPMDRecordJoiSchema = Joi.object({
   '@type': Joi.string().valid('CDCPMDRecord').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
   description: Joi.string(),
   '@id': Joi.string().uri(),
-  cvdNumC19OverflowPats: Joi.number(),
-  cvdNumTotBeds: Joi.number(),
-  cvdNumBeds: Joi.number(),
-  cvdNumC19OFMechVentPats: Joi.number(),
-  cvdNumC19HospPats: Joi.number(),
-  cvdNumVent: Joi.number(),
-  cvdNumBedsOcc: Joi.number(),
-  cvdNumC19HOPats: Joi.number(),
-  cvdNumC19Died: Joi.number(),
-  cvdCollectionDate: Joi.alternatives().try(Joi.string(), Joi.string().isoDate()),
   cvdNumVentUse: Joi.number(),
+  cvdNumTotBeds: Joi.number(),
+  cvdNumC19Died: Joi.number(),
+  cvdNumC19HOPats: Joi.number(),
   cvdFacilityCounty: Joi.string(),
-  cvdNumICUBedsOcc: Joi.number(),
+  cvdNumC19OverflowPats: Joi.number(),
+  cvdNumBeds: Joi.number(),
   datePosted: Joi.string().isoDate(),
+  cvdNumICUBedsOcc: Joi.number(),
+  cvdNumVent: Joi.number(),
+  cvdNumC19HospPats: Joi.number(),
   cvdNumICUBeds: Joi.number(),
-  cvdFacilityId: Joi.string(),
+  cvdNumC19OFMechVentPats: Joi.number(),
   cvdNumC19MechVentPats: Joi.number(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  cvdFacilityId: Joi.string(),
+  cvdCollectionDate: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
+  cvdNumBedsOcc: Joi.number(),
+  mainEntityOfPage: Joi.alternatives().try(Joi.string().uri(), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema)),
   additionalType: Joi.string().uri(),
-  alternateName: Joi.string(),
   url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  alternateName: Joi.string(),
+  sameAs: Joi.string().uri(),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
 });
 
 /**

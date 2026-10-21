@@ -9,9 +9,9 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type GamePlayMode = 
   
-  | 'https://schema.org/SinglePlayer'
-  | 'https://schema.org/CoOp'
   | 'https://schema.org/MultiPlayer'
+  | 'https://schema.org/CoOp'
+  | 'https://schema.org/SinglePlayer'
   ;
 
 /**
@@ -20,9 +20,9 @@ export type GamePlayMode =
  * Indicates whether this game is multi-player, co-op or single-player.
  */
 export const GamePlayModeJoiSchema = Joi.string().valid(
-  'https://schema.org/SinglePlayer',
-  'https://schema.org/CoOp',
   'https://schema.org/MultiPlayer',
+  'https://schema.org/CoOp',
+  'https://schema.org/SinglePlayer',
 );
 
 /**

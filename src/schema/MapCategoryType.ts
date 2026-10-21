@@ -9,10 +9,10 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type MapCategoryType = 
   
-  | 'https://schema.org/ParkingMap'
-  | 'https://schema.org/TransitMap'
-  | 'https://schema.org/VenueMap'
   | 'https://schema.org/SeatingMap'
+  | 'https://schema.org/VenueMap'
+  | 'https://schema.org/TransitMap'
+  | 'https://schema.org/ParkingMap'
   ;
 
 /**
@@ -21,10 +21,10 @@ export type MapCategoryType =
  * An enumeration of several kinds of Map.
  */
 export const MapCategoryTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/ParkingMap',
-  'https://schema.org/TransitMap',
-  'https://schema.org/VenueMap',
   'https://schema.org/SeatingMap',
+  'https://schema.org/VenueMap',
+  'https://schema.org/TransitMap',
+  'https://schema.org/ParkingMap',
 );
 
 /**

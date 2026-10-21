@@ -9,13 +9,13 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type MusicReleaseFormatType = 
   
-  | 'https://schema.org/DVDFormat'
-  | 'https://schema.org/DigitalAudioTapeFormat'
   | 'https://schema.org/VinylFormat'
-  | 'https://schema.org/CDFormat'
-  | 'https://schema.org/CassetteFormat'
+  | 'https://schema.org/DigitalAudioTapeFormat'
+  | 'https://schema.org/DVDFormat'
   | 'https://schema.org/LaserDiscFormat'
   | 'https://schema.org/DigitalFormat'
+  | 'https://schema.org/CDFormat'
+  | 'https://schema.org/CassetteFormat'
   ;
 
 /**
@@ -24,13 +24,13 @@ export type MusicReleaseFormatType =
  * Format of this release (the type of recording media used, ie. compact disc, digital media, LP, etc.).
  */
 export const MusicReleaseFormatTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/DVDFormat',
-  'https://schema.org/DigitalAudioTapeFormat',
   'https://schema.org/VinylFormat',
-  'https://schema.org/CDFormat',
-  'https://schema.org/CassetteFormat',
+  'https://schema.org/DigitalAudioTapeFormat',
+  'https://schema.org/DVDFormat',
   'https://schema.org/LaserDiscFormat',
   'https://schema.org/DigitalFormat',
+  'https://schema.org/CDFormat',
+  'https://schema.org/CassetteFormat',
 );
 
 /**

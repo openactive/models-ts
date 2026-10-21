@@ -24,46 +24,55 @@ export type Demand = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
+  /**
+   * This links to a node or nodes indicating the exact quantity of the products included in  an [[Offer]] or [[ProductCollection]].
+   */
+  includesObject?: schema.TypeAndQuantityNodeOrSubClass | string;
+  /**
+   * The geographic area where a service or offered item is provided.
+   */
+  areaServed?: string | schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | schema.AdministrativeAreaOrSubClass;
   /**
    * The delivery method(s) available for this offer.
    */
   availableDeliveryMethod?: schema.DeliveryMethod;
   /**
-   * A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.
+   * The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
    */
-  itemCondition?: schema.OfferItemCondition;
+  serialNumber?: string;
   /**
-   * The date when the item becomes valid.
+   * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
    */
-  validFrom?: string;
+  gtin13?: string;
   /**
-   * An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+   * The type(s) of customers for which the given offer is valid.
    */
-  seller?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  eligibleCustomerType?: schema.BusinessEntityType;
   /**
-   * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+   * The availability of this item&#x2014;for example In stock, Out of stock, Pre-order, etc.
    */
-  gtin12?: string;
+  availability?: schema.ItemAvailability;
   /**
-   * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
-   *     
+   * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
    */
-  eligibleRegion?: string | schema.GeoShapeOrSubClass | schema.PlaceOrSubClass;
+  gtin8?: string;
   /**
-   * The warranty promise(s) included in the offer.
+   * The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.
    */
-  warranty?: schema.WarrantyPromiseOrSubClass | string;
+  eligibleTransactionVolume?: schema.PriceSpecificationOrSubClass | string;
   /**
-   * The end of the availability of the product or service included in the offer.
+   * The payment method(s) accepted by seller for this offer.
    */
-  availabilityEnds?: string;
+  acceptedPaymentMethod?: schema.LoanOrCreditOrSubClass | schema.PaymentMethod | string;
   /**
-   * The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.
+   * The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.
    */
-  deliveryLeadTime?: schema.QuantitativeValueOrSubClass | string;
+  businessFunction?: schema.BusinessFunction;
   /**
    * The duration for which the given offer is valid.
    */
@@ -73,131 +82,124 @@ export type Demand = {
    */
   availabilityStarts?: string;
   /**
-   * The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.
+   * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
+   *     
    */
-  serialNumber?: string;
+  eligibleRegion?: schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | string;
   /**
-   * The payment method(s) accepted by seller for this offer.
+   * An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
    */
-  acceptedPaymentMethod?: schema.LoanOrCreditOrSubClass | schema.PaymentMethod | string;
+  seller?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
   /**
-   * One or more detailed price specifications, indicating the unit price and delivery or payment charges.
+   * The warranty promise(s) included in the offer.
    */
-  priceSpecification?: schema.PriceSpecificationOrSubClass | string;
+  warranty?: schema.WarrantyPromiseOrSubClass | string;
   /**
-   * The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.
+   * The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.
    */
-  eligibleTransactionVolume?: schema.PriceSpecificationOrSubClass | string;
+  deliveryLeadTime?: schema.QuantitativeValueOrSubClass | string;
   /**
-   * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+   * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
    */
-  gtin13?: string;
+  mpn?: string;
+  /**
+   * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+   */
+  gtin12?: string;
+  /**
+   * The place(s) from which the offer can be obtained (e.g. store locations).
+   */
+  availableAtOrFrom?: schema.PlaceOrSubClass | string;
+  /**
+   * The date when the item becomes valid.
+   */
+  validFrom?: string;
+  /**
+   * An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+   */
+  itemOffered?: schema.TripOrSubClass | schema.Event_OrSubClass | schema.AggregateOfferOrSubClass | schema.CreativeWorkOrSubClass | schema.ServiceOrSubClass | schema.ProductOrSubClass | schema.MenuItemOrSubClass | string;
+  /**
+   * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+   */
+  gtin14?: string;
+  /**
+   * The end of the availability of the product or service included in the offer.
+   */
+  availabilityEnds?: string;
+  /**
+   * The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+   */
+  validThrough?: string;
+  /**
+   * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
+   */
+  sku?: string;
   /**
    * A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.
    *    
    */
   gtin?: string;
   /**
-   * The geographic area where a service or offered item is provided.
+   * A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.
    */
-  areaServed?: string | schema.PlaceOrSubClass | schema.AdministrativeAreaOrSubClass | schema.GeoShapeOrSubClass;
-  /**
-   * The amount of time that is required between accepting the offer and the actual usage of the resource or service.
-   */
-  advanceBookingRequirement?: schema.QuantitativeValueOrSubClass | string;
-  /**
-   * An item being offered (or demanded). The transactional nature of the offer or demand is documented using [[businessFunction]], e.g. sell, lease etc. While several common expected types are listed explicitly in this definition, others can be used. Using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
-   */
-  itemOffered?: schema.TripOrSubClass | schema.ProductOrSubClass | schema.MenuItemOrSubClass | schema.ServiceOrSubClass | schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | schema.AggregateOfferOrSubClass | string;
+  itemCondition?: schema.OfferItemCondition;
   /**
    * The current approximate inventory level for the item or items.
    */
   inventoryLevel?: schema.QuantitativeValueOrSubClass | string;
   /**
+   * The amount of time that is required between accepting the offer and the actual usage of the resource or service.
+   */
+  advanceBookingRequirement?: schema.QuantitativeValueOrSubClass | string;
+  /**
+   * One or more detailed price specifications, indicating the unit price and delivery or payment charges.
+   */
+  priceSpecification?: schema.PriceSpecificationOrSubClass | string;
+  /**
    * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\n\nSee also [[eligibleRegion]].
    *       
    */
-  ineligibleRegion?: schema.GeoShapeOrSubClass | string | schema.PlaceOrSubClass;
-  /**
-   * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
-   */
-  mpn?: string;
-  /**
-   * This links to a node or nodes indicating the exact quantity of the products included in  an [[Offer]] or [[ProductCollection]].
-   */
-  includesObject?: schema.TypeAndQuantityNodeOrSubClass | string;
-  /**
-   * The availability of this item&#x2014;for example In stock, Out of stock, Pre-order, etc.
-   */
-  availability?: schema.ItemAvailability;
-  /**
-   * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
-   */
-  sku?: string;
-  /**
-   * The type(s) of customers for which the given offer is valid.
-   */
-  eligibleCustomerType?: schema.BusinessEntityType;
-  /**
-   * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-   */
-  gtin14?: string;
+  ineligibleRegion?: schema.PlaceOrSubClass | schema.GeoShapeOrSubClass | string;
   /**
    * The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
    */
   eligibleQuantity?: schema.QuantitativeValueOrSubClass | string;
   /**
-   * The place(s) from which the offer can be obtained (e.g. store locations).
-   */
-  availableAtOrFrom?: schema.PlaceOrSubClass | string;
-  /**
-   * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-   */
-  gtin8?: string;
-  /**
-   * The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.
-   */
-  businessFunction?: schema.BusinessFunction;
-  /**
-   * The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-   */
-  validThrough?: string;
-  /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-   */
-  sameAs?: string;
-  /**
-   * A CreativeWork or Event about this Thing.
-   */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-  /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
    * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  mainEntityOfPage?: string | schema.CreativeWorkOrSubClass;
   /**
    * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
    */
   additionalType?: string;
   /**
-   * An alias for the item.
-   */
-  alternateName?: string;
-  /**
    * URL of the item.
    */
   url?: string;
   /**
-   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   * An alias for the item.
    */
-  image?: schema.ImageObjectOrSubClass | string;
+  alternateName?: string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
   /**
    * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
   disambiguatingDescription?: string;
+  /**
+   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   */
+  image?: schema.ImageObjectOrSubClass | string;
 };
 
 /**
@@ -217,52 +219,52 @@ export type DemandOrSubClass =
 export const DemandJoiSchema = Joi.object({
   '@type': Joi.string().valid('Demand').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
   description: Joi.string(),
   '@id': Joi.string().uri(),
+  includesObject: Joi.alternatives().try(Joi.lazy(() => schema.TypeAndQuantityNodeOrSubClassJoiSchema), Joi.string().uri()),
+  areaServed: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.lazy(() => schema.AdministrativeAreaOrSubClassJoiSchema), Joi.string().uri()),
   availableDeliveryMethod: Joi.lazy(() => schema.DeliveryMethodJoiSchema),
-  itemCondition: Joi.lazy(() => schema.OfferItemConditionJoiSchema),
-  validFrom: Joi.string().isoDate(),
-  seller: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  gtin12: Joi.string(),
-  eligibleRegion: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  warranty: Joi.alternatives().try(Joi.lazy(() => schema.WarrantyPromiseOrSubClassJoiSchema), Joi.string().uri()),
-  availabilityEnds: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
-  deliveryLeadTime: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
+  serialNumber: Joi.string(),
+  gtin13: Joi.string(),
+  eligibleCustomerType: Joi.lazy(() => schema.BusinessEntityTypeJoiSchema),
+  availability: Joi.lazy(() => schema.ItemAvailabilityJoiSchema),
+  gtin8: Joi.string(),
+  eligibleTransactionVolume: Joi.alternatives().try(Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string().uri()),
+  acceptedPaymentMethod: Joi.alternatives().try(Joi.lazy(() => schema.LoanOrCreditOrSubClassJoiSchema), Joi.lazy(() => schema.PaymentMethodJoiSchema), Joi.string().uri()),
+  businessFunction: Joi.lazy(() => schema.BusinessFunctionJoiSchema),
   eligibleDuration: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
   availabilityStarts: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
-  serialNumber: Joi.string(),
-  acceptedPaymentMethod: Joi.alternatives().try(Joi.lazy(() => schema.LoanOrCreditOrSubClassJoiSchema), Joi.lazy(() => schema.PaymentMethodJoiSchema), Joi.string().uri()),
-  priceSpecification: Joi.alternatives().try(Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string().uri()),
-  eligibleTransactionVolume: Joi.alternatives().try(Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string().uri()),
-  gtin13: Joi.string(),
-  gtin: Joi.string(),
-  areaServed: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.lazy(() => schema.AdministrativeAreaOrSubClassJoiSchema), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.string().uri()),
-  advanceBookingRequirement: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
-  itemOffered: Joi.alternatives().try(Joi.lazy(() => schema.TripOrSubClassJoiSchema), Joi.lazy(() => schema.ProductOrSubClassJoiSchema), Joi.lazy(() => schema.MenuItemOrSubClassJoiSchema), Joi.lazy(() => schema.ServiceOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.AggregateOfferOrSubClassJoiSchema), Joi.string().uri()),
-  inventoryLevel: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
-  ineligibleRegion: Joi.alternatives().try(Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.string(), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
+  eligibleRegion: Joi.alternatives().try(Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  seller: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  warranty: Joi.alternatives().try(Joi.lazy(() => schema.WarrantyPromiseOrSubClassJoiSchema), Joi.string().uri()),
+  deliveryLeadTime: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
   mpn: Joi.string(),
-  includesObject: Joi.alternatives().try(Joi.lazy(() => schema.TypeAndQuantityNodeOrSubClassJoiSchema), Joi.string().uri()),
-  availability: Joi.lazy(() => schema.ItemAvailabilityJoiSchema),
-  sku: Joi.string(),
-  eligibleCustomerType: Joi.lazy(() => schema.BusinessEntityTypeJoiSchema),
-  gtin14: Joi.string(),
-  eligibleQuantity: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
+  gtin12: Joi.string(),
   availableAtOrFrom: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
-  gtin8: Joi.string(),
-  businessFunction: Joi.lazy(() => schema.BusinessFunctionJoiSchema),
+  validFrom: Joi.string().isoDate(),
+  itemOffered: Joi.alternatives().try(Joi.lazy(() => schema.TripOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.AggregateOfferOrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.ServiceOrSubClassJoiSchema), Joi.lazy(() => schema.ProductOrSubClassJoiSchema), Joi.lazy(() => schema.MenuItemOrSubClassJoiSchema), Joi.string().uri()),
+  gtin14: Joi.string(),
+  availabilityEnds: Joi.alternatives().try(Joi.string(), Joi.string().isoDate()),
   validThrough: Joi.string().isoDate(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  sku: Joi.string(),
+  gtin: Joi.string(),
+  itemCondition: Joi.lazy(() => schema.OfferItemConditionJoiSchema),
+  inventoryLevel: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
+  advanceBookingRequirement: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
+  priceSpecification: Joi.alternatives().try(Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string().uri()),
+  ineligibleRegion: Joi.alternatives().try(Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  eligibleQuantity: Joi.alternatives().try(Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.string().uri(), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema)),
   additionalType: Joi.string().uri(),
-  alternateName: Joi.string(),
   url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  alternateName: Joi.string(),
+  sameAs: Joi.string().uri(),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
 });
 
 /**

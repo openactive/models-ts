@@ -4,50 +4,79 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [data-models-update]
+  # Lets other repositories (e.g. models-lib pull requests) test the TypeScript models generated
+  # from a specific models-lib or data-models ref. In that case no pull request is created.
+  workflow_call:
+    inputs:
+      models-lib_ref:
+        required: false
+        type: string
+      data-models_ref:
+        required: false
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
   generate:
     runs-on: ubuntu-latest
 
     steps:
+      # The repository is named explicitly, as this workflow can be called from another repository
       - name: Checkout models-ts
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
+          repository: openactive/models-ts
           ref: main
           path: models-ts
 
       - name: Checkout models-lib
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: openactive/models-lib
+          ref: ${{ inputs.models-lib_ref }}
           path: models-lib
 
-      - name: Setup Node.js 14.x
-        uses: actions/setup-node@v1
+      - name: Setup Node.js 18.17.1
+        uses: actions/setup-node@v4
         with:
-          node-version: 14.x
-        
+          node-version: 18.17.1
+
       - name: Install models-lib
         run: npm install
         working-directory: ./models-lib/
-        
+
       - name: Update models-lib with latest data-models
+        if: ${{ !inputs.data-models_ref }}
         run: npm update @openactive/data-models
+        working-directory: ./models-lib/
+
+      - name: Install data-models ${{ inputs.data-models_ref }}
+        if: ${{ inputs.data-models_ref }}
+        env:
+          DATA_MODELS_REF: ${{ inputs.data-models_ref }}
+        run: npm install "github:openactive/data-models#$DATA_MODELS_REF"
         working-directory: ./models-lib/
 
       - name: Run TypeScript models generator
         run: npm start -- generate TypeScript --destination ../models-ts/src/
         working-directory: ./models-lib/
-        
+
       - name: Install models-ts
         run: npm install
         working-directory: ./models-ts/
-        
+
       - name: Build models-ts types
         run: npm run build
         working-directory: ./models-ts/
 
+      - name: Test models-ts
+        run: npm test
+        working-directory: ./models-ts/
+
       - name: Generate GitHub App Token
+        if: ${{ !inputs.models-lib_ref && !inputs.data-models_ref }}
         uses: actions/create-github-app-token@v1
         id: generate-token
         with:
@@ -55,8 +84,9 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
+        if: ${{ !inputs.models-lib_ref && !inputs.data-models_ref }}
         id: cpr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7
         with:
           path: ./models-ts/
           token: ${{ steps.generate-token.outputs.token }}
@@ -74,6 +104,10 @@ jobs:
           draft: false
 
       - name: Check outputs
+        if: ${{ !inputs.models-lib_ref && !inputs.data-models_ref }}
+        env:
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
         run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Number - $PR_NUMBER"
+          echo "Pull Request URL - $PR_URL"

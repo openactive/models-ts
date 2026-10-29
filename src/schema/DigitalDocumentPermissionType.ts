@@ -9,9 +9,9 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type DigitalDocumentPermissionType = 
   
-  | 'https://schema.org/WritePermission'
-  | 'https://schema.org/ReadPermission'
   | 'https://schema.org/CommentPermission'
+  | 'https://schema.org/ReadPermission'
+  | 'https://schema.org/WritePermission'
   ;
 
 /**
@@ -20,9 +20,9 @@ export type DigitalDocumentPermissionType =
  * A type of permission which can be granted for accessing a digital document.
  */
 export const DigitalDocumentPermissionTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/WritePermission',
-  'https://schema.org/ReadPermission',
   'https://schema.org/CommentPermission',
+  'https://schema.org/ReadPermission',
+  'https://schema.org/WritePermission',
 );
 
 /**

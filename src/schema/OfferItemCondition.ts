@@ -10,9 +10,9 @@ import { OaValidationError } from '../oaValidationError';
 export type OfferItemCondition = 
   
   | 'https://schema.org/DamagedCondition'
-  | 'https://schema.org/UsedCondition'
   | 'https://schema.org/NewCondition'
   | 'https://schema.org/RefurbishedCondition'
+  | 'https://schema.org/UsedCondition'
   ;
 
 /**
@@ -22,9 +22,9 @@ export type OfferItemCondition =
  */
 export const OfferItemConditionJoiSchema = Joi.string().valid(
   'https://schema.org/DamagedCondition',
-  'https://schema.org/UsedCondition',
   'https://schema.org/NewCondition',
   'https://schema.org/RefurbishedCondition',
+  'https://schema.org/UsedCondition',
 );
 
 /**

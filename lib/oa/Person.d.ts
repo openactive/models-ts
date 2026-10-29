@@ -36,11 +36,9 @@ export declare type Person = {
      */
     description?: string;
     /**
-     * A unique url based identifier for the record
-     *
-     * ```json
-     * "@id": "https://example.com/person/12345"
-     * ```
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -57,6 +55,10 @@ export declare type Person = {
      */
     email?: string;
     /**
+     * Person to contact in case of emergencies related to this Person.
+     */
+    emergencyContact?: oa.PersonOrSubClass;
+    /**
      * A last name for the person.
      * This person must have given permission for their personal information to be shared as part of the open data.
      *
@@ -66,13 +68,13 @@ export declare type Person = {
      */
     familyName?: string;
     /**
-     * Indicates the gender of the person.
+     * Indicates the gender of the person. While `https://schema.org/Male` and `https://schema.org/Female` may be used, text strings are also acceptable for people who do not identify as a binary gender.
      *
      * ```json
      * "gender": "https://schema.org/Female"
      * ```
      */
-    gender?: schema.GenderType;
+    gender?: string | schema.GenderType;
     /**
      * A first name for the person.
      * This person must have given permission for their personal information to be shared as part of the open data.
@@ -82,6 +84,11 @@ export declare type Person = {
      * ```
      */
     givenName?: string;
+    /**
+     * Reference to the CustomerAccount associated with this Customer, for use within the Open Booking API flow.
+     * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
+     */
+    hasAccount?: oa.CustomerAccountOrSubClass | string;
     /**
      * Indicates whether the Seller allows open booking
      *
@@ -170,238 +177,254 @@ export declare type Person = {
      */
     'beta:formalCriteriaMet'?: string[];
     /**
-     * The most generic uni-directional social relation.
+     * An additional name for a Person, can be used for a middle name.
      */
-    follows?: schema.PersonOrSubClass | string;
-    /**
-     * A contact location for a person's place of work.
-     */
-    workLocation?: schema.ContactPointOrSubClass | schema.PlaceOrSubClass | string;
+    additionalName?: string;
     /**
      * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
      */
     affiliation?: schema.OrganizationOrSubClass | string;
     /**
-     * The height of the item.
+     * The number of completed interactions for this entity, in a particular role (the 'agent'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService).
      */
-    height?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
-    /**
-     * Organizations that the person works for.
-     */
-    worksFor?: schema.OrganizationOrSubClass | string;
-    /**
-     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
-     */
-    honorificPrefix?: string;
-    /**
-     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
-     */
-    globalLocationNumber?: string;
-    /**
-     * Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions.
-     */
-    knowsAbout?: string | schema.ThingOrSubClass;
-    /**
-     * A contact point for a person or organization.
-     */
-    contactPoint?: schema.ContactPointOrSubClass | string;
-    /**
-     * Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
-     */
-    knowsLanguage?: string | schema.LanguageOrSubClass;
-    /**
-     * The Person's occupation. For past professions, use Role for expressing dates.
-     */
-    hasOccupation?: schema.OccupationOrSubClass | string;
-    /**
-     * Event that this person is a performer or participant in.
-     */
-    performerIn?: schema.Event_OrSubClass | string;
-    /**
-     * The weight of the product or person.
-     */
-    weight?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * A contact location for a person's residence.
-     */
-    homeLocation?: schema.PlaceOrSubClass | schema.ContactPointOrSubClass | string;
-    /**
-     * The person's spouse.
-     */
-    spouse?: schema.PersonOrSubClass | string;
-    /**
-     * A sibling of the person.
-     */
-    siblings?: schema.PersonOrSubClass | string;
-    /**
-     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
-     */
-    duns?: string;
-    /**
-     * A colleague of the person.
-     */
-    colleague?: schema.PersonOrSubClass | string;
-    /**
-     * A contact point for a person or organization.
-     */
-    contactPoints?: schema.ContactPointOrSubClass | string;
-    /**
-     * A pointer to products or services offered by the organization or person.
-     */
-    makesOffer?: schema.OfferOrSubClass | string;
-    /**
-     * The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
-     */
-    isicV4?: string;
-    /**
-     * An award won by or for this item.
-     */
-    award?: string;
-    /**
-     * The total financial value of the person as calculated by subtracting assets from liabilities.
-     */
-    netWorth?: schema.PriceSpecificationOrSubClass | schema.MonetaryAmountOrSubClass | string;
-    /**
-     * A pointer to products or services sought by the organization or person (demand).
-     */
-    seeks?: schema.DemandOrSubClass | string;
-    /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
-     */
-    hasOfferCatalog?: schema.OfferCatalogOrSubClass | string;
-    /**
-     * Date of birth.
-     */
-    birthDate?: string;
-    /**
-     * A child of the person.
-     */
-    children?: schema.PersonOrSubClass | string;
-    /**
-     * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-     */
-    sponsor?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * The place where the person was born.
-     */
-    birthPlace?: schema.PlaceOrSubClass | string;
-    /**
-     * An honorific suffix following a Person's name such as M.D. /PhD/MSCSW.
-     */
-    honorificSuffix?: string;
-    /**
-     * A colleague of the person.
-     */
-    colleagues?: schema.PersonOrSubClass | string;
+    agentInteractionStatistic?: schema.InteractionCounterOrSubClass | string;
     /**
      * An organization that the person is an alumni of.
      */
     alumniOf?: schema.EducationalOrganizationOrSubClass | schema.OrganizationOrSubClass | string;
     /**
-     * Products owned by the organization or person.
+     * An award won by or for this item.
      */
-    owns?: schema.OwnershipInfoOrSubClass | schema.ProductOrSubClass | string;
-    /**
-     * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
-     */
-    interactionStatistic?: schema.InteractionCounterOrSubClass | string;
-    /**
-     * Date of death.
-     */
-    deathDate?: string;
-    /**
-     * An additional name for a Person, can be used for a middle name.
-     */
-    additionalName?: string;
-    /**
-     * The fax number.
-     */
-    faxNumber?: string;
-    /**
-     * The most generic bi-directional social/work relation.
-     */
-    knows?: schema.PersonOrSubClass | string;
-    /**
-     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
-     */
-    memberOf?: schema.ProgramMembershipOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * A sibling of the person.
-     */
-    sibling?: schema.PersonOrSubClass | string;
-    /**
-     * The place where the person died.
-     */
-    deathPlace?: schema.PlaceOrSubClass | string;
-    /**
-     * A credential awarded to the Person or Organization.
-     */
-    hasCredential?: schema.EducationalOccupationalCredentialOrSubClass | string;
-    /**
-     * A parents of the person.
-     */
-    parents?: schema.PersonOrSubClass | string;
-    /**
-     * The most generic familial relation.
-     */
-    relatedTo?: schema.PersonOrSubClass | string;
-    /**
-     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-     */
-    brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
-     */
-    taxID?: string;
-    /**
-     * Nationality of the person.
-     */
-    nationality?: schema.CountryOrSubClass | string;
-    /**
-     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
-     */
-    naics?: string;
-    /**
-     * A person or organization that supports (sponsors) something through some kind of financial contribution.
-     */
-    funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
-     *
-     * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
-     *
-     */
-    publishingPrinciples?: string | schema.CreativeWorkOrSubClass;
+    award?: string;
     /**
      * Awards won by or for this item.
      */
     awards?: string;
     /**
+     * Date of birth.
+     */
+    birthDate?: string;
+    /**
+     * The place where the person was born.
+     */
+    birthPlace?: schema.PlaceOrSubClass | string;
+    /**
+     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+     */
+    brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
      * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.
      */
     callSign?: string;
     /**
-     * A parent of this person.
+     * A child of the person.
      */
-    parent?: schema.PersonOrSubClass | string;
+    children?: schema.PersonOrSubClass | string;
+    /**
+     * A colleague of the person.
+     */
+    colleague?: schema.PersonOrSubClass | string;
+    /**
+     * A colleague of the person.
+     */
+    colleagues?: schema.PersonOrSubClass | string;
+    /**
+     * A contact point for a person or organization.
+     */
+    contactPoint?: schema.ContactPointOrSubClass | string;
+    /**
+     * A contact point for a person or organization.
+     */
+    contactPoints?: schema.ContactPointOrSubClass | string;
+    /**
+     * Date of death.
+     */
+    deathDate?: string;
+    /**
+     * The place where the person died.
+     */
+    deathPlace?: schema.PlaceOrSubClass | string;
+    /**
+     * The Dun & Bradstreet DUNS number for identifying an organization or business person.
+     */
+    duns?: string;
+    /**
+     * The fax number.
+     */
+    faxNumber?: string;
+    /**
+     * The most generic uni-directional social relation.
+     */
+    follows?: schema.PersonOrSubClass | string;
+    /**
+     * A person or organization that supports (sponsors) something through some kind of financial contribution.
+     */
+    funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].
+     */
+    funding?: schema.GrantOrSubClass | string;
+    /**
+     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
+     */
+    globalLocationNumber?: string;
+    /**
+     * Certification information about a product, organization, service, place, or person.
+     */
+    hasCertification?: schema.CertificationOrSubClass | string;
+    /**
+     * A credential awarded to the Person or Organization.
+     */
+    hasCredential?: schema.CredentialOrSubClass | string;
+    /**
+     * The Person's occupation. For past professions, use Role for expressing dates.
+     */
+    hasOccupation?: schema.OccupationOrSubClass | string;
+    /**
+     * Indicates an OfferCatalog listing for this Organization, Person, or Service.
+     */
+    hasOfferCatalog?: schema.OfferCatalogOrSubClass | string;
     /**
      * Points-of-Sales operated by the organization or person.
      */
     hasPOS?: schema.PlaceOrSubClass | string;
     /**
-     * A CreativeWork or Event about this Thing.
+     * The height of the item.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    height?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * A contact location for a person's residence.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    homeLocation?: schema.ContactPointOrSubClass | schema.PlaceOrSubClass | string;
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    honorificPrefix?: string;
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
+     */
+    honorificSuffix?: string;
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used.
+     */
+    interactionStatistic?: schema.InteractionCounterOrSubClass | string;
+    /**
+     * The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
+     */
+    isicV4?: string;
+    /**
+     * The most generic bi-directional social/work relation.
+     */
+    knows?: schema.PersonOrSubClass | string;
+    /**
+     * Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions.
+     */
+    knowsAbout?: string | schema.ThingOrSubClass;
+    /**
+     * Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
+     */
+    knowsLanguage?: schema.LanguageOrSubClass | string;
+    /**
+     * A life event like baptism, communions, Bar Mitzvahs, Aqiqah, Namakarana, Miyamairi, burial, ....
+     */
+    lifeEvent?: schema.Event_OrSubClass | string;
+    /**
+     * A pointer to products or services offered by the organization or person.
+     */
+    makesOffer?: schema.OfferOrSubClass | string;
+    /**
+     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+     */
+    memberOf?: schema.MemberProgramTierOrSubClass | schema.OrganizationOrSubClass | schema.ProgramMembershipOrSubClass | string;
+    /**
+     * The North American Industry Classification System (NAICS) code for a particular organization or business person.
+     */
+    naics?: string;
+    /**
+     * Nationality of the person.
+     */
+    nationality?: schema.CountryOrSubClass | string;
+    /**
+     * The total financial value of the person as calculated by subtracting the total value of liabilities from the total value of assets.
+     */
+    netWorth?: schema.MonetaryAmountOrSubClass | schema.PriceSpecificationOrSubClass | string;
+    /**
+     * Things owned by the organization or person.
+     */
+    owns?: schema.ThingOrSubClass | string;
+    /**
+     * A parent of this person.
+     */
+    parent?: schema.PersonOrSubClass | string;
+    /**
+     * A parents of the person.
+     */
+    parents?: schema.PersonOrSubClass | string;
+    /**
+     * Event that this person is a performer or participant in.
+     */
+    performerIn?: schema.Event_OrSubClass | string;
+    /**
+     * A short string listing or describing pronouns for a person. Typically the person concerned is the best authority as pronouns are a critical part of personal identity and expression. Publishers and consumers of this information are reminded to treat this data responsibly, take country-specific laws related to gender expression into account, and be wary of out-of-date data and drawing unwarranted inferences about the person being described.
+     *
+     * In English, formulations such as "they/them", "she/her", and "he/him" are commonly used online and can also be used here. We do not intend to enumerate all possible micro-syntaxes in all languages. More structured and well-defined external values for pronouns can be referenced using the [[StructuredValue]] or [[DefinedTerm]] values.
+     *
+     */
+    pronouns?: schema.DefinedTermOrSubClass | schema.StructuredValueOrSubClass | string;
+    /**
+     * The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].
+     *
+     * While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
+     *
+     */
+    publishingPrinciples?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * The most generic familial relation.
+     */
+    relatedTo?: schema.PersonOrSubClass | string;
+    /**
+     * A pointer to products or services sought by the organization or person (demand).
+     */
+    seeks?: schema.DemandOrSubClass | string;
+    /**
+     * A sibling of the person.
+     */
+    sibling?: schema.PersonOrSubClass | string;
+    /**
+     * A sibling of the person.
+     */
+    siblings?: schema.PersonOrSubClass | string;
+    /**
+     * A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.
+     */
+    skills?: schema.DefinedTermOrSubClass | string;
+    /**
+     * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+     */
+    sponsor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * The person's spouse.
+     */
+    spouse?: schema.PersonOrSubClass | string;
+    /**
+     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
+     */
+    taxID?: string;
+    /**
+     * The weight of the product or person.
+     */
+    weight?: schema.MassOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * A contact location for a person's place of work.
+     */
+    workLocation?: schema.ContactPointOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Organizations that the person works for.
+     */
+    worksFor?: schema.OrganizationOrSubClass | string;
+    /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -409,13 +432,29 @@ export declare type Person = {
      */
     alternateName?: string;
     /**
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     */
+    disambiguatingDescription?: string;
+    /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
 };
 /**
  * Person

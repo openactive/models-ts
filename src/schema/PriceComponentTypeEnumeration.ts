@@ -9,10 +9,10 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type PriceComponentTypeEnumeration = 
   
-  | 'https://schema.org/Downpayment'
+  | 'https://schema.org/ActivationFee'
   | 'https://schema.org/CleaningFee'
   | 'https://schema.org/DistanceFee'
-  | 'https://schema.org/ActivationFee'
+  | 'https://schema.org/Downpayment'
   | 'https://schema.org/Installment'
   | 'https://schema.org/Subscription'
   ;
@@ -23,10 +23,10 @@ export type PriceComponentTypeEnumeration =
  * Enumerates different price components that together make up the total price for an offered product.
  */
 export const PriceComponentTypeEnumerationJoiSchema = Joi.string().valid(
-  'https://schema.org/Downpayment',
+  'https://schema.org/ActivationFee',
   'https://schema.org/CleaningFee',
   'https://schema.org/DistanceFee',
-  'https://schema.org/ActivationFee',
+  'https://schema.org/Downpayment',
   'https://schema.org/Installment',
   'https://schema.org/Subscription',
 );

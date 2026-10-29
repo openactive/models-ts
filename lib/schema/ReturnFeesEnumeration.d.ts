@@ -3,13 +3,13 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:ReturnFeesEnumeration
  *
- * ReturnFeesEnumeration expresses policies for return fees.
+ * Enumerates several kinds of policies for product return fees.
  */
-export declare type ReturnFeesEnumeration = 'https://schema.org/ReturnShippingFees' | 'https://schema.org/OriginalShippingFees' | 'https://schema.org/RestockingFees';
+export declare type ReturnFeesEnumeration = 'https://schema.org/FreeReturn' | 'https://schema.org/OriginalShippingFees' | 'https://schema.org/RestockingFees' | 'https://schema.org/ReturnFeesCustomerResponsibility' | 'https://schema.org/ReturnShippingFees';
 /**
  * schema:ReturnFeesEnumeration - Validation schema (w/ JOI)
  *
- * ReturnFeesEnumeration expresses policies for return fees.
+ * Enumerates several kinds of policies for product return fees.
  */
 export declare const ReturnFeesEnumerationJoiSchema: Joi.StringSchema;
 /**

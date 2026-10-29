@@ -12,14 +12,40 @@ describe('data-models example - facilityuse_example_1.json', () => {
   ],
   "@type": "FacilityUse",
   "@id": "http://www.example.org/facility-uses/1",
-  "name": "Example Leisure Centre Outdoor Tennis",
-  "description": "Table courts are available to hire for thirty minute slots",
-  "activity": [
+  "name": "Outdoor Tennis",
+  "description": "Tennis courts are available to hire for thirty minute slots",
+  "facilityType": [
     {
-      "@id": "https://openactive.io/activity-list#f2ea7405-6098-4378-b0fe-4e398a659fc4",
-      "inScheme": "https://openactive.io/activity-list",
-      "prefLabel": "Tennis",
-      "@type": "Concept"
+      "@type": "Concept",
+      "@id": "https://openactive.io/facility-types#bba8ae59-d152-40bc-85cc-88c5375696d4",
+      "prefLabel": "Tennis Court",
+      "inScheme": "https://openactive.io/facility-types"
+    }
+  ],
+  "individualFacilityUse": [
+    {
+      "@type": "IndividualFacilityUse",
+      "@id": "http://www.example.org/facility-uses/1/individual-facility-uses/1",
+      "name": "Outdoor Tennis on Main Tennis Court 1",
+      "beta:sportsActivityLocation": [
+        {
+          "@type": "SportsActivityLocation",
+          "name": "Main Tennis Court 1",
+          "containedInPlace": "http://www.example.org/api/locations/8958f9b8-2004-4e90-80ff-50c98a9b121d"
+        }
+      ]
+    },
+    {
+      "@type": "IndividualFacilityUse",
+      "@id": "http://www.example.org/facility-uses/1/individual-facility-uses/2",
+      "name": "Outdoor Tennis on Main Tennis Court 2",
+      "beta:sportsActivityLocation": [
+        {
+          "@type": "SportsActivityLocation",
+          "name": "Main Tennis Court 2",
+          "containedInPlace": "http://www.example.org/api/locations/8958f9b8-2004-4e90-80ff-50c98a9b121d"
+        }
+      ]
     }
   ],
   "provider": {
@@ -154,27 +180,7 @@ describe('data-models example - facilityuse_example_1.json', () => {
       "url": "http://example.org/images/1.jpg"
     }
   ],
-  "beta:sportsActivityLocation": [
-    {
-      "@type": "SportsActivityLocation",
-      "name": "Main Tennis Court 1",
-      "containedInPlace": "http://www.example.org/api/locations/8958f9b8-2004-4e90-80ff-50c98a9b121d"
-    },
-    {
-      "@type": "SportsActivityLocation",
-      "name": "Main Tennis Court 2",
-      "containedInPlace": "http://www.example.org/api/locations/8958f9b8-2004-4e90-80ff-50c98a9b121d"
-    }
-  ],
-  "beta:facilitySetting": "https://openactive.io/ns-beta#IndoorFacility",
-  "beta:facilityType": [
-    {
-      "@type": "Concept",
-      "@id": "https://openactive.io/facility-types#a5ac16fe-06ac-4bc1-93f7-69ff3bfcf3b9",
-      "prefLabel": "3G Artificial Grass",
-      "inScheme": "https://openactive.io/facility-types"
-    }
-  ],
+  "beta:facilitySetting": "https://openactive.io/ns-beta#OutdoorFacility",
   "offers": [
     {
       "@type": "Offer",

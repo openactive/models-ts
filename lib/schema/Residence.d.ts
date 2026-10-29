@@ -19,9 +19,11 @@ export declare type Residence = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
@@ -29,202 +31,204 @@ export declare type Residence = {
      */
     accommodationFloorPlan?: schema.FloorPlanOrSubClass | string;
     /**
-     * The overall rating, based on a collection of reviews or ratings, of the item.
+     * The floor level for an [[Accommodation]] in a multi-storey building. Since counting
+     *   systems [vary internationally](https://en.wikipedia.org/wiki/Storey#Consecutive_number_floor_designations), the local system should be used where possible.
      */
-    aggregateRating?: schema.AggregateRatingOrSubClass | string;
+    floorLevel?: string;
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     */
-    geoIntersects?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
-    /**
-     * Photographs of this place.
-     */
-    photos?: schema.PhotographOrSubClass | schema.ImageObjectOrSubClass | string;
-    /**
-     * Physical address of the item.
-     */
-    address?: string | schema.PostalAddressOrSubClass;
-    /**
-     * A page providing information on how to book a tour of some [[Place]], such as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting, as well as other kinds of tours as appropriate.
-     */
-    tourBookingPage?: string;
-    /**
-     * The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-     */
-    longitude?: string | number;
-    /**
-     * The geo coordinates of the place.
-     */
-    geo?: schema.GeoCoordinatesOrSubClass | schema.GeoShapeOrSubClass | string;
-    /**
-     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
-     */
-    globalLocationNumber?: string;
-    /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     */
-    geoCoveredBy?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
-    /**
-     * The basic containment relation between a place and one that contains it.
-     */
-    containedInPlace?: schema.PlaceOrSubClass | string;
-    /**
-     * The special opening hours of a certain place.\n\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
-     *
-     */
-    specialOpeningHoursSpecification?: schema.OpeningHoursSpecificationOrSubClass | string;
-    /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     */
-    geoOverlaps?: schema.PlaceOrSubClass | schema.GeospatialGeometryOrSubClass | string;
-    /**
-     * A photograph of this place.
-     */
-    photo?: schema.PhotographOrSubClass | schema.ImageObjectOrSubClass | string;
-    /**
-     * The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
-     */
-    isicV4?: string;
-    /**
-     * Review of the item.
-     */
-    reviews?: schema.ReviewOrSubClass | string;
-    /**
-     * A review of the item.
-     */
-    review?: schema.ReviewOrSubClass | string;
-    /**
-     * Upcoming or past events associated with this place or organization.
-     */
-    events?: schema.Event_OrSubClass | string;
-    /**
-     * The opening hours of a certain place.
-     */
-    openingHoursSpecification?: schema.OpeningHoursSpecificationOrSubClass | string;
-    /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     */
-    geoWithin?: schema.PlaceOrSubClass | schema.GeospatialGeometryOrSubClass | string;
-    /**
-     * Indicates whether some facility (e.g. [[FoodEstablishment]], [[CovidTestingFacility]]) offers a service that can be used by driving through in a car. In the case of [[CovidTestingFacility]] such facilities could potentially help with social distancing from other potentially-infected users.
-     */
-    hasDriveThroughService?: boolean;
-    /**
-     * The basic containment relation between a place and one that contains it.
-     */
-    containedIn?: schema.PlaceOrSubClass | string;
-    /**
-     * Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     */
-    geoCovers?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
-    /**
-     * A URL to a map of the place.
-     */
-    map?: string;
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.
-     */
-    amenityFeature?: schema.LocationFeatureSpecificationOrSubClass | string;
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     */
-    event?: schema.Event_OrSubClass | string;
-    /**
-     * A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+     * A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
      *
      */
     additionalProperty?: schema.PropertyValueOrSubClass | string;
     /**
-     * The telephone number.
+     * Physical address of the item.
      */
-    telephone?: string;
+    address?: schema.PostalAddressOrSubClass | string;
     /**
-     * An associated logo.
+     * The overall rating, based on a collection of reviews or ratings, of the item.
      */
-    logo?: schema.ImageObjectOrSubClass | string;
+    aggregateRating?: schema.AggregateRatingOrSubClass | string;
     /**
-     * A flag to signal that the item, event, or place is accessible for free.
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.
      */
-    isAccessibleForFree?: boolean;
-    /**
-     * The total number of individuals that may attend an event or venue.
-     */
-    maximumAttendeeCapacity?: number;
-    /**
-     * A slogan or motto associated with the item.
-     */
-    slogan?: string;
-    /**
-     * A URL to a map of the place.
-     */
-    maps?: string;
-    /**
-     * A URL to a map of the place.
-     */
-    hasMap?: string | schema.MapOrSubClass;
-    /**
-     * Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)
-     */
-    geoEquals?: schema.PlaceOrSubClass | schema.GeospatialGeometryOrSubClass | string;
-    /**
-     * The basic containment relation between a place and another that it contains.
-     */
-    containsPlace?: schema.PlaceOrSubClass | string;
-    /**
-     * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: they have no point in common. They form a set of disconnected geometries." (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM))
-     */
-    geoDisjoint?: schema.PlaceOrSubClass | schema.GeospatialGeometryOrSubClass | string;
-    /**
-     * The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-     */
-    latitude?: string | number;
-    /**
-     * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
-     */
-    smokingAllowed?: boolean;
-    /**
-     * The fax number.
-     */
-    faxNumber?: string;
+    amenityFeature?: schema.LocationFeatureSpecificationOrSubClass | string;
     /**
      * A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs.\n\nFor example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.
      *
      */
     branchCode?: string;
     /**
-     * Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) )
+     * The basic containment relation between a place and one that contains it.
      */
-    geoTouches?: schema.PlaceOrSubClass | schema.GeospatialGeometryOrSubClass | string;
+    containedIn?: schema.PlaceOrSubClass | string;
     /**
-     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     * The basic containment relation between a place and one that contains it.
      */
-    geoCrosses?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    containedInPlace?: schema.PlaceOrSubClass | string;
+    /**
+     * The basic containment relation between a place and another that it contains.
+     */
+    containsPlace?: schema.PlaceOrSubClass | string;
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     */
+    event?: schema.Event_OrSubClass | string;
+    /**
+     * Upcoming or past events associated with this place or organization.
+     */
+    events?: schema.Event_OrSubClass | string;
+    /**
+     * The fax number.
+     */
+    faxNumber?: string;
+    /**
+     * The geo coordinates of the place.
+     */
+    geo?: schema.GeoCoordinatesOrSubClass | schema.GeoShapeOrSubClass | string;
     /**
      * Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
      */
     geoContains?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
     /**
-     * A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoCoveredBy?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoCovers?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoCrosses?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: "they have no point in common. They form a set of disconnected geometries." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
+     */
+    geoDisjoint?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship).
+     */
+    geoEquals?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoIntersects?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoOverlaps?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
+     */
+    geoTouches?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     */
+    geoWithin?: schema.GeospatialGeometryOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
+     */
+    globalLocationNumber?: string;
+    /**
+     * Certification information about a product, organization, service, place, or person.
+     */
+    hasCertification?: schema.CertificationOrSubClass | string;
+    /**
+     * Indicates whether some facility (e.g. [[FoodEstablishment]], [[CovidTestingFacility]]) offers a service that can be used by driving through in a car. In the case of [[CovidTestingFacility]] such facilities could potentially help with social distancing from other potentially-infected users.
+     */
+    hasDriveThroughService?: boolean;
+    /**
+     * The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital link</a> associated with the object. This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a [[Product]] or an [[Organization]], and for the correct granularity. In particular, for products:<ul><li>A Digital Link that contains a serial number (AI <code>21</code>) should only be present on instances of [[IndividualProduct]]</li><li>A Digital Link that contains a lot number (AI <code>10</code>) should be annotated as [[SomeProducts]] if only products from that lot are sold, or [[IndividualProduct]] if there is only a specific product.</li><li>A Digital Link that contains a global model number (AI <code>8013</code>) should be attached to a [[Product]] or a [[ProductModel]].</li></ul> Other item types should be adapted similarly.
+     */
+    hasGS1DigitalLink?: string;
+    /**
+     * A URL to a map of the place.
+     */
+    hasMap?: schema.MapOrSubClass | string;
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     */
+    isAccessibleForFree?: boolean;
+    /**
+     * The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
+     */
+    isicV4?: string;
+    /**
+     * Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
+     */
+    keywords?: schema.DefinedTermOrSubClass | string;
+    /**
+     * The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
+     */
+    latitude?: number | string;
+    /**
+     * An associated logo.
+     */
+    logo?: schema.ImageObjectOrSubClass | string;
+    /**
+     * The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
+     */
+    longitude?: number | string;
+    /**
+     * A URL to a map of the place.
+     */
+    map?: string;
+    /**
+     * A URL to a map of the place.
+     */
+    maps?: string;
+    /**
+     * The total number of individuals that may attend an event or venue.
+     */
+    maximumAttendeeCapacity?: number;
+    /**
+     * The opening hours of a certain place.
+     */
+    openingHoursSpecification?: schema.OpeningHoursSpecificationOrSubClass | string;
+    /**
+     * A photograph of this place.
+     */
+    photo?: schema.ImageObjectOrSubClass | schema.PhotographOrSubClass | string;
+    /**
+     * Photographs of this place.
+     */
+    photos?: schema.ImageObjectOrSubClass | schema.PhotographOrSubClass | string;
+    /**
+     * A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value.
      */
     publicAccess?: boolean;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * A review of the item.
      */
-    sameAs?: string;
+    review?: schema.ReviewOrSubClass | string;
     /**
-     * A CreativeWork or Event about this Thing.
+     * Review of the item.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    reviews?: schema.ReviewOrSubClass | string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * A slogan or motto associated with the item.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    slogan?: string;
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    smokingAllowed?: boolean;
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * The special opening hours of a certain place.\n\nUse this to explicitly override general opening hours brought in scope by [[openingHoursSpecification]] or [[openingHours]].
+     *
+     */
+    specialOpeningHoursSpecification?: schema.OpeningHoursSpecificationOrSubClass | string;
+    /**
+     * The telephone number.
+     */
+    telephone?: string;
+    /**
+     * A page providing information on how to book a tour of some [[Place]], such as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting, as well as other kinds of tours as appropriate.
+     */
+    tourBookingPage?: string;
+    /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -232,17 +236,37 @@ export declare type Residence = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:Residence

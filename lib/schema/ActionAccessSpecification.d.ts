@@ -19,20 +19,13 @@ export declare type ActionAccessSpecification = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
-    /**
-     * An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
-     */
-    expectsAcceptanceOf?: schema.OfferOrSubClass | string;
-    /**
-     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
-     *
-     */
-    eligibleRegion?: string | schema.GeoShapeOrSubClass | schema.PlaceOrSubClass;
     /**
      * The end of the availability of the product or service included in the offer.
      */
@@ -42,36 +35,30 @@ export declare type ActionAccessSpecification = {
      */
     availabilityStarts?: string;
     /**
+     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+     */
+    category?: schema.CategoryCodeOrSubClass | schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
+    /**
+     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.\n\nSee also [[ineligibleRegion]].
+     *
+     */
+    eligibleRegion?: schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | string;
+    /**
+     * An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.
+     */
+    expectsAcceptanceOf?: schema.OfferOrSubClass | string;
+    /**
      * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.\n\nSee also [[eligibleRegion]].
      *
      */
-    ineligibleRegion?: schema.GeoShapeOrSubClass | string | schema.PlaceOrSubClass;
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-     */
-    category?: schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
+    ineligibleRegion?: schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | string;
     /**
      * Indicates if use of the media require a subscription  (either paid or free). Allowed values are ```true``` or ```false``` (note that an earlier version had 'yes', 'no').
      */
     requiresSubscription?: boolean | schema.MediaSubscriptionOrSubClass | string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-     */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-    /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -79,17 +66,37 @@ export declare type ActionAccessSpecification = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:ActionAccessSpecification

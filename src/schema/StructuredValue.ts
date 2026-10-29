@@ -22,29 +22,16 @@ export type StructuredValue = {
   /**
    * A description of the item.
    */
-  description?: string;
+  description?: string | schema.TextObjectOrSubClass;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-   */
-  sameAs?: string;
-  /**
-   * A CreativeWork or Event about this Thing.
-   */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-  /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
-   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-   */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
    */
   additionalType?: string;
   /**
@@ -52,17 +39,37 @@ export type StructuredValue = {
    */
   alternateName?: string;
   /**
-   * URL of the item.
+   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
-  url?: string;
+  disambiguatingDescription?: string;
   /**
    * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
    */
   image?: schema.ImageObjectOrSubClass | string;
   /**
-   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  disambiguatingDescription?: string;
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * URL of the item.
+   */
+  url?: string;
 };
 
 /**
@@ -74,31 +81,36 @@ export type StructuredValue = {
  */
 export type StructuredValueOrSubClass =
   | StructuredValue
-  | schema.NutritionInformationOrSubClass
-  | schema.EngineSpecificationOrSubClass
-  | schema.WarrantyPromiseOrSubClass
-  | schema.OfferShippingDetailsOrSubClass
-  | schema.OwnershipInfoOrSubClass
-  | schema.MonetaryAmountOrSubClass
-  | schema.QuantitativeValueOrSubClass
-  | schema.GeoShapeOrSubClass
-  | schema.RepaymentSpecificationOrSubClass
-  | schema.DeliveryTimeSettingsOrSubClass
-  | schema.InteractionCounterOrSubClass
-  | schema.PriceSpecificationOrSubClass
-  | schema.OpeningHoursSpecificationOrSubClass
-  | schema.PostalCodeRangeSpecificationOrSubClass
-  | schema.GeoCoordinatesOrSubClass
-  | schema.QuantitativeValueDistributionOrSubClass
-  | schema.ContactPointOrSubClass
-  | schema.ShippingDeliveryTimeOrSubClass
-  | schema.DefinedRegionOrSubClass
   | schema.CDCPMDRecordOrSubClass
-  | schema.PropertyValueOrSubClass
-  | schema.ExchangeRateSpecificationOrSubClass
+  | schema.ContactPointOrSubClass
   | schema.DatedMoneySpecificationOrSubClass
+  | schema.DefinedRegionOrSubClass
+  | schema.DeliveryTimeSettingsOrSubClass
+  | schema.EngineSpecificationOrSubClass
+  | schema.ExchangeRateSpecificationOrSubClass
+  | schema.GeoCoordinatesOrSubClass
+  | schema.GeoShapeOrSubClass
+  | schema.InstantaneousEventOrSubClass
+  | schema.InteractionCounterOrSubClass
+  | schema.MonetaryAmountOrSubClass
+  | schema.NutritionInformationOrSubClass
+  | schema.OfferShippingDetailsOrSubClass
+  | schema.OpeningHoursSpecificationOrSubClass
+  | schema.OrderItemOrSubClass
+  | schema.OwnershipInfoOrSubClass
+  | schema.PostalCodeRangeSpecificationOrSubClass
+  | schema.PriceSpecificationOrSubClass
+  | schema.PropertyValueOrSubClass
+  | schema.QuantitativeValueOrSubClass
+  | schema.QuantitativeValueDistributionOrSubClass
+  | schema.RepaymentSpecificationOrSubClass
+  | schema.ServicePeriodOrSubClass
+  | schema.ShippingConditionsOrSubClass
+  | schema.ShippingDeliveryTimeOrSubClass
   | schema.ShippingRateSettingsOrSubClass
+  | schema.ShippingServiceOrSubClass
   | schema.TypeAndQuantityNodeOrSubClass
+  | schema.WarrantyPromiseOrSubClass
   ;
 
 /**
@@ -107,19 +119,20 @@ export type StructuredValueOrSubClass =
 export const StructuredValueJoiSchema = Joi.object({
   '@type': Joi.string().valid('StructuredValue').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
-  description: Joi.string(),
+  description: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.TextObjectOrSubClassJoiSchema), Joi.string().uri()),
   '@id': Joi.string().uri(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  additionalType: Joi.string().uri(),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   alternateName: Joi.string(),
-  url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  url: Joi.string().uri(),
 });
 
 /**
@@ -131,31 +144,36 @@ export const StructuredValueJoiSchema = Joi.object({
  */
 export const StructuredValueOrSubClassJoiSchema = Joi.alternatives().try([
   StructuredValueJoiSchema,
-  Joi.lazy(() => schema.NutritionInformationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.EngineSpecificationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.WarrantyPromiseOrSubClassJoiSchema),
-  Joi.lazy(() => schema.OfferShippingDetailsOrSubClassJoiSchema),
-  Joi.lazy(() => schema.OwnershipInfoOrSubClassJoiSchema),
-  Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema),
-  Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema),
-  Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema),
-  Joi.lazy(() => schema.RepaymentSpecificationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.DeliveryTimeSettingsOrSubClassJoiSchema),
-  Joi.lazy(() => schema.InteractionCounterOrSubClassJoiSchema),
-  Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.OpeningHoursSpecificationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.PostalCodeRangeSpecificationOrSubClassJoiSchema),
-  Joi.lazy(() => schema.GeoCoordinatesOrSubClassJoiSchema),
-  Joi.lazy(() => schema.QuantitativeValueDistributionOrSubClassJoiSchema),
-  Joi.lazy(() => schema.ContactPointOrSubClassJoiSchema),
-  Joi.lazy(() => schema.ShippingDeliveryTimeOrSubClassJoiSchema),
-  Joi.lazy(() => schema.DefinedRegionOrSubClassJoiSchema),
   Joi.lazy(() => schema.CDCPMDRecordOrSubClassJoiSchema),
-  Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema),
-  Joi.lazy(() => schema.ExchangeRateSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ContactPointOrSubClassJoiSchema),
   Joi.lazy(() => schema.DatedMoneySpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.DefinedRegionOrSubClassJoiSchema),
+  Joi.lazy(() => schema.DeliveryTimeSettingsOrSubClassJoiSchema),
+  Joi.lazy(() => schema.EngineSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ExchangeRateSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.GeoCoordinatesOrSubClassJoiSchema),
+  Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema),
+  Joi.lazy(() => schema.InstantaneousEventOrSubClassJoiSchema),
+  Joi.lazy(() => schema.InteractionCounterOrSubClassJoiSchema),
+  Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema),
+  Joi.lazy(() => schema.NutritionInformationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.OfferShippingDetailsOrSubClassJoiSchema),
+  Joi.lazy(() => schema.OpeningHoursSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.OrderItemOrSubClassJoiSchema),
+  Joi.lazy(() => schema.OwnershipInfoOrSubClassJoiSchema),
+  Joi.lazy(() => schema.PostalCodeRangeSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema),
+  Joi.lazy(() => schema.QuantitativeValueOrSubClassJoiSchema),
+  Joi.lazy(() => schema.QuantitativeValueDistributionOrSubClassJoiSchema),
+  Joi.lazy(() => schema.RepaymentSpecificationOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ServicePeriodOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ShippingConditionsOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ShippingDeliveryTimeOrSubClassJoiSchema),
   Joi.lazy(() => schema.ShippingRateSettingsOrSubClassJoiSchema),
+  Joi.lazy(() => schema.ShippingServiceOrSubClassJoiSchema),
   Joi.lazy(() => schema.TypeAndQuantityNodeOrSubClassJoiSchema),
+  Joi.lazy(() => schema.WarrantyPromiseOrSubClassJoiSchema),
 ]);
 
 /**

@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * [NOTICE: This enumeration is part of the Open Booking API Test Interface, and MUST NOT be used in production.]
  *
- * An enumeration of open booking flows that an opportunity can be booked with.
+ * An enumeration of [open booking flow](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#booking-flows) that an [Opportunity and Offer pair](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#definition-of-a-bookable-opportunity-and-offer-pair) can be booked with.
  */
 export declare type TestOpenBookingFlowEnumeration = 'https://openactive.io/test-interface#OpenBookingSimpleFlow' | 'https://openactive.io/test-interface#OpenBookingApprovalFlow';
 /**
@@ -13,7 +13,7 @@ export declare type TestOpenBookingFlowEnumeration = 'https://openactive.io/test
  *
  * [NOTICE: This enumeration is part of the Open Booking API Test Interface, and MUST NOT be used in production.]
  *
- * An enumeration of open booking flows that an opportunity can be booked with.
+ * An enumeration of [open booking flow](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#booking-flows) that an [Opportunity and Offer pair](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#definition-of-a-bookable-opportunity-and-offer-pair) can be booked with.
  */
 export declare const TestOpenBookingFlowEnumerationJoiSchema: Joi.StringSchema;
 /**

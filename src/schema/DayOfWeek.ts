@@ -15,14 +15,14 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type DayOfWeek = 
   
-  | 'https://schema.org/PublicHolidays'
-  | 'https://schema.org/Sunday'
-  | 'https://schema.org/Monday'
-  | 'https://schema.org/Thursday'
-  | 'https://schema.org/Wednesday'
-  | 'https://schema.org/Tuesday'
-  | 'https://schema.org/Saturday'
   | 'https://schema.org/Friday'
+  | 'https://schema.org/Monday'
+  | 'https://schema.org/PublicHolidays'
+  | 'https://schema.org/Saturday'
+  | 'https://schema.org/Sunday'
+  | 'https://schema.org/Thursday'
+  | 'https://schema.org/Tuesday'
+  | 'https://schema.org/Wednesday'
   ;
 
 /**
@@ -37,14 +37,14 @@ export type DayOfWeek =
  *       
  */
 export const DayOfWeekJoiSchema = Joi.string().valid(
-  'https://schema.org/PublicHolidays',
-  'https://schema.org/Sunday',
-  'https://schema.org/Monday',
-  'https://schema.org/Thursday',
-  'https://schema.org/Wednesday',
-  'https://schema.org/Tuesday',
-  'https://schema.org/Saturday',
   'https://schema.org/Friday',
+  'https://schema.org/Monday',
+  'https://schema.org/PublicHolidays',
+  'https://schema.org/Saturday',
+  'https://schema.org/Sunday',
+  'https://schema.org/Thursday',
+  'https://schema.org/Tuesday',
+  'https://schema.org/Wednesday',
 );
 
 /**

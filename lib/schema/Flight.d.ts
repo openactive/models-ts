@@ -19,51 +19,29 @@ export declare type Flight = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
-     * The time when a passenger can check into the flight online.
-     */
-    webCheckinTime?: string;
-    /**
-     * Identifier of the flight's departure gate.
-     */
-    departureGate?: string;
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
-     */
-    seller?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * Description of the meals that will be provided or available for purchase.
-     */
-    mealService?: string;
-    /**
      * The kind of aircraft (e.g., "Boeing 747").
      */
-    aircraft?: schema.VehicleOrSubClass | string;
+    aircraft?: string | schema.VehicleOrSubClass;
     /**
-     * Identifier of the flight's arrival terminal.
+     * The airport where the flight terminates.
      */
-    arrivalTerminal?: string;
-    /**
-     * The airport where the flight originates.
-     */
-    departureAirport?: schema.AirportOrSubClass | string;
+    arrivalAirport?: schema.AirportOrSubClass | string;
     /**
      * Identifier of the flight's arrival gate.
      */
     arrivalGate?: string;
     /**
-     * Identifier of the flight's departure terminal.
+     * Identifier of the flight's arrival terminal.
      */
-    departureTerminal?: string;
-    /**
-     * The airport where the flight terminates.
-     */
-    arrivalAirport?: schema.AirportOrSubClass | string;
+    arrivalTerminal?: string;
     /**
      * The type of boarding policy used by the airline (e.g. zone-based or group-based).
      */
@@ -73,64 +51,77 @@ export declare type Flight = {
      */
     carrier?: schema.OrganizationOrSubClass | string;
     /**
-     * The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is 'UA', the flightNumber is 'UA110'.
+     * The airport where the flight originates.
      */
-    flightNumber?: string;
+    departureAirport?: schema.AirportOrSubClass | string;
     /**
-     * The distance of the flight.
+     * Identifier of the flight's departure gate.
      */
-    flightDistance?: schema.DistanceOrSubClass | string;
+    departureGate?: string;
+    /**
+     * Identifier of the flight's departure terminal.
+     */
+    departureTerminal?: string;
     /**
      * The estimated time the flight will take.
      */
     estimatedFlightDuration?: string;
     /**
-     * Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).
+     * The distance of the flight.
      */
-    itinerary?: schema.PlaceOrSubClass | schema.ItemListOrSubClass | string;
+    flightDistance?: schema.DistanceOrSubClass | string;
     /**
-     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
+     * The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is 'UA', the flightNumber is 'UA110'.
      */
-    subTrip?: schema.TripOrSubClass | string;
+    flightNumber?: string;
     /**
-     * Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
+     * Description of the meals that will be provided or available for purchase.
      */
-    partOfTrip?: schema.TripOrSubClass | string;
+    mealService?: string;
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider.
+     */
+    seller?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * The time when a passenger can check into the flight online.
+     */
+    webCheckinTime?: string;
     /**
      * The expected arrival time.
      */
     arrivalTime?: string;
     /**
+     * The expected departure time.
+     */
+    departureTime?: string;
+    /**
+     * Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).
+     */
+    itinerary?: schema.ItemListOrSubClass | schema.PlaceOrSubClass | string;
+    /**
      * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
      *
      */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
+    /**
+     * Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
+     */
+    partOfTrip?: schema.TripOrSubClass | string;
     /**
      * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
      */
     provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
     /**
-     * The expected departure time.
+     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.
      */
-    departureTime?: string;
+    subTrip?: schema.TripOrSubClass | string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The location of origin of the trip, prior to any destination(s).
      */
-    sameAs?: string;
+    tripOrigin?: schema.PlaceOrSubClass | string;
     /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-     */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-    /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -138,17 +129,37 @@ export declare type Flight = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:Flight

@@ -10,9 +10,9 @@ import { OaValidationError } from '../oaValidationError';
 export type LegalValueLevel = 
   
   | 'https://schema.org/AuthoritativeLegalValue'
-  | 'https://schema.org/UnofficialLegalValue'
   | 'https://schema.org/DefinitiveLegalValue'
   | 'https://schema.org/OfficialLegalValue'
+  | 'https://schema.org/UnofficialLegalValue'
   ;
 
 /**
@@ -22,9 +22,9 @@ export type LegalValueLevel =
  */
 export const LegalValueLevelJoiSchema = Joi.string().valid(
   'https://schema.org/AuthoritativeLegalValue',
-  'https://schema.org/UnofficialLegalValue',
   'https://schema.org/DefinitiveLegalValue',
   'https://schema.org/OfficialLegalValue',
+  'https://schema.org/UnofficialLegalValue',
 );
 
 /**

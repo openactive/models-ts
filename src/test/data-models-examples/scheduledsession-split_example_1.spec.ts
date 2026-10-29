@@ -6,7 +6,10 @@ describe('data-models example - scheduledsession-split_example_1.json', () => {
   /* Because the tests are also checked by `tsc`, this declaration acts as a test to ensure that the generated type
   correctly identifies this valid example */
   const example: ScheduledSession = {
-  "@context": "https://openactive.io/",
+  "@context": [
+    "https://openactive.io/",
+    "https://openactive.io/ns-beta"
+  ],
   "@type": "ScheduledSession",
   "@id": "https://opensessions.io/api/session-series/1402CBP20150217#/subEvent/C5EE1E55-2DE6-44F7-A865-42F268A82C63",
   "identifier": "C5EE1E55-2DE6-44F7-A865-42F268A82C63",
@@ -17,7 +20,14 @@ describe('data-models example - scheduledsession-split_example_1.json', () => {
   "eventStatus": "https://schema.org/EventScheduled",
   "maximumAttendeeCapacity": 10,
   "remainingAttendeeCapacity": 0,
-  "url": "https://bookwhen.com/hulafit/e/ev-ssyp-20160510011500?r=oa"
+  "url": "https://bookwhen.com/hulafit/e/ev-ssyp-20160510011500?r=oa",
+  "beta:sportsActivityLocation": [
+    {
+      "@type": "SportsActivityLocation",
+      "name": "Yoga Studio",
+      "containedInPlace": "http://www.example.org/api/locations/8958f9b8-2004-4e90-80ff-50c98a9b121d"
+    }
+  ]
 };
 
   it('should validate correctly', () => {

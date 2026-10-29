@@ -94,6 +94,7 @@ describe('data-models example - booking_spec_examples/p_response_example_1.json'
   "orderedItem": [
     {
       "@type": "OrderItem",
+      "@id": "https://example.com/api/orders/e11429ea-467f-4270-ab62-e47368996fe8#/orderedItem/1234",
       "position": 0,
       "unitTaxSpecification": [
         {

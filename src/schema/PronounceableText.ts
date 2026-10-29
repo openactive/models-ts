@@ -11,25 +11,27 @@ export type PronounceableText = {
   '@type': 'PronounceableText';
   '@context'?: string | string[];
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * Text value being annotated.
+   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
    */
-  textValue?: string;
+  inLanguage?: schema.LanguageOrSubClass | string;
   /**
    * Representation of a text [[textValue]] using the specified [[speechToTextMarkup]]. For example the city name of Houston in IPA: /ˈhjuːstən/.
    */
   phoneticText?: string;
   /**
-   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
-   */
-  inLanguage?: string | schema.LanguageOrSubClass;
-  /**
    * Form of markup used. eg. [SSML](https://www.w3.org/TR/speech-synthesis11) or [IPA](https://www.wikidata.org/wiki/Property:P898).
    */
   speechToTextMarkup?: string;
+  /**
+   * Text value being annotated.
+   */
+  textValue?: string;
 };
 
 /**
@@ -50,10 +52,10 @@ export const PronounceableTextJoiSchema = Joi.object({
   '@type': Joi.string().valid('PronounceableText').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
   '@id': Joi.string().uri(),
-  textValue: Joi.string(),
+  inLanguage: Joi.alternatives().try(Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   phoneticText: Joi.string(),
-  inLanguage: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string().uri()),
   speechToTextMarkup: Joi.string(),
+  textValue: Joi.string(),
 });
 
 /**

@@ -3,13 +3,13 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:MusicReleaseFormatType
  *
- * Format of this release (the type of recording media used, ie. compact disc, digital media, LP, etc.).
+ * Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).
  */
-export declare type MusicReleaseFormatType = 'https://schema.org/DVDFormat' | 'https://schema.org/DigitalAudioTapeFormat' | 'https://schema.org/VinylFormat' | 'https://schema.org/CDFormat' | 'https://schema.org/CassetteFormat' | 'https://schema.org/LaserDiscFormat' | 'https://schema.org/DigitalFormat';
+export declare type MusicReleaseFormatType = 'https://schema.org/CDFormat' | 'https://schema.org/CassetteFormat' | 'https://schema.org/DVDFormat' | 'https://schema.org/DigitalAudioTapeFormat' | 'https://schema.org/DigitalFormat' | 'https://schema.org/LaserDiscFormat' | 'https://schema.org/VinylFormat';
 /**
  * schema:MusicReleaseFormatType - Validation schema (w/ JOI)
  *
- * Format of this release (the type of recording media used, ie. compact disc, digital media, LP, etc.).
+ * Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).
  */
 export declare const MusicReleaseFormatTypeJoiSchema: Joi.StringSchema;
 /**

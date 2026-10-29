@@ -13,11 +13,16 @@ import * as schema from '../schema';
  *
  * 
  *
- * This type is derived from https://pending.schema.org/WebAPI.
+ * This type is derived from https://schema.org/WebAPI, which means that any of this type's properties within schema.org may also be used.
  */
 export type WebAPI = {
   '@type': 'WebAPI';
   '@context'?: string | string[];
+  /**
+   * The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.
+   *         
+   */
+  identifier?: schema.PropertyValueOrSubClass | string;
   /**
    * The name of the WebAPI
    *
@@ -35,11 +40,13 @@ export type WebAPI = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * The location of the OpenID Provider or other relevant authentication authority that must be used to access the API.
+   * The location of the OpenID Provider that must be used to access the API.
    *
    * ```json
    * "authenticationAuthority": "https://auth.bookingsystem.com"
@@ -57,10 +64,10 @@ export type WebAPI = {
    */
   conformsTo?: string[];
   /**
-   * A link to documentation related to the Dataset, or a link to the OpenActive developer documentation if no Dataset-specific documentation is available.
+   * A link to documentation related to how to use the Open Booking API, or a link to the OpenActive developer documentation using `https://permalink.openactive.io/dataset-site/open-booking-api-documentation` if no system-specific documentation is available.
    *
    * ```json
-   * "documentation": "https://developer.openactive.io"
+   * "documentation": "https://permalink.openactive.io/dataset-site/open-booking-api-documentation"
    * ```
    */
   documentation?: string;
@@ -73,15 +80,15 @@ export type WebAPI = {
    */
   endpointDescription?: string;
   /**
-   * The base URL of the Open Booking API
+   * The Base URI of this implementation of the Open Booking API
    *
    * ```json
-   * "endpointURL": "https://example.bookingsystem.com/api/openbooking"
+   * "endpointUrl": "https://example.bookingsystem.com/api/openbooking"
    * ```
    */
-  endpointURL?: string;
+  endpointUrl?: string;
   /**
-   * The web page the broker uses to obtain access to the API, e.g. via a web form.
+   * The URL of a web page that the Broker may use to obtain access to the API, e.g. via a web form.
    *
    * ```json
    * "landingPage": "https://exampleforms.com/get-me-an-api-access-key"
@@ -96,6 +103,144 @@ export type WebAPI = {
    * ```
    */
   termsOfService?: string;
+  /**
+   * The overall rating, based on a collection of reviews or ratings, of the item.
+   */
+  aggregateRating?: schema.AggregateRatingOrSubClass | string;
+  /**
+   * The geographic area where a service or offered item is provided.
+   */
+  areaServed?: schema.AdministrativeAreaOrSubClass | schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | string;
+  /**
+   * An intended audience, i.e. a group for whom something was created.
+   */
+  audience?: schema.AudienceOrSubClass | string;
+  /**
+   * A means of accessing the service (e.g. a phone bank, a web site, a location, etc.).
+   */
+  availableChannel?: schema.ServiceChannelOrSubClass | string;
+  /**
+   * An award won by or for this item.
+   */
+  award?: string;
+  /**
+   * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+   */
+  brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
+  /**
+   * An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.
+   */
+  broker?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+   */
+  category?: schema.CategoryCodeOrSubClass | schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
+  /**
+   * Certification information about a product, organization, service, place, or person.
+   */
+  hasCertification?: schema.CertificationOrSubClass | string;
+  /**
+   * Indicates an OfferCatalog listing for this Organization, Person, or Service.
+   */
+  hasOfferCatalog?: schema.OfferCatalogOrSubClass | string;
+  /**
+   * The hours during which this service or contact is available.
+   */
+  hoursAvailable?: schema.OpeningHoursSpecificationOrSubClass | string;
+  /**
+   * A pointer to another, somehow related product (or multiple products).
+   */
+  isRelatedTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+  /**
+   * A pointer to another, functionally similar product (or multiple products).
+   */
+  isSimilarTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+  /**
+   * An associated logo.
+   */
+  logo?: schema.ImageObjectOrSubClass | string;
+  /**
+   * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+   *       
+   */
+  offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
+  /**
+   * The tangible thing generated by the service, e.g. a passport, permit, etc.
+   */
+  produces?: schema.ThingOrSubClass | string;
+  /**
+   * The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.
+   */
+  provider?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates the mobility of a provided service (e.g. 'static', 'dynamic').
+   */
+  providerMobility?: string;
+  /**
+   * A review of the item.
+   */
+  review?: schema.ReviewOrSubClass | string;
+  /**
+   * The geographic area where the service is provided.
+   */
+  serviceArea?: schema.AdministrativeAreaOrSubClass | schema.GeoShapeOrSubClass | schema.PlaceOrSubClass | string;
+  /**
+   * The audience eligible for this service.
+   */
+  serviceAudience?: schema.AudienceOrSubClass | string;
+  /**
+   * The tangible thing generated by the service, e.g. a passport, permit, etc.
+   */
+  serviceOutput?: schema.ThingOrSubClass | string;
+  /**
+   * The type of service being offered, e.g. veterans' benefits, emergency relief, etc.
+   */
+  serviceType?: schema.GovernmentBenefitsType | string;
+  /**
+   * A slogan or motto associated with the item.
+   */
+  slogan?: string;
+  /**
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
+   */
+  additionalType?: string;
+  /**
+   * An alias for the item.
+   */
+  alternateName?: string;
+  /**
+   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+   */
+  disambiguatingDescription?: string;
+  /**
+   * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
+   */
+  image?: schema.ImageObjectOrSubClass | string;
+  /**
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+   */
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * URL of the item.
+   */
+  url?: string;
 };
 
 /**
@@ -107,7 +252,7 @@ export type WebAPI = {
  *
  * 
  *
- * This type is derived from https://pending.schema.org/WebAPI.
+ * This type is derived from https://schema.org/WebAPI, which means that any of this type's properties within schema.org may also be used.
  *
  * This differs from WebAPI because it also allows for objects that have the type of a model that
  * sub-classes this model. e.g. `Event_OrSubClass` allows `Event`s as well as `ScheduledSession`s, `SessionSeries`,
@@ -126,11 +271,12 @@ export type WebAPIOrSubClass =
  *
  * 
  *
- * This type is derived from https://pending.schema.org/WebAPI.
+ * This type is derived from https://schema.org/WebAPI, which means that any of this type's properties within schema.org may also be used.
  */
 export const WebAPIJoiSchema = Joi.object({
   '@type': Joi.string().valid('WebAPI').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
   description: Joi.string(),
   '@id': Joi.string().uri(),
@@ -138,9 +284,43 @@ export const WebAPIJoiSchema = Joi.object({
   conformsTo: Joi.array().items(Joi.string().uri()),
   documentation: Joi.string().uri(),
   endpointDescription: Joi.string().uri(),
-  endpointURL: Joi.string().uri(),
+  endpointUrl: Joi.string().uri(),
   landingPage: Joi.string().uri(),
   termsOfService: Joi.string().uri(),
+  aggregateRating: Joi.alternatives().try(Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema), Joi.string().uri()),
+  areaServed: Joi.alternatives().try(Joi.lazy(() => schema.AdministrativeAreaOrSubClassJoiSchema), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
+  availableChannel: Joi.alternatives().try(Joi.lazy(() => schema.ServiceChannelOrSubClassJoiSchema), Joi.string().uri()),
+  award: Joi.string(),
+  brand: Joi.alternatives().try(Joi.lazy(() => schema.BrandOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  broker: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  category: Joi.alternatives().try(Joi.lazy(() => schema.CategoryCodeOrSubClassJoiSchema), Joi.lazy(() => schema.PhysicalActivityCategoryJoiSchema), Joi.string(), Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  hasCertification: Joi.alternatives().try(Joi.lazy(() => schema.CertificationOrSubClassJoiSchema), Joi.string().uri()),
+  hasOfferCatalog: Joi.alternatives().try(Joi.lazy(() => schema.OfferCatalogOrSubClassJoiSchema), Joi.string().uri()),
+  hoursAvailable: Joi.alternatives().try(Joi.lazy(() => schema.OpeningHoursSpecificationOrSubClassJoiSchema), Joi.string().uri()),
+  isRelatedTo: Joi.alternatives().try(Joi.lazy(() => schema.ProductOrSubClassJoiSchema), Joi.lazy(() => schema.ServiceOrSubClassJoiSchema), Joi.string().uri()),
+  isSimilarTo: Joi.alternatives().try(Joi.lazy(() => schema.ProductOrSubClassJoiSchema), Joi.lazy(() => schema.ServiceOrSubClassJoiSchema), Joi.string().uri()),
+  logo: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  offers: Joi.alternatives().try(Joi.lazy(() => schema.DemandOrSubClassJoiSchema), Joi.lazy(() => schema.OfferOrSubClassJoiSchema), Joi.string().uri()),
+  produces: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  provider: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  providerMobility: Joi.string(),
+  review: Joi.alternatives().try(Joi.lazy(() => schema.ReviewOrSubClassJoiSchema), Joi.string().uri()),
+  serviceArea: Joi.alternatives().try(Joi.lazy(() => schema.AdministrativeAreaOrSubClassJoiSchema), Joi.lazy(() => schema.GeoShapeOrSubClassJoiSchema), Joi.lazy(() => schema.PlaceOrSubClassJoiSchema), Joi.string().uri()),
+  serviceAudience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
+  serviceOutput: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
+  serviceType: Joi.alternatives().try(Joi.lazy(() => schema.GovernmentBenefitsTypeJoiSchema), Joi.string()),
+  slogan: Joi.string(),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
+  alternateName: Joi.string(),
+  disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  url: Joi.string().uri(),
 });
 
 /**
@@ -152,7 +332,7 @@ export const WebAPIJoiSchema = Joi.object({
  *
  * 
  *
- * This type is derived from https://pending.schema.org/WebAPI.
+ * This type is derived from https://schema.org/WebAPI, which means that any of this type's properties within schema.org may also be used.
  *
  * This differs from WebAPIJoiSchema because it also allows for objects that have the type of a model that
  * sub-classes this model. e.g. `Event.OrSubClassJoiSchema` allows `Event`s as well as `ScheduledSession`s,

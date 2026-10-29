@@ -9,17 +9,17 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type RestrictedDiet = 
   
-  | 'https://schema.org/VegetarianDiet'
-  | 'https://schema.org/LowCalorieDiet'
+  | 'https://schema.org/DiabeticDiet'
   | 'https://schema.org/GlutenFreeDiet'
+  | 'https://schema.org/HalalDiet'
+  | 'https://schema.org/HinduDiet'
   | 'https://schema.org/KosherDiet'
-  | 'https://schema.org/VeganDiet'
+  | 'https://schema.org/LowCalorieDiet'
   | 'https://schema.org/LowFatDiet'
   | 'https://schema.org/LowLactoseDiet'
-  | 'https://schema.org/DiabeticDiet'
-  | 'https://schema.org/HinduDiet'
   | 'https://schema.org/LowSaltDiet'
-  | 'https://schema.org/HalalDiet'
+  | 'https://schema.org/VeganDiet'
+  | 'https://schema.org/VegetarianDiet'
   ;
 
 /**
@@ -28,17 +28,17 @@ export type RestrictedDiet =
  * A diet restricted to certain foods or preparations for cultural, religious, health or lifestyle reasons. 
  */
 export const RestrictedDietJoiSchema = Joi.string().valid(
-  'https://schema.org/VegetarianDiet',
-  'https://schema.org/LowCalorieDiet',
+  'https://schema.org/DiabeticDiet',
   'https://schema.org/GlutenFreeDiet',
+  'https://schema.org/HalalDiet',
+  'https://schema.org/HinduDiet',
   'https://schema.org/KosherDiet',
-  'https://schema.org/VeganDiet',
+  'https://schema.org/LowCalorieDiet',
   'https://schema.org/LowFatDiet',
   'https://schema.org/LowLactoseDiet',
-  'https://schema.org/DiabeticDiet',
-  'https://schema.org/HinduDiet',
   'https://schema.org/LowSaltDiet',
-  'https://schema.org/HalalDiet',
+  'https://schema.org/VeganDiet',
+  'https://schema.org/VegetarianDiet',
 );
 
 /**

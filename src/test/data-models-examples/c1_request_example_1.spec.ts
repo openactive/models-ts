@@ -27,22 +27,13 @@ describe('data-models example - booking_spec_examples/c1_request_example_1.json'
       "addressCountry": "GB"
     }
   },
-  "seller": {
-    "@type": "Organization",
-    "@id": "https://example.com/api/organisations/123"
-  },
+  "seller": "https://example.com/api/organisations/123",
   "orderedItem": [
     {
       "@type": "OrderItem",
       "position": 0,
-      "acceptedOffer": {
-        "@type": "Offer",
-        "@id": "https://example.com/events/452#/offers/878"
-      },
-      "orderedItem": {
-        "@type": "ScheduledSession",
-        "@id": "https://example.com/events/452/subEvents/132"
-      }
+      "acceptedOffer": "https://example.com/events/452#/offers/878",
+      "orderedItem": "https://example.com/events/452/subEvents/132"
     }
   ]
 };

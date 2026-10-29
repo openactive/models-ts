@@ -19,97 +19,84 @@ export declare type CDCPMDRecord = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
-    /**
-     * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed.
-     */
-    cvdNumC19OverflowPats?: number;
-    /**
-     * numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and outpatient beds, including all staffed,ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.
-     */
-    cvdNumTotBeds?: number;
-    /**
-     * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed, and overflow (surge) beds used for inpatients.
-     */
-    cvdNumBeds?: number;
-    /**
-     * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed and on a mechanical ventilator.
-     */
-    cvdNumC19OFMechVentPats?: number;
-    /**
-     * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care location who have suspected or confirmed COVID-19.
-     */
-    cvdNumC19HospPats?: number;
-    /**
-     * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
-     */
-    cvdNumVent?: number;
-    /**
-     * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed inpatient beds that are occupied.
-     */
-    cvdNumBedsOcc?: number;
-    /**
-     * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.
-     */
-    cvdNumC19HOPats?: number;
-    /**
-     * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died in the hospital, ED, or any overflow location.
-     */
-    cvdNumC19Died?: number;
     /**
      * collectiondate - Date for which patient counts are reported.
      */
     cvdCollectionDate?: string;
     /**
-     * numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.
-     */
-    cvdNumVentUse?: number;
-    /**
      * Name of the County of the NHSN facility that this data record applies to. Use [[cvdFacilityId]] to identify the facility. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.
      */
     cvdFacilityCounty?: string;
-    /**
-     * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are occupied.
-     */
-    cvdNumICUBedsOcc?: number;
-    /**
-     * Publication date of an online listing.
-     */
-    datePosted?: string;
-    /**
-     * numicubeds - ICU BEDS: Total number of staffed inpatient intensive care unit (ICU) beds.
-     */
-    cvdNumICUBeds?: number;
     /**
      * Identifier of the NHSN facility that this data record applies to. Use [[cvdFacilityCounty]] to indicate the county. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.
      */
     cvdFacilityId?: string;
     /**
+     * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed, and overflow (surge) beds used for inpatients.
+     */
+    cvdNumBeds?: number;
+    /**
+     * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed inpatient beds that are occupied.
+     */
+    cvdNumBedsOcc?: number;
+    /**
+     * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died in the hospital, ED, or any overflow location.
+     */
+    cvdNumC19Died?: number;
+    /**
+     * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.
+     */
+    cvdNumC19HOPats?: number;
+    /**
+     * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care location who have suspected or confirmed COVID-19.
+     */
+    cvdNumC19HospPats?: number;
+    /**
      * numc19mechventpats - HOSPITALIZED and VENTILATED: Patients hospitalized in an NHSN inpatient care location who have suspected or confirmed COVID-19 and are on a mechanical ventilator.
      */
     cvdNumC19MechVentPats?: number;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed and on a mechanical ventilator.
      */
-    sameAs?: string;
+    cvdNumC19OFMechVentPats?: number;
     /**
-     * A CreativeWork or Event about this Thing.
+     * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19 who are in the ED or any overflow location awaiting an inpatient bed.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    cvdNumC19OverflowPats?: number;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * numicubeds - ICU BEDS: Total number of staffed inpatient intensive care unit (ICU) beds.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    cvdNumICUBeds?: number;
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are occupied.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    cvdNumICUBedsOcc?: number;
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * numtotbeds - ALL HOSPITAL BEDS: Total number of all inpatient and outpatient beds, including all staffed, ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.
+     */
+    cvdNumTotBeds?: number;
+    /**
+     * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
+     */
+    cvdNumVent?: number;
+    /**
+     * numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.
+     */
+    cvdNumVentUse?: number;
+    /**
+     * Publication date of an online listing.
+     */
+    datePosted?: string;
+    /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -117,17 +104,37 @@ export declare type CDCPMDRecord = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:CDCPMDRecord

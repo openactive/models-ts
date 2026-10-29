@@ -22,31 +22,29 @@ export type Ticket = {
   /**
    * A description of the item.
    */
-  description?: string;
+  description?: string | schema.TextObjectOrSubClass;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * The person or organization the reservation or ticket is for.
+   * The date the ticket was issued.
    */
-  underName?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+  dateIssued?: string;
   /**
-   * The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".
+   * The organization issuing the item, for example a [[Permit]], [[Ticket]], or [[Certification]].
+   */
+  issuedBy?: schema.OrganizationOrSubClass | string;
+  /**
+   * The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\n\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".
    */
   priceCurrency?: string;
   /**
    * The unique identifier for the ticket.
    */
   ticketNumber?: string;
-  /**
-   * The total price for the reservation or ticket, including applicable taxes, shipping, etc.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-   */
-  totalPrice?: number | string | schema.PriceSpecificationOrSubClass;
-  /**
-   * The organization issuing the ticket or permit.
-   */
-  issuedBy?: schema.OrganizationOrSubClass | string;
   /**
    * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.
    */
@@ -56,27 +54,16 @@ export type Ticket = {
    */
   ticketedSeat?: schema.SeatOrSubClass | string;
   /**
-   * The date the ticket was issued.
+   * The total price for the reservation or ticket, including applicable taxes, shipping, etc.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
    */
-  dateIssued?: string;
+  totalPrice?: number | schema.PriceSpecificationOrSubClass | string;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * The person or organization the reservation or ticket is for.
    */
-  sameAs?: string;
+  underName?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
-   * A CreativeWork or Event about this Thing.
-   */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-  /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
-   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-   */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
    */
   additionalType?: string;
   /**
@@ -84,17 +71,37 @@ export type Ticket = {
    */
   alternateName?: string;
   /**
-   * URL of the item.
+   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
-  url?: string;
+  disambiguatingDescription?: string;
   /**
    * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
    */
   image?: schema.ImageObjectOrSubClass | string;
   /**
-   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  disambiguatingDescription?: string;
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * URL of the item.
+   */
+  url?: string;
 };
 
 /**
@@ -114,27 +121,28 @@ export type TicketOrSubClass =
 export const TicketJoiSchema = Joi.object({
   '@type': Joi.string().valid('Ticket').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
-  description: Joi.string(),
+  description: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.TextObjectOrSubClassJoiSchema), Joi.string().uri()),
   '@id': Joi.string().uri(),
-  underName: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  dateIssued: Joi.string().isoDate(),
+  issuedBy: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
   priceCurrency: Joi.string(),
   ticketNumber: Joi.string(),
-  totalPrice: Joi.alternatives().try(Joi.number(), Joi.string(), Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string().uri()),
-  issuedBy: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
   ticketToken: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   ticketedSeat: Joi.alternatives().try(Joi.lazy(() => schema.SeatOrSubClassJoiSchema), Joi.string().uri()),
-  dateIssued: Joi.string().isoDate(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  additionalType: Joi.string().uri(),
+  totalPrice: Joi.alternatives().try(Joi.number(), Joi.lazy(() => schema.PriceSpecificationOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  underName: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   alternateName: Joi.string(),
-  url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  url: Joi.string().uri(),
 });
 
 /**

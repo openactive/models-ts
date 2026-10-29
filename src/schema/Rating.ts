@@ -22,53 +22,40 @@ export type Rating = {
   /**
    * A description of the item.
    */
-  description?: string;
+  description?: string | schema.TextObjectOrSubClass;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * This Review or Rating is relevant to this part or facet of the itemReviewed.
-   */
-  reviewAspect?: string;
-  /**
-   * The rating for the content.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-   */
-  ratingValue?: number | string;
-  /**
-   * The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.
-   */
-  worstRating?: string | number;
-  /**
    * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
    */
-  author?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+  author?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * The highest value allowed in this rating system.
+   */
+  bestRating?: number | string;
   /**
    * A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with "fact check" markup using [[ClaimReview]].
    */
   ratingExplanation?: string;
   /**
-   * The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.
+   * The rating for the content.\n\nUsage guidelines:\n\n* Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.\n* Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
    */
-  bestRating?: string | number;
+  ratingValue?: number | string;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * This Review or Rating is relevant to this part or facet of the itemReviewed.
    */
-  sameAs?: string;
+  reviewAspect?: schema.StructuredValueOrSubClass | string;
   /**
-   * A CreativeWork or Event about this Thing.
+   * The lowest value allowed in this rating system.
    */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+  worstRating?: number | string;
   /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
-   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-   */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
    */
   additionalType?: string;
   /**
@@ -76,17 +63,37 @@ export type Rating = {
    */
   alternateName?: string;
   /**
-   * URL of the item.
+   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
-  url?: string;
+  disambiguatingDescription?: string;
   /**
    * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
    */
   image?: schema.ImageObjectOrSubClass | string;
   /**
-   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  disambiguatingDescription?: string;
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * URL of the item.
+   */
+  url?: string;
 };
 
 /**
@@ -98,8 +105,8 @@ export type Rating = {
  */
 export type RatingOrSubClass =
   | Rating
-  | schema.EndorsementRatingOrSubClass
   | schema.AggregateRatingOrSubClass
+  | schema.EndorsementRatingOrSubClass
   ;
 
 /**
@@ -108,25 +115,26 @@ export type RatingOrSubClass =
 export const RatingJoiSchema = Joi.object({
   '@type': Joi.string().valid('Rating').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
-  description: Joi.string(),
+  description: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.TextObjectOrSubClassJoiSchema), Joi.string().uri()),
   '@id': Joi.string().uri(),
-  reviewAspect: Joi.string(),
-  ratingValue: Joi.alternatives().try(Joi.number(), Joi.string()),
-  worstRating: Joi.alternatives().try(Joi.string(), Joi.number()),
-  author: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
+  author: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  bestRating: Joi.alternatives().try(Joi.number(), Joi.string()),
   ratingExplanation: Joi.string(),
-  bestRating: Joi.alternatives().try(Joi.string(), Joi.number()),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  additionalType: Joi.string().uri(),
+  ratingValue: Joi.alternatives().try(Joi.number(), Joi.string()),
+  reviewAspect: Joi.alternatives().try(Joi.lazy(() => schema.StructuredValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  worstRating: Joi.alternatives().try(Joi.number(), Joi.string()),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   alternateName: Joi.string(),
-  url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  url: Joi.string().uri(),
 });
 
 /**
@@ -138,8 +146,8 @@ export const RatingJoiSchema = Joi.object({
  */
 export const RatingOrSubClassJoiSchema = Joi.alternatives().try([
   RatingJoiSchema,
-  Joi.lazy(() => schema.EndorsementRatingOrSubClassJoiSchema),
   Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema),
+  Joi.lazy(() => schema.EndorsementRatingOrSubClassJoiSchema),
 ]);
 
 /**

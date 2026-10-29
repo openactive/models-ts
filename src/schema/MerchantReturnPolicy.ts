@@ -22,53 +22,105 @@ export type MerchantReturnPolicy = {
   /**
    * A description of the item.
    */
-  description?: string;
+  description?: string | schema.TextObjectOrSubClass;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
-   * A returnPolicyCategory expresses at most one of several enumerated kinds of return.
+   * A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+   * 
    */
-  returnPolicyCategory?: schema.MerchantReturnEnumeration;
+  additionalProperty?: schema.PropertyValueOrSubClass | string;
   /**
-   * A refundType, from an enumerated list.
+   * A country where a particular merchant return policy applies to, for example the two-letter ISO 3166-1 alpha-2 country code.
    */
-  refundType?: schema.RefundTypeEnumeration;
+  applicableCountry?: schema.CountryOrSubClass | string;
   /**
-   * Indicates (via enumerated options) the return fees policy for a MerchantReturnPolicy
+   * The type of return fees if the product is returned due to customer remorse.
    */
-  returnFees?: schema.ReturnFeesEnumeration;
+  customerRemorseReturnFees?: schema.ReturnFeesEnumeration;
   /**
-   * Indicates a Web page or service by URL, for product return.
+   * The method (from an enumeration) by which the customer obtains a return shipping label for a product returned due to customer remorse.
    */
-  merchantReturnLink?: string;
+  customerRemorseReturnLabelSource?: schema.ReturnLabelSourceEnumeration;
   /**
-   * The merchantReturnDays property indicates the number of days (from purchase) within which relevant merchant return policy is applicable.
+   * The amount of shipping costs if a product is returned due to customer remorse. Applicable when property [[customerRemorseReturnFees]] equals [[ReturnShippingFees]].
    */
-  merchantReturnDays?: number;
+  customerRemorseReturnShippingFeesAmount?: schema.MonetaryAmountOrSubClass | string;
   /**
-   * Are in-store returns offered?
+   * Are in-store returns offered? (For more advanced return methods use the [[returnMethod]] property.)
    */
   inStoreReturnsOffered?: boolean;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.
    */
-  sameAs?: string;
+  itemCondition?: schema.OfferItemCondition;
   /**
-   * A CreativeWork or Event about this Thing.
+   * The type of return fees for returns of defect products.
    */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+  itemDefectReturnFees?: schema.ReturnFeesEnumeration;
   /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   * The method (from an enumeration) by which the customer obtains a return shipping label for a defect product.
    */
-  potentialAction?: schema.ActionOrSubClass | string;
+  itemDefectReturnLabelSource?: schema.ReturnLabelSourceEnumeration;
   /**
-   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+   * Amount of shipping costs for defect product returns. Applicable when property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].
    */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  itemDefectReturnShippingFeesAmount?: schema.MonetaryAmountOrSubClass | string;
   /**
-   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   * Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].
+   */
+  merchantReturnDays?: string | number;
+  /**
+   * Specifies a Web page or service by URL, for product returns.
+   */
+  merchantReturnLink?: string;
+  /**
+   * A refund type, from an enumerated list.
+   */
+  refundType?: schema.RefundTypeEnumeration;
+  /**
+   * Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use [[Number]] to specify a percentage of the product price paid by the customer.
+   */
+  restockingFee?: schema.MonetaryAmountOrSubClass | number | string;
+  /**
+   * The type of return fees for purchased products (for any return reason).
+   */
+  returnFees?: schema.ReturnFeesEnumeration;
+  /**
+   * The method (from an enumeration) by which the customer obtains a return shipping label for a product returned for any reason.
+   */
+  returnLabelSource?: schema.ReturnLabelSourceEnumeration;
+  /**
+   * The type of return method offered, specified from an enumeration.
+   */
+  returnMethod?: schema.ReturnMethodEnumeration;
+  /**
+   * Specifies an applicable return policy (from an enumeration).
+   */
+  returnPolicyCategory?: schema.MerchantReturnEnumeration;
+  /**
+   * The country where the product has to be sent to for returns, for example "Ireland" using the [[name]] property of [[Country]]. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be different from the country where the product was originally shipped from or sent to.
+   */
+  returnPolicyCountry?: schema.CountryOrSubClass | string;
+  /**
+   * Seasonal override of a return policy.
+   */
+  returnPolicySeasonalOverride?: schema.MerchantReturnPolicySeasonalOverrideOrSubClass | string;
+  /**
+   * Amount of shipping costs for product returns (for any reason). Applicable when property [[returnFees]] equals [[ReturnShippingFees]].
+   */
+  returnShippingFeesAmount?: schema.MonetaryAmountOrSubClass | string;
+  /**
+   * The membership program tier(s) an Offer (or a PriceSpecification, OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.
+   */
+  validForMemberTier?: schema.MemberProgramTierOrSubClass | string;
+  /**
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
    */
   additionalType?: string;
   /**
@@ -76,17 +128,37 @@ export type MerchantReturnPolicy = {
    */
   alternateName?: string;
   /**
-   * URL of the item.
+   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
    */
-  url?: string;
+  disambiguatingDescription?: string;
   /**
    * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
    */
   image?: schema.ImageObjectOrSubClass | string;
   /**
-   * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
    */
-  disambiguatingDescription?: string;
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * URL of the item.
+   */
+  url?: string;
 };
 
 /**
@@ -106,25 +178,42 @@ export type MerchantReturnPolicyOrSubClass =
 export const MerchantReturnPolicyJoiSchema = Joi.object({
   '@type': Joi.string().valid('MerchantReturnPolicy').required(),
   '@context': Joi.alternatives().try([Joi.string(), Joi.array().items(Joi.string())]),
-  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri(), Joi.string()),
+  identifier: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
   name: Joi.string(),
-  description: Joi.string(),
+  description: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.TextObjectOrSubClassJoiSchema), Joi.string().uri()),
   '@id': Joi.string().uri(),
-  returnPolicyCategory: Joi.lazy(() => schema.MerchantReturnEnumerationJoiSchema),
-  refundType: Joi.lazy(() => schema.RefundTypeEnumerationJoiSchema),
-  returnFees: Joi.lazy(() => schema.ReturnFeesEnumerationJoiSchema),
-  merchantReturnLink: Joi.string().uri(),
-  merchantReturnDays: Joi.number().integer(),
+  additionalProperty: Joi.alternatives().try(Joi.lazy(() => schema.PropertyValueOrSubClassJoiSchema), Joi.string().uri()),
+  applicableCountry: Joi.alternatives().try(Joi.lazy(() => schema.CountryOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  customerRemorseReturnFees: Joi.lazy(() => schema.ReturnFeesEnumerationJoiSchema),
+  customerRemorseReturnLabelSource: Joi.lazy(() => schema.ReturnLabelSourceEnumerationJoiSchema),
+  customerRemorseReturnShippingFeesAmount: Joi.alternatives().try(Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema), Joi.string().uri()),
   inStoreReturnsOffered: Joi.boolean(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  additionalType: Joi.string().uri(),
+  itemCondition: Joi.lazy(() => schema.OfferItemConditionJoiSchema),
+  itemDefectReturnFees: Joi.lazy(() => schema.ReturnFeesEnumerationJoiSchema),
+  itemDefectReturnLabelSource: Joi.lazy(() => schema.ReturnLabelSourceEnumerationJoiSchema),
+  itemDefectReturnShippingFeesAmount: Joi.alternatives().try(Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema), Joi.string().uri()),
+  merchantReturnDays: Joi.alternatives().try(Joi.string().isoDate(), Joi.number().integer()),
+  merchantReturnLink: Joi.string().uri(),
+  refundType: Joi.lazy(() => schema.RefundTypeEnumerationJoiSchema),
+  restockingFee: Joi.alternatives().try(Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema), Joi.number(), Joi.string().uri()),
+  returnFees: Joi.lazy(() => schema.ReturnFeesEnumerationJoiSchema),
+  returnLabelSource: Joi.lazy(() => schema.ReturnLabelSourceEnumerationJoiSchema),
+  returnMethod: Joi.lazy(() => schema.ReturnMethodEnumerationJoiSchema),
+  returnPolicyCategory: Joi.lazy(() => schema.MerchantReturnEnumerationJoiSchema),
+  returnPolicyCountry: Joi.alternatives().try(Joi.lazy(() => schema.CountryOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  returnPolicySeasonalOverride: Joi.alternatives().try(Joi.lazy(() => schema.MerchantReturnPolicySeasonalOverrideOrSubClassJoiSchema), Joi.string().uri()),
+  returnShippingFeesAmount: Joi.alternatives().try(Joi.lazy(() => schema.MonetaryAmountOrSubClassJoiSchema), Joi.string().uri()),
+  validForMemberTier: Joi.alternatives().try(Joi.lazy(() => schema.MemberProgramTierOrSubClassJoiSchema), Joi.string().uri()),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   alternateName: Joi.string(),
-  url: Joi.string().uri(),
-  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
   disambiguatingDescription: Joi.string(),
+  image: Joi.alternatives().try(Joi.lazy(() => schema.ImageObjectOrSubClassJoiSchema), Joi.string().uri()),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  url: Joi.string().uri(),
 });
 
 /**

@@ -3,13 +3,13 @@ import { OaValidationError } from '../oaValidationError';
 /**
  * schema:MusicAlbumProductionType
  *
- * Classification of the album by it's type of content: soundtrack, live album, studio album, etc.
+ * Classification of the album by its type of content: soundtrack, live album, studio album, etc.
  */
-export declare type MusicAlbumProductionType = 'https://schema.org/SpokenWordAlbum' | 'https://schema.org/SoundtrackAlbum' | 'https://schema.org/StudioAlbum' | 'https://schema.org/RemixAlbum' | 'https://schema.org/DemoAlbum' | 'https://schema.org/MixtapeAlbum' | 'https://schema.org/LiveAlbum' | 'https://schema.org/DJMixAlbum' | 'https://schema.org/CompilationAlbum';
+export declare type MusicAlbumProductionType = 'https://schema.org/CompilationAlbum' | 'https://schema.org/DJMixAlbum' | 'https://schema.org/DemoAlbum' | 'https://schema.org/LiveAlbum' | 'https://schema.org/MixtapeAlbum' | 'https://schema.org/RemixAlbum' | 'https://schema.org/SoundtrackAlbum' | 'https://schema.org/SpokenWordAlbum' | 'https://schema.org/StudioAlbum';
 /**
  * schema:MusicAlbumProductionType - Validation schema (w/ JOI)
  *
- * Classification of the album by it's type of content: soundtrack, live album, studio album, etc.
+ * Classification of the album by its type of content: soundtrack, live album, studio album, etc.
  */
 export declare const MusicAlbumProductionTypeJoiSchema: Joi.StringSchema;
 /**

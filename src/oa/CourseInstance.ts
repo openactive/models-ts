@@ -37,7 +37,9 @@ export type CourseInstance = {
    */
   description?: string;
   /**
-   * A unique url based identifier for the record
+   * A unique URI-based identifier for the record.
+   * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+   * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
    */
   '@id'?: string;
   /**
@@ -148,6 +150,18 @@ export type CourseInstance = {
    */
   contributor?: oa.PersonOrSubClass[];
   /**
+   * Free text restrictions to display to the Customer at the browse stage, that may apply when using a Customer Account to make the booking.
+   * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
+   *
+   * ```json
+   * "customerAccountBookingRestriction": [
+   *   "Gold members only",
+   *   "Gym induction required"
+   * ]
+   * ```
+   */
+  customerAccountBookingRestriction?: string[];
+  /**
    * The duration of the event given in [ISO8601] format.
    *
    * ```json
@@ -238,6 +252,15 @@ export type CourseInstance = {
    */
   isCoached?: boolean;
   /**
+   * Indicates that a Customer Account may be used to book that opportunity.
+   * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
+   *
+   * ```json
+   * "isOpenBookingWithCustomerAccountAllowed": "true"
+   * ```
+   */
+  isOpenBookingWithCustomerAccountAllowed?: boolean;
+  /**
    * Refers to a person (schema:Person) who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor. The person will need to have given their consent for their personal information to be present in the Open Data.
    *
    * ```json
@@ -291,7 +314,7 @@ export type CourseInstance = {
    * }
    * ```
    */
-  location?: oa.PlaceOrSubClass;
+  location?: oa.PlaceOrSubClass | string;
   /**
    * The maximum capacity of the Event.
    *
@@ -464,7 +487,7 @@ export type CourseInstance = {
    * 
    * If you are using this property, please join the discussion at proposal [#110](https://github.com/openactive/modelling-opportunity-data/issues/110).
    */
-  'beta:sportsActivityLocation'?: schema.SportsActivityLocationOrSubClass[];
+  'beta:sportsActivityLocation'?: oa.SportsActivityLocationOrSubClass[];
   /**
    * [NOTICE: This is a beta property, and is highly likely to change in future versions of this library.]
    * Duration before the event for which the associated Offers are valid
@@ -530,6 +553,13 @@ export type CourseInstance = {
   'beta:isFirstSessionAccessibleForFree'?: boolean;
   /**
    * [NOTICE: This is a beta property, and is highly likely to change in future versions of this library.]
+   * A property that indicates whether the event contains a high frequency of occurrences. Intended as a UI hint for interfaces that represent these occurrences.
+   * 
+   * If you are using this property, please join the discussion at proposal [#301](https://github.com/openactive/modelling-opportunity-data/issues/301).
+   */
+  'beta:isScheduledAsSlots'?: boolean;
+  /**
+   * [NOTICE: This is a beta property, and is highly likely to change in future versions of this library.]
    * Contact details for an Event, where they are not specifically related to the `organizer` or `leader`.
    * 
    * If you are using this property, please join the discussion at proposal [#113](https://github.com/openactive/modelling-opportunity-data/issues/113).
@@ -544,6 +574,7 @@ export type CourseInstance = {
   'beta:bookingChannel'?: oa.BookingChannelType[];
   /**
    * [NOTICE: This property is part of the Open Booking API Test Interface, and MUST NOT be used in production.]
+   * The [open booking flow](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#booking-flows) that a created [Opportunity and Offer pair](https://openactive.io/open-booking-api/EditorsDraft/1.0CR3/#definition-of-a-bookable-opportunity-and-offer-pair) should support.
    */
   'test:testOpenBookingFlow'?: oa.TestOpenBookingFlowEnumeration;
   /**
@@ -552,82 +583,37 @@ export type CourseInstance = {
    */
   'test:testOpportunityCriteria'?: oa.TestOpportunityCriteriaEnumeration;
   /**
-   * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
-   *        Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).
+   * The subject matter of an object.
    */
-  workFeatured?: schema.CreativeWorkOrSubClass | string;
+  about?: schema.ThingOrSubClass | string;
+  /**
+   * An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.
+   */
+  actor?: schema.PerformingGroupOrSubClass | schema.PersonOrSubClass | string;
   /**
    * The overall rating, based on a collection of reviews or ratings, of the item.
    */
   aggregateRating?: schema.AggregateRatingOrSubClass | string;
   /**
-   * A work performed in some event, for example a play performed in a TheaterEvent.
+   * A person or organization attending the event.
    */
-  workPerformed?: schema.CreativeWorkOrSubClass | string;
+  attendee?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
    * A person attending the event.
    */
-  attendees?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
+  attendees?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
-   * An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.
+   * An intended audience, i.e. a group for whom something was created.
    */
-  actor?: schema.PersonOrSubClass | string;
-  /**
-   * A performer at the event&#x2014;for example, a presenter, musician, musical group or actor.
-   */
-  performer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-  /**
-   * A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.
-   */
-  director?: schema.PersonOrSubClass | string;
-  /**
-   * Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.
-   */
-  previousStartDate?: string;
-  /**
-   * A review of the item.
-   */
-  review?: schema.ReviewOrSubClass | string;
-  /**
-   * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
-   */
-  translator?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference.
-   */
-  subEvents?: schema.Event_OrSubClass | string;
-  /**
-   * A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
-   */
-  sponsor?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). 
-   */
-  maximumPhysicalAttendeeCapacity?: number;
-  /**
-   * A person or organization attending the event.
-   */
-  attendee?: schema.PersonOrSubClass | schema.OrganizationOrSubClass | string;
-  /**
-   * The CreativeWork that captured all or part of this Event.
-   */
-  recordedIn?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * The subject matter of the content.
-   */
-  about?: schema.ThingOrSubClass | string;
-  /**
-   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
-   */
-  inLanguage?: string | schema.LanguageOrSubClass;
+  audience?: schema.AudienceOrSubClass | string;
   /**
    * The person or organization who wrote a composition, or who is the composer of a work performed at some event.
    */
   composer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
-   * The main performer or performers of the event&#x2014;for example, a presenter, musician, or actor.
+   * A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.
    */
-  performers?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  director?: schema.PersonOrSubClass | string;
   /**
    * The time admission will commence.
    */
@@ -637,31 +623,77 @@ export type CourseInstance = {
    */
   funder?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
-   * An intended audience, i.e. a group for whom something was created.
+   * A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].
    */
-  audience?: schema.AudienceOrSubClass | string;
+  funding?: schema.GrantOrSubClass | string;
+  /**
+   * An offer to participate in the event, for example, Call for Proposals, Call for Speakers, or Call for Performers.
+   */
+  hasParticipationOffer?: schema.OfferOrSubClass | string;
+  /**
+   * An offer to sponsor the event, for example, Sponsorship Prospectus, Sponsorship Opportunities, or Sponsor Packages.
+   */
+  hasSponsorshipOffer?: schema.OfferOrSubClass | string;
+  /**
+   * The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].
+   */
+  inLanguage?: schema.LanguageOrSubClass | string;
+  /**
+   * Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
+   */
+  keywords?: schema.DefinedTermOrSubClass | string;
+  /**
+   * The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). 
+   */
+  maximumPhysicalAttendeeCapacity?: number;
+  /**
+   * A performer at the event&#x2014;for example, a presenter, musician, musical group or actor.
+   */
+  performer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * The main performer or performers of the event&#x2014;for example, a presenter, musician, or actor.
+   */
+  performers?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.
+   */
+  previousStartDate?: string;
+  /**
+   * The CreativeWork that captured all or part of this Event.
+   */
+  recordedIn?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A review of the item.
+   */
+  review?: schema.ReviewOrSubClass | string;
+  /**
+   * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+   */
+  sponsor?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference.
+   */
+  subEvents?: schema.Event_OrSubClass | string;
+  /**
+   * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
+   */
+  translator?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
   /**
    * The typical expected age range, e.g. '7-9', '11-'.
    */
   typicalAgeRange?: string;
   /**
-   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
+   *        Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).
    */
-  sameAs?: string;
+  workFeatured?: schema.CreativeWorkOrSubClass | string;
   /**
-   * A CreativeWork or Event about this Thing.
+   * A work performed in some event, for example a play performed in a TheaterEvent.
    */
-  subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+  workPerformed?: schema.CreativeWorkOrSubClass | string;
   /**
-   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-   */
-  potentialAction?: schema.ActionOrSubClass | string;
-  /**
-   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-   */
-  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-  /**
-   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+   *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
    */
   additionalType?: string;
   /**
@@ -673,9 +705,33 @@ export type CourseInstance = {
    */
   disambiguatingDescription?: string;
   /**
-   * The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous ).
+   * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+   */
+  mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+  /**
+   * A person or organization who owns this Thing.
+   */
+  owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+  /**
+   * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+   */
+  potentialAction?: schema.ActionOrSubClass | string;
+  /**
+   * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+   */
+  sameAs?: string;
+  /**
+   * A CreativeWork or Event about this Thing.
+   */
+  subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+  /**
+   * The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous).
    */
   courseMode?: string;
+  /**
+   * Represents the length and pace of a course, expressed as a [[Schedule]].
+   */
+  courseSchedule?: schema.ScheduleOrSubClass | string;
   /**
    * The amount of work expected of students taking the course, often provided as a figure per week or per month, and may be broken down by type. For example, "2 hours of lectures, 1 hour of lab work and 3 hours of independent study per week".
    */
@@ -720,6 +776,7 @@ export const CourseInstanceJoiSchema = Joi.object({
   attendeeInstructions: Joi.string(),
   category: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.array().items(Joi.lazy(() => oa.ConceptOrSubClassJoiSchema))),
   contributor: Joi.array().items(Joi.lazy(() => oa.PersonOrSubClassJoiSchema)),
+  customerAccountBookingRestriction: Joi.array().items(Joi.string()),
   duration: Joi.string(),
   eventAttendanceMode: Joi.lazy(() => schema.EventAttendanceModeEnumerationJoiSchema),
   eventSchedule: Joi.array().items(Joi.lazy(() => oa.ScheduleOrSubClassJoiSchema)),
@@ -729,9 +786,10 @@ export const CourseInstanceJoiSchema = Joi.object({
   instanceOfCourse: Joi.lazy(() => oa.CourseOrSubClassJoiSchema),
   isAccessibleForFree: Joi.boolean(),
   isCoached: Joi.boolean(),
+  isOpenBookingWithCustomerAccountAllowed: Joi.boolean(),
   leader: Joi.array().items(Joi.lazy(() => oa.PersonOrSubClassJoiSchema)),
   level: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.array().items(Joi.lazy(() => oa.ConceptOrSubClassJoiSchema))),
-  location: Joi.lazy(() => oa.PlaceOrSubClassJoiSchema),
+  location: Joi.alternatives().try(Joi.lazy(() => oa.PlaceOrSubClassJoiSchema), Joi.string().uri()),
   maximumAttendeeCapacity: Joi.number().integer(),
   maximumVirtualAttendeeCapacity: Joi.number().integer(),
   meetingPoint: Joi.string(),
@@ -752,7 +810,7 @@ export const CourseInstanceJoiSchema = Joi.object({
   'beta:isWheelchairAccessible': Joi.boolean(),
   'beta:estimatedDuration': Joi.lazy(() => oa.QuantitativeValueOrSubClassJoiSchema),
   'beta:video': Joi.array().items(Joi.lazy(() => oa.VideoObjectOrSubClassJoiSchema)),
-  'beta:sportsActivityLocation': Joi.array().items(Joi.lazy(() => schema.SportsActivityLocationOrSubClassJoiSchema)),
+  'beta:sportsActivityLocation': Joi.array().items(Joi.lazy(() => oa.SportsActivityLocationOrSubClassJoiSchema)),
   'beta:offerValidityPeriod': Joi.string(),
   'beta:facilitySetting': Joi.lazy(() => oa.FacilitySettingTypeJoiSchema),
   'beta:isVirtuallyCoached': Joi.boolean(),
@@ -762,41 +820,48 @@ export const CourseInstanceJoiSchema = Joi.object({
   'beta:participantSuppliedEquipment': Joi.lazy(() => oa.RequiredStatusTypeJoiSchema),
   'beta:donationPaymentUrl': Joi.string().uri(),
   'beta:isFirstSessionAccessibleForFree': Joi.boolean(),
+  'beta:isScheduledAsSlots': Joi.boolean(),
   'beta:contactPoint': Joi.lazy(() => schema.ContactPointOrSubClassJoiSchema),
   'beta:bookingChannel': Joi.array().items(Joi.lazy(() => oa.BookingChannelTypeJoiSchema)),
   'test:testOpenBookingFlow': Joi.lazy(() => oa.TestOpenBookingFlowEnumerationJoiSchema),
   'test:testOpportunityCriteria': Joi.lazy(() => oa.TestOpportunityCriteriaEnumerationJoiSchema),
-  workFeatured: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  aggregateRating: Joi.alternatives().try(Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema), Joi.string().uri()),
-  workPerformed: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  attendees: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  actor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  performer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  director: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  previousStartDate: Joi.string().isoDate(),
-  review: Joi.alternatives().try(Joi.lazy(() => schema.ReviewOrSubClassJoiSchema), Joi.string().uri()),
-  translator: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  subEvents: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
-  sponsor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  maximumPhysicalAttendeeCapacity: Joi.number().integer(),
-  attendee: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.string().uri()),
-  recordedIn: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
   about: Joi.alternatives().try(Joi.lazy(() => schema.ThingOrSubClassJoiSchema), Joi.string().uri()),
-  inLanguage: Joi.alternatives().try(Joi.string(), Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string().uri()),
+  actor: Joi.alternatives().try(Joi.lazy(() => schema.PerformingGroupOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  aggregateRating: Joi.alternatives().try(Joi.lazy(() => schema.AggregateRatingOrSubClassJoiSchema), Joi.string().uri()),
+  attendee: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  attendees: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
   composer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  performers: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  director: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
   doorTime: Joi.alternatives().try(Joi.string().isoDate(), Joi.string()),
   funder: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
-  audience: Joi.alternatives().try(Joi.lazy(() => schema.AudienceOrSubClassJoiSchema), Joi.string().uri()),
+  funding: Joi.alternatives().try(Joi.lazy(() => schema.GrantOrSubClassJoiSchema), Joi.string().uri()),
+  hasParticipationOffer: Joi.alternatives().try(Joi.lazy(() => schema.OfferOrSubClassJoiSchema), Joi.string().uri()),
+  hasSponsorshipOffer: Joi.alternatives().try(Joi.lazy(() => schema.OfferOrSubClassJoiSchema), Joi.string().uri()),
+  inLanguage: Joi.alternatives().try(Joi.lazy(() => schema.LanguageOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  keywords: Joi.alternatives().try(Joi.lazy(() => schema.DefinedTermOrSubClassJoiSchema), Joi.string(), Joi.string().uri()),
+  maximumPhysicalAttendeeCapacity: Joi.number().integer(),
+  performer: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  performers: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  previousStartDate: Joi.string().isoDate(),
+  recordedIn: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  review: Joi.alternatives().try(Joi.lazy(() => schema.ReviewOrSubClassJoiSchema), Joi.string().uri()),
+  sponsor: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  subEvents: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
+  translator: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
   typicalAgeRange: Joi.string(),
-  sameAs: Joi.string().uri(),
-  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
-  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
-  additionalType: Joi.string().uri(),
+  workFeatured: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  workPerformed: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  additionalType: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
   alternateName: Joi.string(),
   disambiguatingDescription: Joi.string(),
+  mainEntityOfPage: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.string().uri()),
+  owner: Joi.alternatives().try(Joi.lazy(() => schema.OrganizationOrSubClassJoiSchema), Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
+  potentialAction: Joi.alternatives().try(Joi.lazy(() => schema.ActionOrSubClassJoiSchema), Joi.string().uri()),
+  sameAs: Joi.string().uri(),
+  subjectOf: Joi.alternatives().try(Joi.lazy(() => schema.CreativeWorkOrSubClassJoiSchema), Joi.lazy(() => schema.Event_OrSubClassJoiSchema), Joi.string().uri()),
   courseMode: Joi.alternatives().try(Joi.string(), Joi.string().uri()),
+  courseSchedule: Joi.alternatives().try(Joi.lazy(() => schema.ScheduleOrSubClassJoiSchema), Joi.string().uri()),
   courseWorkload: Joi.string(),
   instructor: Joi.alternatives().try(Joi.lazy(() => schema.PersonOrSubClassJoiSchema), Joi.string().uri()),
 });

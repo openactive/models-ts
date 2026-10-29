@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * A list of possible conditions for the item.
  */
-export declare type OfferItemCondition = 'https://schema.org/DamagedCondition' | 'https://schema.org/UsedCondition' | 'https://schema.org/NewCondition' | 'https://schema.org/RefurbishedCondition';
+export declare type OfferItemCondition = 'https://schema.org/DamagedCondition' | 'https://schema.org/NewCondition' | 'https://schema.org/RefurbishedCondition' | 'https://schema.org/UsedCondition';
 /**
  * schema:OfferItemCondition - Validation schema (w/ JOI)
  *

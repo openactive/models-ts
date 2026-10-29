@@ -19,31 +19,49 @@ export declare type Motorcycle = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
-     * The release date of a vehicle model (often used to differentiate versions of the same make and model).
+     * The time needed to accelerate the vehicle from a given start velocity to a given target velocity.\n\nTypical unit code(s): SEC for seconds\n\n* Note: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]] with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the reference speeds.
      */
-    vehicleModelDate?: string;
+    accelerationTime?: schema.QuantitativeValueOrSubClass | string;
     /**
-     * The permitted weight of passengers and cargo, EXCLUDING the weight of the empty vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: Many databases specify the permitted TOTAL weight instead, which is the sum of [[weight]] and [[payload]]\n* Note 2: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 3: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 4: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     * Indicates the design and body style of the vehicle (e.g. station wagon, hatchback, etc.).
      */
-    payload?: schema.QuantitativeValueOrSubClass | string;
+    bodyType?: schema.QualitativeValue | string;
     /**
-     * The type of component used for transmitting the power from a rotating power source to the wheels or other relevant component(s) ("gearbox" for cars).
+     * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.
      */
-    vehicleTransmission?: string | schema.QualitativeValue;
+    callSign?: string;
     /**
-     * The number of doors.\n\nTypical unit code(s): C62
+     * The available volume for cargo or luggage. For automobiles, this is usually the trunk volume.\n\nTypical unit code(s): LTR for liters, FTQ for cubic foot/feet\n\nNote: You can use [[minValue]] and [[maxValue]] to indicate ranges.
      */
-    numberOfDoors?: number | schema.QuantitativeValueOrSubClass | string;
+    cargoVolume?: schema.QuantitativeValueOrSubClass | string;
     /**
-     * The release date of a vehicle model (often used to differentiate versions of the same make and model).
+     * The date of the first registration of the vehicle with the respective public authorities.
      */
-    modelDate?: string;
+    dateVehicleFirstRegistered?: string;
+    /**
+     * The drive wheel configuration, i.e. which roadwheels will receive torque from the vehicle's engine via the drivetrain.
+     */
+    driveWheelConfiguration?: schema.DriveWheelConfigurationValueOrSubClass | string;
+    /**
+     * The CO2 emissions in g/km. When used in combination with a QuantitativeValue, put "g/km" into the unitText property of that value, since there is no UN/CEFACT Common Code for "g/km".
+     */
+    emissionsCO2?: number;
+    /**
+     * The capacity of the fuel tank or in the case of electric cars, the battery. If there are multiple components for storage, this should indicate the total of all storage of the same type.\n\nTypical unit code(s): LTR for liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for ampere-hours (for electrical vehicles).
+     */
+    fuelCapacity?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km).\n\n* Note 1: There are unfortunately no standard unit codes for liters per 100 km.  Use [[unitText]] to indicate the unit of measurement, e.g. L/100 km.\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\n* Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use [[valueReference]] to link the value for the fuel consumption to another value.
+     */
+    fuelConsumption?: schema.QuantitativeValueOrSubClass | string;
     /**
      * The distance traveled per unit of fuel used; most commonly miles per gallon (mpg) or kilometers per liter (km/L).\n\n* Note 1: There are unfortunately no standard unit codes for miles per gallon or kilometers per liter. Use [[unitText]] to indicate the unit of measurement, e.g. mpg or km/L.\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\n* Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use [[valueReference]] to link the value for the fuel economy to another value.
      */
@@ -53,322 +71,412 @@ export declare type Motorcycle = {
      */
     fuelType?: schema.QualitativeValue | string;
     /**
-     * Indicates the design and body style of the vehicle (e.g. station wagon, hatchback, etc.).
-     */
-    bodyType?: string | schema.QualitativeValue;
-    /**
-     * The distance between the centers of the front and rear wheels.\n\nTypical unit code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for foot/feet
-     */
-    wheelbase?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The type or material of the interior of the vehicle (e.g. synthetic fabric, leather, wood, etc.). While most interior types are characterized by the material used, an interior type can also be based on vehicle usage or target audience.
-     */
-    vehicleInteriorType?: string;
-    /**
-     * The permitted vertical load (TWR) of a trailer attached to the vehicle. Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR)\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
-     */
-    tongueWeight?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * Information about the engine or engines of the vehicle.
-     */
-    vehicleEngine?: schema.EngineSpecificationOrSubClass | string;
-    /**
-     * The date of the first registration of the vehicle with the respective public authorities.
-     */
-    dateVehicleFirstRegistered?: string;
-    /**
-     * The speed range of the vehicle. If the vehicle is powered by an engine, the upper limit of the speed range (indicated by [[maxValue]] should be the maximum speed achievable under regular conditions.\n\nTypical unit code(s): KMH for km/h, HM for mile per hour (0.447 04 m/s), KNT for knot\n\n*Note 1: Use [[minValue]] and [[maxValue]] to indicate the range. Typically, the minimal value is zero.\n* Note 2: There are many different ways of measuring the speed range. You can link to information about how the given value has been determined using the [[valueReference]] property.
-     */
-    speed?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The drive wheel configuration, i.e. which roadwheels will receive torque from the vehicle's engine via the drivetrain.
-     */
-    driveWheelConfiguration?: schema.DriveWheelConfigurationValueOrSubClass | string;
-    /**
-     * The number of persons that can be seated (e.g. in a vehicle), both in terms of the physical space available, and in terms of limitations set by law.\n\nTypical unit code(s): C62 for persons
-     */
-    seatingCapacity?: number | schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The capacity of the fuel tank or in the case of electric cars, the battery. If there are multiple components for storage, this should indicate the total of all storage of the same type.\n\nTypical unit code(s): LTR for liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for ampere-hours (for electrical vehicles).
-     */
-    fuelCapacity?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The available volume for cargo or luggage. For automobiles, this is usually the trunk volume.\n\nTypical unit code(s): LTR for liters, FTQ for cubic foot/feet\n\nNote: You can use [[minValue]] and [[maxValue]] to indicate ranges.
-     */
-    cargoVolume?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The Vehicle Identification Number (VIN) is a unique serial number used by the automotive industry to identify individual motor vehicles.
-     */
-    vehicleIdentificationNumber?: string;
-    /**
-     * Indicates whether the vehicle has been used for special purposes, like commercial rental, driving school, or as a taxi. The legislation in many countries requires this information to be revealed when offering a car for sale.
-     */
-    vehicleSpecialUsage?: string | schema.CarUsageType;
-    /**
-     * The CO2 emissions in g/km. When used in combination with a QuantitativeValue, put "g/km" into the unitText property of that value, since there is no UN/CEFACT Common Code for "g/km".
-     */
-    emissionsCO2?: number;
-    /**
-     * The number of passengers that can be seated in the vehicle, both in terms of the physical space available, and in terms of limitations set by law.\n\nTypical unit code(s): C62 for persons.
-     */
-    vehicleSeatingCapacity?: number | schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The permitted weight of a trailer attached to the vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
-     */
-    trailerWeight?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The number of owners of the vehicle, including the current one.\n\nTypical unit code(s): C62
-     */
-    numberOfPreviousOwners?: schema.QuantitativeValueOrSubClass | number | string;
-    /**
-     * The date the item e.g. vehicle was purchased by the current owner.
-     */
-    purchaseDate?: string;
-    /**
      * A textual description of known damages, both repaired and unrepaired.
      */
     knownVehicleDamages?: string;
     /**
-     * The total distance travelled by the particular vehicle since its initial production, as read from its odometer.\n\nTypical unit code(s): KMT for kilometers, SMI for statute miles
+     * Indicates that the vehicle meets the respective emission standard.
+     */
+    meetsEmissionStandard?: schema.QualitativeValue | string;
+    /**
+     * The total distance travelled by the particular vehicle since its initial production, as read from its odometer.\n\nTypical unit code(s): KMT for kilometers, SMI for statute miles.
      */
     mileageFromOdometer?: schema.QuantitativeValueOrSubClass | string;
     /**
-     * The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km).\n\n* Note 1: There are unfortunately no standard unit codes for liters per 100 km.  Use [[unitText]] to indicate the unit of measurement, e.g. L/100 km.\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\n* Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use [[valueReference]] to link the value for the fuel consumption to another value.
+     * The release date of a vehicle model (often used to differentiate versions of the same make and model).
      */
-    fuelConsumption?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The number of axles.\n\nTypical unit code(s): C62
-     */
-    numberOfAxles?: number | schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The position of the steering wheel or similar device (mostly for cars).
-     */
-    steeringPosition?: schema.SteeringPositionValueOrSubClass | string;
-    /**
-     * The time needed to accelerate the vehicle from a given start velocity to a given target velocity.\n\nTypical unit code(s): SEC for seconds\n\n* Note: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]] with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the reference speeds.
-     */
-    accelerationTime?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * A short text indicating the configuration of the vehicle, e.g. '5dr hatchback ST 2.5 MT 225 hp' or 'limited edition'.
-     */
-    vehicleConfiguration?: string;
+    modelDate?: string;
     /**
      * The number or type of airbags in the vehicle.
      */
     numberOfAirbags?: number | string;
     /**
-     * The permitted total weight of the loaded vehicle, including passengers and cargo and the weight of the empty vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     * The number of axles.\n\nTypical unit code(s): C62.
      */
-    weightTotal?: schema.QuantitativeValueOrSubClass | string;
+    numberOfAxles?: number | schema.QuantitativeValueOrSubClass | string;
     /**
-     * Indicates that the vehicle meets the respective emission standard.
+     * The number of doors.\n\nTypical unit code(s): C62.
      */
-    meetsEmissionStandard?: string | schema.QualitativeValue;
+    numberOfDoors?: number | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The total number of forward gears available for the transmission system of the vehicle.\n\nTypical unit code(s): C62.
+     */
+    numberOfForwardGears?: number | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The number of owners of the vehicle, including the current one.\n\nTypical unit code(s): C62.
+     */
+    numberOfPreviousOwners?: number | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The permitted weight of passengers and cargo, EXCLUDING the weight of the empty vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: Many databases specify the permitted TOTAL weight instead, which is the sum of [[weight]] and [[payload]]\n* Note 2: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 3: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 4: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     */
+    payload?: schema.QuantitativeValueOrSubClass | string;
     /**
      * The date of production of the item, e.g. vehicle.
      */
     productionDate?: string;
     /**
-     * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.
+     * The date the item, e.g. vehicle, was purchased by the current owner.
      */
-    callSign?: string;
+    purchaseDate?: string;
+    /**
+     * The number of persons that can be seated (e.g. in a vehicle), both in terms of the physical space available, and in terms of limitations set by law.\n\nTypical unit code(s): C62 for persons.
+     */
+    seatingCapacity?: number | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The speed range of the vehicle. If the vehicle is powered by an engine, the upper limit of the speed range (indicated by [[maxValue]]) should be the maximum speed achievable under regular conditions.\n\nTypical unit code(s): KMH for km/h, HM for mile per hour (0.447 04 m/s), KNT for knot\n\n*Note 1: Use [[minValue]] and [[maxValue]] to indicate the range. Typically, the minimal value is zero.\n* Note 2: There are many different ways of measuring the speed range. You can link to information about how the given value has been determined using the [[valueReference]] property.
+     */
+    speed?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The position of the steering wheel or similar device (mostly for cars).
+     */
+    steeringPosition?: schema.SteeringPositionValueOrSubClass | string;
+    /**
+     * The permitted vertical load (TWR) of a trailer attached to the vehicle. Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR).\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     */
+    tongueWeight?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The permitted weight of a trailer attached to the vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     */
+    trailerWeight?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * A short text indicating the configuration of the vehicle, e.g. '5dr hatchback ST 2.5 MT 225 hp' or 'limited edition'.
+     */
+    vehicleConfiguration?: string;
+    /**
+     * Information about the engine or engines of the vehicle.
+     */
+    vehicleEngine?: schema.EngineSpecificationOrSubClass | string;
+    /**
+     * The Vehicle Identification Number (VIN) is a unique serial number used by the automotive industry to identify individual motor vehicles.
+     */
+    vehicleIdentificationNumber?: string;
     /**
      * The color or color combination of the interior of the vehicle.
      */
     vehicleInteriorColor?: string;
     /**
-     * The total number of forward gears available for the transmission system of the vehicle.\n\nTypical unit code(s): C62
+     * The type or material of the interior of the vehicle (e.g. synthetic fabric, leather, wood, etc.). While most interior types are characterized by the material used, an interior type can also be based on vehicle usage or target audience.
      */
-    numberOfForwardGears?: schema.QuantitativeValueOrSubClass | number | string;
+    vehicleInteriorType?: string;
     /**
-     * A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
+     * The release date of a vehicle model (often used to differentiate versions of the same make and model).
      */
-    hasMeasurement?: schema.QuantitativeValueOrSubClass | string;
+    vehicleModelDate?: string;
     /**
-     * A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.
+     * The number of passengers that can be seated in the vehicle, both in terms of the physical space available, and in terms of limitations set by law.\n\nTypical unit code(s): C62 for persons.
      */
-    itemCondition?: schema.OfferItemCondition;
+    vehicleSeatingCapacity?: number | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * Indicates whether the vehicle has been used for special purposes, like commercial rental, driving school, or as a taxi. The legislation in many countries requires this information to be revealed when offering a car for sale.
+     */
+    vehicleSpecialUsage?: schema.CarUsageType | string;
+    /**
+     * The type of component used for transmitting the power from a rotating power source to the wheels or other relevant component(s) ("gearbox" for cars).
+     */
+    vehicleTransmission?: schema.QualitativeValue | string;
+    /**
+     * The permitted total weight of the loaded vehicle, including passengers and cargo and the weight of the empty vehicle.\n\nTypical unit code(s): KGM for kilogram, LBR for pound\n\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges.
+     */
+    weightTotal?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The distance between the centers of the front and rear wheels.\n\nTypical unit code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for foot/feet.
+     */
+    wheelbase?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+     *
+     */
+    additionalProperty?: schema.PropertyValueOrSubClass | string;
     /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
      */
     aggregateRating?: schema.AggregateRatingOrSubClass | string;
     /**
-     * A standardized size of a product or creative work, specified either through a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue with a unitCode, or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]], [[height]], [[depth]] and [[weight]] properties may be more applicable.
-     */
-    size?: schema.DefinedTermOrSubClass | schema.SizeSpecificationOrSubClass | schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The depth of the item.
-     */
-    depth?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The height of the item.
-     */
-    height?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
-    /**
-     * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin12?: string;
-    /**
-     * A pointer to another, functionally similar product (or multiple products).
-     */
-    isSimilarTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
-    /**
-     * The weight of the product or person.
-     */
-    weight?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * Indicates a MerchantReturnPolicy that may be applicable.
-     */
-    hasMerchantReturnPolicy?: schema.MerchantReturnPolicyOrSubClass | string;
-    /**
-     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+     * An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique identifier assigned by Amazon.com and its partners for product identification within the Amazon organization (summary from [Wikipedia](https://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number)'s article).
      *
+     * Note also that this is a definition for how to include ASINs in Schema.org data, and not a definition of ASINs in general - see documentation from Amazon for authoritative details.
+     * ASINs are most commonly encoded as text strings, but the [asin] property supports URL/URI as potential values too.
      */
-    offers?: schema.OfferOrSubClass | schema.DemandOrSubClass | string;
-    /**
-     * The width of the item.
-     */
-    width?: schema.QuantitativeValueOrSubClass | schema.DistanceOrSubClass | string;
-    /**
-     * A pointer to another product (or multiple products) for which this product is a consumable.
-     */
-    isConsumableFor?: schema.ProductOrSubClass | string;
-    /**
-     * Review of the item.
-     */
-    reviews?: schema.ReviewOrSubClass | string;
-    /**
-     * An award won by or for this item.
-     */
-    award?: string;
-    /**
-     * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin13?: string;
-    /**
-     * A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties. The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs as URLs. A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged.
-     *
-     */
-    gtin?: string;
-    /**
-     * A review of the item.
-     */
-    review?: schema.ReviewOrSubClass | string;
-    /**
-     * Defines the energy efficiency Category (also known as "class" or "rating") for a product according to an international energy efficiency standard.
-     */
-    hasEnergyConsumptionDetails?: schema.EnergyConsumptionDetailsOrSubClass | string;
-    /**
-     * The color of the product.
-     */
-    color?: string;
-    /**
-     * A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
-     *
-     */
-    additionalProperty?: schema.PropertyValueOrSubClass | string;
-    /**
-     * An associated logo.
-     */
-    logo?: schema.ImageObjectOrSubClass | string;
-    /**
-     * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
-     */
-    mpn?: string;
-    /**
-     * Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].
-     */
-    inProductGroupWithID?: string;
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
-     */
-    category?: schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
-    /**
-     * Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.
-     */
-    isVariantOf?: schema.ProductGroupOrSubClass | schema.ProductModelOrSubClass | string;
-    /**
-     * A slogan or motto associated with the item.
-     */
-    slogan?: string;
-    /**
-     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.
-     */
-    pattern?: string | schema.DefinedTermOrSubClass;
-    /**
-     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
-     */
-    sku?: string;
-    /**
-     * Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number) (nsn) of a [[Product]].
-     */
-    nsn?: string;
-    /**
-     * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin14?: string;
-    /**
-     * A pointer to another product (or multiple products) for which this product is an accessory or spare part.
-     */
-    isAccessoryOrSparePartFor?: schema.ProductOrSubClass | string;
-    /**
-     * The manufacturer of the product.
-     */
-    manufacturer?: schema.OrganizationOrSubClass | string;
-    /**
-     * The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
-     */
-    model?: schema.ProductModelOrSubClass | string;
-    /**
-     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
-     */
-    brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
-    /**
-     * The release date of a product or product model. This can be used to distinguish the exact variant of a product.
-     */
-    releaseDate?: string;
-    /**
-     * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
-     */
-    gtin8?: string;
-    /**
-     * A material that something is made from, e.g. leather, wool, cotton, paper.
-     */
-    material?: schema.ProductOrSubClass | string;
-    /**
-     * Awards won by or for this item.
-     */
-    awards?: string;
+    asin?: string;
     /**
      * An intended audience, i.e. a group for whom something was created.
      */
     audience?: schema.AudienceOrSubClass | string;
     /**
+     * An organization or person officially appointed to act on behalf of the manufacturer in a specific region or context.
+     */
+    authorizedRepresentative?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * An award won by or for this item.
+     */
+    award?: string;
+    /**
+     * Awards won by or for this item.
+     */
+    awards?: string;
+    /**
+     * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+     */
+    brand?: schema.BrandOrSubClass | schema.OrganizationOrSubClass | string;
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+     */
+    category?: schema.CategoryCodeOrSubClass | schema.PhysicalActivityCategory | string | schema.ThingOrSubClass;
+    /**
+     * The color of the product.
+     */
+    color?: string;
+    /**
+     * A color swatch image, visualizing the color of a [[Product]]. Should match the textual description specified in the [[color]] property. This can be a URL or a fully described ImageObject.
+     */
+    colorSwatch?: schema.ImageObjectOrSubClass | string;
+    /**
+     * A consumer notice, such as a safety warning or mandatory information, related to the product.
+     */
+    consumerNotice?: string | schema.TextObjectOrSubClass | schema.WebContentOrSubClass;
+    /**
+     * The place where the product was assembled.
+     */
+    countryOfAssembly?: string;
+    /**
+     * The place where the item (typically [[Product]]) was last processed and tested before importation.
+     */
+    countryOfLastProcessing?: string;
+    /**
+     * The country of origin of something, including products as well as creative  works such as movie and TV content.
+     *
+     * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties such as [[contentLocation]] and [[locationCreated]] may be more applicable.
+     *
+     * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
+     */
+    countryOfOrigin?: schema.CountryOrSubClass | string;
+    /**
+     * The depth of the item.
+     */
+    depth?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The location at which an item can be viewed or experienced in-person.
+     */
+    displayLocation?: schema.PlaceOrSubClass | string;
+    /**
+     * A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].
+     */
+    funding?: schema.GrantOrSubClass | string;
+    /**
+     * A Global Trade Item Number ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade items, including products and services, using numeric identification codes.
+     *
+     * A correct [[gtin]] value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a [valid GS1 check digit](https://www.gs1.org/services/check-digit-calculator) and meet the other rules for valid GTINs. See also [GS1's GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for more details. Left-padding of the gtin values is not required or encouraged. The [[gtin]] property generalizes the earlier [[gtin8]], [[gtin12]], [[gtin13]], and [[gtin14]] properties.
+     *
+     * The GS1 [digital link specifications](https://www.gs1.org/standards/Digital-Link/) expresses GTINs as URLs (URIs, IRIs, etc.).
+     * Digital Links should be populated into the [[hasGS1DigitalLink]] attribute.
+     *
+     * Note also that this is a definition for how to include GTINs in Schema.org data, and not a definition of GTINs in general - see the GS1 documentation for authoritative details.
+     */
+    gtin?: string;
+    /**
+     * The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin12?: string;
+    /**
+     * The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceding zero. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin13?: string;
+    /**
+     * The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin14?: string;
+    /**
+     * The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.
+     */
+    gtin8?: string;
+    /**
+     * Used to tag an item to be intended or suitable for consumption or use by adults only.
+     */
+    hasAdultConsideration?: schema.AdultOrientedEnumeration;
+    /**
+     * Certification information about a product, organization, service, place, or person.
+     */
+    hasCertification?: schema.CertificationOrSubClass | string;
+    /**
+     * A link to a Digital Product Passport (DPP) or a digital record detailing the lifecycle, sustainability, and compliance data for this product or offer. This may be a direct URL, a GS1 Digital Link URI, or a nested DigitalProductPassport object. Note: This property is aligned with the IANA 'dpp' link relation and the GS1 Web Vocabulary 'dpp' link type.
+     */
+    hasDigitalProductPassport?: schema.DigitalProductPassportOrSubClass | string;
+    /**
+     * Defines the energy efficiency Category (also known as "class" or "rating") for a product according to an international energy efficiency standard.
+     */
+    hasEnergyConsumptionDetails?: schema.EnergyConsumptionDetailsOrSubClass | string;
+    /**
+     * The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital link</a> associated with the object. This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a [[Product]] or an [[Organization]], and for the correct granularity. In particular, for products:<ul><li>A Digital Link that contains a serial number (AI <code>21</code>) should only be present on instances of [[IndividualProduct]]</li><li>A Digital Link that contains a lot number (AI <code>10</code>) should be annotated as [[SomeProducts]] if only products from that lot are sold, or [[IndividualProduct]] if there is only a specific product.</li><li>A Digital Link that contains a global model number (AI <code>8013</code>) should be attached to a [[Product]] or a [[ProductModel]].</li></ul> Other item types should be adapted similarly.
+     */
+    hasGS1DigitalLink?: string;
+    /**
+     * A measurement of an item, For example, the inseam of pants, the wheel size of a bicycle, the gauge of a screw, or the carbon footprint measured for certification by an authority. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
+     */
+    hasMeasurement?: schema.QuantitativeValueOrSubClass | string;
+    /**
+     * Specifies a MerchantReturnPolicy that may be applicable.
+     */
+    hasMerchantReturnPolicy?: schema.MerchantReturnPolicyOrSubClass | string;
+    /**
+     * Indicates a ProductReturnPolicy that may be applicable.
+     */
+    hasProductReturnPolicy?: schema.ProductReturnPolicyOrSubClass | string;
+    /**
+     * The height of the item.
+     */
+    height?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * An organization or person who imports the product into a specific market or region.
+     */
+    importer?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates the [[productGroupID]] for a [[ProductGroup]] that this product [[isVariantOf]].
+     */
+    inProductGroupWithID?: string;
+    /**
+     * A pointer to another product (or multiple products) for which this product is an accessory or spare part.
+     */
+    isAccessoryOrSparePartFor?: schema.ProductOrSubClass | string;
+    /**
+     * A pointer to another product (or multiple products) for which this product is a consumable.
+     */
+    isConsumableFor?: schema.ProductOrSubClass | string;
+    /**
+     * Indicates whether this content is family friendly.
+     */
+    isFamilyFriendly?: boolean;
+    /**
+     * Indicates a product that is often bought with the described product.
+     */
+    isOftenBoughtWith?: schema.ProductOrSubClass | string;
+    /**
      * A pointer to another, somehow related product (or multiple products).
      */
     isRelatedTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+    /**
+     * A pointer to another, functionally similar product (or multiple products).
+     */
+    isSimilarTo?: schema.ProductOrSubClass | schema.ServiceOrSubClass | string;
+    /**
+     * Indicates the kind of product that this is a variant of. In the case of [[ProductModel]], this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a [[ProductGroup]], the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with [[ProductGroup]], this property can apply to any [[Product]] included in the group.
+     */
+    isVariantOf?: schema.ProductGroupOrSubClass | schema.ProductModelOrSubClass | string;
+    /**
+     * A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.
+     */
+    itemCondition?: schema.OfferItemCondition;
+    /**
+     * Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
+     */
+    keywords?: schema.DefinedTermOrSubClass | string;
+    /**
+     * An associated logo.
+     */
+    logo?: schema.ImageObjectOrSubClass | string;
+    /**
+     * The manufacturer of the product.
+     */
+    manufacturer?: schema.OrganizationOrSubClass | string;
+    /**
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     */
+    material?: schema.ProductOrSubClass | string;
+    /**
+     * The [[mobileUrl]] property is provided for specific situations in which data consumers need to determine whether one of several provided URLs is a dedicated 'mobile site'.
+     *
+     * To discourage over-use, and reflecting intial usecases, the property is expected only on [[Product]] and [[Offer]], rather than [[Thing]]. The general trend in web technology is towards [responsive design](https://en.wikipedia.org/wiki/Responsive_web_design) in which content can be flexibly adapted to a wide range of browsing environments. Pages and sites referenced with the long-established [[url]] property should ideally also be usable on a wide variety of devices, including mobile phones. In most cases, it would be pointless and counter productive to attempt to update all [[url]] markup to use [[mobileUrl]] for more mobile-oriented pages. The property is intended for the case when items (primarily [[Product]] and [[Offer]]) have extra URLs hosted on an additional "mobile site" alongside the main one. It should not be taken as an endorsement of this publication style.
+     *
+     */
+    mobileUrl?: string;
+    /**
+     * The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
+     */
+    model?: schema.ProductModelOrSubClass | string;
+    /**
+     * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
+     */
+    mpn?: string;
+    /**
+     * Provides negative considerations regarding something, most typically in pro/con lists for reviews (alongside [[positiveNotes]]). For symmetry
+     *
+     * In the case of a [[Review]], the property describes the [[itemReviewed]] from the perspective of the review; in the case of a [[Product]], the product itself is being described. Since product descriptions
+     * tend to emphasise positive claims, it may be relatively unusual to find [[negativeNotes]] used in this way. Nevertheless for the sake of symmetry, [[negativeNotes]] can be used on [[Product]].
+     *
+     * The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most negative is at the beginning of the list).
+     */
+    negativeNotes?: schema.ItemListOrSubClass | schema.ListItemOrSubClass | string | schema.WebContentOrSubClass;
+    /**
+     * Indicates the [NATO stock number](https://en.wikipedia.org/wiki/NATO_Stock_Number) (nsn) of a [[Product]].
+     */
+    nsn?: string;
+    /**
+     * An offer to provide this item&#x2014;for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+     *
+     */
+    offers?: schema.DemandOrSubClass | schema.OfferOrSubClass | string;
+    /**
+     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.
+     */
+    pattern?: schema.DefinedTermOrSubClass | string;
+    /**
+     * Provides positive considerations regarding something, for example product highlights or (alongside [[negativeNotes]]) pro/con lists for reviews.
+     *
+     * In the case of a [[Review]], the property describes the [[itemReviewed]] from the perspective of the review; in the case of a [[Product]], the product itself is being described.
+     *
+     * The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most positive is at the beginning of the list).
+     */
+    positiveNotes?: schema.ItemListOrSubClass | schema.ListItemOrSubClass | string | schema.WebContentOrSubClass;
     /**
      * The product identifier, such as ISBN. For example: ``` meta itemprop="productID" content="isbn:123-456-789" ```.
      */
     productID?: string;
     /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * The percentage of recycled material in the product.
      */
-    sameAs?: string;
+    recycledContentPercentage?: number;
     /**
-     * A CreativeWork or Event about this Thing.
+     * The release date of a product or product model. This can be used to distinguish the exact variant of a product.
      */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
+    releaseDate?: string;
     /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * A review of the item.
      */
-    potentialAction?: schema.ActionOrSubClass | string;
+    review?: schema.ReviewOrSubClass | string;
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * Review of the item.
      */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    reviews?: schema.ReviewOrSubClass | string;
     /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * A standardized size of a product or creative work, specified either through a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue with a unitCode, or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]], [[height]], [[depth]] and [[weight]] properties may be more applicable.
+     */
+    size?: schema.DefinedTermOrSubClass | schema.QuantitativeValueOrSubClass | schema.SizeSpecificationOrSubClass | string;
+    /**
+     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
+     */
+    sku?: string;
+    /**
+     * A slogan or motto associated with the item.
+     */
+    slogan?: string;
+    /**
+     * A specification of the product, often grouped by a section header/name. This is a cleaner alternative to additionalProperty for strict retail product specifications.
+     */
+    specification?: schema.PropertyValueOrSubClass | string;
+    /**
+     * A substance of concern (SoC) contained within the product, typically based on regulatory lists like REACH or RoHS.
+     */
+    substanceOfConcern?: schema.ChemicalSubstanceOrSubClass | schema.DefinedTermOrSubClass | string;
+    /**
+     * The weight of the product or person.
+     */
+    weight?: schema.MassOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * The width of the item.
+     */
+    width?: schema.DistanceOrSubClass | schema.QuantitativeValueOrSubClass | string;
+    /**
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -376,17 +484,37 @@ export declare type Motorcycle = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:Motorcycle

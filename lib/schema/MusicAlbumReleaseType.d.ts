@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * The kind of release which this album is: single, EP or album.
  */
-export declare type MusicAlbumReleaseType = 'https://schema.org/BroadcastRelease' | 'https://schema.org/AlbumRelease' | 'https://schema.org/EPRelease' | 'https://schema.org/SingleRelease';
+export declare type MusicAlbumReleaseType = 'https://schema.org/AlbumRelease' | 'https://schema.org/BroadcastRelease' | 'https://schema.org/EPRelease' | 'https://schema.org/SingleRelease';
 /**
  * schema:MusicAlbumReleaseType - Validation schema (w/ JOI)
  *

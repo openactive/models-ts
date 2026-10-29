@@ -19,103 +19,117 @@ export declare type InfectiousDisease = {
     /**
      * A description of the item.
      */
-    description?: string;
+    description?: string | schema.TextObjectOrSubClass;
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
-    /**
-     * How the disease spreads, either as a route or vector, for example 'direct contact', 'Aedes aegypti', etc.
-     */
-    transmissionMethod?: string;
-    /**
-     * The class of infectious agent (bacteria, prion, etc.) that causes the disease.
-     */
-    infectiousAgentClass?: schema.InfectiousAgentClassOrSubClass | string;
     /**
      * The actual infectious agent, such as a specific bacterium.
      */
     infectiousAgent?: string;
     /**
-     * One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.
+     * The class of infectious agent (bacteria, prion, etc.) that causes the disease.
      */
-    differentialDiagnosis?: schema.DDxElementOrSubClass | string;
+    infectiousAgentClass?: schema.InfectiousAgentClassOrSubClass | string;
     /**
-     * The characteristics of associated patients, such as age, gender, race etc.
+     * How the disease spreads, either as a route or vector, for example 'direct contact', 'Aedes aegypti', etc.
      */
-    epidemiology?: string;
+    transmissionMethod?: string;
     /**
      * The anatomy of the underlying organ system or structures associated with this entity.
      */
     associatedAnatomy?: schema.AnatomicalStructureOrSubClass | schema.AnatomicalSystemOrSubClass | schema.SuperficialAnatomyOrSubClass | string;
     /**
-     * The expected progression of the condition if it is not treated and allowed to progress naturally.
+     * The cause of a medical condition.
      */
-    naturalProgression?: string;
+    cause?: schema.MedicalCauseOrSubClass | string;
     /**
-     * A possible treatment to address this condition, sign or symptom.
+     * One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.
      */
-    possibleTreatment?: schema.MedicalTherapyOrSubClass | string;
-    /**
-     * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
-     */
-    secondaryPrevention?: schema.MedicalTherapyOrSubClass | string;
-    /**
-     * The status of the study (enumerated).
-     */
-    status?: schema.EventStatusType | string | schema.MedicalStudyStatusOrSubClass;
-    /**
-     * A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.
-     */
-    possibleComplication?: string;
-    /**
-     * A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.
-     */
-    primaryPrevention?: schema.MedicalTherapyOrSubClass | string;
+    differentialDiagnosis?: schema.DDxElementOrSubClass | string;
     /**
      * Specifying a drug or medicine used in a medication procedure.
      */
     drug?: schema.DrugOrSubClass | string;
     /**
-     * A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.
+     * The characteristics of associated patients, such as age, gender, race etc.
      */
-    signOrSymptom?: schema.MedicalSignOrSymptomOrSubClass | string;
+    epidemiology?: string;
     /**
      * The likely outcome in either the short term or long term of the medical condition.
      */
     expectedPrognosis?: string;
     /**
-     * A modifiable or non-modifiable factor that increases the risk of a patient contracting this condition, e.g. age,  coexisting condition.
+     * The expected progression of the condition if it is not treated and allowed to progress naturally.
      */
-    riskFactor?: schema.MedicalRiskFactorOrSubClass | string;
-    /**
-     * The stage of the condition, if applicable.
-     */
-    stage?: schema.MedicalConditionStageOrSubClass | string;
-    /**
-     * A medical test typically performed given this condition.
-     */
-    typicalTest?: schema.MedicalTestOrSubClass | string;
+    naturalProgression?: string;
     /**
      * Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.
      */
     pathophysiology?: string;
     /**
-     * A medical guideline related to this entity.
+     * A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.
      */
-    guideline?: schema.MedicalGuidelineOrSubClass | string;
+    possibleComplication?: string;
     /**
-     * If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.
+     * A possible treatment to address this condition, sign or symptom.
      */
-    recognizingAuthority?: schema.OrganizationOrSubClass | string;
+    possibleTreatment?: schema.DrugOrSubClass | schema.DrugClassOrSubClass | schema.LifestyleModificationOrSubClass | schema.MedicalTherapyOrSubClass | string;
     /**
-     * The drug or supplement's legal status, including any controlled substance schedules that apply.
+     * A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.
      */
-    legalStatus?: schema.MedicalEnumeration | string | schema.DrugLegalStatusOrSubClass;
+    primaryPrevention?: schema.MedicalTherapyOrSubClass | string;
+    /**
+     * A modifiable or non-modifiable factor that increases the risk of a patient contracting this condition, e.g. age,  coexisting condition.
+     */
+    riskFactor?: schema.MedicalRiskFactorOrSubClass | string;
+    /**
+     * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
+     */
+    secondaryPrevention?: schema.DrugOrSubClass | schema.DrugClassOrSubClass | schema.LifestyleModificationOrSubClass | schema.MedicalTherapyOrSubClass | string;
+    /**
+     * A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.
+     */
+    signOrSymptom?: schema.MedicalSignOrSymptomOrSubClass | string;
+    /**
+     * The stage of the condition, if applicable.
+     */
+    stage?: schema.MedicalConditionStageOrSubClass | string;
+    /**
+     * The status of the study (enumerated).
+     */
+    status?: schema.EventStatusType | schema.MedicalStudyStatusOrSubClass | string;
+    /**
+     * A medical test typically performed given this condition.
+     */
+    typicalTest?: schema.MedicalTestOrSubClass | string;
     /**
      * A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
      */
     code?: schema.MedicalCodeOrSubClass | string;
+    /**
+     * A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].
+     */
+    funding?: schema.GrantOrSubClass | string;
+    /**
+     * A medical guideline related to this entity.
+     */
+    guideline?: schema.MedicalGuidelineOrSubClass | string;
+    /**
+     * The drug or supplement's legal status, including any controlled substance schedules that apply.
+     */
+    legalStatus?: schema.DrugLegalStatusOrSubClass | schema.MedicalEnumeration | string;
+    /**
+     * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
+     */
+    medicineSystem?: schema.MedicineSystemOrSubClass | string;
+    /**
+     * If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.
+     */
+    recognizingAuthority?: schema.OrganizationOrSubClass | string;
     /**
      * If applicable, a medical specialty in which this entity is relevant.
      */
@@ -125,27 +139,8 @@ export declare type InfectiousDisease = {
      */
     study?: schema.MedicalStudyOrSubClass | string;
     /**
-     * The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
-     */
-    medicineSystem?: schema.MedicineSystemOrSubClass | string;
-    /**
-     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
-     */
-    sameAs?: string;
-    /**
-     * A CreativeWork or Event about this Thing.
-     */
-    subjectOf?: schema.Event_OrSubClass | schema.CreativeWorkOrSubClass | string;
-    /**
-     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
-     */
-    potentialAction?: schema.ActionOrSubClass | string;
-    /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
-     */
-    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
-    /**
-     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+     * An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the
+     *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
     /**
@@ -153,17 +148,37 @@ export declare type InfectiousDisease = {
      */
     alternateName?: string;
     /**
-     * URL of the item.
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
-    url?: string;
+    disambiguatingDescription?: string;
     /**
      * An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
      */
     image?: schema.ImageObjectOrSubClass | string;
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.
      */
-    disambiguatingDescription?: string;
+    mainEntityOfPage?: schema.CreativeWorkOrSubClass | string;
+    /**
+     * A person or organization who owns this Thing.
+     */
+    owner?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
+    /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     */
+    potentialAction?: schema.ActionOrSubClass | string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    sameAs?: string;
+    /**
+     * A CreativeWork or Event about this Thing.
+     */
+    subjectOf?: schema.CreativeWorkOrSubClass | schema.Event_OrSubClass | string;
+    /**
+     * URL of the item.
+     */
+    url?: string;
 };
 /**
  * schema:InfectiousDisease

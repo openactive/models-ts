@@ -9,12 +9,15 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type PriceTypeEnumeration = 
   
-  | 'https://schema.org/SalePrice'
   | 'https://schema.org/InvoicePrice'
-  | 'https://schema.org/MinimumAdvertisedPrice'
   | 'https://schema.org/ListPrice'
-  | 'https://schema.org/SRP'
   | 'https://schema.org/MSRP'
+  | 'https://schema.org/MaximumRetailPrice'
+  | 'https://schema.org/MinimumAdvertisedPrice'
+  | 'https://schema.org/RegularPrice'
+  | 'https://schema.org/SRP'
+  | 'https://schema.org/SalePrice'
+  | 'https://schema.org/StrikethroughPrice'
   ;
 
 /**
@@ -23,12 +26,15 @@ export type PriceTypeEnumeration =
  * Enumerates different price types, for example list price, invoice price, and sale price.
  */
 export const PriceTypeEnumerationJoiSchema = Joi.string().valid(
-  'https://schema.org/SalePrice',
   'https://schema.org/InvoicePrice',
-  'https://schema.org/MinimumAdvertisedPrice',
   'https://schema.org/ListPrice',
-  'https://schema.org/SRP',
   'https://schema.org/MSRP',
+  'https://schema.org/MaximumRetailPrice',
+  'https://schema.org/MinimumAdvertisedPrice',
+  'https://schema.org/RegularPrice',
+  'https://schema.org/SRP',
+  'https://schema.org/SalePrice',
+  'https://schema.org/StrikethroughPrice',
 );
 
 /**

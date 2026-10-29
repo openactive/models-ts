@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Enumerates different price types, for example list price, invoice price, and sale price.
  */
-export declare type PriceTypeEnumeration = 'https://schema.org/SalePrice' | 'https://schema.org/InvoicePrice' | 'https://schema.org/MinimumAdvertisedPrice' | 'https://schema.org/ListPrice' | 'https://schema.org/SRP' | 'https://schema.org/MSRP';
+export declare type PriceTypeEnumeration = 'https://schema.org/InvoicePrice' | 'https://schema.org/ListPrice' | 'https://schema.org/MSRP' | 'https://schema.org/MaximumRetailPrice' | 'https://schema.org/MinimumAdvertisedPrice' | 'https://schema.org/RegularPrice' | 'https://schema.org/SRP' | 'https://schema.org/SalePrice' | 'https://schema.org/StrikethroughPrice';
 /**
  * schema:PriceTypeEnumeration - Validation schema (w/ JOI)
  *

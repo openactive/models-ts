@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * A list of possible levels for the legal validity of a legislation.
  */
-export declare type LegalValueLevel = 'https://schema.org/AuthoritativeLegalValue' | 'https://schema.org/UnofficialLegalValue' | 'https://schema.org/DefinitiveLegalValue' | 'https://schema.org/OfficialLegalValue';
+export declare type LegalValueLevel = 'https://schema.org/AuthoritativeLegalValue' | 'https://schema.org/DefinitiveLegalValue' | 'https://schema.org/OfficialLegalValue' | 'https://schema.org/UnofficialLegalValue';
 /**
  * schema:LegalValueLevel - Validation schema (w/ JOI)
  *

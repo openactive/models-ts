@@ -9,16 +9,18 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type ItemAvailability = 
   
-  | 'https://schema.org/PreOrder'
-  | 'https://schema.org/SoldOut'
   | 'https://schema.org/BackOrder'
-  | 'https://schema.org/PreSale'
-  | 'https://schema.org/InStoreOnly'
-  | 'https://schema.org/OutOfStock'
-  | 'https://schema.org/OnlineOnly'
   | 'https://schema.org/Discontinued'
-  | 'https://schema.org/LimitedAvailability'
   | 'https://schema.org/InStock'
+  | 'https://schema.org/InStoreOnly'
+  | 'https://schema.org/LimitedAvailability'
+  | 'https://schema.org/MadeToOrder'
+  | 'https://schema.org/OnlineOnly'
+  | 'https://schema.org/OutOfStock'
+  | 'https://schema.org/PreOrder'
+  | 'https://schema.org/PreSale'
+  | 'https://schema.org/Reserved'
+  | 'https://schema.org/SoldOut'
   ;
 
 /**
@@ -27,16 +29,18 @@ export type ItemAvailability =
  * A list of possible product availability options.
  */
 export const ItemAvailabilityJoiSchema = Joi.string().valid(
-  'https://schema.org/PreOrder',
-  'https://schema.org/SoldOut',
   'https://schema.org/BackOrder',
-  'https://schema.org/PreSale',
-  'https://schema.org/InStoreOnly',
-  'https://schema.org/OutOfStock',
-  'https://schema.org/OnlineOnly',
   'https://schema.org/Discontinued',
-  'https://schema.org/LimitedAvailability',
   'https://schema.org/InStock',
+  'https://schema.org/InStoreOnly',
+  'https://schema.org/LimitedAvailability',
+  'https://schema.org/MadeToOrder',
+  'https://schema.org/OnlineOnly',
+  'https://schema.org/OutOfStock',
+  'https://schema.org/PreOrder',
+  'https://schema.org/PreSale',
+  'https://schema.org/Reserved',
+  'https://schema.org/SoldOut',
 );
 
 /**

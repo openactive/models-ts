@@ -8,17 +8,19 @@ export declare type SizeSpecification = {
     '@type': 'SizeSpecification';
     '@context'?: string | string[];
     /**
-     * A unique url based identifier for the record
+     * A unique URI-based identifier for the record.
+     * `@id` properties are used as identifiers for compatibility with JSON-LD. The value of such a property must always be an absolute URI that provides a stable globally unique identifier for the resource, as described in [RFC3986](https://tools.ietf.org/html/rfc3986).
+     * The primary purpose of the URI format in this context is to provide natural namespacing for the identifier. Hence, the URI itself may not resolve to a valid endpoint, but must use a domain name controlled by the resource owner (the organisation responsible for the OpenActive open data feed).
      */
     '@id'?: string;
     /**
-     * A product measurement, for example the inseam of pants, the wheel size of a bicycle, or the gauge of a screw. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
+     * A measurement of an item, For example, the inseam of pants, the wheel size of a bicycle, the gauge of a screw, or the carbon footprint measured for certification by an authority. Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
      */
     hasMeasurement?: schema.QuantitativeValueOrSubClass | string;
     /**
-     * The suggested gender of the intended person or audience, for example "male", "female", or "unisex".
+     * The size group (also known as "size type") for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example "men's big and tall", "petite maternity" or "regular".
      */
-    suggestedGender?: string | schema.GenderType;
+    sizeGroup?: schema.SizeGroupEnumeration | string;
     /**
      * The size system used to identify a product's size. Typically either a standard (for example, "GS1" or "ISO-EN13402"), country code (for example "US" or "JP"), or a measuring system (for example "Metric" or "Imperial").
      */
@@ -28,13 +30,13 @@ export declare type SizeSpecification = {
      */
     suggestedAge?: schema.QuantitativeValueOrSubClass | string;
     /**
+     * The suggested gender of the intended person or audience, for example "male", "female", or "unisex".
+     */
+    suggestedGender?: schema.GenderType | string;
+    /**
      * A suggested range of body measurements for the intended audience or person, for example inseam between 32 and 34 inches or height between 170 and 190 cm. Typically found on a size chart for wearable products.
      */
     suggestedMeasurement?: schema.QuantitativeValueOrSubClass | string;
-    /**
-     * The size group (also known as "size type") for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example "men's big and tall", "petite maternity" or "regular"
-     */
-    sizeGroup?: schema.SizeGroupEnumeration | string;
 };
 /**
  * schema:SizeSpecification

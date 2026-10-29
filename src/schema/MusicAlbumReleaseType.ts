@@ -9,8 +9,8 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type MusicAlbumReleaseType = 
   
-  | 'https://schema.org/BroadcastRelease'
   | 'https://schema.org/AlbumRelease'
+  | 'https://schema.org/BroadcastRelease'
   | 'https://schema.org/EPRelease'
   | 'https://schema.org/SingleRelease'
   ;
@@ -21,8 +21,8 @@ export type MusicAlbumReleaseType =
  * The kind of release which this album is: single, EP or album.
  */
 export const MusicAlbumReleaseTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/BroadcastRelease',
   'https://schema.org/AlbumRelease',
+  'https://schema.org/BroadcastRelease',
   'https://schema.org/EPRelease',
   'https://schema.org/SingleRelease',
 );

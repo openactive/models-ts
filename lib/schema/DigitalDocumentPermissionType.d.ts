@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * A type of permission which can be granted for accessing a digital document.
  */
-export declare type DigitalDocumentPermissionType = 'https://schema.org/WritePermission' | 'https://schema.org/ReadPermission' | 'https://schema.org/CommentPermission';
+export declare type DigitalDocumentPermissionType = 'https://schema.org/CommentPermission' | 'https://schema.org/ReadPermission' | 'https://schema.org/WritePermission';
 /**
  * schema:DigitalDocumentPermissionType - Validation schema (w/ JOI)
  *

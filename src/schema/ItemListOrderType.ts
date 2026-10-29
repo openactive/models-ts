@@ -10,8 +10,8 @@ import { OaValidationError } from '../oaValidationError';
 export type ItemListOrderType = 
   
   | 'https://schema.org/ItemListOrderAscending'
-  | 'https://schema.org/ItemListUnordered'
   | 'https://schema.org/ItemListOrderDescending'
+  | 'https://schema.org/ItemListUnordered'
   ;
 
 /**
@@ -21,8 +21,8 @@ export type ItemListOrderType =
  */
 export const ItemListOrderTypeJoiSchema = Joi.string().valid(
   'https://schema.org/ItemListOrderAscending',
-  'https://schema.org/ItemListUnordered',
   'https://schema.org/ItemListOrderDescending',
+  'https://schema.org/ItemListUnordered',
 );
 
 /**

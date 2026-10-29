@@ -9,8 +9,8 @@ import { OaValidationError } from '../oaValidationError';
  */
 export type CarUsageType = 
   
-  | 'https://schema.org/RentalVehicleUsage'
   | 'https://schema.org/DrivingSchoolVehicleUsage'
+  | 'https://schema.org/RentalVehicleUsage'
   | 'https://schema.org/TaxiVehicleUsage'
   ;
 
@@ -20,8 +20,8 @@ export type CarUsageType =
  * A value indicating a special usage of a car, e.g. commercial rental, driving school, or as a taxi.
  */
 export const CarUsageTypeJoiSchema = Joi.string().valid(
-  'https://schema.org/RentalVehicleUsage',
   'https://schema.org/DrivingSchoolVehicleUsage',
+  'https://schema.org/RentalVehicleUsage',
   'https://schema.org/TaxiVehicleUsage',
 );
 

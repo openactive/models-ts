@@ -5,7 +5,7 @@ import { OaValidationError } from '../oaValidationError';
  *
  * Enumerated for values for itemListOrder for indicating how an ordered ItemList is organized.
  */
-export declare type ItemListOrderType = 'https://schema.org/ItemListOrderAscending' | 'https://schema.org/ItemListUnordered' | 'https://schema.org/ItemListOrderDescending';
+export declare type ItemListOrderType = 'https://schema.org/ItemListOrderAscending' | 'https://schema.org/ItemListOrderDescending' | 'https://schema.org/ItemListUnordered';
 /**
  * schema:ItemListOrderType - Validation schema (w/ JOI)
  *

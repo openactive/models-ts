@@ -7,7 +7,7 @@ describe('data-models example - sessionseries_example_1.json', () => {
   correctly identifies this valid example */
   const example: SessionSeries = {
   "@context": "https://openactive.io/",
-  "@id": "https://everyoneactiveuat-openactive.azurewebsites.net/api/sessions/1402CBP20150217",
+  "@id": "https://example.com/api/session-series/1402CBP20150217",
   "identifier": "1402CBP20150217",
   "@type": "SessionSeries",
   "organizer": {
@@ -198,6 +198,7 @@ describe('data-models example - sessionseries_example_1.json', () => {
   "subEvent": [
     {
       "@type": "ScheduledSession",
+      "@id": "https://example.com/api/session-series/1402CBP20150217#/subEvent/1400109454",
       "startDate": "2018-10-02T19:15:00Z",
       "endDate": "2018-10-02T19:45:00Z",
       "remainingAttendeeCapacity": 2,
@@ -207,6 +208,7 @@ describe('data-models example - sessionseries_example_1.json', () => {
     },
     {
       "@type": "ScheduledSession",
+      "@id": "https://example.com/api/session-series/1402CBP20150217#/subEvent/1400109455",
       "startDate": "2018-10-09T19:15:00Z",
       "endDate": "2018-10-09T19:45:00Z",
       "remainingAttendeeCapacity": 12,

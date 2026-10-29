@@ -67,6 +67,12 @@ jobs:
         run: npm install
         working-directory: ./models-ts/
 
+      # tsc never deletes output, so compiled files for removed models would otherwise stay in lib/.
+      # This only affects the runner's copy: if the build or tests fail, no pull request is created.
+      - name: Remove previous build
+        run: rm -rf lib
+        working-directory: ./models-ts/
+
       - name: Build models-ts types
         run: npm run build
         working-directory: ./models-ts/

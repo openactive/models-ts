@@ -41,9 +41,46 @@ export declare type Organization = {
      */
     '@id'?: string;
     /**
+     * The physical activity or activities provided by this organization.
+     *
+     * ```json
+     * "activity": [
+     *   {
+     *     "@type": "Concept",
+     *     "@id": "https://openactive.io/activity-list#6bb8b844-df3e-4cae-bf5f-3e129c6b1a9d",
+     *     "prefLabel": "Sailing",
+     *     "inScheme": "https://openactive.io/activity-list"
+     *   }
+     * ]
+     * ```
+     */
+    activity?: oa.ConceptOrSubClass[];
+    /**
      * Address of the Seller, used on tax receipts.
      */
     address?: oa.PostalAddressOrSubClass;
+    /**
+     * The age range this organization caters for overall.
+     *
+     * ```json
+     * "ageRange": {
+     *   "@type": "QuantitativeValue",
+     *   "minValue": 5,
+     *   "maxValue": 16
+     * }
+     * ```
+     */
+    ageRange?: oa.QuantitativeValueOrSubClass;
+    /**
+     * Aliases, common acronyms or alternative names for the organization.
+     *
+     * ```json
+     * "alternateName": [
+     *   "EYC"
+     * ]
+     * ```
+     */
+    alternateName?: string[] | string;
     /**
      * General enquiries e-mail address for the organization.
      *
@@ -52,6 +89,14 @@ export declare type Organization = {
      * ```
      */
     email?: string;
+    /**
+     * Indicates that the organization provides activities that are restricted to male or female participants, or that there are no restrictions.
+     *
+     * ```json
+     * "genderRestriction": "https://openactive.io/FemaleOnly"
+     * ```
+     */
+    genderRestriction?: oa.GenderRestrictionType;
     /**
      * Reference to the CustomerAccount associated with this Customer, for use within the Open Booking API flow.
      * Note that this property is in EARLY RELEASE AND IS SUBJECT TO CHANGE, as the [Customer Accounts proposal](https://github.com/openactive/customer-accounts) evolves.
@@ -74,6 +119,31 @@ export declare type Organization = {
      */
     legalName?: string;
     /**
+     * Reference to the license under which the Organization's data is published. Required when an Organization is published on its own outside an RPDE feed; in an RPDE feed, the license is given by each feed page, so it should not be included.
+     *
+     * ```json
+     * "license": "https://creativecommons.org/licenses/by/4.0/"
+     * ```
+     */
+    license?: string;
+    /**
+     * The main address of the organization, or the key locations of the activities it provides.
+     *
+     * ```json
+     * "location": {
+     *   "@type": "Place",
+     *   "@id": "https://example.com/locations/1234ABCD",
+     *   "name": "Example Sailing Club",
+     *   "address": {
+     *     "@type": "PostalAddress",
+     *     "postalCode": "SE10 0BW",
+     *     "addressCountry": "GB"
+     *   }
+     * }
+     * ```
+     */
+    location?: string | oa.PlaceOrSubClass[] | oa.PostalAddressOrSubClass | oa.PlaceOrSubClass;
+    /**
      * A logo for the Organization.
      *
      * ```json
@@ -84,6 +154,24 @@ export declare type Organization = {
      * ```
      */
     logo?: oa.ImageObjectOrSubClass;
+    /**
+     * The `@id`s of organizations affiliated to this organization. For example, a national governing body can list its affiliated clubs.
+     *
+     * ```json
+     * "member": [
+     *   "https://example.org/id/organisation/1"
+     * ]
+     * ```
+     */
+    member?: string | string[];
+    /**
+     * The `@id` of an organization that this organization is affiliated to. For example, a club can link to its national governing body.
+     *
+     * ```json
+     * "memberOf": "https://example.org/id/organisation/national-governing-body"
+     * ```
+     */
+    memberOf?: oa.OrganizationOrSubClass | string;
     /**
      * Lists the URL(s) of the official social media profile pages associated with the organization.
      *
@@ -352,21 +440,9 @@ export declare type Organization = {
      */
     leiCode?: string;
     /**
-     * The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
-     */
-    location?: schema.PlaceOrSubClass | schema.PostalAddressOrSubClass | string | schema.VirtualLocationOrSubClass;
-    /**
      * A pointer to products or services offered by the organization or person.
      */
     makesOffer?: schema.OfferOrSubClass | string;
-    /**
-     * A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.
-     */
-    member?: schema.OrganizationOrSubClass | schema.PersonOrSubClass | string;
-    /**
-     * An Organization (or ProgramMembership) to which this Person or Organization belongs.
-     */
-    memberOf?: schema.MemberProgramTierOrSubClass | schema.OrganizationOrSubClass | schema.ProgramMembershipOrSubClass | string;
     /**
      * A member of this organization.
      */
@@ -447,10 +523,6 @@ export declare type Organization = {
      *     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.
      */
     additionalType?: string;
-    /**
-     * An alias for the item.
-     */
-    alternateName?: string;
     /**
      * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
      */
